@@ -153,3 +153,60 @@
 #5 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #6 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
 #7 {main} in C:\wamp\www\mfarm\application\classes\Controller\reportes.php:20
+2013-04-24 23:47:52 --- CRITICAL: View_Exception [ 0 ]: The requested view pdf/example could not be found ~ SYSPATH\classes\Kohana\View.php [ 257 ] in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:47:52 --- DEBUG: #0 C:\wamp\www\mfarm\system\classes\Kohana\View.php(137): Kohana_View->set_filename('pdf/example')
+#1 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(19): Kohana_View->__construct('pdf/example', NULL)
+#2 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(25): View_mPDF_Core->__construct('pdf/example', NULL)
+#3 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(23): View_mPDF_Core::factory('pdf/example')
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_servicios()
+#5 [internal function]: Kohana_Controller->execute()
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#7 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#10 {main} in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:48:41 --- CRITICAL: View_Exception [ 0 ]: The requested view test could not be found ~ SYSPATH\classes\Kohana\View.php [ 257 ] in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:48:41 --- DEBUG: #0 C:\wamp\www\mfarm\system\classes\Kohana\View.php(137): Kohana_View->set_filename('<html>test</htm...')
+#1 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(19): Kohana_View->__construct('<html>test</htm...', NULL)
+#2 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(25): View_mPDF_Core->__construct('<html>test</htm...', NULL)
+#3 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(23): View_mPDF_Core::factory('<html>test</htm...')
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_servicios()
+#5 [internal function]: Kohana_Controller->execute()
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#7 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#10 {main} in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:48:54 --- CRITICAL: View_Exception [ 0 ]: The requested view parto could not be found ~ SYSPATH\classes\Kohana\View.php [ 257 ] in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:48:54 --- DEBUG: #0 C:\wamp\www\mfarm\system\classes\Kohana\View.php(137): Kohana_View->set_filename('parto')
+#1 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(19): Kohana_View->__construct('parto', NULL)
+#2 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(25): View_mPDF_Core->__construct('parto', NULL)
+#3 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(23): View_mPDF_Core::factory('parto')
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_servicios()
+#5 [internal function]: Kohana_Controller->execute()
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#7 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#10 {main} in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:49:01 --- CRITICAL: View_Exception [ 0 ]: The requested view partos could not be found ~ SYSPATH\classes\Kohana\View.php [ 257 ] in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:49:01 --- DEBUG: #0 C:\wamp\www\mfarm\system\classes\Kohana\View.php(137): Kohana_View->set_filename('partos')
+#1 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(19): Kohana_View->__construct('partos', NULL)
+#2 C:\wamp\www\mfarm\modules\mpdf\classes\view\mpdf\core.php(25): View_mPDF_Core->__construct('partos', NULL)
+#3 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(23): View_mPDF_Core::factory('partos')
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_servicios()
+#5 [internal function]: Kohana_Controller->execute()
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#7 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#10 {main} in C:\wamp\www\mfarm\system\classes\Kohana\View.php:137
+2013-04-24 23:52:29 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method form::open() ~ APPPATH\views\newcerda.php [ 29 ] in :
+2013-04-24 23:52:29 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-04-24 23:54:44 --- CRITICAL: ErrorException [ 1 ]: Call to a member function headers() on a non-object ~ APPPATH\classes\Controller\reportes.php [ 27 ] in :
+2013-04-24 23:54:44 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-04-24 23:55:03 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method View_mPDF::headers() ~ APPPATH\classes\Controller\reportes.php [ 29 ] in :
+2013-04-24 23:55:03 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
