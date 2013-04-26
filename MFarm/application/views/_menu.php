@@ -24,10 +24,10 @@
                 			->uri(array('controller' => 'abmdestetes', 'action' => 'new')); ?>><span>ABM de Destetes</span></a></li>
                     </ul>
                 </li>
-                <li id="3" menuid=<?php echo $menuid ?>><a href="#" class="editor menudrop"><span>Reportes</span></a>
+                <li id="3" menuid=<?php echo $menuid ?>><a href="#" class="pdf menudrop"><span>Reportes</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'reportes', 'action' => 'servicios')); ?>><span>Servicios</span></a></li>
+                			->uri(array('controller' => 'reportes', 'action' => 'listarporfecha')); ?>><span>Listar por fecha</span></a></li>
                     </ul>
                 </li>
             </ul>
