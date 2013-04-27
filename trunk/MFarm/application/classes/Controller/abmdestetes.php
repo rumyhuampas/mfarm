@@ -5,7 +5,7 @@ class Controller_ABMDestetes extends Controller {
 	public function action_new(){
 		if(!isset($_POST['number'])){
 			$view=View::factory('newdestete');
-			$view->title = "MFarm - ABM Destetes";
+			$view->title = Helpers_Const::APPNAME()." - ABM Destetes";
 			$view->menuid = 2;
 			$this->response->body($view->render());
 		}
@@ -40,7 +40,7 @@ class Controller_ABMDestetes extends Controller {
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
 			$view=View::factory('newdestete');
-			$view->title = "MFarm - ABM Destetes";
+			$view->title = Helpers_Const::APPNAME()." - ABM Destetes";
 			$view->menuid = 2;
 			$cerda = Helpers_DB::getCerda($_POST['numbersearch']);
 			$view->cerda = $cerda;

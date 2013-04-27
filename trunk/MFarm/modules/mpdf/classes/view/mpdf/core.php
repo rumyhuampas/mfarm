@@ -14,15 +14,31 @@ abstract class View_mPDF_Core extends View {
 	protected $mpdf = NULL;
 	protected $view_file = NULL;
 
-	public function __construct($file = NULL, array $data = NULL)
+	public function __construct($file = NULL, array $data = NULL, array $pdfdata = NULL)
 	{
 		parent::__construct($file, $data);
-		$this->mpdf = new mPDF('UTF-8', 'A4');
+		if($pdfdata != NULL && count($pdfdata) == 11){
+			$mode=$pdfdata[0];
+			$format=$pdfdata[1];
+			$default_font_size=$pdfdata[2];
+			$default_font=$pdfdata[3];
+			$mgl=$pdfdata[4];
+			$mgr=$pdfdata[5];
+			$mgt=$pdfdata[6];
+			$mgb=$pdfdata[7];
+			$mgh=$pdfdata[8];
+			$mgf=$pdfdata[9];
+			$orientation=$pdfdata[10];
+			$this->mpdf = new mPDF($mode,$format,$default_font_size,$default_font,$mgl,$mgr,$mgt,$mgb,$mgh,$mgf,$orientation);
+		}
+		else{
+			$this->mpdf = new mPDF('UTF-8', 'A4');	
+		}
 	}
 
-	public static function factory($view_file = NULL, array $data = NULL)
+	public static function factory($view_file = NULL, array $data = NULL, array $pdfdata = NULL)
 	{
-		return new View_MPDF($view_file, $data);
+		return new View_MPDF($view_file, $data, $pdfdata);
 	}
 
 	/*
@@ -46,6 +62,7 @@ abstract class View_mPDF_Core extends View {
 		$this->mpdf->WriteHTML($html);
 
 		return $this->mpdf->output(FALSE, 'S');
+		
 	}
 
 	public function download($generated_filename, $view_file = NULL)

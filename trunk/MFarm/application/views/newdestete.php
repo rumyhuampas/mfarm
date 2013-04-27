@@ -170,7 +170,7 @@
 					                            echo '<td>'.$destete->Lechones.'</td>';
 					                            echo '<td>'.$destete->Dias.'</td>';
 												echo '<td>'.$destete->PesoTotal.'</td>';
-												echo '<td>'.($destete->PesoTotal/$destete->Lechones).'</td>';
+												echo '<td>'.$destete->PesoProm.'</td>';
 												echo '<td>'.$destete->Observaciones.'</td>';
 					                        echo '</tr>';
 											}
