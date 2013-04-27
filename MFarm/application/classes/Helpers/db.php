@@ -156,5 +156,14 @@ class Helpers_DB {
 		$destetes = ORM::factory('destete')->where(DB::expr('DATE(Fecha)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
 		return $servicios + $partos + $destetes;
 	}
+	
+	/*********** HEADERBAR *********/
+	public static function getServicios($desde, $hasta){
+		return ORM::factory('servicio')
+			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
+			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE("'.$desde.'")'))
+			->and_where(DB::expr('DATE(FechaServicio)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+			->order_by('FechaServicio', 'DESC')->find_all();	
+	}
 }
 	
