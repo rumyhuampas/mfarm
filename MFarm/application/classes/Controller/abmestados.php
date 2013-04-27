@@ -5,7 +5,7 @@ class Controller_ABMEstados extends Controller {
 	public function action_new(){
 		if(!isset($_POST['name'])){
 			$view=View::factory('newestado');
-			$view->title = "MFarm - ABM Estados";
+			$view->title = Helpers_Const::APPNAME()." - ABM Estados";
 			$view->menuid = 2;
 			$view->estados = Helpers_DB::getEstados();
 			$this->response->body($view->render());

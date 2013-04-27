@@ -5,7 +5,7 @@ class Controller_Home extends Controller {
 	public function action_index()
 	{
 		$view=View::factory('home');
-		$view->title = 'MFarm - Home';
+		$view->title = Helpers_Const::APPNAME().' - Home';
 		$view->menuid = 0;
 		$view->lastmodif = Helpers_DB::getLastModifications();
 		$view->maxweights = Helpers_DB::getMaxWeights();

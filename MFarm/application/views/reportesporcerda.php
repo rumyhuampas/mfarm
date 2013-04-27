@@ -16,16 +16,17 @@
         	<div class="maincontentinner">
         		
         		<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'reportes', 'action' => 'listarporfecha')); ?>>Listar por fecha</a></li>
+                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'reportes', 'action' => 'reportesporfecha')); ?>>Reportes por fecha</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'reportes', 'action' => 'reportesporcerda')); ?>>Reportes por cerda</a></li>
                 </ul><!--maintabmenu-->
             	                
                 <div class="content">
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Listar por fecha</span></h2>
+                    	<h2 class="form"><span>Datos</span></h2>
                     </div><!--contenttitle-->
                     
-                    <?php echo Form::open('reportes/listarporfecha', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formreportlistar'));
+                    <?php echo Form::open('reportes/reportesporcerda', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formreportlistar'));
                     	echo '<p>';
                         	echo Form::label('datos', 'Datos');
 							echo '<span class="field">';

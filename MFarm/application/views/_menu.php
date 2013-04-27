@@ -27,7 +27,9 @@
                 <li id="3" menuid=<?php echo $menuid ?>><a href="#" class="pdf menudrop"><span>Reportes</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'reportes', 'action' => 'listarporfecha')); ?>><span>Listar por fecha</span></a></li>
+                			->uri(array('controller' => 'reportes', 'action' => 'reportesporfecha')); ?>><span>Por fecha</span></a></li>
+                		<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'reportes', 'action' => 'reportesporcerda')); ?>><span>Por cerda</span></a></li>
                     </ul>
                 </li>
             </ul>

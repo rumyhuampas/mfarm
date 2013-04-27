@@ -10,7 +10,7 @@ class Controller_Login extends Controller {
 		else{
 			$view=View::factory('newuser');
 		}
-		$view->title = "MFarm - Granja Mancini";
+		$view->title = Helpers_Const::APPNAME()." - Granja Mancini";
 		$this->response->body($view->render());
 	}
 

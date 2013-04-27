@@ -5,7 +5,7 @@ class Controller_ABMCerdas extends Controller {
 	public function action_new(){
 		if(!isset($_POST['number'])){
 			$view=View::factory('newcerda');
-			$view->title = "MFarm - ABM Cerda";
+			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
 			$view->menuid = 1;
 			$view->estados = Helpers_DB::getComboEstados();
 			$view->cerdas = Helpers_DB::getCerdas();
@@ -42,7 +42,7 @@ class Controller_ABMCerdas extends Controller {
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
 			$view=View::factory('editcerda');
-			$view->title = "MFarm - ABM Cerda";
+			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
 			$view->menuid = 1;
 			$view->estados = Helpers_DB::getComboEstados();
 			$cerda = Helpers_DB::getCerda($_POST['numbersearch']);
@@ -166,7 +166,7 @@ class Controller_ABMCerdas extends Controller {
 	public function action_edit(){
 		if(!isset($_POST['number'])){
 			$view=View::factory('editcerda');
-			$view->title = "MFarm - ABM Cerda";
+			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
 			$view->menuid = 1;
 			$view->estados = Helpers_DB::getComboEstados();
 			$this->response->body($view->render());

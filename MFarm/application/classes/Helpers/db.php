@@ -121,7 +121,9 @@ class Helpers_DB {
 	}
 	
 	public static function getCerdaDestetes($IdCerda){
-		return ORM::factory('destete')->where('IdCerda', '=', $IdCerda)->order_by('Fecha', 'DESC')->order_by('Id', 'DESC')->find_all();
+		return ORM::factory('destete')
+		->select(DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))
+		->where('IdCerda', '=', $IdCerda)->order_by('Fecha', 'DESC')->order_by('Id', 'DESC')->find_all();
 	}
 	
 	/*********** ESTADOS **********/
@@ -157,13 +159,30 @@ class Helpers_DB {
 		return $servicios + $partos + $destetes;
 	}
 	
-	/*********** HEADERBAR *********/
+	/*********** REPORTES *********/
 	public static function getServicios($desde, $hasta){
-		return ORM::factory('servicio')
-			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
+		return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicios.IdCerda) AS Numero'))
+			->from('servicios')
 			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE("'.$desde.'")'))
 			->and_where(DB::expr('DATE(FechaServicio)'), '<=', DB::expr('DATE("'.$hasta.'")'))
-			->order_by('FechaServicio', 'DESC')->find_all();	
+			->order_by('FechaServicio', 'ASC')->execute()->as_array();
+	}
+	
+	public static function getPartos($desde, $hasta){
+		return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=partos.IdCerda) AS Numero'))
+			->from('partos')
+			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+			->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+			->order_by('Fecha', 'ASC')->execute()->as_array();
+	}
+	
+	public static function getDestetes($desde, $hasta){
+		return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=destetes.IdCerda) AS Numero'), 
+			DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))
+			->from('destetes')
+			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+			->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+			->order_by('Fecha', 'ASC')->execute()->as_array();
 	}
 }
 	
