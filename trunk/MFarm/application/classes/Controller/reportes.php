@@ -23,6 +23,9 @@ class Controller_Reportes extends Controller {
  					9,		// margin header
 	 				9,		// margin footer
 	 				'L'));  // L - landscape, P - portrait
+	 		$stylesheet = file_get_contents('assets/css/pdfstyle.css');
+			$pdf->get_mpdf()->WriteHTML($stylesheet, 1);
+
 			$this->response->headers(array('Content-Type' => 'application/pdf'));
 			$pdf->title = Helpers_Const::APPNAME().' - Reportes por Fecha';
 			$pdf->get_mpdf()->SetTitle(Helpers_Const::APPNAME().' - Reportes por Fecha');

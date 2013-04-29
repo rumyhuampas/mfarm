@@ -78,7 +78,7 @@ abstract class View_mPDF_Core extends View {
 	public function inline($generated_filename, $view_file = NULL)
 	{
 		if (empty($view_file)) $view_file = $this->view_file;
-
+			
 		$html = parent::render($view_file);
 		$this->mpdf->WriteHTML($html);
 
