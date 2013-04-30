@@ -26,7 +26,7 @@
                     	<h2 class="form"><span>Datos</span></h2>
                     </div><!--contenttitle-->
                     
-                    <?php echo Form::open('reportes/reportesporfecha', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formreportlistar'));
+                    <?php echo Form::open('reportes/reportesporfecha', array('method' => 'POST', 'target' => '_blank', 'class' => 'stdform', 'id' => 'formreportlistar'));
                     	echo '<p>';
                         	echo Form::label('datos', 'Datos');
 							echo '<span class="field">';
@@ -36,7 +36,7 @@
                     	echo '<p>';
 							echo Form::label('desde', 'Fecha desde');
 							echo '<span class="field">';
-								echo Form::input('desde', date("d-m-Y H:i:s"), array('id' => 'fielddate'));
+								echo Form::input('desde', date("d-m-Y"), array('id' => 'fielddate'));
 							echo '</span>';
 							echo '<div class="formwidgetbox" style="width: 300px">';
 		                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
@@ -48,7 +48,7 @@
 						echo '<p>';			
 							echo Form::label('hasta', 'Fecha hasta');
 							echo '<span class="field">';
-								echo Form::input('hasta', date("d-m-Y H:i:s"), array('id' => 'fielddate2'));
+								echo Form::input('hasta', date("d-m-Y"), array('id' => 'fielddate2'));
 							echo '</span>';
 							echo '<div class="formwidgetbox" style="width: 300px">';
 		                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';

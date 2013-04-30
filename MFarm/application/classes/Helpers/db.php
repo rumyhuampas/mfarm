@@ -160,29 +160,60 @@ class Helpers_DB {
 	}
 	
 	/*********** REPORTES *********/
-	public static function getServicios($desde, $hasta){
-		return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicios.IdCerda) AS Numero'))
-			->from('servicios')
-			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE("'.$desde.'")'))
-			->and_where(DB::expr('DATE(FechaServicio)'), '<=', DB::expr('DATE("'.$hasta.'")'))
-			->order_by('FechaServicio', 'ASC')->execute()->as_array();
+	public static function getServicios($desde, $hasta, $IdCerda = NULL){
+		if($IdCerda == NULL){
+			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicios.IdCerda) AS Numero'))
+				->from('servicios')
+				->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE("'.$desde.'")'))
+				->and_where(DB::expr('DATE(FechaServicio)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+				->order_by('FechaServicio', 'ASC')->execute()->as_array();
+		}
+		else{
+			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicios.IdCerda) AS Numero'))
+				->from('servicios')
+				->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE("'.$desde.'")'))
+				->and_where(DB::expr('DATE(FechaServicio)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+				->and_where('IdCerda', '=', $IdCerda)
+				->order_by('FechaServicio', 'ASC')->execute()->as_array();
+		}
 	}
 	
-	public static function getPartos($desde, $hasta){
-		return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=partos.IdCerda) AS Numero'))
-			->from('partos')
-			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
-			->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
-			->order_by('Fecha', 'ASC')->execute()->as_array();
+	public static function getPartos($desde, $hasta, $cerdaNumber = NULL){
+		if($IdCerda == NULL){
+			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=partos.IdCerda) AS Numero'))
+				->from('partos')
+				->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+				->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+				->order_by('Fecha', 'ASC')->execute()->as_array();
+		}
+		else{
+			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=partos.IdCerda) AS Numero'))
+				->from('partos')
+				->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+				->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+				->and_where('IdCerda', '=', $IdCerda)
+				->order_by('Fecha', 'ASC')->execute()->as_array();
+		}
 	}
 	
-	public static function getDestetes($desde, $hasta){
-		return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=destetes.IdCerda) AS Numero'), 
-			DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))
-			->from('destetes')
-			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
-			->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
-			->order_by('Fecha', 'ASC')->execute()->as_array();
+	public static function getDestetes($desde, $hasta, $cerdaNumber = NULL){
+		if($IdCerda == NULL){
+			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=destetes.IdCerda) AS Numero'), 
+				DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))
+				->from('destetes')
+				->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+				->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+				->order_by('Fecha', 'ASC')->execute()->as_array();
+		}
+		else{
+			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=destetes.IdCerda) AS Numero'), 
+				DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))
+				->from('destetes')
+				->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+				->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'))
+				->and_where('IdCerda', '=', $IdCerda)
+				->order_by('Fecha', 'ASC')->execute()->as_array();
+		}
 	}
 }
 	

@@ -52,3 +52,106 @@
 #9 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #10 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
 #11 {main} in :
+2013-04-29 21:51:32 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(views/reports/_pdfheader) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:51:32 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('views/reports/_...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:51:46 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(views/reports/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:51:46 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('views/reports/_...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:52:14 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(reports/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:52:14 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('reports/_pdfhea...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:52:25 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(/views/reports/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:52:25 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('/views/reports/...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:52:49 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(/mfarm//views/reports/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:52:49 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('/mfarm//views/r...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:52:56 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(/mfarm/views/reports/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:52:56 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('/mfarm/views/re...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:53:09 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(/mfarm//reports/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:53:09 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('/mfarm//reports...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:53:16 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(/mfarm/reports/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:53:16 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('/mfarm/reports/...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:53:24 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(/mfarm/_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:53:24 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('/mfarm/_pdfhead...')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 21:53:36 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(_pdfheader.php) [function.file-get-contents]: failed to open stream: No such file or directory ~ APPPATH\classes\Controller\reportes.php [ 28 ] in :
+2013-04-29 21:53:36 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'C:\wamp\www\mfa...', 28, Array)
+#1 C:\wamp\www\mfarm\application\classes\Controller\reportes.php(28): file_get_contents('_pdfheader.php')
+#2 C:\wamp\www\mfarm\system\classes\Kohana\Controller.php(84): Controller_Reportes->action_reportesporfecha()
+#3 [internal function]: Kohana_Controller->execute()
+#4 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Reportes))
+#5 C:\wamp\www\mfarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#7 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
+#8 {main} in :
+2013-04-29 22:01:09 --- CRITICAL: ErrorException [ 1 ]: Cannot access empty property ~ APPPATH\classes\Controller\reportes.php [ 29 ] in :
+2013-04-29 22:01:09 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
