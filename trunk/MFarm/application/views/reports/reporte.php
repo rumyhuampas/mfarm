@@ -12,7 +12,7 @@
             	<div class="content">
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span><?php echo $dato; ?></span></h2>
+                    	<h2 class="form"><span><?php echo $pdftitle; ?></span></h2>
                     </div><!--contenttitle-->
 		                
 	                <br clear="all" />
