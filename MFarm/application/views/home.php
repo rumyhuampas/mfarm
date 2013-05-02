@@ -87,16 +87,7 @@
                     </div><!--widgetbox-->                        
                     </div><!--one_half-->
                     
-                    <br clear="all" /><br />
-                    
-                    <div class="contenttitle">
-                    	<h2 class="chart"><span>Simple Chart</span></h2>
-                    </div><!--contenttitle-->
-                    <br />
-                    <div id="homechart" style="height:300px;"></div>
-                
-                <br /><br />
-
+                    <br clear="all" />
                     
                 </div><!--content-->
                 

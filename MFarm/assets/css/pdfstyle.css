@@ -502,10 +502,10 @@ button,input,select,textarea { font-size: 12px; margin: 0; }
 .footer { margin: 10px 0; font-size: 11px; }
 
 .pdfheader { background-color:#222222; vertical-align: bottom; font-family: serif; font-size: 9pt; width: 100%; }
+.pdfheader .title { font-size: 14pt; padding-top: 6px; font-weight: bold; color:#FFF; }
 .pdfheader td .left { text-align: left; }
 .pdfheader td .center { text-align: center; }
 .pdfheader td .right { text-align: right; }
-.pdfheader td span { font-size:9pt; }
 
 .pdffooter { border-top: 1px solid #000000; vertical-align: bottom; font-family: serif; font-size: 9pt; width: 100%; }
 .pdffooter td { width: 100%; text-align: right; }

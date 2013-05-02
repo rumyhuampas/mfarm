@@ -72,6 +72,16 @@ class Helpers_DB {
 	public static function getLastBirthsData($amount){
 		return ORM::factory('parto')->order_by('Fecha', 'ASC')->limit($amount)->find_all();	
 	}
+
+	public static function getMaxMachoServicios($desde = NULL){
+		if($desde == NULL){
+			$desde = 'DATE_SUB(NOW(), INTERVAL 30 DAY)';
+		}
+		return DB::select('Id', 'Macho', DB::expr('COUNT(Id) as cnt'))->from('servicios')	
+		->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'))
+		->group_by('Macho') 
+		->order_by('cnt', 'DESC')->order_by('Macho')->execute();
+	}
 	
 	/******** ESTADOS *********/
 	public static function getEstados(){
