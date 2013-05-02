@@ -74,4 +74,39 @@ jQuery(document).ready(function(){
 	    	jQuery("#homebirthvivos").text(vivos);
 	    }
     );
+    
+    /*****PIE CHART*****/
+	jQuery.post( 
+	    '/mfarm/home/getMaxMachoServicios/',
+	    {amount: 10},
+	    function( data ){
+	    	data = JSON.parse(data);
+			var series = data.length;
+			var colors = [];
+			for( var i = 0; i<series; i++) {
+				data[i] = { label: data[i][0], data: data[i][1] }
+				colors[i] = get_random_color();
+			}
+			jQuery.plot(jQuery("#homemachosservicioschart"), data, {
+					//colors: ['#b9d6fd','#fdb5b5','#c9fdb5','#f9b5fd','#d7b5fd'],
+					colors: colors,		   
+					series: {
+						pie: { show: true, radius: 1, label: { show: true, radius: 2/3, formatter: function(label, series){
+	                        return '<div class="pie">'+Math.round(series.percent)+'%</div>';
+	                    },
+						threshold: 0.1,
+	                    background: { opacity: 0 }} }
+					}
+			});
+		}
+	);
+	
+	function get_random_color() {
+	    var letters = '0123456789ABCDEF'.split('');
+	    var color = '#';
+	    for (var i = 0; i < 6; i++ ) {
+	        color += letters[Math.round(Math.random() * 15)];
+	    }
+	    return color;
+	}
 });

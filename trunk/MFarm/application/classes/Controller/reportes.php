@@ -105,13 +105,17 @@ class Controller_Reportes extends Controller {
  					'',		// default font family
  					8,		// margin_left
  					8,		// margin right
-					8,		// margin top
- 					8,		// margin bottom
+					25,		// margin top
+ 					15,		// margin bottom
  					9,		// margin header
 	 				9,		// margin footer
 	 				'L'));  // L - landscape, P - portrait
 	 		$stylesheet = file_get_contents('assets/css/pdfstyle.css');
 			$pdf->get_mpdf()->WriteHTML($stylesheet, 1);
+			$pdfheader = file_get_contents('application/views/reports/_pdfheader.php');
+			$pdf->get_mpdf()->SetHTMLHeader($pdfheader);
+			$pdffooter = file_get_contents('application/views/reports/_pdffooter.php');
+			$pdf->get_mpdf()->SetHTMLFooter($pdffooter);
 			
 			$this->response->headers(array('Content-Type' => 'application/pdf'));
 			$pdf->title = Helpers_Const::APPNAME().' - Reportes por Cerda';

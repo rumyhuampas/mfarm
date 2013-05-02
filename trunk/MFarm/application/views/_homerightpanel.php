@@ -13,7 +13,7 @@
                         <small>% cerdos vivos</small>
                         <h1 id="homebirthporc"></h1>
                         <small></small>
-                    </div><!--visitoday-->
+                    </div><!--analytics-->
                 </div><!--one_half-->
                 
                 <div class="one_half last">
@@ -45,46 +45,9 @@
         </div><!--widgetbox-->
         
         <div class="widgetbox">
-        	<div class="title"><h2 class="tabbed"><span>Tabbed Widget</span></h2></div>
-            <div class="widgetcontent padding0">
-            	<!--
-            	<div id="tabs">
-                	<ul>
-                        <li><a href="#tabs-1">Products</a></li>
-                        <li><a href="#tabs-2">Posts</a></li>
-                        <li><a href="#tabs-3">Media</a></li>
-                    </ul>
-                    <div id="tabs-1">
-                        <ul class="listthumb">
-                        	<li><img src=<?php echo URL::base()."assets/images/thumb/small/thumb1.png"?> alt="" /> <a href="#">Proin elit arcu, rutrum commodo</a></li>
-                            <li><img src=<?php echo URL::base()."assets/images/thumb/small/thumb2.png"?> alt="" /> <a href="#">Aenean tempor ullamcorper leo</a></li>
-                            <li><img src=<?php echo URL::base()."assets/images/thumb/small/thumb3.png"?> alt="" /> <a href="#">Vehicula tempus, commodo a, risus</a></li>
-                            <li><img src=<?php echo URL::base()."assets/images/thumb/small/thumb4.png"?> alt="" /> <a href="#">Donec sollicitudin mi sit amet mauris</a></li>
-                            <li><img src=<?php echo URL::base()."assets/images/thumb/small/thumb5.png"?> alt="" /> <a href="#">Curabitur nec arcu</a></li>
-                        </ul>
-                    </div>
-                    <div id="tabs-2">
-                        <ul>
-                        	<li><a href="#">Proin elit arcu, rutrum commodo</a></li>
-                            <li><a href="#">Aenean tempor ullamcorper leo</a></li>
-                            <li><a href="#">Vehicula tempus, commodo a, risus</a></li>
-                            <li><a href="#">Donec sollicitudin mi sit amet mauris</a></li>
-                            <li><a href="#">Curabitur nec arcu</a></li>
-                        </ul>
-                    </div>
-                    <div id="tabs-3">
-                        <ul class="thumb">
-                        	<li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb1.png"?> alt="" /></a></li>
-                            <li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb2.png"?> alt="" /></a></li>
-                            <li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb3.png"?> alt="" /></a></li>
-                            <li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb4.png"?> alt="" /></a></li>
-                            <li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb5.png"?> alt="" /></a></li>
-                            <li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb6.png"?> alt="" /></a></li>
-                            <li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb7.png"?> alt="" /></a></li>
-                            <li><a href="#"><img src=<?php echo URL::base()."assets/images/thumb/xsmall/thumb8.png"?> alt="" /></a></li>
-                        </ul>     
-                	</div>
-                </div><!--#tabs-->
+        	<div class="title"><h2 class="chart"><span>Machos con mas servicios</span></h2></div>
+            <div class="chartbox widgetcontent">
+            	<div id="homemachosservicioschart" class="chartplace"></div>
             </div><!--widgetcontent-->
         </div><!--widgetbox-->
         

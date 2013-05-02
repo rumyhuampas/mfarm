@@ -158,9 +158,6 @@ class Controller_Home extends Controller {
 	
 	public function action_getlastbirthsdata(){
 		if ($this->request->is_ajax()) {
-			/*$data = DB::select ('Peso', DB::expr('DATEDIFF(Fecha, 
-				(select fecha from cerdaaudit where IdCerda='.$_POST['IdCerda'].' order by fecha limit 1)) AS Fecha'))
-				->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->execute();*/
 			$data = Helpers_DB::getLastBirthsData($_POST['amount']);
 			$vivos = 0;
 			$muertos = 0;
@@ -172,6 +169,24 @@ class Controller_Home extends Controller {
 			}
 			$jsonarray = array('vivos' => $vivos, 'muertos' => $muertos, 'momif' => $momif);
 			
+			echo json_encode($jsonarray);
+		}
+	}
+	
+	public function action_getMaxMachoServicios(){	
+		if ($this->request->is_ajax()) {
+			$data = Helpers_DB::getMaxMachoServicios();
+			$jsonarray = array();
+			$total=0;
+			foreach($data as $d){
+				$total = $total + (int)$d['cnt'];
+			}
+			foreach($data as $d){
+				$macho = $d['Macho'];
+				$cnt = (int)$d['cnt'];
+				$porc = (int)(($cnt * 100) / $total);
+				array_push($jsonarray, array($macho, $porc));
+			}
 			echo json_encode($jsonarray);
 		}
 	}
