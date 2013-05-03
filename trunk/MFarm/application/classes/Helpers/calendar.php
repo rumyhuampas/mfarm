@@ -7,7 +7,7 @@ class Helpers_Calendar {
 	}
 	
 	public static function getModificationColors(){
-		return array('backgroundColor' => '#8A0651', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => '#909090', 'borderColor' => '#404040', 'textColor' => '#303030');
 	}
 	
 	public static function getProbCelo21Colors(){

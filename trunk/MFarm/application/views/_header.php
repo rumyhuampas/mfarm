@@ -30,8 +30,9 @@
 		<script src=<?php echo URL::base()."/scripts/plugins/jquery.confirmdialog.js" ?> type="text/javascript"></script>
 		<script src=<?php echo URL::base()."/scripts/custom/general.js" ?> type="text/javascript"></script>
 		<script src=<?php echo URL::base()."/scripts/custom/calendar.js" ?> type="text/javascript"></script>
+		<script src=<?php echo URL::base()."/scripts/custom/forms.js" ?> type="text/javascript"></script>
 		<!--<script src=<?php echo URL::base()."/scripts/custom/dashboard.js" ?> type="text/javascript"></script>-->
-		<!--<script src=<?php echo URL::base()."/scripts/custom/form.js" ?> type="text/javascript"></script>
+		<!--
 		<script src=<?php echo URL::base()."/scripts/custom/tables.js" ?> type="text/javascript"></script>-->
 		<!--[if lt IE 9]>
 			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>

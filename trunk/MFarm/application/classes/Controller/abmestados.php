@@ -11,7 +11,7 @@ class Controller_ABMEstados extends Controller {
 			$this->response->body($view->render());
 		}
 		else{
-			if(!Helpers_DB::estadoExits($_POST['name'])){
+			if(!Helpers_DB::estadoExists($_POST['name'])){
 				$estado = ORM::factory('estado');
 				$estado->Nombre = $_POST['name'];
 				$estado->CanDelete = 'Y';
