@@ -77,7 +77,10 @@ jQuery(document).ready(function(){
 			    {IdCerda: idcerda},
 			    function( data ){
 			    	data = JSON.parse(data);
-			    	jQuery('#fechainicio').text('Fecha inicio: ' + data[0]);
+			    	jQuery('#fechainicio').text('Fecha inicio: ' + data[0][0]);
+			    	for(i=0;i<data.length;i++){
+			    		data[i][0] = i;
+			    	}
 			    	var plot = jQuery.plot(jQuery("#cerdachart"),
 					   [ { data: data, label: "Peso", color: "#ff6138"}/*, { data: html5, label: "HTML5(x)", color: "#00a388"}*/ ], {
 						   series: {
