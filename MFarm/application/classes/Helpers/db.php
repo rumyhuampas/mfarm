@@ -82,6 +82,10 @@ class Helpers_DB {
 		->group_by('Macho') 
 		->order_by('cnt', 'DESC')->order_by('Macho')->execute();
 	}
+
+	public static function getLastDestetes($amount){
+		return ORM::factory('destete')->order_by('Fecha', 'ASC')->limit($amount)->find_all();	
+	}
 	
 	/******** ESTADOS *********/
 	public static function getEstados(){

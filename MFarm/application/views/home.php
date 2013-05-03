@@ -27,7 +27,7 @@
                     
                     <!--------CALENDAR------->
                     <div class="contenttitle">
-                    	<h2 class="chart"><span>Calendario</span></h2>
+                    	<h2 class="calendar"><span>Calendario</span></h2>
                     </div><!--contenttitle-->
                     <br />
                     <?php include Kohana::find_file('views', '_calendarlegend'); ?>

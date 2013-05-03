@@ -397,6 +397,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .contenttitle h2.chart { background-position: -10px -227px; }
 .contenttitle h2.image { background-position: -10px -408px; }
 .contenttitle h2.button { background-position: -47px -443px; }
+.contenttitle h2.calendar { background-position: -82px -155px; }
 
 
 /****************** LIST OF WIDGETS STYLE *******************/

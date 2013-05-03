@@ -38,9 +38,16 @@
                     </div><!--analytics-->
                     
                 </div><!--one_half-->
-                
-                
+                                
                 <br clear="all" />
+                
+            </div><!--widgetcontent-->
+        </div><!--widgetbox-->
+        
+        <div class="widgetbox">
+        	<div class="title"><h2 class="chart"><span>Ultimos 10 destetes</span></h2></div>
+            <div class="chartbox widgetcontent">
+            	<div id="homedestetechart" class="chartplace"></div>
             </div><!--widgetcontent-->
         </div><!--widgetbox-->
         
@@ -48,6 +55,10 @@
         	<div class="title"><h2 class="chart"><span>Machos con mas servicios</span></h2></div>
             <div class="chartbox widgetcontent">
             	<div id="homemachosservicioschart" class="chartplace"></div>
+            	
+            	<div class="analytics analytics2">
+                    <small>Datos de los ultimos 30 dias</small>
+                </div><!--analytics-->
             </div><!--widgetcontent-->
         </div><!--widgetbox-->
         
