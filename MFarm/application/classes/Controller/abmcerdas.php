@@ -151,13 +151,14 @@ class Controller_ABMCerdas extends Controller {
 
 	public function action_getcerdachartdata(){
 		if ($this->request->is_ajax()) {
-			$mindate = DB::select ('Fecha')->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->limit(1)->execute();
-			$data = DB::select ('Peso', DB::expr('DATEDIFF(Fecha, 
+			//$mindate = DB::select ('Fecha')->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->limit(1)->execute();
+			/*$data = DB::select ('Peso', DB::expr('DATEDIFF(Fecha, 
 				(select fecha from cerdaaudit where IdCerda='.$_POST['IdCerda'].' order by fecha limit 1)) AS Fecha'))
-				->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->execute();
+				->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->execute();*/
+			$data = DB::select('Fecha', 'Peso')->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->limit(20)->execute();
 			$jsonarray = array();
 			for($i=0; $i<count($data); $i++){
-				array_push($jsonarray, array((int)$data[$i]['Fecha'], (int)$data[$i]['Peso']));
+				array_push($jsonarray, array(date('Y-m-d', strtotime($data[$i]['Fecha'])), (int)$data[$i]['Peso']));
 			}
 			echo json_encode($jsonarray);
 		}
