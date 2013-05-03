@@ -138,9 +138,6 @@ class Controller_Home extends Controller {
 
 	public function action_getlastbirthspercentage(){	
 		if ($this->request->is_ajax()) {
-			/*$data = DB::select ('Peso', DB::expr('DATEDIFF(Fecha, 
-				(select fecha from cerdaaudit where IdCerda='.$_POST['IdCerda'].' order by fecha limit 1)) AS Fecha'))
-				->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->execute();*/
 			$data = Helpers_DB::getLastBirthsData($_POST['amount']);
 			$jsonarray = array();
 			$i=0;
@@ -186,6 +183,19 @@ class Controller_Home extends Controller {
 				$cnt = (int)$d['cnt'];
 				$porc = (int)(($cnt * 100) / $total);
 				array_push($jsonarray, array($macho, $porc));
+			}
+			echo json_encode($jsonarray);
+		}
+	}
+	
+	public function action_getLastDestetes(){	
+		if ($this->request->is_ajax()) {
+			$data = Helpers_DB::getLastDestetes($_POST['amount']);
+			$jsonarray = array();
+			$i=0;
+			foreach($data as $d){
+				array_push($jsonarray, array((int)$i, (int)$d->Lechones));
+				$i++;
 			}
 			echo json_encode($jsonarray);
 		}

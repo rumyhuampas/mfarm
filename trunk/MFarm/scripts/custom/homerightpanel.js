@@ -109,4 +109,23 @@ jQuery(document).ready(function(){
 	    }
 	    return color;
 	}
+	
+	/*****BAR GRAPH IN SIDEBAR*****/
+	jQuery.post( 
+	    '/mfarm/home/getLastDestetes/',
+	    {amount: 10},
+	    function( data ){
+	    	data = JSON.parse(data);
+			var stack = 0, bars = true, lines = false, steps = false;
+			jQuery.plot(jQuery("#homedestetechart"), [ data ], {
+				series: {
+					stack: stack,
+					lines: { show: lines, fill: true, steps: steps },
+					bars: { show: bars, barWidth: 0.6 }
+				},
+				grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
+				colors: ["#cc0000"]
+			});
+		}
+	);
 });
