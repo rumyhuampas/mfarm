@@ -12,9 +12,14 @@ class Helpers_Const {
 	public static function POSTPARTO(){ return 'POSTPARTO'; }
 	
 	/******** DATOS *********/
+	public static function DATOMODIF(){ return 'MODIFICACIONES'; }
 	public static function DATOSERVICIOS(){ return 'SERVICIOS'; }
 	public static function DATOPARTOS(){ return 'PARTOS'; }
 	public static function DATODESTETES(){ return 'DESTETES'; }
+	public static function DATOCOMPLETO(){ return 'COMPLETO'; }
+	
+	public static function MODIFCOLNAMES(){ return array('Numero', 'Fecha', 'Estado', 'Peso', 'Observaciones'); }
+	public static function MODIFCOLTITLES(){ return array('Numero de cerda', 'Fecha de modif', 'Estado', 'Peso', 'Observaciones'); }
 	
 	public static function SERVICIOSCOLNAMES(){ return array('Numero', 'FechaServicio', 'Macho', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'ProbableFechaParto', 'Observaciones'); }
 	public static function SERVICIOSCOLTITLES(){ return array('Numero de cerda', 'Fecha de servicio', 'Macho', 'Probable fecha de celo 21', 'Probable fecha de celo 42', 'Probable fecha de parto', 'Observaciones'); }

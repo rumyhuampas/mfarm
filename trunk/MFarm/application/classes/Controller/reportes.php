@@ -7,7 +7,7 @@ class Controller_Reportes extends Controller {
 			$view=View::factory('reportesporfecha');
 			$view->title = Helpers_Const::APPNAME()." - Reportes";
 			$view->menuid = 3;
-			$view->datos = array(Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES());
+			$view->datos = array(Helpers_Const::DATOMODIF(), Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES());
 			$this->response->body($view->render());
 		}
 		else{
@@ -39,6 +39,14 @@ class Controller_Reportes extends Controller {
 			$pdf->get_mpdf()->SetCreator(Helpers_Const::APPNAME());
 			
 			if($_POST['datos'] == 0){
+				$pdf->pdftitle = Helpers_Const::DATOMODIF().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				$pdf->colTitles = Helpers_Const::MODIFCOLTITLES();
+				$pdf->colNames = Helpers_Const::MODIFCOLNAMES();
+				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
+				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
+				$pdf->rows = Helpers_DB::getModificaciones($desde, $hasta);
+			}
+			if($_POST['datos'] == 1){
 				$pdf->pdftitle = Helpers_Const::DATOSERVICIOS().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$pdf->colTitles = Helpers_Const::SERVICIOSCOLTITLES();
 				$pdf->colNames = Helpers_Const::SERVICIOSCOLNAMES();
@@ -46,7 +54,7 @@ class Controller_Reportes extends Controller {
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
 				$pdf->rows = Helpers_DB::getServicios($desde, $hasta);
 			}
-			if($_POST['datos'] == 1){
+			if($_POST['datos'] == 2){
 				$pdf->pdftitle = Helpers_Const::DATOPARTOS().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$pdf->colTitles = Helpers_Const::PARTOSCOLTITLES();
 				$pdf->colNames = Helpers_Const::PARTOSCOLNAMES();
@@ -54,7 +62,7 @@ class Controller_Reportes extends Controller {
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
 				$pdf->rows = Helpers_DB::getPartos($desde, $hasta);
 			}
-			if($_POST['datos'] == 2){
+			if($_POST['datos'] == 3){
 				$pdf->pdftitle = Helpers_Const::DATODESTETES().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$pdf->colTitles = Helpers_Const::DESTETESCOLTITLES();
 				$pdf->colNames = Helpers_Const::DESTETESCOLNAMES();
@@ -75,7 +83,7 @@ class Controller_Reportes extends Controller {
 			$cerda = Helpers_DB::getCerda($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->datos = array(Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES());
+				$view->datos = array(Helpers_Const::DATOMODIF(), Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES(), Helpers_Const::DATOCOMPLETO());
 				$this->response->body($view->render());
 			}
 			else{
@@ -94,7 +102,7 @@ class Controller_Reportes extends Controller {
 			$view=View::factory('reportesporcerda');
 			$view->title = Helpers_Const::APPNAME()." - Reportes";
 			$view->menuid = 3;
-			$view->datos = array(Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES());
+			$view->datos = array(Helpers_Const::DATOMODIF(), Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES(), Helpers_Const::DATOCOMPLETO());
 			$this->response->body($view->render());
 		}
 		else{
@@ -125,6 +133,14 @@ class Controller_Reportes extends Controller {
 			$pdf->get_mpdf()->SetCreator(Helpers_Const::APPNAME());
 			
 			if($_POST['datos'] == 0){
+				$pdf->pdftitle = Helpers_Const::DATOMODIF().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				$pdf->colTitles = Helpers_Const::MODIFCOLTITLES();
+				$pdf->colNames = Helpers_Const::MODIFCOLNAMES();
+				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
+				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
+				$pdf->rows = Helpers_DB::getModificaciones($desde, $hasta, $_POST['IdCerda']);
+			}
+			if($_POST['datos'] == 1){
 				$pdf->pdftitle = Helpers_Const::DATOSERVICIOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$pdf->colTitles = Helpers_Const::CERDASERVICIOSCOLTITLES();
 				$pdf->colNames = Helpers_Const::CERDASERVICIOSCOLNAMES();
@@ -132,7 +148,7 @@ class Controller_Reportes extends Controller {
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
 				$pdf->rows = Helpers_DB::getServicios($desde, $hasta, $_POST['IdCerda']);
 			}
-			if($_POST['datos'] == 1){
+			if($_POST['datos'] == 2){
 				$pdf->pdftitle = Helpers_Const::DATOPARTOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$pdf->colTitles = Helpers_Const::CERDAPARTOSCOLTITLES();
 				$pdf->colNames = Helpers_Const::CERDAPARTOSCOLNAMES();
@@ -140,7 +156,7 @@ class Controller_Reportes extends Controller {
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
 				$pdf->rows = Helpers_DB::getPartos($desde, $hasta, $_POST['IdCerda']);
 			}
-			if($_POST['datos'] == 2){
+			if($_POST['datos'] == 3){
 				$pdf->pdftitle = Helpers_Const::DATODESTETES().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$pdf->colTitles = Helpers_Const::CERDADESTETESCOLTITLES();
 				$pdf->colNames = Helpers_Const::CERDADESTETESCOLNAMES();
