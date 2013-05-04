@@ -23,6 +23,9 @@ jQuery(document).ready(function() {
 			titleFormat:{month:"MMMM yyyy",week:"d[ yyyy] MMM{ '&#8212;' d [ MMM] yyyy}",day:"dddd, d MMM, yyyy"},
 			editable: false,
 			droppable: false, // this allows things to be dropped onto the calendar !!!
+			eventRender: function(event, element) { 
+				element.find('.fc-event-title').html(element.find('.fc-event-title').text().replace(/\\n/g,"<br/>")); 
+	        } 
 			/*drop: function(date, allDay) { // this function is called when something is dropped
 			
 				// retrieve the dropped element's stored Event Object

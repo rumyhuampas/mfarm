@@ -6,6 +6,10 @@
         <div class="widgetbox">
         	<div class="title"><h2 class="chart"><span>Ultimos 10 partos</span></h2></div>
             <div class="chartbox widgetcontent">
+				<div style="width:14px; border:1px solid #ccc; padding:1px; display: inline-block;">
+					<div style="width:4px;height:0;border:5px solid #069;overflow:hidden"></div>
+				</div><div style="padding-bottom:5px; display: inline-block;">% de cerdos vivos</div>
+            	
             	<div id="homebirthchart" class="chartplace"></div>
                 
                 <div class="one_half">
@@ -47,6 +51,10 @@
         <div class="widgetbox">
         	<div class="title"><h2 class="chart"><span>Ultimos 10 destetes</span></h2></div>
             <div class="chartbox widgetcontent">
+            	<div style="width:14px; border:1px solid #ccc; padding:1px; display: inline-block;">
+					<div style="width:4px;height:0;border:5px solid #cc0000;overflow:hidden"></div>
+				</div><div style="padding-bottom:5px; display: inline-block;">Cant. de lechones</div>
+				
             	<div id="homedestetechart" class="chartplace"></div>
             </div><!--widgetcontent-->
         </div><!--widgetbox-->

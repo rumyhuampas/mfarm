@@ -1283,9 +1283,11 @@ a.btn_table { background-position: -82px -480px; }
 .average { font-size: 10px; text-transform: uppercase; color: #069; font-weight: bold; border-top: 1px dashed #ccc; padding-top: 5px; }
 .average h3 { display: inline-block; vertical-align: bottom; margin-left: 10px; font-size: 16px; }
 .ui-datepicker-inline .ui-datepicker-calendar td a:hover { background: #ddd; text-decoration: none; color: #666; text-shadow: none; }
-.ui-datepicker-inline .ui-datepicker-calendar td.ui-datepicker-today a { 
-	background: #333; text-decoration: none; color: #fff; text-shadow: none; font-weight: bold; 
+.ui-datepicker-inline .ui-datepicker-calendar td.ui-datepicker-current-day a { 
+	background: #999; text-decoration: none; color: #fff; text-shadow: none; font-weight: bold; 
 }
+.ui-datepicker-inline .ui-datepicker-calendar td.ui-datepicker-today a { 
+	background: #333; text-decoration: none; color: #fff; text-shadow: none; font-weight: bold;
 
 /*************  CONFIRM DIALOG *************/
 #confirmOverlay{ width:100%;	height:100%;	position:fixed;	top:0;	left:0;

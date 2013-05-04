@@ -32,17 +32,23 @@ class Controller_Home extends Controller {
 			foreach($servicios as $servicio){
 				$servicio->FechaServicio = date('Y-m-d', strtotime($servicio->FechaServicio));
 				if($currentdate != $servicio->FechaServicio || $currentcerda != $servicio->Numero){
-					if($servicioarray != null){
-						if($_POST['servicio'] == 'true'){
+					if($_POST['servicio'] == 'true'){
+						if($servicioarray != null){
 							array_push($jsonarray, $servicioarray);
 						}
-						if($_POST['celo21'] == 'true'){
+					}
+					if($_POST['celo21'] == 'true'){
+						if($celo21array != null){
 							array_push($jsonarray, $celo21array);
 						}
-						if($_POST['celo42'] == 'true'){
+					}
+					if($_POST['celo42'] == 'true'){
+						if($celo42array != null){
 							array_push($jsonarray, $celo42array);
 						}
-						if($_POST['probparto'] == 'true'){
+					}
+					if($_POST['probparto'] == 'true'){
+						if($probpartoarray != null){
 							array_push($jsonarray, $probpartoarray);
 						}
 					}
@@ -79,29 +85,35 @@ class Controller_Home extends Controller {
 					}
 				}
 				if($_POST['servicio'] == 'true'){
-					$servicioarray['title'] = $servicioarray['title'].' -Macho: '.$servicio->Macho;
+					$servicioarray['title'] = $servicioarray['title'].'\nMacho: '.$servicio->Macho;
 				}
 				if($_POST['celo21'] == 'true'){
-					$celo21array['title'] = $celo21array['title'].' -Macho: '.$servicio->Macho;
+					$celo21array['title'] = $celo21array['title'].'\nMacho: '.$servicio->Macho;
 				}
 				if($_POST['celo42'] == 'true'){
-					$celo42array['title'] = $celo42array['title'].' -Macho: '.$servicio->Macho;
+					$celo42array['title'] = $celo42array['title'].'\nMacho: '.$servicio->Macho;
 				}
 				if($_POST['probparto'] == 'true'){
-					$probpartoarray['title'] = $probpartoarray['title'].' -Macho: '.$servicio->Macho;
+					$probpartoarray['title'] = $probpartoarray['title'].'\nMacho: '.$servicio->Macho;
 				}
 			}
-			if($servicioarray != null){
-				if($_POST['servicio'] == 'true'){
+			if($_POST['servicio'] == 'true'){
+				if($servicioarray != null){
 					array_push($jsonarray, $servicioarray);
 				}
-				if($_POST['celo21'] == 'true'){
+			}
+			if($_POST['celo21'] == 'true'){
+				if($celo21array != null){
 					array_push($jsonarray, $celo21array);
 				}
-				if($_POST['celo42'] == 'true'){
+			}
+			if($_POST['celo42'] == 'true'){
+				if($celo42array != null){
 					array_push($jsonarray, $celo42array);
 				}
-				if($_POST['probparto'] == 'true'){
+			}
+			if($_POST['probparto'] == 'true'){
+				if($probpartoarray != null){
 					array_push($jsonarray, $probpartoarray);
 				}
 			}
@@ -125,7 +137,7 @@ class Controller_Home extends Controller {
 							'borderColor' => $partoColors['borderColor'],
 							'textColor' => $partoColors['textColor']);
 					}
-					$partoarray['title'] = $partoarray['title'].' - Vivos: '.$parto->Vivos.' - Muertos: '.$parto->Muertos;
+					$partoarray['title'] = $partoarray['title'].'\nVivos: '.$parto->Vivos.'\nMuertos: '.$parto->Muertos.'\nMomificados: '.$parto->Momificados;
 				}
 				if($partoarray != null){
 					array_push($jsonarray, $partoarray);

@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
 					   points: { show: true, radius: 2 }, shadowSize: 0
 				
 				   },
-				   legend: { position: 'nw'},
+				   legend: { show: false },
 				   grid: { hoverable: true, clickable: true, labelMargin: 5, borderWidth: 1, borderColor: '#bbb' },
 				   yaxis: { show: true, min: 0, max: 100 },
 				 });
@@ -124,6 +124,7 @@ jQuery(document).ready(function(){
 					bars: { show: bars, barWidth: 0.6 }
 				},
 				grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
+				xaxis: { show: false },
 				colors: ["#cc0000"]
 			});
 		}
