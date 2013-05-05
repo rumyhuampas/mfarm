@@ -5,7 +5,13 @@
 	if($userid == ''){
 		HTTP::redirect(Route::get('default')->uri(array('controller' => 'login')));	
 	}
-	$eventsCount = Helpers_DB::getTodayEventsCount();
+	$altasCount = Helpers_DB::getTodayNewCerdasCount();
+	$serviciosCount = Helpers_DB::getTodayServiciosCount();
+	$partosCount = Helpers_DB::getTodayPartosCount();
+	$destetesCount = Helpers_DB::getTodayDestetesCount();
+	$celosCount = Helpers_DB::getTodayCelosCount();
+	$probpartoCount = Helpers_DB::getTodayProbPartoCount();
+	$eventsCount = $altasCount + $serviciosCount + $partosCount + $destetesCount + $celosCount + $probpartoCount;
 ?>
 
 <!-- START OF HEADER -->
@@ -29,7 +35,7 @@
         	<div id="notiPanel" class="headercolumn">
                 <div class="notiwrapper">
                 	<?php if($eventsCount > 0){
-                    	echo '<a href="'.URL::base().'headerbar/getTodayEvents" class="notialert radius2">'.$eventsCount.'</a>';
+                    	echo '<a href="'.URL::base().'headerbar/getTodayNewCerdas" class="notialert radius2">'.$eventsCount.'</a>';
                     }
 					else{
 						echo '<a href="#" class="noalert radius2">'.$eventsCount.'</a>';
@@ -37,7 +43,13 @@
                     ?>
                     <div class="notibox">
                         <ul class="tabmenu">
-                            <li class="current"><div class="title">Eventos</div></li>
+                        	<li class="current"><a href="<?php echo URL::base().'headerbar/getTodayNewCerdas'?>" class="msg">Altas(<?php echo $altasCount ?>)</a></li>
+                            <li class="current"><a href="<?php echo URL::base().'headerbar/getTodayServicios'?>" class="msg">Servicios(<?php echo $serviciosCount ?>)</a></li>
+                            <li><a href="<?php echo URL::base().'headerbar/getTodayPartos'?>" class="msg">Partos(<?php echo $partosCount ?>)</a></li>
+                        	<br clear="all" />
+                        	<li><a href="<?php echo URL::base().'headerbar/getTodayDestetes'?>" class="msg">Destetes(<?php echo $destetesCount ?>)</a></li>
+                            <li><a href="<?php echo URL::base().'headerbar/getTodayCelos'?>" class="msg">Celos(<?php echo $celosCount ?>)</a></li>
+                            <li><a href="<?php echo URL::base().'headerbar/getTodayProbParto'?>" class="msg">Prob Parto(<?php echo $probpartoCount ?>)</a></li>
                         </ul>
                         <br clear="all" />
                         <div class="loader"><img src=<?php echo URL::base()."assets/images/loaders/loader3.gif" ?> alt="Loading Icon" /> Loading...</div>

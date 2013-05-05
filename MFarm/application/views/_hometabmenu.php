@@ -2,11 +2,11 @@
 	<li><a href=<?php echo URL::base().Route::get('default')
 		->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?> class="add">Nueva cerda</a></li>
 	<li><a href=<?php echo URL::base().Route::get('default')
-		->uri(array('controller' => 'abmcerdas', 'action' => 'edit')); ?> class="editor">Modificar cerda</a></li>
+		->uri(array('controller' => 'abmcerdas', 'action' => 'edit')); ?> class="editor">Modif. cerda</a></li>
     <li><a href=<?php echo URL::base().Route::get("default")
-		->uri(array("controller" => "abmservicios", "action" => "new")); ?> class="pipeta">Alta de servicio</a></li>
+		->uri(array("controller" => "abmservicios", "action" => "new")); ?> class="pipeta">Nuevo servicio</a></li>
 	<li><a href=<?php echo URL::base().Route::get("default")
-		->uri(array("controller" => "abmpartos", "action" => "new")); ?> class="stork">Agregar parto</a></li>
+		->uri(array("controller" => "abmpartos", "action" => "new")); ?> class="stork">Nuevo parto</a></li>
 	<li><a href=<?php echo URL::base().Route::get("default")
-		->uri(array("controller" => "abmdestetes", "action" => "new")); ?> class="babybottle">Agregar destete</a></li>
+		->uri(array("controller" => "abmdestetes", "action" => "new")); ?> class="babybottle">Nuevo destete</a></li>
 </ul>

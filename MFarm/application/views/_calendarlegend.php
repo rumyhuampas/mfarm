@@ -1,19 +1,36 @@
 <table>
 	<tbody>
 	<tr>
-		<td style="padding:5px; border:1px solid #ccc;">
-			<?php 
-			if(Request::current()->controller() == 'Home'){ 
-				echo '<input type="checkbox" class="calendarcheck" id="modif" name="modif" value="modif" checked>';
-			}
-			?>
-			<div style="width:14px; border:1px solid #ccc; padding:1px; display: inline-block;">
-				<?php $colors = Helpers_Calendar::getModificationColors();
-				echo '<div style="width:4px;height:0;border:5px solid '.$colors['backgroundColor'].';overflow:hidden"></div>'
+		<?php if(Request::current()->controller() == 'Home'){ ?>
+			<td style="padding:5px; border:1px solid #ccc;">
+				<?php 
+				if(Request::current()->controller() == 'Home'){ 
+					echo '<input type="checkbox" class="calendarcheck" id="new" name="new" value="new" checked>';
+				}
 				?>
-			</div>
-			Modificacion
-		</td>
+				<div style="width:14px; border:1px solid #ccc; padding:1px; display: inline-block;">
+					<?php $colors = Helpers_Calendar::getNewCerdaColors();
+					echo '<div style="width:4px;height:0;border:5px solid '.$colors['backgroundColor'].';overflow:hidden"></div>'
+					?>
+				</div>
+				Alta de cerda
+			</td>
+		<?php } ?>
+		<?php if(Request::current()->controller() != 'Home'){ ?>
+			<td style="padding:5px; border:1px solid #ccc;">
+				<?php 
+				if(Request::current()->controller() == 'Home'){ 
+					echo '<input type="checkbox" class="calendarcheck" id="modif" name="modif" value="modif" checked>';
+				}
+				?>
+				<div style="width:14px; border:1px solid #ccc; padding:1px; display: inline-block;">
+					<?php $colors = Helpers_Calendar::getModificationColors();
+					echo '<div style="width:4px;height:0;border:5px solid '.$colors['backgroundColor'].';overflow:hidden"></div>'
+					?>
+				</div>
+				Modificacion
+			</td>
+		<?php } ?>
 		<td style="padding:5px; border:1px solid #ccc;">
 			<?php 
 			if(Request::current()->controller() == 'Home'){

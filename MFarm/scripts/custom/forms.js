@@ -135,17 +135,17 @@ jQuery(document).ready(function(){
 			alive: {
 				required: true,
 				digits: true,
-				min: 1
+				min: 0
 			},
 			dead: {
 				required: true,
 				digits: true,
-				min: 1
+				min: 0
 			},
 			momif: {
 				required: true,
 				digits: true,
-				min: 1
+				min: 0
 			}
 		},
 		messages: {
@@ -157,17 +157,17 @@ jQuery(document).ready(function(){
 			alive: {
 				required: "Por favor ingrese el numero de cerdos vivos",
 				digits: "Debe ingresar solo numeros",
-				min: "El valor debe ser mayor que 0"
+				min: "El valor debe ser positivo"
 			},
 			dead: {
 				required: "Por favor ingrese el numero de cerdos muertos",
 				digits: "Debe ingresar solo numeros",
-				min: "El valor debe ser mayor que 0"
+				min: "El valor debe ser positivo"
 			},
 			momif: {
 				required: "Por favor ingrese el numero de cerdos momificados",
 				digits: "Debe ingresar solo numeros",
-				min: "El valor debe ser mayor que 0"
+				min: "El valor debe ser positivo"
 			}
 		}
 	});
