@@ -4,15 +4,15 @@ class Controller_ABMCerdas extends Controller {
 
 	public function action_new(){
 		if(!isset($_POST['number'])){
-			$view=View::factory('newcerda');
+			$view = View::factory('newcerda');
 			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
 			$view->menuid = 1;
-			$view->estados = Helpers_DB::getComboEstados();
-			$view->cerdas = Helpers_DB::getCerdas();
+			$view->estados = Helpers_Combos::getEstados();
+			$view->cerdas = Helpers_Cerda::get();
 			$this->response->body($view->render());
 		}
 		else{
-			if(!Helpers_DB::cerdaExists($_POST['number'])){
+			if(!Helpers_Cerda::exists($_POST['number'])){
 				$cerda = ORM::factory('cerda');
 				$cerda->Numero = $_POST['number'];
 				$cerda->IdEstado = $_POST['estado'];
@@ -41,17 +41,17 @@ class Controller_ABMCerdas extends Controller {
 
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
-			$view=View::factory('editcerda');
+			$view = View::factory('editcerda');
 			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
 			$view->menuid = 1;
-			$view->estados = Helpers_DB::getComboEstados();
-			$cerda = Helpers_DB::getCerda($_POST['numbersearch']);
+			$view->estados = Helpers_Combos::getEstados();
+			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->audits = Helpers_DB::getCerdaAudit($cerda->Id);
-				$view->servicios = Helpers_DB::getCerdaServicios($cerda->Id);
-				$view->partos = Helpers_DB::getCerdaPartos($cerda->Id);
-				$view->destetes = Helpers_DB::getCerdaDestetes($cerda->Id);
+				$view->audits = Helpers_Cerda::getAudit($cerda->Id);
+				$view->servicios = Helpers_Cerda::getServicios($cerda->Id);
+				$view->partos = Helpers_Cerda::getPartos($cerda->Id);
+				$view->destetes = Helpers_Cerda::getDestetes($cerda->Id);
 				$this->response->body($view->render());
 			}
 			else{
@@ -73,7 +73,7 @@ class Controller_ABMCerdas extends Controller {
 			$probFechaParto = Helpers_Calendar::getProbPartoColors();
 			$modifColors = Helpers_Calendar::getModificationColors();
 						
-			$servicios = Helpers_DB::getCerdaServicios($_POST['IdCerda']);
+			$servicios = Helpers_Cerda::getServicios($_POST['IdCerda']);
 			$jsonarray = array();
 			$currentdate = null;
 			$servicioarray = null;
@@ -123,7 +123,7 @@ class Controller_ABMCerdas extends Controller {
 				array_push($jsonarray, $partoarray);
 			}
 			
-			$audits = Helpers_DB::getCerdaAudit($_POST['IdCerda']);
+			$audits = Helpers_Cerda::getAudit($_POST['IdCerda']);
 			$currentdate = null;
 			$modificationarray = null;
 			foreach($audits as $audit){
@@ -151,15 +151,7 @@ class Controller_ABMCerdas extends Controller {
 
 	public function action_getcerdachartdata(){
 		if ($this->request->is_ajax()) {
-			//$mindate = DB::select ('Fecha')->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->limit(1)->execute();
-			/*$data = DB::select ('Peso', DB::expr('DATEDIFF(Fecha, 
-				(select fecha from cerdaaudit where IdCerda='.$_POST['IdCerda'].' order by fecha limit 1)) AS Fecha'))
-				->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->execute();*/
-			$data = DB::select('Fecha', 'Peso')->from('cerdaaudit')->where('IdCerda', '=', $_POST['IdCerda'])->order_by('Fecha')->limit(20)->execute();
-			$jsonarray = array();
-			for($i=0; $i<count($data); $i++){
-				array_push($jsonarray, array(date('Y-m-d', strtotime($data[$i]['Fecha'])), (int)$data[$i]['Peso']));
-			}
+			$jsonarray = Helpers_Charts::getCerdaPesoData($_POST['IdCerda']);
 			echo json_encode($jsonarray);
 		}
 	}
@@ -169,11 +161,11 @@ class Controller_ABMCerdas extends Controller {
 			$view=View::factory('editcerda');
 			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
 			$view->menuid = 1;
-			$view->estados = Helpers_DB::getComboEstados();
+			$view->estados = Helpers_Combos::getEstados();
 			$this->response->body($view->render());
 		}
 		else{
-			$cerda = ORM::factory('cerda')->where('Numero', '=', $_POST['number'])->find();
+			$cerda = Helpers_Cerda::get($_POST['number']);
 			$cerda->IdEstado = $_POST['estado'];
 			$cerda->Peso = $_POST['weight'];
 			$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
@@ -196,7 +188,7 @@ class Controller_ABMCerdas extends Controller {
 		$IdCerda = $this->request->param('id');
 		$cerda = ORM::factory('cerda', $IdCerda);
 		$vacia = Helpers_Const::VACIA();
-		$cerda->IdEstado = Helpers_DB::getEstadoId($vacia);
+		$cerda->IdEstado = Helpers_Estado::get($vacia)->Id;
 		$cerda->Modified_On = DB::expr('Now()');
 		$cerda->Update();
 	

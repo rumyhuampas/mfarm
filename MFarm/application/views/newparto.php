@@ -47,7 +47,7 @@
 							echo Form::open('abmpartos/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewparto'));
 
 								$EstadoPreñada = Helpers_Const::PREÑADA();
-								$IdEstadoPreñada = Helpers_DB::getEstadoId($EstadoPreñada);
+								$IdEstadoPreñada = Helpers_Estado::get($EstadoPreñada)->Id;
 								if($cerda->IdEstado != $IdEstadoPreñada){
 									echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 								    	echo '<a class="close"></a>';

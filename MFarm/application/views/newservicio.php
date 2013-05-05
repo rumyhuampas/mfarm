@@ -47,7 +47,7 @@
 							echo Form::open('abmservicios/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewservicio'));
 								
 								$EstadoCelo = Helpers_Const::CELO();
-								$IdEstadoCelo = Helpers_DB::getEstadoId($EstadoCelo);
+								$IdEstadoCelo = Helpers_Estado::get($EstadoCelo)->Id;
 								if($cerda->IdEstado != $IdEstadoCelo){
 									echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 								    	echo '<a class="close"></a>';

@@ -47,7 +47,7 @@
 							echo Form::open('abmdestetes/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewdestete'));
 
 								$EstadoPostParto = Helpers_Const::POSTPARTO();
-								$IdEstadoPostParto = Helpers_DB::getEstadoId($EstadoPostParto);
+								$IdEstadoPostParto = Helpers_Estado::get($EstadoPostParto)->Id;
 								if($cerda->IdEstado != $IdEstadoPostParto){
 									echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 								    	echo '<a class="close"></a>';

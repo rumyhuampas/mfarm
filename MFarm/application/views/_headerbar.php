@@ -18,7 +18,9 @@
 <div class="header radius3">
 	<div class="headerinner">
     	
-        <a href="#"><img src=<?php echo URL::base()."assets/images/starlight_admin_template_logo_small.png" ?> alt="" /></a>
+        <a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'home', 'action' => 'index')); ?>>
+        	<img src=<?php echo URL::base()."assets/images/starlight_admin_template_logo_small.png" ?> alt="" />
+        </a>
         
           
         <div class="headright">

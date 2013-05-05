@@ -46,7 +46,7 @@
                         			echo '<p>';
 		                            echo '<span class="radius2">'.$lm->Fecha.'</span> <br />';
 									echo 'Cerda: <b>'.$lm->Numero.'</b><br />';
-									echo 'Estado: <b>'.$lm->NombreEstado.'</b> - Peso: <b>'.$lm->Peso.'</b>';
+									echo 'Estado: <b>'.$lm->Estado.'</b> - Peso: <b>'.$lm->Peso.'</b>';
 		                            echo '</p>';
 								}
                         	?>

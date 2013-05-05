@@ -4,14 +4,14 @@ class Controller_ABMEstados extends Controller {
 
 	public function action_new(){
 		if(!isset($_POST['name'])){
-			$view=View::factory('newestado');
+			$view = View::factory('newestado');
 			$view->title = Helpers_Const::APPNAME()." - ABM Estados";
 			$view->menuid = 2;
-			$view->estados = Helpers_DB::getEstados();
+			$view->estados = Helpers_Estado::get();
 			$this->response->body($view->render());
 		}
 		else{
-			if(!Helpers_DB::estadoExists($_POST['name'])){
+			if(!Helpers_Estado::exists($_POST['name'])){
 				$estado = ORM::factory('estado');
 				$estado->Nombre = $_POST['name'];
 				$estado->CanDelete = 'Y';

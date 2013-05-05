@@ -77,7 +77,7 @@
 						if(isset($cerda) && $cerda->loaded()){
 							echo Form::open('abmcerdas/edit', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formeditcerda'));
 							
-								if($cerda->IdEstado == Helpers_DB::getEndStatusId()){
+								if($cerda->IdEstado == Helpers_Estado::getEndStatus()->Id){
 									echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 								    	echo '<a class="close"></a>';
 								    	echo '<p>La cerda esta muerta.</p>';
@@ -91,7 +91,7 @@
 											array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 		                            echo '</span>';
 		                        echo '</p>';
-								if($cerda->IdEstado != Helpers_DB::getEndStatusId()){
+								if($cerda->IdEstado != Helpers_Estado::getEndStatus()->Id){
 									echo '<p>';
 										echo Form::label('date', 'Fecha');
 										echo '<span class="field">';
@@ -108,7 +108,7 @@
 								echo '<p>';
 		                        	echo Form::label('estado', 'Estado');
 									echo '<span class="field">';
-									if($cerda->IdEstado == Helpers_DB::getEndStatusId()){
+									if($cerda->IdEstado == Helpers_Estado::getEndStatus()->Id){
 										echo Form::select('estado', $estados, $cerda->IdEstado,
 											array('id' => 'cerdaestado', 'style' => 'background-color: #DDDDDD', 'disabled'));
 									}
@@ -121,7 +121,7 @@
 								echo '<p>';
 		                        	echo Form::label('weight', 'Peso');
 									echo '<span class="field">';
-									if($cerda->IdEstado == Helpers_DB::getEndStatusId()){
+									if($cerda->IdEstado == Helpers_Estado::getEndStatus()->Id){
 										echo Form::input('weight', $cerda->Peso,
 											array('type' => 'text', 'id' => 'weight', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 									}
@@ -133,7 +133,7 @@
 								echo '<p>';
 	                            	echo Form::label('obs', 'Observaciones');
 	                            	echo '<span class="field">';
-									if($cerda->IdEstado == Helpers_DB::getEndStatusId()){
+									if($cerda->IdEstado == Helpers_Estado::getEndStatus()->Id){
 	                            		echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80" style="background-color: #DDDDDD" readonly></textarea>';
 									}
 									else{
@@ -143,7 +143,7 @@
 		                        echo '</p>';
 		                        
 		                        echo '<p class="stdformbutton">';
-									if($cerda->IdEstado == Helpers_DB::getEndStatusId()){
+									if($cerda->IdEstado == Helpers_Estado::getEndStatus()->Id){
 		                        		echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2', 'style' => 'background-color: #DDDDDD; color: #333333;', 'disabled'));
 									}
 									else{
