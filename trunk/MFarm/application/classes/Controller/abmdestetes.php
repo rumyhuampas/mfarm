@@ -4,7 +4,7 @@ class Controller_ABMDestetes extends Controller {
 
 	public function action_new(){
 		if(!isset($_POST['number'])){
-			$view=View::factory('newdestete');
+			$view = View::factory('newdestete');
 			$view->title = Helpers_Const::APPNAME()." - ABM Destetes";
 			$view->menuid = 2;
 			$this->response->body($view->render());
@@ -21,7 +21,7 @@ class Controller_ABMDestetes extends Controller {
 			
 			$cerda = ORM::factory('cerda', $destete->IdCerda);
 			$vaciaestado = Helpers_Const::VACIA();
-			$cerda->IdEstado = Helpers_DB::getEstadoId($vaciaestado);
+			$cerda->IdEstado = Helpers_Estado::get($vaciaestado)->Id;
 			$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$cerda->Update();
 		
@@ -39,13 +39,13 @@ class Controller_ABMDestetes extends Controller {
 
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
-			$view=View::factory('newdestete');
+			$view = View::factory('newdestete');
 			$view->title = Helpers_Const::APPNAME()." - ABM Destetes";
 			$view->menuid = 2;
-			$cerda = Helpers_DB::getCerda($_POST['numbersearch']);
+			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->destetes = Helpers_DB::getCerdaDestetes($cerda->Id);
+				$view->destetes = Helpers_Cerda::getDestetes($cerda->Id);
 				$this->response->body($view->render());
 			}
 			else{

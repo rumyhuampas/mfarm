@@ -4,7 +4,7 @@ class Controller_Reportes extends Controller {
 
 	public function action_reportesporfecha(){
 		if(!isset($_POST['desde'])){
-			$view=View::factory('reportesporfecha');
+			$view = View::factory('reportesporfecha');
 			$view->title = Helpers_Const::APPNAME()." - Reportes";
 			$view->menuid = 3;
 			$view->datos = array(Helpers_Const::DATOMODIF(), Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES());
@@ -77,10 +77,10 @@ class Controller_Reportes extends Controller {
 
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
-			$view=View::factory('reportesporcerda');
+			$view = View::factory('reportesporcerda');
 			$view->title = Helpers_Const::APPNAME()." - Reportes";
 			$view->menuid = 3;
-			$cerda = Helpers_DB::getCerda($_POST['numbersearch']);
+			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
 				$view->datos = array(Helpers_Const::DATOMODIF(), Helpers_Const::DATOSERVICIOS(), Helpers_Const::DATOPARTOS(), Helpers_Const::DATODESTETES(), Helpers_Const::DATOCOMPLETO());

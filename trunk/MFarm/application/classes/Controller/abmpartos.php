@@ -22,7 +22,7 @@ class Controller_ABMPartos extends Controller {
 				
 				$cerda = ORM::factory('cerda', $parto->IdCerda);
 				$postpartoestado = Helpers_Const::POSTPARTO();
-				$cerda->IdEstado = Helpers_DB::getEstadoId($postpartoestado);
+				$cerda->IdEstado = Helpers_Estado::get($postpartoestado)->Id;
 				$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
 				$cerda->Update();
 			
@@ -45,13 +45,13 @@ class Controller_ABMPartos extends Controller {
 
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
-			$view=View::factory('newparto');
+			$view = View::factory('newparto');
 			$view->title = Helpers_Const::APPNAME()." - ABM Parto";
 			$view->menuid = 2;
-			$cerda = Helpers_DB::getCerda($_POST['numbersearch']);
+			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->partos = Helpers_DB::getCerdaPartos($cerda->Id);
+				$view->partos = Helpers_Cerda::getPartos($cerda->Id);
 				$this->response->body($view->render());
 			}
 			else{

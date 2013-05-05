@@ -4,11 +4,11 @@ class Controller_Login extends Controller {
 
 	public function action_index()
 	{
-		if(Helpers_DB::IsAnyUser()){
-			$view=View::factory('login');
+		if(Helpers_User::IsAnyUser()){
+			$view = View::factory('login');
 		}
 		else{
-			$view=View::factory('newuser');
+			$view = View::factory('newuser');
 		}
 		$view->title = Helpers_Const::APPNAME()." - Granja Mancini";
 		$this->response->body($view->render());
@@ -20,7 +20,7 @@ class Controller_Login extends Controller {
 			$pass = $_POST['password'];
 			
 			if($user != '' && $pass != ''){
-				$log = Helpers_DB::getUser($user, $pass);
+				$log = Helpers_User::get($user, $pass);
 				if($log->loaded()){
 					$session = Session::instance();
 					$session->set('currentuserid', $log->Id);

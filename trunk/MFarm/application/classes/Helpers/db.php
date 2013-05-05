@@ -2,7 +2,7 @@
 
 class Helpers_DB {
 	/******** LOGIN *********/
-	public static function getUser($user, $pass){
+	/*public static function getUser($user, $pass){
 		return ORM::factory('user')->where('username', '=', $user)->and_where('password', '=', $pass)->find();
 	}
 	
@@ -17,7 +17,7 @@ class Helpers_DB {
 	public static function usernameExists($username){
 		$user = ORM::factory('user')->where('username', '=', $username)->find();
 		return $user->loaded();
-	}
+	}*/
 	
 	public static function registerEndStatusId(){
 		$estado = ORM::factory('estado')->where('Nombre', '=', Helpers_Const::MUERTA())->find();
@@ -25,10 +25,10 @@ class Helpers_DB {
 		$session->set('endstatusid', $estado->Id);
 	}
 	
-	public static function getEndStatusId(){
+	/*public static function getEndStatusId(){
 		$session = $session = Session::instance();
 		return $session->get('endstatusid');
-	}
+	}*/
 	
 	public static function clearSession(){
 		$session = $session = Session::instance();
@@ -38,7 +38,7 @@ class Helpers_DB {
 	}
 	
 	/******** HOME *********/
-	public static function getHomeNewCerdas(){
+	/*public static function getHomeNewCerdas(){
 		return ORM::factory('cerda')
 			->where(DB::expr('YEAR(Created_On)'), '>=', DB::expr('YEAR(Now())'))
 			->order_by('Created_On', 'DESC')->order_by('Id', 'DESC')
@@ -61,9 +61,9 @@ class Helpers_DB {
 			->where(DB::expr('YEAR(Fecha)'), '>=', DB::expr('YEAR(Now())'))
 			->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
 			->find_all();
-	}
+	}*/
 	
-	public static function getLastModifications(){
+	/*public static function getLastModifications(){
 		return ORM::factory('cerdaaudit')
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=cerdaaudit.IdCerda)'), 'Numero'))
 			->select(array(DB::expr('(SELECT Nombre FROM estados WHERE estados.Id=cerdaaudit.IdEstado)'), 'NombreEstado'))
@@ -74,13 +74,13 @@ class Helpers_DB {
 		return DB::select('IdCerda', 'Peso', 'Fecha', 'Numero')
 			->from(DB::expr('(select ca.IdCerda, ca.peso, ca.fecha, c.numero from cerdaaudit ca, cerdas c where c.Id=ca.IdCerda order by ca.idcerda, ca.fecha desc) q'))
 			->group_by('idcerda')->order_by('Peso', 'DESC')->limit(10)->execute();
-	}
+	}*/
 	
-	public static function getLastBirthsData($amount){
+	/*public static function getLastBirthsData($amount){
 		return ORM::factory('parto')->order_by('Fecha', 'ASC')->limit($amount)->find_all();	
-	}
+	}*/
 
-	public static function getMaxMachoServicios($desde = NULL){
+	/*public static function getMaxMachoServicios($desde = NULL){
 		if($desde == NULL){
 			$desde = 'DATE_SUB(NOW(), INTERVAL 30 DAY)';
 		}
@@ -88,14 +88,14 @@ class Helpers_DB {
 		->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'))
 		->group_by('Macho') 
 		->order_by('cnt', 'DESC')->order_by('Macho')->execute();
-	}
+	}*/
 
-	public static function getLastDestetes($amount){
+	/*public static function getLastDestetes($amount){
 		return ORM::factory('destete')->order_by('Fecha', 'ASC')->limit($amount)->find_all();	
-	}
+	}*/
 	
 	/******** ESTADOS *********/
-	public static function getEstados(){
+	/*public static function getEstados(){
 		return ORM::factory('estado')->order_by('Nombre', 'ASC')->find_all();
 	}
 	
@@ -106,10 +106,10 @@ class Helpers_DB {
 	public static function estadoExists($name){
 		$estado = ORM::factory('estado')->where('nombre', '=', $name)->find();
 		return $estado->loaded();
-	}
+	}*/
 	
 	/******** CERDAS *********/
-	public static function cerdaExists($number){
+	/*public static function cerdaExists($number){
 		$cerda = ORM::factory('cerda')->where('Numero', '=', $number)->find();
 		return $cerda->loaded();
 	}
@@ -145,14 +145,14 @@ class Helpers_DB {
 		return ORM::factory('destete')
 		->select(DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))
 		->where('IdCerda', '=', $IdCerda)->order_by('Fecha', 'DESC')->order_by('Id', 'DESC')->find_all();
-	}
+	}*/
 	
 	/*********** ESTADOS **********/
-	public static function getEstadoId($nombre){
+	/*public static function getEstadoId($nombre){
 		$result = DB::select('Id')->from('estados')->where('Nombre', '=', $nombre)->execute();
 		return $result[0]['Id'];
 		//return ORM::factory('estado')->where('Nombre', '=', $nombre)->find()->Id;	
-	}
+	}*/
 
 	/*********** HEADERBAR *********/
 	public static function getTodayNewCerdas(){

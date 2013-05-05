@@ -5,7 +5,7 @@ Class Controller_ABMUsers extends Controller
 	public function action_edit()
     {
     	if(!isset($_POST['username'])){
-    		$view=View::factory('profile');
+    		$view = View::factory('profile');
 			$view->title = Helpers_Const::APPNAME()." - Perfil de usuario";
 			$view->menuid = 0;
 			$session = Session::instance();
@@ -41,14 +41,14 @@ Class Controller_ABMUsers extends Controller
 	public function action_new()
     {
     	if(!isset($_POST['username'])){
-    		$view=View::factory('users');
+    		$view = View::factory('users');
 			$view->title = Helpers_Const::APPNAME()." - Usuarios";
 			$view->menuid = 0;
-			$view->users = Helpers_DB::getUsers();
+			$view->users = Helpers_User::get();
 			$this->response->body($view->render());
 		}
 		else{
-			if(!Helpers_DB::usernameExists($_POST['username'])){
+			if(!Helpers_User::exists($_POST['username'])){
 				if($_POST['newpass'] == $_POST['newpass2']){
 					$user = ORM::factory('user');
 					$user->UserName = $_POST['username'];

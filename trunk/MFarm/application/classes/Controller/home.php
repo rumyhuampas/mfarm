@@ -7,8 +7,8 @@ class Controller_Home extends Controller {
 		$view=View::factory('home');
 		$view->title = Helpers_Const::APPNAME().' - Home';
 		$view->menuid = 0;
-		$view->lastmodif = Helpers_DB::getLastModifications();
-		$view->maxweights = Helpers_DB::getMaxWeights();
+		$view->lastmodif = Helpers_Cerda::getLastModifications();
+		$view->maxweights = Helpers_Cerda::getMaxWeights();
 		$this->response->body($view->render());
 	}
 
@@ -21,7 +21,7 @@ class Controller_Home extends Controller {
 			$partoColors = Helpers_Calendar::getPartoColors();
 			$newcerdaColors = Helpers_Calendar::getNewCerdaColors();
 						
-			$servicios = Helpers_DB::getHomeServicios();
+			$servicios = Helpers_Cerda::getServicios();
 			
 			$jsonarray = array();
 			$currentdate = null;
@@ -120,7 +120,7 @@ class Controller_Home extends Controller {
 			}
 			
 			if($_POST['parto'] == 'true'){
-				$partos = Helpers_DB::getHomePartos();
+				$partos = Helpers_Cerda::getPartos();
 				$currentdate = null;
 				$currentcerda = null;
 				$partoarray = null;
@@ -146,7 +146,7 @@ class Controller_Home extends Controller {
 			}
 			
 			if($_POST['newcerda'] == 'true'){
-				$newcerdas = Helpers_DB::getHomeNewCerdas();
+				$newcerdas = Helpers_Cerda::getAltas();
 				$newcerdasarray = null;
 				foreach($newcerdas as $newcerda){
 					//$newcerda->Created_On = date('Y-m-d', strtotime($newcerda->Created_On));
@@ -169,65 +169,28 @@ class Controller_Home extends Controller {
 
 	public function action_getlastbirthspercentage(){	
 		if ($this->request->is_ajax()) {
-			$data = Helpers_DB::getLastBirthsData($_POST['amount']);
-			$jsonarray = array();
-			$i=0;
-			foreach($data as $d){
-				$vivos = (int)$d->Vivos;
-				$muertos = (int)$d->Muertos;
-				$momif = (int)$d->Momificados;
-				$porc = (int)(($vivos * 100) / ($vivos+$muertos+$momif));
-				array_push($jsonarray, array((int)$i, $porc));
-				$i++;
-			}
+			$jsonarray = Helpers_Charts::getLastBirthsPercentage($_POST['amount']);
 			echo json_encode($jsonarray);
 		}
 	}
 	
 	public function action_getlastbirthsdata(){
 		if ($this->request->is_ajax()) {
-			$data = Helpers_DB::getLastBirthsData($_POST['amount']);
-			$vivos = 0;
-			$muertos = 0;
-			$momif = 0;
-			foreach($data as $d){
-				$vivos = $vivos + (int)$d->Vivos;
-				$muertos = $muertos + (int)$d->Muertos;
-				$momif = $momif + (int)$d->Momificados;
-			}
-			$jsonarray = array('vivos' => $vivos, 'muertos' => $muertos, 'momif' => $momif);
-			
+			$jsonarray = Helpers_Charts::getLastBirthsData($_POST['amount']);
 			echo json_encode($jsonarray);
 		}
 	}
 	
 	public function action_getMaxMachoServicios(){	
 		if ($this->request->is_ajax()) {
-			$data = Helpers_DB::getMaxMachoServicios();
-			$jsonarray = array();
-			$total=0;
-			foreach($data as $d){
-				$total = $total + (int)$d['cnt'];
-			}
-			foreach($data as $d){
-				$macho = $d['Macho'];
-				$cnt = (int)$d['cnt'];
-				$porc = (int)(($cnt * 100) / $total);
-				array_push($jsonarray, array($macho, $porc));
-			}
+			$jsonarray = Helpers_Charts::getMaxMachosData();
 			echo json_encode($jsonarray);
 		}
 	}
 	
 	public function action_getLastDestetes(){	
 		if ($this->request->is_ajax()) {
-			$data = Helpers_DB::getLastDestetes($_POST['amount']);
-			$jsonarray = array();
-			$i=0;
-			foreach($data as $d){
-				array_push($jsonarray, array((int)$i, (int)$d->Lechones));
-				$i++;
-			}
+			$jsonarray = Helpers_Charts::getLastDestetesData($_POST['amount']);
 			echo json_encode($jsonarray);
 		}
 	}
