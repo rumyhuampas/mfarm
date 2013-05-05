@@ -10,30 +10,36 @@ class Controller_ABMPartos extends Controller {
 			$this->response->body($view->render());
 		}
 		else{
-			$parto = ORM::factory('parto');
-			$parto->IdCerda = $_POST['IdCerda'];
-			$parto->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$parto->Vivos = $_POST['alive'];
-			$parto->Muertos = $_POST['dead'];
-			$parto->Momificados = $_POST['momif'];
-			$parto->Observaciones = $_POST['obs'];
-			$parto->create();
+			if($_POST['alive'] != 0 || $_POST['dead'] != 0 || $_POST['momif'] != 0){
+				$parto = ORM::factory('parto');
+				$parto->IdCerda = $_POST['IdCerda'];
+				$parto->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$parto->Vivos = $_POST['alive'];
+				$parto->Muertos = $_POST['dead'];
+				$parto->Momificados = $_POST['momif'];
+				$parto->Observaciones = $_POST['obs'];
+				$parto->create();
+				
+				$cerda = ORM::factory('cerda', $parto->IdCerda);
+				$postpartoestado = Helpers_Const::POSTPARTO();
+				$cerda->IdEstado = Helpers_DB::getEstadoId($postpartoestado);
+				$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$cerda->Update();
 			
-			$cerda = ORM::factory('cerda', $parto->IdCerda);
-			$postpartoestado = Helpers_Const::POSTPARTO();
-			$cerda->IdEstado = Helpers_DB::getEstadoId($postpartoestado);
-			$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerda->Update();
-		
-			$cerdaaudit = ORM::factory('cerdaaudit');
-			$cerdaaudit->IdCerda = $cerda->Id;
-			$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerdaaudit->IdEstado = $cerda->IdEstado;
-			$cerdaaudit->Peso = $cerda->Peso;
-			$cerdaaudit->create();
-			
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
-				'msgtype' => 'msgsuccess', 'msgtext' => 'Parto agregado con exito.')));	
+				$cerdaaudit = ORM::factory('cerdaaudit');
+				$cerdaaudit->IdCerda = $cerda->Id;
+				$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$cerdaaudit->IdEstado = $cerda->IdEstado;
+				$cerdaaudit->Peso = $cerda->Peso;
+				$cerdaaudit->create();
+				
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
+					'msgtype' => 'msgsuccess', 'msgtext' => 'Parto agregado con exito.')));
+			}
+			else{
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
+					'msgtype' => 'msgerror', 'msgtext' => 'Al menos uno de los campos debe ser mayor que 0')));
+			}	
 		}
 	}
 

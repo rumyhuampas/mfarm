@@ -38,6 +38,13 @@ class Helpers_DB {
 	}
 	
 	/******** HOME *********/
+	public static function getHomeNewCerdas(){
+		return ORM::factory('cerda')
+			->where(DB::expr('YEAR(Created_On)'), '>=', DB::expr('YEAR(Now())'))
+			->order_by('Created_On', 'DESC')->order_by('Id', 'DESC')
+			->find_all();
+	}
+	
 	public static function getHomeServicios(){
 		return ORM::factory('servicio')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicio.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_DB::getEndStatusId())
@@ -148,6 +155,11 @@ class Helpers_DB {
 	}
 
 	/*********** HEADERBAR *********/
+	public static function getTodayNewCerdas(){
+		return ORM::factory('cerda')
+			->where(DB::expr('DATE(Created_On)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->find_all();	
+	}
+	
 	public static function getTodayServicios(){
 		return ORM::factory('servicio')
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
@@ -166,11 +178,49 @@ class Helpers_DB {
 			->where(DB::expr('DATE(Fecha)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->find_all();	
 	}
 	
-	public static function getTodayEventsCount(){
-		$servicios = ORM::factory('servicio')->where(DB::expr('DATE(FechaServicio)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
-		$partos = ORM::factory('parto')->where(DB::expr('DATE(Fecha)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
-		$destetes = ORM::factory('destete')->where(DB::expr('DATE(Fecha)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
-		return $servicios + $partos + $destetes;
+	public static function getTodayCelo21(){
+		return ORM::factory('servicio')
+			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
+			->where(DB::expr('DATE(ProbableFechaCelo21)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->find_all();	
+	}
+	
+	public static function getTodayCelo42(){
+		return ORM::factory('servicio')
+			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
+			->where(DB::expr('DATE(ProbableFechaCelo42)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->find_all();	
+	}
+	
+	public static function getTodayProbParto(){
+		return ORM::factory('servicio')
+			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
+			->where(DB::expr('DATE(ProbableFechaParto)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->find_all();	
+	}
+	
+	public static function getTodayNewCerdasCount(){
+		return ORM::factory('cerda')->where(DB::expr('DATE(Created_On)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
+	}
+
+	public static function getTodayServiciosCount(){
+		return ORM::factory('servicio')->where(DB::expr('DATE(FechaServicio)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
+	}
+	
+	public static function getTodayPartosCount(){
+		return ORM::factory('parto')->where(DB::expr('DATE(Fecha)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
+	}
+	
+	public static function getTodayDestetesCount(){
+		return ORM::factory('destete')->where(DB::expr('DATE(Fecha)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
+	}
+	
+	public static function getTodayCelosCount(){
+		return ORM::factory('servicio')
+		->where(DB::expr('DATE(ProbableFechaCelo21)'), '=', DB::expr('DATE(NOW())'))
+		->or_where(DB::expr('DATE(ProbableFechaCelo42)'), '=', DB::expr('DATE(NOW())'))
+		->order_by('Id', 'DESC')->count_all();
+	}
+	
+	public static function getTodayProbPartoCount(){
+		return ORM::factory('servicio')->where(DB::expr('DATE(ProbableFechaParto)'), '=', DB::expr('DATE(NOW())'))->order_by('Id', 'DESC')->count_all();
 	}
 	
 	/*********** REPORTES *********/

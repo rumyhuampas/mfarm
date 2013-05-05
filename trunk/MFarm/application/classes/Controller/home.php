@@ -19,6 +19,7 @@ class Controller_Home extends Controller {
 			$probCelo42Colors = Helpers_Calendar::getProbCelo42Colors();
 			$probFechaPartoColors = Helpers_Calendar::getProbPartoColors();
 			$partoColors = Helpers_Calendar::getPartoColors();
+			$newcerdaColors = Helpers_Calendar::getNewCerdaColors();
 						
 			$servicios = Helpers_DB::getHomeServicios();
 			
@@ -142,6 +143,24 @@ class Controller_Home extends Controller {
 				if($partoarray != null){
 					array_push($jsonarray, $partoarray);
 				}
+			}
+			
+			if($_POST['newcerda'] == 'true'){
+				$newcerdas = Helpers_DB::getHomeNewCerdas();
+				$newcerdasarray = null;
+				foreach($newcerdas as $newcerda){
+					//$newcerda->Created_On = date('Y-m-d', strtotime($newcerda->Created_On));
+					$newcerdasarray = array('title' => 'Cerda: '.$newcerda->Numero.'\nPeso: '.$newcerda->Peso,
+						'date' => $newcerda->Created_On,
+						'backgroundColor' => $newcerdaColors['backgroundColor'],
+						'borderColor' => $newcerdaColors['borderColor'],
+						'textColor' => $newcerdaColors['textColor']);
+						
+					array_push($jsonarray, $newcerdasarray);
+				}
+				/*if($newcerdasarray != null){
+					array_push($jsonarray, $newcerdasarray);
+				}*/
 			}
 			
 			echo json_encode($jsonarray);

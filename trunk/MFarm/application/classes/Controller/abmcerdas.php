@@ -111,10 +111,10 @@ class Controller_ABMCerdas extends Controller {
 						'borderColor' => $probFechaParto['borderColor'],
 						'textColor' => $probFechaParto['textColor']);
 				}
-				$servicioarray['title'] = $servicioarray['title'].' - Macho: '.$servicio->Macho;
-				$celo21array['title'] = $celo21array['title'].' - Macho: '.$servicio->Macho;
-				$celo42array['title'] = $celo42array['title'].' - Macho: '.$servicio->Macho;
-				$partoarray['title'] = $partoarray['title'].' - Macho: '.$servicio->Macho;
+				$servicioarray['title'] = $servicioarray['title'].'\nMacho: '.$servicio->Macho;
+				$celo21array['title'] = $celo21array['title'].'\nMacho: '.$servicio->Macho;
+				$celo42array['title'] = $celo42array['title'].'\nMacho: '.$servicio->Macho;
+				$partoarray['title'] = $partoarray['title'].'\nMacho: '.$servicio->Macho;
 			}
 			if($servicioarray != null){
 				array_push($jsonarray, $servicioarray);
@@ -139,7 +139,7 @@ class Controller_ABMCerdas extends Controller {
 						'borderColor' => $modifColors['borderColor'],
 						'textColor' => $modifColors['textColor']);
 				}
-				$modificationarray['title'] = $modificationarray['title'].' - Estado: '.$audit->Estado.' - Peso: '.$audit->Peso;
+				$modificationarray['title'] = $modificationarray['title'].'\nEstado: '.$audit->Estado.'\nPeso: '.$audit->Peso;
 			}
 			if($modificationarray != null){
 				array_push($jsonarray, $modificationarray);

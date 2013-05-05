@@ -2,10 +2,22 @@
 
 class Controller_HeaderBar extends Controller {
 
-	public function action_getTodayEvents(){
+	public function action_getTodayNewCerdas(){
+		$newcerdas = Helpers_DB::getTodayNewCerdas();
+		echo '<ul class="msglist">';
+		foreach($newcerdas as $newcerda){
+			echo '<li class="newcerda">';
+		        echo '<div class="msg">';
+		            echo '<p class="title">Alta de cerda</p>';
+		            echo '<p>Cerda: '.$newcerda->Numero.' - Peso: '.$newcerda->Peso.'</p>';
+		        echo '</div>';
+		    echo '</li>';
+		}
+		echo '</ul>';		
+	}
+	
+	public function action_getTodayServicios(){
 		$servicios = Helpers_DB::getTodayServicios();
-		$partos = Helpers_DB::getTodayPartos();
-		$destetes = Helpers_DB::getTodayDestetes();
 		echo '<ul class="msglist">';
 		foreach($servicios as $servicio){
 			echo '<li class="pipette">';
@@ -15,6 +27,12 @@ class Controller_HeaderBar extends Controller {
 		        echo '</div>';
 		    echo '</li>';
 		}
+		echo '</ul>';		
+	}
+	
+	public function action_getTodayPartos(){
+		$partos = Helpers_DB::getTodayPartos();
+		echo '<ul class="msglist">';
 		foreach($partos as $parto){
 			echo '<li class="stork">';
 		        echo '<div class="msg">';
@@ -23,6 +41,12 @@ class Controller_HeaderBar extends Controller {
 		        echo '</div>';
 		    echo '</li>';
 		}
+		echo '</ul>';		
+	}
+	
+	public function action_getTodayDestetes(){
+		$destetes = Helpers_DB::getTodayDestetes();
+		echo '<ul class="msglist">';
 		foreach($destetes as $destete){
 			echo '<li class="babybottle">';
 		        echo '<div class="msg">';
@@ -34,4 +58,40 @@ class Controller_HeaderBar extends Controller {
 		echo '</ul>';		
 	}
 	
+	public function action_getTodayCelos(){
+		$celos21 = Helpers_DB::getTodayCelo21();
+		$celos42 = Helpers_DB::getTodayCelo42();
+		echo '<ul class="msglist">';
+		foreach($celos21 as $celo21){
+			echo '<li class="calendar">';
+		        echo '<div class="msg">';
+		            echo '<p class="title">Probable celo 21 dias</p>';
+		            echo '<p>Cerda: '.$celo21->Numero.' - Macho: '.$celo21->Macho.'</p>';
+		        echo '</div>';
+		    echo '</li>';
+		}
+		foreach($celos42 as $celo42){
+			echo '<li class="calendar">';
+		        echo '<div class="msg">';
+		            echo '<p class="title">Probable celo 42 dias</p>';
+		            echo '<p>Cerda: '.$celo42->Numero.' - Macho: '.$celo42->Macho.'</p>';
+		        echo '</div>';
+		    echo '</li>';
+		}
+		echo '</ul>';		
+	}
+	
+	public function action_getTodayProbParto(){
+		$probpartos = Helpers_DB::getTodayProbParto();
+		echo '<ul class="msglist">';
+		foreach($probpartos as $probparto){
+			echo '<li class="stork">';
+		        echo '<div class="msg">';
+		            echo '<p class="title">Probable parto</p>';
+		            echo '<p>Cerda: '.$probparto->Numero.' - Macho: '.$probparto->Macho.'</p>';
+		        echo '</div>';
+		    echo '</li>';
+		}
+		echo '</ul>';		
+	}
 }

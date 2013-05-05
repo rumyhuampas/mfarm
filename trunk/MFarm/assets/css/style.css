@@ -196,7 +196,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .noticontent { margin: 5px 0; }
 
 .tabmenu { list-style: none; }
-.tabmenu li { display: inline-block; float: left; width: 100%; border-bottom: 1px solid #ddd; }
+.tabmenu li { display: inline-block; float: left; width: 33%; border-bottom: 1px solid #ddd; }
 .tabmenu li a { display: block; font-weight: bold; color: #666; padding: 8px 10px; text-align: center; }
 .tabmenu li a:hover { text-decoration: none; color: #333; }
 .tabmenu li.current a { background: #ddd; color: #333; }
@@ -217,6 +217,8 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .msglist li.babybottle { background-image: url(../images/icons/default/babybottlesmall.png); }
 .msglist li.pipette { background-image: url(../images/icons/default/pipettesmall.png); }
 .msglist li.stork { background-image: url(../images/icons/default/storksmall.png); }
+.msglist li.newcerda { background-image: url(../images/icons/default/pig.png); 
+	background-repeat: no-repeat; background-position: 8px center; background-size: 20px 20px; }
 
 .tabmenu li .title { display: block; background: #ddd; font-weight: bold; color: #666; padding: 8px 10px; text-align: center; }
 .msglist li.new { background-color: #fff; }
@@ -301,7 +303,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .leftmenu ul li a.contacts { background-position: -82px -227px; }
 .leftmenu ul li a.users { background-position: -82px -191px; }
 .leftmenu ul li a.error { background-position: -119px -119px; }
-.leftmenu ul li a.pig { border-top: 0; display: block; /*background: #fcfcfc*/ background-image: url(../images/icons/default/pig2.png);  
+.leftmenu ul li a.pig { background-image: url(../images/icons/default/pig2.png);  
 	background-repeat: no-repeat; background-position: 8px center; background-size: 20px 20px; }
 .leftmenu ul li a.pdf { background-position: -190px -227px; }
 
@@ -411,7 +413,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 }*/
 .widgetlist li a { 
 	display: inline-block; padding: 85px 20px 20px 20px; background-repeat: no-repeat; background-position: center 20px; color: #eee; font-weight: bold; 
-	background-color: #bbb;  width: 80px; text-align: center; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; background-size: 80px auto;
+	background-color: #bbb;  width: 90px; text-align: center; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; background-size: 80px auto;
 }
 .widgetlist li a:hover { text-decoration: none; }
 .widgetlist li a.default { background-color: #bbb; }
@@ -1288,6 +1290,7 @@ a.btn_table { background-position: -82px -480px; }
 }
 .ui-datepicker-inline .ui-datepicker-calendar td.ui-datepicker-today a { 
 	background: #333; text-decoration: none; color: #fff; text-shadow: none; font-weight: bold;
+}
 
 /*************  CONFIRM DIALOG *************/
 #confirmOverlay{ width:100%;	height:100%;	position:fixed;	top:0;	left:0;

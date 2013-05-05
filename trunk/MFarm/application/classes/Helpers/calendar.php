@@ -2,12 +2,16 @@
 
 class Helpers_Calendar {
 	
-	public static function getServicioColors(){
-		return array('backgroundColor' => '#00ACE9', 'borderColor' => '#404040', 'textColor' => '#303030');
+	public static function getNewCerdaColors(){
+		return array('backgroundColor' => '#FF9900', 'borderColor' => '#404040', 'textColor' => '#303030');
 	}
 	
 	public static function getModificationColors(){
 		return array('backgroundColor' => '#909090', 'borderColor' => '#404040', 'textColor' => '#303030');
+	}
+	
+	public static function getServicioColors(){
+		return array('backgroundColor' => '#00ACE9', 'borderColor' => '#404040', 'textColor' => '#303030');
 	}
 	
 	public static function getProbCelo21Colors(){
