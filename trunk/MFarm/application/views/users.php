@@ -78,7 +78,7 @@
 	                    		echo '<tr>';
 		                            echo '<td>'.$user->UserName.'</td>';
 									echo '<td class="center">';
-									if($user->Id != $userid){
+									if($user->Id != $_userid){
 		                            	echo '<a href='.URL::base().Route::get('default')
 		                            		->uri(array('controller' => 'abmusers', 'action' => 'delete', 'id' => $user->Id)).'class="delete">Eliminar</a>';
 									}
