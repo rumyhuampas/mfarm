@@ -3,7 +3,7 @@
 class Controller_HeaderBar extends Controller {
 
 	public function action_getTodayNewCerdas(){
-		$newcerdas = Helpers_DB::getTodayNewCerdas();
+		$newcerdas = Helpers_Cerda::getAltas('Now()');
 		echo '<ul class="msglist">';
 		foreach($newcerdas as $newcerda){
 			echo '<li class="newcerda">';
@@ -17,7 +17,7 @@ class Controller_HeaderBar extends Controller {
 	}
 	
 	public function action_getTodayServicios(){
-		$servicios = Helpers_DB::getTodayServicios();
+		$servicios = Helpers_Cerda::getServicios(NULL, 'Now()');
 		echo '<ul class="msglist">';
 		foreach($servicios as $servicio){
 			echo '<li class="pipette">';
@@ -31,7 +31,7 @@ class Controller_HeaderBar extends Controller {
 	}
 	
 	public function action_getTodayPartos(){
-		$partos = Helpers_DB::getTodayPartos();
+		$partos = Helpers_Cerda::getPartos(NULL, 'Now()');
 		echo '<ul class="msglist">';
 		foreach($partos as $parto){
 			echo '<li class="stork">';
@@ -45,7 +45,7 @@ class Controller_HeaderBar extends Controller {
 	}
 	
 	public function action_getTodayDestetes(){
-		$destetes = Helpers_DB::getTodayDestetes();
+		$destetes = Helpers_Cerda::getDestetes(NULL, 'Now()');
 		echo '<ul class="msglist">';
 		foreach($destetes as $destete){
 			echo '<li class="babybottle">';
@@ -59,8 +59,8 @@ class Controller_HeaderBar extends Controller {
 	}
 	
 	public function action_getTodayCelos(){
-		$celos21 = Helpers_DB::getTodayCelo21();
-		$celos42 = Helpers_DB::getTodayCelo42();
+		$celos21 = Helpers_Cerda::getCelos(NULL,NULL,true,false);
+		$celos42 = Helpers_Cerda::getCelos(NULL,NULL,false,true);
 		echo '<ul class="msglist">';
 		foreach($celos21 as $celo21){
 			echo '<li class="calendar">';
@@ -82,7 +82,7 @@ class Controller_HeaderBar extends Controller {
 	}
 	
 	public function action_getTodayProbParto(){
-		$probpartos = Helpers_DB::getTodayProbParto();
+		$probpartos = Helpers_Cerda::getProbPartos(NULL,NULL);
 		echo '<ul class="msglist">';
 		foreach($probpartos as $probparto){
 			echo '<li class="stork">';

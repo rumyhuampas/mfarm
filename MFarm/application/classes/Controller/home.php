@@ -32,7 +32,7 @@ class Controller_Home extends Controller {
 			$probpartoarray = null;
 			foreach($servicios as $servicio){
 				$servicio->FechaServicio = date('Y-m-d', strtotime($servicio->FechaServicio));
-				if($currentdate != $servicio->FechaServicio || $currentcerda != $servicio->Numero){
+				/*if($currentdate != $servicio->FechaServicio || $currentcerda != $servicio->Numero){
 					if($_POST['servicio'] == 'true'){
 						if($servicioarray != null){
 							array_push($jsonarray, $servicioarray);
@@ -52,7 +52,7 @@ class Controller_Home extends Controller {
 						if($probpartoarray != null){
 							array_push($jsonarray, $probpartoarray);
 						}
-					}
+					}*/
 					
 					$currentdate = $servicio->FechaServicio;
 					$currentcerda = $servicio->Numero;
@@ -84,7 +84,7 @@ class Controller_Home extends Controller {
 							'borderColor' => $probFechaPartoColors['borderColor'],
 							'textColor' => $probFechaPartoColors['textColor']);
 					}
-				}
+				//}
 				if($_POST['servicio'] == 'true'){
 					$servicioarray['title'] = $servicioarray['title'].'\nMacho: '.$servicio->Macho;
 				}
@@ -97,8 +97,30 @@ class Controller_Home extends Controller {
 				if($_POST['probparto'] == 'true'){
 					$probpartoarray['title'] = $probpartoarray['title'].'\nMacho: '.$servicio->Macho;
 				}
+
+				//added to fix
+				if($_POST['servicio'] == 'true'){
+					if($servicioarray != null){
+						array_push($jsonarray, $servicioarray);
+					}
+				}
+				if($_POST['celo21'] == 'true'){
+					if($celo21array != null){
+						array_push($jsonarray, $celo21array);
+					}
+				}
+				if($_POST['celo42'] == 'true'){
+					if($celo42array != null){
+						array_push($jsonarray, $celo42array);
+					}
+				}
+				if($_POST['probparto'] == 'true'){
+					if($probpartoarray != null){
+						array_push($jsonarray, $probpartoarray);
+					}
+				}
 			}
-			if($_POST['servicio'] == 'true'){
+			/*if($_POST['servicio'] == 'true'){
 				if($servicioarray != null){
 					array_push($jsonarray, $servicioarray);
 				}
@@ -117,7 +139,7 @@ class Controller_Home extends Controller {
 				if($probpartoarray != null){
 					array_push($jsonarray, $probpartoarray);
 				}
-			}
+			}*/
 			
 			if($_POST['parto'] == 'true'){
 				$partos = Helpers_Cerda::getPartos();
