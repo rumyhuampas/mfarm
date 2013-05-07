@@ -1,6 +1,13 @@
 <?php defined('SYSPATH') OR die('No Direct Script Access');
 
 class Helpers_Calendar {
+		
+	const ALTACOLOR = '#FF9900';
+	const SERVCOLOR = '#00ACE9';
+	const PFCELO21COLOR = '#DB5800';
+	const PFCELO42COLOR = '#D43F3F';
+	const PFPARTOCOLOR = '#6A9A1F';
+	const PARTOCOLOR = '#FFD800';
 	
 	public static function getNewCerdaColors(){
 		return array('backgroundColor' => '#FF9900', 'borderColor' => '#404040', 'textColor' => '#303030');
