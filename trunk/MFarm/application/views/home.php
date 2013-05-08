@@ -3,6 +3,10 @@
 <script src=<?php echo URL::base()."/scripts/custom/home.js" ?> type="text/javascript"></script>
 
 <body class="loggedin">
+	<div style="display: none" id="loadingframe">
+		&nbsp;
+		<h1 class="loadingtitle">Cargando</h1>
+	</div>
 
 	<?php include Kohana::find_file('views', '_headerbar'); ?>
         

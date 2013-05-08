@@ -4,10 +4,10 @@ class Helpers_Charts {
 	
 	/***********ABM CERDA**********/
 	public static function getCerdaPesoData($id){
-		$data = DB::select('Fecha', 'Peso')->from('cerdaaudit')->where('IdCerda', '=', $id)->order_by('Fecha')->limit(20)->execute();
+		$data = DB::select('Peso')->from('cerdaaudit')->where('IdCerda', '=', $id)->order_by('Fecha')->limit(20)->execute();
 		$jsonarray = array();
 		for($i=0; $i<count($data); $i++){
-			array_push($jsonarray, array(date('Y-m-d', strtotime($data[$i]['Fecha'])), (int)$data[$i]['Peso']));
+			array_push($jsonarray, array((int)$i, (int)$data[$i]['Peso']));
 		}
 		return $jsonarray;
 	}
@@ -18,66 +18,66 @@ class Helpers_Charts {
 		
 		$result = array();
 		if($altas == 'true'){
-			$altas = DB::select(array(DB::expr('CONCAT(\'Cerda: \','.Numero.',\'\\\nPeso: \','.Peso.')'), 'title'), 
+			$altas = DB::select(array(DB::expr('CONCAT(\'Cerda: \',cerdas.Numero,\'\\\nPeso: \',cerdas.Peso)'), 'title'), 
 				array(Created_On, 'date'),
 				array(DB::expr('\''.Helpers_Calendar::ALTACOLOR.'\''), 'backgroundColor'),
 				array(DB::expr('\'404040\''), 'borderColor'),
 				array(DB::expr('\'#303030\''), 'textColor'))
 			->from('cerdas')
 			->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
-			->where(DB::expr('DATE(Created_On)'), 'BETWEEN', DB::expr('DATE(DATE_SUB(NOW(), INTERVAL 365 DAY)) AND DATE(Now())'))
+			->where(DB::expr('DATE(Created_On)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
 			->order_by('Created_On', 'DESC')->order_by('Id', 'DESC')
 			->execute()->as_array();
 			$result = array_merge($result, $altas);
 		}
 		if($serv == 'true'){
-			$servicios = DB::select(array(DB::expr('CONCAT(\'Cerda: \',servicios.Id,\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+			$servicios = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
 				array(FechaServicio, 'date'),
 				array(DB::expr('\''.Helpers_Calendar::SERVCOLOR.'\''), 'backgroundColor'),
 				array(DB::expr('\'404040\''), 'borderColor'),
 				array(DB::expr('\'#303030\''), 'textColor'))
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
-			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE(DATE_SUB(NOW(), INTERVAL 365 DAY)) AND DATE(Now())'))
+			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
 			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
 			->execute()->as_array();
 			$result = array_merge($result, $servicios);
 		}
 		if($celo21 == 'true'){
-			$pfcelo21 = DB::select(array(DB::expr('CONCAT(\'Cerda: \',servicios.Id,\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+			$pfcelo21 = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
 				array(ProbableFechaCelo21, 'date'),
 				array(DB::expr('\''.Helpers_Calendar::PFCELO21COLOR.'\''), 'backgroundColor'),
 				array(DB::expr('\'404040\''), 'borderColor'),
 				array(DB::expr('\'#303030\''), 'textColor'))
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
-			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE(DATE_SUB(NOW(), INTERVAL 365 DAY)) AND DATE(Now())'))
+			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
 			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
 			->execute()->as_array();
 			$result = array_merge($result, $pfcelo21);
 		}
 		if($celo42 == 'true'){
-			$pfcelo42 = DB::select(array(DB::expr('CONCAT(\'Cerda: \',servicios.Id,\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+			$pfcelo42 = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
 				array(ProbableFechaCelo42, 'date'),
 				array(DB::expr('\''.Helpers_Calendar::PFCELO42COLOR.'\''), 'backgroundColor'),
 				array(DB::expr('\'404040\''), 'borderColor'),
 				array(DB::expr('\'#303030\''), 'textColor'))
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
-			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE(DATE_SUB(NOW(), INTERVAL 365 DAY)) AND DATE(Now())'))
+			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
 			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
 			->execute()->as_array();
 			$result = array_merge($result, $pfcelo42);
 		}
 		if($pparto == 'true'){
-			$pfparto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',servicios.Id,\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+			$pfparto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
 				array(ProbableFechaParto, 'date'),
 				array(DB::expr('\''.Helpers_Calendar::PFPARTOCOLOR.'\''), 'backgroundColor'),
 				array(DB::expr('\'404040\''), 'borderColor'),
 				array(DB::expr('\'#303030\''), 'textColor'))
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
-			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE(DATE_SUB(NOW(), INTERVAL 365 DAY)) AND DATE(Now())'))
+			->where(DB::expr('DATE(FechaServicio)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
 			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
 			->execute()->as_array();
 			$result = array_merge($result, $pfparto);
@@ -90,7 +90,7 @@ class Helpers_Charts {
 				array(DB::expr('\'#303030\''), 'textColor'))
 			->from('partos')
 			->join('cerdas')->on('cerdas.Id', '=', 'partos.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
-			->where(DB::expr('DATE(Fecha)'), 'BETWEEN', DB::expr('DATE(DATE_SUB(NOW(), INTERVAL 365 DAY)) AND DATE(Now())'))
+			->where(DB::expr('DATE(Fecha)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
 			->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
 			->execute()->as_array();
 			$result = array_merge($result, $parto);
@@ -98,61 +98,47 @@ class Helpers_Charts {
 		return $result;
 	}
 	
+	/**********HOME RIGHT PANEL************/
 	public static function getLastBirthsPercentage($amount){
-		$data = ORM::factory('parto')->order_by('Fecha', 'ASC')->limit($amount)->find_all();
+		$data = DB::select('vivos','muertos','momificados')->from('partos')->order_by('Fecha', 'ASC')->limit($amount)->execute();
 		$jsonarray = array();
-		$i=0;
-		foreach($data as $d){
-			$vivos = (int)$d->Vivos;
-			$muertos = (int)$d->Muertos;
-			$momif = (int)$d->Momificados;
+		for($i=0; $i<count($data); $i++){
+			$vivos = (int)$data[$i]['vivos'];
+			$muertos = (int)$data[$i]['muertos'];
+			$momif = (int)$data[$i]['momificados'];
 			$porc = (int)(($vivos * 100) / ($vivos+$muertos+$momif));
 			array_push($jsonarray, array((int)$i, $porc));
-			$i++;
 		}
 		return $jsonarray;
 	}
 	
 	public static function getLastBirthsData($amount){
-		$data = ORM::factory('parto')->order_by('Fecha', 'ASC')->limit($amount)->find_all();
-		$vivos = 0;
-		$muertos = 0;
-		$momif = 0;
-		foreach($data as $d){
-			$vivos = $vivos + (int)$d->Vivos;
-			$muertos = $muertos + (int)$d->Muertos;
-			$momif = $momif + (int)$d->Momificados;
-		}
-		$jsonarray = array('vivos' => $vivos, 'muertos' => $muertos, 'momif' => $momif);
-		return $jsonarray;
+		$data = DB::select(array(DB::expr('SUM(partos.vivos)'), 'vivos'),
+			array(DB::expr('SUM(partos.muertos)'), 'muertos'),array(DB::expr('SUM(partos.momificados)'), 'momif'))
+			->from('partos')
+			->order_by('Fecha', 'ASC')->limit($amount)->execute()->as_array();
+		return $data;
 	}
 	
 	public static function getMaxMachosData(){
-		$data = DB::select('Id', 'Macho', DB::expr('COUNT(Id) as cnt'))->from('servicios')	
+		$data = DB::select('Macho', DB::expr('ROUND(((count(Id) * 100)/(select count(Id) from servicios))) porc'))->from('servicios')	
 			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE_SUB(NOW(), INTERVAL 30 DAY)'))
 			->group_by('Macho') 
-			->order_by('cnt', 'DESC')->order_by('Macho')->execute();
+			->order_by('Macho')->execute();
 		$jsonarray = array();
-		$total=0;
-		foreach($data as $d){
-			$total = $total + (int)$d['cnt'];
-		}
 		foreach($data as $d){
 			$macho = $d['Macho'];
-			$cnt = (int)$d['cnt'];
-			$porc = (int)(($cnt * 100) / $total);
+			$porc = (int)$d['porc'];
 			array_push($jsonarray, array($macho, $porc));
 		}
 		return $jsonarray;
 	}
 
 	public static function getLastDestetesData($amount){
-		$data = ORM::factory('destete')->order_by('Fecha', 'ASC')->limit($amount)->find_all();
+		$data = DB::select('Lechones')->from('destetes')->order_by('Fecha', 'ASC')->limit($amount)->execute();
 		$jsonarray = array();
-		$i=0;
-		foreach($data as $d){
-			array_push($jsonarray, array((int)$i, (int)$d->Lechones));
-			$i++;
+		for($i=0; $i<count($data); $i++){
+			array_push($jsonarray, array((int)$i, (int)$data[$i]['Lechones']));
 		}
 		return $jsonarray;
 	}

@@ -45,6 +45,23 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 /************ GENERAL STYLES ****************/
 /************ used by all pages *************/
 
+#loadingframe
+ { 
+ 	position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; 
+ 	background: #fff;
+ 	/*background: #fff url(../images/loaders/loader6.gif) no-repeat; background-position: center center;*/
+ 	z-index: 99; /* Higher than anything else in the document */
+ }
+ 
+.loadingtitle
+ { 
+ 	position:relative;
+    top:50%;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+ }
+
 body { background: #fff url(../images/bgmain.png); font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #666; }
 body.login { background: #555 url(../images/bgmain.png); }
 body.errorpage { background-color: #666; }

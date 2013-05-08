@@ -2,6 +2,14 @@ jQuery.noConflict();
 
 jQuery(document).ready(function(){
 	
+	//document.getElementById("loadingframe").style.display = "block";
+	//jQuery("#loadingframe").css("display", "block"); 
+	jQuery("#loadingframe").show()
+	jQuery(window).load(function() {  
+		//jQuery("#loadingframe").css("display", "none"); 
+		jQuery("#loadingframe").hide('slow');
+	});
+	
 	//search box of header
 	jQuery('#keyword').bind('focusin focusout', function(e){
 		var t = jQuery(this);

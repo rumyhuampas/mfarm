@@ -366,7 +366,6 @@
 		                    	<h2 class="chart"><span>Ultimas variaciones de peso (max 20)</span></h2>
 		                    </div><!--contenttitle-->
 		                    <br />
-		                    <div id="fechainicio" style="margin-bottom:20px"></div>
 							<div id="cerdachart" style="height:300px; margin-right: 30px"></div>
 							
 						<?php
