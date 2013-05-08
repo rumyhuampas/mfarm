@@ -64,9 +64,9 @@ jQuery(document).ready(function(){
 	    {amount: 10},
 	    function( data ){
 	    	data = JSON.parse(data);
-	    	var muertos = data['muertos'];
-	    	var momif = data['momif'];
-	    	var vivos = data['vivos'];
+	    	var muertos = parseInt(data[0].muertos);
+	    	var momif = parseInt(data[0].momif);
+	    	var vivos = parseInt(data[0].vivos);
 	    	var porc = Math.round((vivos * 100) / (vivos+muertos+momif));
 	    	jQuery("#homebirthporc").text(porc + '%');
 	    	jQuery("#homebirthmuertos").text(muertos);
@@ -85,10 +85,10 @@ jQuery(document).ready(function(){
 			var colors = [];
 			for( var i = 0; i<series; i++) {
 				data[i] = { label: data[i][0], data: data[i][1] }
-				colors[i] = get_random_color();
+				//colors[i] = get_random_color();
 			}
 			jQuery.plot(jQuery("#homemachosservicioschart"), data, {
-					//colors: ['#b9d6fd','#fdb5b5','#c9fdb5','#f9b5fd','#d7b5fd'],
+					colors: ['#b9d6fd','#fdb5b5','#c9fdb5','#f9b5fd','#d7b5fd'],
 					colors: colors,		   
 					series: {
 						pie: { show: true, radius: 1, label: { show: true, radius: 2/3, formatter: function(label, series){
