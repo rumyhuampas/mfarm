@@ -12,6 +12,97 @@ class Helpers_Charts {
 		return $jsonarray;
 	}
 	
+	public static function getCerdaCalendarData($idCerda, $modif = 'true', $serv = 'true', $celo21 = 'true',
+		$celo42 = 'true', $pparto = 'true', $parto = 'true', $desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)'){
+		
+		$result = array();
+		if($modif == 'true'){
+			$modif = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=cerdaaudit.IdCerda),\'\\\nEstado: \',(select Nombre from estados where estados.Id=cerdaaudit.IdEstado),\'\\\nPeso: \',cerdaaudit.Peso)'), 'title'), 
+				array(Fecha, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::MODIFCOLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('cerdaaudit')
+			->where('cerdaaudit.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE('.$desde.')'))
+			->where('cerdaaudit.IdCerda', '=', $idCerda)
+			->order_by('Fecha', 'DESC')->order_by('Id', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $modif);
+		}
+		if($serv == 'true'){
+			$servicios = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+				array(FechaServicio, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::SERVCOLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('servicios')
+			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'))
+			->where('servicios.IdCerda', '=', $idCerda)
+			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $servicios);
+		}
+		if($celo21 == 'true'){
+			$pfcelo21 = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+				array(ProbableFechaCelo21, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::PFCELO21COLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('servicios')
+			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'))
+			->where('servicios.IdCerda', '=', $idCerda)
+			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $pfcelo21);
+		}
+		if($celo42 == 'true'){
+			$pfcelo42 = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+				array(ProbableFechaCelo42, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::PFCELO42COLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('servicios')
+			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'))
+			->where('servicios.IdCerda', '=', $idCerda)
+			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $pfcelo42);
+		}
+		if($pparto == 'true'){
+			$pfparto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=servicios.IdCerda),\'\\\nMacho: \',servicios.Macho)'), 'title'), 
+				array(ProbableFechaParto, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::PFPARTOCOLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('servicios')
+			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'))
+			->where('servicios.IdCerda', '=', $idCerda)
+			->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $pfparto);
+		}
+		if($parto == 'true'){
+			$parto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',partos.Id,\'\\\nVivos: \',partos.Vivos,\'\\\nMuertos: \',partos.Muertos,\'\\\nMomificados: \',partos.Momificados)'), 'title'), 
+				array(Fecha, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::PARTOCOLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('partos')
+			->join('cerdas')->on('cerdas.Id', '=', 'partos.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE('.$desde.')'))
+			->where('partos.IdCerda', '=', $idCerda)
+			->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $parto);
+		}
+		return $result;
+	}
+	
 	/**********HOME************/
 	public static function getHomeCalendarData($altas = 'true', $serv = 'true', $celo21 = 'true',
 		$celo42 = 'true', $pparto = 'true', $parto = 'true', $desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)', $hasta = 'Now()'){
