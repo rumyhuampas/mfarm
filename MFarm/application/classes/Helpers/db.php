@@ -54,7 +54,7 @@ class Helpers_DB {
 		}
 	}
 	
-	public static function getPartos($desde, $hasta, $cerdaNumber = NULL){
+	public static function getPartos($desde, $hasta, $IdCerda = NULL){
 		if($IdCerda == NULL){
 			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=partos.IdCerda) AS Numero'))
 				->from('partos')
@@ -72,7 +72,7 @@ class Helpers_DB {
 		}
 	}
 	
-	public static function getDestetes($desde, $hasta, $cerdaNumber = NULL){
+	public static function getDestetes($desde, $hasta, $IdCerda = NULL){
 		if($IdCerda == NULL){
 			return DB::select('*', DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=destetes.IdCerda) AS Numero'), 
 				DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))

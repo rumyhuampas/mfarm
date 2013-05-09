@@ -30,6 +30,9 @@ class Helpers_Const {
 	public static function DESTETESCOLNAMES(){ return array('Numero', 'Fecha', 'Lechones', 'Dias', 'PesoTotal', 'PesoProm', 'Observaciones'); }
 	public static function DESTETESCOLTITLES(){ return array('Numero de cerda', 'Fecha de destete', 'Lechones', 'Dias', 'Peso Total', 'Peso promedio', 'Observaciones'); }
 
+	public static function CERDAMODIFCOLNAMES(){ return array('Fecha', 'Estado', 'Peso', 'Observaciones'); }
+	public static function CERDAMODIFCOLTITLES(){ return array('Fecha de modif', 'Estado', 'Peso', 'Observaciones'); }
+	
 	public static function CERDASERVICIOSCOLNAMES(){ return array('FechaServicio', 'Macho', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'ProbableFechaParto', 'Observaciones'); }
 	public static function CERDASERVICIOSCOLTITLES(){ return array('Fecha de servicio', 'Macho', 'Probable fecha de celo 21', 'Probable fecha de celo 42', 'Probable fecha de parto', 'Observaciones'); }
 	
