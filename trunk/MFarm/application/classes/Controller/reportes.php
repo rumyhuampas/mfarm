@@ -40,32 +40,40 @@ class Controller_Reportes extends Controller {
 			
 			$pdf->tables = array();
 			if($_POST['datos'] == 0){
+				$reportTitle = Helpers_Const::DATOMODIF().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				array_push($pdf->tables, Helpers_Reportes::getModifReport($desde, $hasta));
+				array_push($pdf->tables, Helpers_Reportes::getModifReport($reportTitle, $desde, $hasta));
 			}
 			if($_POST['datos'] == 1){
+				$reportTitle = Helpers_Const::DATOSERVICIOS().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				array_push($pdf->tables, Helpers_Reportes::getServReport($desde, $hasta));
+				array_push($pdf->tables, Helpers_Reportes::getServReport($reportTitle, $desde, $hasta));
 			}
 			if($_POST['datos'] == 2){
+				$reportTitle = Helpers_Const::DATOPARTOS().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				array_push($pdf->tables, Helpers_Reportes::getPartoReport($desde, $hasta));
+				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta));
 			}
 			if($_POST['datos'] == 3){
+				$reportTitle = Helpers_Const::DATODESTETES().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($desde, $hasta));
+				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($reportTitle, $desde, $hasta));
 			}
 			if($_POST['datos'] == 4){
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				array_push($pdf->tables, Helpers_Reportes::getModifReport($desde, $hasta));
-				array_push($pdf->tables, Helpers_Reportes::getServReport($desde, $hasta));
-				array_push($pdf->tables, Helpers_Reportes::getPartoReport($desde, $hasta));
-				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($desde, $hasta));
+				$reportTitle = Helpers_Const::DATOMODIF().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getModifReport($reportTitle, $desde, $hasta));
+				$reportTitle = Helpers_Const::DATOSERVICIOS().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getServReport($reportTitle, $desde, $hasta));
+				$reportTitle = Helpers_Const::DATOPARTOS().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta));
+				$reportTitle = Helpers_Const::DATODESTETES().' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($reportTitle, $desde, $hasta));
 			}
 			$pdf->inline(Helpers_Const::APPNAME().' - Reporte por fecha.pdf');
 		}
@@ -129,37 +137,42 @@ class Controller_Reportes extends Controller {
 			$pdf->get_mpdf()->SetAuthor(Helpers_Const::APPNAME());
 			$pdf->get_mpdf()->SetCreator(Helpers_Const::APPNAME());
 			
+			$pdf->tables = array();
 			if($_POST['datos'] == 0){
-				$pdf->pdftitle = Helpers_Const::DATOMODIF().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
-				$pdf->colTitles = Helpers_Const::MODIFCOLTITLES();
-				$pdf->colNames = Helpers_Const::MODIFCOLNAMES();
+				$reportTitle = Helpers_Const::DATOMODIF().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				$pdf->rows = Helpers_DB::getModificaciones($desde, $hasta, $_POST['IdCerda']);
+				array_push($pdf->tables, Helpers_Reportes::getModifReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 			}
 			if($_POST['datos'] == 1){
-				$pdf->pdftitle = Helpers_Const::DATOSERVICIOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
-				$pdf->colTitles = Helpers_Const::CERDASERVICIOSCOLTITLES();
-				$pdf->colNames = Helpers_Const::CERDASERVICIOSCOLNAMES();
+				$reportTitle = Helpers_Const::DATOSERVICIOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				$pdf->rows = Helpers_DB::getServicios($desde, $hasta, $_POST['IdCerda']);
+				array_push($pdf->tables, Helpers_Reportes::getServReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 			}
 			if($_POST['datos'] == 2){
-				$pdf->pdftitle = Helpers_Const::DATOPARTOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
-				$pdf->colTitles = Helpers_Const::CERDAPARTOSCOLTITLES();
-				$pdf->colNames = Helpers_Const::CERDAPARTOSCOLNAMES();
+				$reportTitle = Helpers_Const::DATOPARTOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				$pdf->rows = Helpers_DB::getPartos($desde, $hasta, $_POST['IdCerda']);
+				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 			}
 			if($_POST['datos'] == 3){
-				$pdf->pdftitle = Helpers_Const::DATODESTETES().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
-				$pdf->colTitles = Helpers_Const::CERDADESTETESCOLTITLES();
-				$pdf->colNames = Helpers_Const::CERDADESTETESCOLNAMES();
+				$reportTitle = Helpers_Const::DATODESTETES().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
-				$pdf->rows = Helpers_DB::getDestetes($desde, $hasta, $_POST['IdCerda']);
+				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
+			}
+			if($_POST['datos'] == 4){
+				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
+				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
+				$reportTitle = Helpers_Const::DATOMODIF().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getModifReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
+				$reportTitle = Helpers_Const::DATOSERVICIOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getServReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
+				$reportTitle = Helpers_Const::DATOPARTOS().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
+				$reportTitle = Helpers_Const::DATODESTETES().' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 			}
 			$pdf->inline(Helpers_Const::APPNAME().' - Reporte cerda-'.$_POST['number'].'.pdf');
 		}
