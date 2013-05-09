@@ -10,50 +10,52 @@
         	<div class="maincontentinner">               
             	     
             	<div class="content">
-                    
-                    <div class="contenttitle">
-                    	<h2 class="form"><span><?php echo $pdftitle; ?></span></h2>
-                    </div><!--contenttitle-->
-		                
-	                <br clear="all" />
-	                
-	                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
-	                    <thead>
-	                        <tr>
-	                        	<?php
-	                        	for($i=0; $i<count($colTitles); $i++){
-	                        		$thclass = $i%2;
-	                        		echo '<th class="head'.$thclass.'">'.$colTitles[$i].'</th>';
-	                        	}
-	                        	?>
-	                        </tr>
-	                    </thead>
-	                    <tfoot>
-	                        <tr>
-	                            <?php
-	                        	for($i=0; $i<count($colTitles); $i++){
-	                        		$thclass = $i%2;
-	                        		echo '<th class="head'.$thclass.'">'.$colTitles[$i].'</th>';
-	                        	}
-	                        	?>
-	                        </tr>
-	                    </tfoot>
-	                    <tbody>
-	                    	<?php
-	                    		if(isset($rows)){
-		                    		foreach($rows as $row){
-		                    		echo '<tr>';
-										for($i=0; $i<count($colNames); $i++){
-			                            	echo '<td>'.$row[$colNames[$i]].'</td>';
-										}
-			                        echo '</tr>';
-									}
-	                    		}
-							?>
-	                    </tbody>
-	                </table>
 
-                	<br clear="all" />
+	               	<?php 
+	               	for($i=0; $i<count($tables); $i++){ ?>
+	               		<div class="contenttitle">
+	                    	<h2 class="form"><span><?php echo $tables[$i]->reportTitle; ?></span></h2>
+	                    </div><!--contenttitle-->
+			                
+		                <br clear="all" />
+	                
+		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+		                    <thead>
+		                        <tr>
+		                        	<?php 
+		                        	for($j=0; $j<count($tables[$i]->colTitles); $j++){
+		                        		$thclass = $j%2;
+		                        		echo '<th class="head'.$thclass.'">'.$tables[$i]->colTitles[$j].'</th>';
+		                        	}
+		                        	?>
+		                        </tr>
+		                    </thead>
+		                    <tfoot>
+		                        <tr>
+		                            <?php
+		                        	for($j=0; $j<count($tables[$i]->colTitles); $j++){
+		                        		$thclass = $j%2;
+		                        		echo '<th class="head'.$thclass.'">'.$tables[$i]->colTitles[$j].'</th>';
+		                        	}
+		                        	?>
+		                        </tr>
+		                    </tfoot>
+		                    <tbody>
+		                    	<?php
+		                    		if(isset($tables[$i]->rows)){
+			                    		foreach($tables[$i]->rows as $row){
+			                    		echo '<tr>';
+											for($j=0; $j<count($tables[$i]->colNames); $j++){
+				                            	echo '<td>'.$row[$tables[$i]->colNames[$j]].'</td>';
+											}
+				                        echo '</tr>';
+										}
+		                    		}
+								?>
+		                    </tbody>
+		                </table>
+		                <br clear="all" />
+		            <?php } ?>
                     
                 </div><!--content-->
                 

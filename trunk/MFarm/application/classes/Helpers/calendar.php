@@ -3,6 +3,7 @@
 class Helpers_Calendar {
 		
 	const ALTACOLOR = '#FF9900';
+	const MODIFCOLOR = '#909090';
 	const SERVCOLOR = '#00ACE9';
 	const PFCELO21COLOR = '#DB5800';
 	const PFCELO42COLOR = '#D43F3F';
