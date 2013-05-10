@@ -1,6 +1,6 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
-<script src=<?php echo URL::base()."/scripts/custom/newservicio.js" ?> type="text/javascript"></script>
+<script src=<?php echo URL::base()."/scripts/custom/newlactancia.js" ?> type="text/javascript"></script>
 
 <body class="loggedin">
 
@@ -16,7 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Alta de servicio</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmlactancias', 'action' => 'new')); ?>>Alta de registro de lactancia</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -24,10 +24,10 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Alta de servicio</span></h2>
+                    	<h2 class="form"><span>Alta de registro de lactancia</span></h2>
                     </div><!--contenttitle-->
                     
-                    <?php echo Form::open('abmservicios/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));
+                    <?php echo Form::open('abmlactancias/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));
                     	echo '<p>';
 							echo Form::label('numbersearch', 'Numero de cerda');
 							echo '<span class="field">';
@@ -44,14 +44,14 @@
                     
 						<?php 
 						if(isset($cerda) && $cerda->loaded()){
-							echo Form::open('abmservicios/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewservicio'));
-								
-								$EstadoCelo = Helpers_Const::ESTCELO;
-								$IdEstadoCelo = Helpers_Estado::get($EstadoCelo)->Id;
-								if($cerda->IdEstado != $IdEstadoCelo){
+							echo Form::open('abmpartos/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewlactancia'));
+
+								$EstadoPostParto = Helpers_Const::ESTPOSTPARTO;
+								$IdEstadoPostParto = Helpers_Estado::get($EstadoPostParto)->Id;
+								if($cerda->IdEstado != $IdEstadoPostParto){
 									echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 								    	echo '<a class="close"></a>';
-								    	echo '<p>La cerda no se encuentra en celo.</p>';
+								    	echo '<p>La cerda no esta preñada.</p>';
 									echo '</div>';
 								}
 							
@@ -62,8 +62,8 @@
 									echo Form::input('number', $cerda->Numero, 
 										array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 									echo '</span>';
-		                        echo '</p>';
-								if($cerda->IdEstado == $IdEstadoCelo){
+		                        echo '</p>';									
+								if($cerda->IdEstado == $IdEstadoPostParto){
 									echo '<p>';
 										echo Form::label('date', 'Fecha');
 										echo '<span class="field">';
@@ -78,20 +78,42 @@
 									echo '</p>';
 								}
 								echo '<p>';
-									echo Form::label('male', 'Macho');
+									echo Form::label('alive', 'Vivos');
 									echo '<span class="field">';
-									if($cerda->IdEstado != $IdEstadoCelo){
-										echo Form::input('male', '', array('type' => 'text', 'id' => 'male', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									if($cerda->IdEstado != $IdEstadoPostParto){
+										echo Form::input('alive', '', array('type' => 'text', 'id' => 'alive', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 									}
 									else{
-										echo Form::input('male', '', array('type' => 'text', 'id' => 'male', 'class' => 'smallinput'));
+										echo Form::input('alive', '', array('type' => 'text', 'id' => 'alive', 'class' => 'smallinput'));
+									}
+									echo '</span>';
+		                        echo '</p>';
+								echo '<p>';
+									echo Form::label('dead', 'Muertos');
+									echo '<span class="field">';
+									if($cerda->IdEstado != $IdEstadoPostParto){
+										echo Form::input('dead', '', array('type' => 'text', 'id' => 'dead', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
+									else{
+										echo Form::input('dead', '', array('type' => 'text', 'id' => 'dead', 'class' => 'smallinput'));
+									}
+									echo '</span>';
+		                        echo '</p>';
+								echo '<p>';
+									echo Form::label('momif', 'Momificados');
+									echo '<span class="field">';
+									if($cerda->IdEstado != $IdEstadoPostParto){
+										echo Form::input('momif', '', array('type' => 'text', 'id' => 'momif', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
+									else{
+										echo Form::input('momif', '', array('type' => 'text', 'id' => 'momif', 'class' => 'smallinput'));
 									}
 									echo '</span>';
 		                        echo '</p>';
 								echo '<p>';
 	                            	echo Form::label('obs', 'Observaciones');
 	                            	echo '<span class="field">';
-									if($cerda->IdEstado != $IdEstadoCelo){
+									if($cerda->IdEstado != $IdEstadoPostParto){
 	                            		echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80" style="background-color: #DDDDDD" readonly></textarea>';
 									}
 									else{
@@ -101,7 +123,7 @@
 		                        echo '</p>';
 		                        
 		                        echo '<p class="stdformbutton">';
-									if($cerda->IdEstado != $IdEstadoCelo){
+									if($cerda->IdEstado != $IdEstadoPostParto){
 		                        		echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2', 'style' => 'background-color: #DDDDDD; color: #333333;', 'disabled'));
 									}
 									else{
@@ -112,7 +134,7 @@
 						?>
 						
 							<div class="contenttitle radiusbottom0">
-			                	<h2 class="table"><span>Servicios</span></h2>
+			                	<h2 class="table"><span>Variaciones durante la lactancia</span></h2>
 			                </div><!--contenttitle-->
 			                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 			                    <colgroup>
@@ -121,35 +143,35 @@
 			                    </colgroup>
 			                    <thead>
 			                        <tr>
-			                            <th class="head0">Fecha de servicio</th>
-			                            <th class="head1">Macho</th>
-			                            <th class="head0">Probable fecha de celo 21</th>
-			                            <th class="head1">Probable fecha de celo 42</th>
-			                            <th class="head0">Probable fecha de parto</th>
+			                            <th class="head0">Fecha de parto</th>
+			                            <th class="head1">Vivos</th>
+			                            <th class="head0">Muertos</th>
+			                            <th class="head1">Momificados</th>
+			                            <th class="head0">Total</th>
 			                            <th class="head1">Observaciones</th>
 			                        </tr>
 			                    </thead>
 			                    <tfoot>
 			                        <tr>
-			                            <th class="head0">Fecha de servicio</th>
-			                            <th class="head1">Macho</th>
-			                            <th class="head0">Probable fecha de celo 21</th>
-			                            <th class="head1">Probable fecha de celo 42</th>
-			                            <th class="head0">Probable fecha de parto</th>
+			                            <th class="head0">Fecha de parto</th>
+			                            <th class="head1">Vivos</th>
+			                            <th class="head0">Muertos</th>
+			                            <th class="head1">Momificados</th>
+			                            <th class="head0">Total</th>
 			                            <th class="head1">Observaciones</th>
 			                        </tr>
 			                    </tfoot>
 			                    <tbody>
 			                    	<?php
-			                    		if(isset($servicios)){ 
-				                    		foreach($servicios as $servicio){
+			                    		if(isset($partos)){ 
+				                    		foreach($partos as $parto){
 				                    		echo '<tr>';
-					                            echo '<td>'.$servicio->FechaServicio.'</td>';
-					                            echo '<td>'.$servicio->Macho.'</td>';
-					                            echo '<td>'.$servicio->ProbableFechaCelo21.'</td>';
-												echo '<td>'.$servicio->ProbableFechaCelo42.'</td>';
-												echo '<td>'.$servicio->ProbableFechaParto.'</td>';
-												echo '<td>'.$servicio->Observaciones.'</td>';
+					                            echo '<td>'.$parto->Fecha.'</td>';
+					                            echo '<td>'.$parto->Vivos.'</td>';
+					                            echo '<td>'.$parto->Muertos.'</td>';
+												echo '<td>'.$parto->Momificados.'</td>';
+												echo '<td>'.($parto->Vivos + $parto->Muertos + $parto->Momificados).'</td>';
+												echo '<td>'.$parto->Observaciones.'</td>';
 					                        echo '</tr>';
 											}
 			                    		}

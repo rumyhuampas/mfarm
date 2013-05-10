@@ -1,12 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_ABMPartos extends Controller {
+class Controller_ABMLactancias extends Controller {
 
 	public function action_new(){
 		if(!isset($_POST['number'])){
-			$view=View::factory('newparto');
-			$view->title = Helpers_Const::APPNAME." - ABM Parto";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view=View::factory('newlactancia');
+			$view->title = Helpers_Const::APPNAME." - ABM Lactancia";
+			$view->menuid = Helpers_Const::MENULACTANCIAID;
 			$this->response->body($view->render());
 		}
 		else{
@@ -45,9 +45,9 @@ class Controller_ABMPartos extends Controller {
 
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
-			$view = View::factory('newparto');
-			$view->title = Helpers_Const::APPNAME." - ABM Parto";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view = View::factory('newlactancia');
+			$view->title = Helpers_Const::APPNAME." - ABM Lactancia";
+			$view->menuid = Helpers_Const::MENULACTANCIAID;
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){

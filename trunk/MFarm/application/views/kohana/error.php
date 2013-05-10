@@ -2,7 +2,7 @@
 
 // Unique error identifier
 $error_id = uniqid('error');
-$title = Helpers_Const::APPNAME().' - Error';
+$title = Helpers_Const::APPNAME.' - Error';
 include Kohana::find_file('views', '_header');
 
 ?>

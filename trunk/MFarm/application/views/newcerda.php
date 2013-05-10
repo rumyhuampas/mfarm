@@ -92,7 +92,7 @@
 									echo '<td>'.$cerda->Peso.'</td>';
 									echo '<td>'.$cerda->Created_On.'</td>';
 									echo '<td class="center">';
-									if($cerda->Estado == Helpers_Const::MUERTA()){
+									if($cerda->Estado == Helpers_Const::ESTMUERTA){
 		                            	echo '<a href='.URL::base().Route::get('default')
 		                            		->uri(array('controller' => 'abmcerdas', 'action' => 'revivir', 'id' => $cerda->Id)).'>
 		                            		Revivir</a>';

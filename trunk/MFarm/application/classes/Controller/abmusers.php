@@ -6,8 +6,8 @@ Class Controller_ABMUsers extends Controller
     {
     	if(!isset($_POST['username'])){
     		$view = View::factory('profile');
-			$view->title = Helpers_Const::APPNAME()." - Perfil de usuario";
-			$view->menuid = 0;
+			$view->title = Helpers_Const::APPNAME." - Perfil de usuario";
+			$view->menuid = Helpers_Const::MENUINICIOID;
 			$session = Session::instance();
 			$userid = $session->get('currentuserid');
 			$view->userobj = ORM::factory('user', $userid);
@@ -42,8 +42,8 @@ Class Controller_ABMUsers extends Controller
     {
     	if(!isset($_POST['username'])){
     		$view = View::factory('users');
-			$view->title = Helpers_Const::APPNAME()." - Usuarios";
-			$view->menuid = 0;
+			$view->title = Helpers_Const::APPNAME." - Usuarios";
+			$view->menuid = Helpers_Const::MENUINICIOID;
 			$view->users = Helpers_User::get();
 			$this->response->body($view->render());
 		}

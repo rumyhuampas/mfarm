@@ -323,6 +323,8 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .leftmenu ul li a.pig { background-image: url(../images/icons/default/pig2.png);  
 	background-repeat: no-repeat; background-position: 8px center; background-size: 20px 20px; }
 .leftmenu ul li a.pdf { background-position: -190px -227px; }
+.leftmenu ul li a.babybottle { background-image: url(../images/icons/default/babybottlesmall.png);
+	background-repeat: no-repeat; background-position: 8px center; background-size: 16px 16px; }
 
 .leftmenu ul li .menutip { 
 	position: absolute; z-index: 100; left: 38px; top: 0; display: none; margin-left: 0; overflow: hidden;
