@@ -46,7 +46,7 @@
 						if(isset($cerda) && $cerda->loaded()){
 							echo Form::open('abmpartos/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewparto'));
 
-								$EstadoPreñada = Helpers_Const::PREÑADA();
+								$EstadoPreñada = Helpers_Const::ESTPRENADA;
 								$IdEstadoPreñada = Helpers_Estado::get($EstadoPreñada)->Id;
 								if($cerda->IdEstado != $IdEstadoPreñada){
 									echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';

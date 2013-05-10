@@ -10,7 +10,7 @@ class Controller_Login extends Controller {
 		else{
 			$view = View::factory('newuser');
 		}
-		$view->title = Helpers_Const::APPNAME()." - Granja Mancini";
+		$view->title = Helpers_Const::APPNAME." - Granja Mancini";
 		$this->response->body($view->render());
 	}
 
@@ -26,7 +26,7 @@ class Controller_Login extends Controller {
 					$session->set('currentuserid', $log->Id);
 					$session->set('currentuser', $user);
 					
-					Helpers_DB::registerEndStatusId();
+					Helpers_Session::registerEndStatusId();
 					HTTP::redirect(Route::get('default')->uri(array('controller' => 'home', 'action' => 'index')));
 				}
 				else{
@@ -70,7 +70,7 @@ class Controller_Login extends Controller {
 	}
 	
 	public function action_exit(){
-		Helpers_DB::clearSession();
+		Helpers_Session::clearSession();
 		HTTP::redirect(Route::get('default')->uri(array('controller' => 'login')));
 	}
 }

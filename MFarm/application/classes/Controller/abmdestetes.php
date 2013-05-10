@@ -5,8 +5,8 @@ class Controller_ABMDestetes extends Controller {
 	public function action_new(){
 		if(!isset($_POST['number'])){
 			$view = View::factory('newdestete');
-			$view->title = Helpers_Const::APPNAME()." - ABM Destetes";
-			$view->menuid = 2;
+			$view->title = Helpers_Const::APPNAME." - ABM Destetes";
+			$view->menuid = Helpers_Const::MENUABMID;
 			$this->response->body($view->render());
 		}
 		else{
@@ -20,7 +20,7 @@ class Controller_ABMDestetes extends Controller {
 			$destete->create();
 			
 			$cerda = ORM::factory('cerda', $destete->IdCerda);
-			$vaciaestado = Helpers_Const::VACIA();
+			$vaciaestado = Helpers_Const::ESTVACIA;
 			$cerda->IdEstado = Helpers_Estado::get($vaciaestado)->Id;
 			$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$cerda->Update();
@@ -40,8 +40,8 @@ class Controller_ABMDestetes extends Controller {
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
 			$view = View::factory('newdestete');
-			$view->title = Helpers_Const::APPNAME()." - ABM Destetes";
-			$view->menuid = 2;
+			$view->title = Helpers_Const::APPNAME." - ABM Destetes";
+			$view->menuid = Helpers_Const::MENUABMID;
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){

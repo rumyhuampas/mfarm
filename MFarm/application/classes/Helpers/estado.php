@@ -17,7 +17,7 @@ class Helpers_Estado {
 	}
 	
 	public static function getEndStatus(){
-		$muerta = Helpers_Const::MUERTA();
+		$muerta = Helpers_Const::ESTMUERTA;
 		return ORM::factory('estado')->where('Nombre', '=', $muerta)->find();
 	}
 }

@@ -5,8 +5,8 @@ class Controller_ABMCerdas extends Controller {
 	public function action_new(){
 		if(!isset($_POST['number'])){
 			$view = View::factory('newcerda');
-			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
-			$view->menuid = 1;
+			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
+			$view->menuid = Helpers_Const::MENUCERDASID;
 			$view->estados = Helpers_Combos::getEstados();
 			$view->cerdas = Helpers_Cerda::get();
 			$this->response->body($view->render());
@@ -42,8 +42,8 @@ class Controller_ABMCerdas extends Controller {
 	public function action_search(){
 		if(isset($_POST['numbersearch'])){
 			$view = View::factory('editcerda');
-			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
-			$view->menuid = 1;
+			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
+			$view->menuid = Helpers_Const::MENUCERDASID;
 			$view->estados = Helpers_Combos::getEstados();
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
@@ -81,8 +81,8 @@ class Controller_ABMCerdas extends Controller {
 	public function action_edit(){
 		if(!isset($_POST['number'])){
 			$view=View::factory('editcerda');
-			$view->title = Helpers_Const::APPNAME()." - ABM Cerda";
-			$view->menuid = 1;
+			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
+			$view->menuid = Helpers_Const::MENUCERDASID;
 			$view->estados = Helpers_Combos::getEstados();
 			$this->response->body($view->render());
 		}
@@ -109,7 +109,7 @@ class Controller_ABMCerdas extends Controller {
 	public function action_revivir(){
 		$IdCerda = $this->request->param('id');
 		$cerda = ORM::factory('cerda', $IdCerda);
-		$vacia = Helpers_Const::VACIA();
+		$vacia = Helpers_Const::ESTVACIA;
 		$cerda->IdEstado = Helpers_Estado::get($vacia)->Id;
 		$cerda->Modified_On = DB::expr('Now()');
 		$cerda->Update();
