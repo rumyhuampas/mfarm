@@ -20,6 +20,16 @@ class Controller_ABMPartos extends Controller {
 				$parto->Observaciones = $_POST['obs'];
 				$parto->create();
 				
+				$registro = ORM::factory('lactanciaaudit');
+				$registro->IdCerda = $_POST['IdCerda'];
+				$registro->IdParto = $parto->Id;
+				$registro->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$registro->Adoptados = 0;
+				$registro->Muertos = 0;
+				$registro->Total = $parto->Vivos - $parto->Muertos - $parto->Momificados;  
+				$registro->Observaciones = '';
+				$registro->create();
+				
 				$cerda = ORM::factory('cerda', $parto->IdCerda);
 				$postpartoestado = Helpers_Const::ESTPOSTPARTO;
 				$cerda->IdEstado = Helpers_Estado::get($postpartoestado)->Id;

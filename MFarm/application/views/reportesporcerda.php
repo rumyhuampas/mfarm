@@ -39,60 +39,54 @@
                         	echo Form::button('btnsearch', 'Buscar', array('class' => 'submit radius2'));
                         echo '</p>';
                     echo Form::close();
+
+                    if(isset($cerda) && $cerda->loaded()){
+                    	echo Form::open('reportes/reportesporcerda', array('method' => 'POST', 'target' => '_blank', 'class' => 'stdform', 'id' => 'formreportlistar'));
+							echo Form::hidden('IdCerda', $cerda->Id);
+	                    	echo '<p>';
+								echo Form::label('number', 'Numero');
+								echo '<span class="field">';
+								echo Form::input('number', $cerda->Numero, 
+									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo '</span>';
+	                        echo '</p>';	
+	                    	echo '<p>';
+	                        	echo Form::label('datos', 'Datos');
+								echo '<span class="field">';
+								echo Form::select('datos', $datos);
+	                            echo '</span>';
+	                        echo '</p>';
+	                    	echo '<p>';
+								echo Form::label('desde', 'Fecha desde');
+								echo '<span class="field">';
+									echo Form::input('desde', date("d-m-Y"), array('id' => 'fielddate'));
+								echo '</span>';
+								echo '<div class="formwidgetbox" style="width: 300px">';
+			                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
+			                        echo '<div class="widgetcontent padding0">';
+			                            echo '<div id="datepicker"></div>';
+			                        echo '</div><!--widgetcontent-->';
+			                    echo '</div><!--widgetbox-->';
+							echo '</p>';
+							echo '<p>';			
+								echo Form::label('hasta', 'Fecha hasta');
+								echo '<span class="field">';
+									echo Form::input('hasta', date("d-m-Y"), array('id' => 'fielddate2'));
+								echo '</span>';
+								echo '<div class="formwidgetbox" style="width: 300px">';
+			                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
+			                        echo '<div class="widgetcontent padding0">';
+			                            echo '<div id="datepicker2"></div>';
+			                        echo '</div><!--widgetcontent-->';
+			                    echo '</div><!--widgetbox-->';
+							echo '</p>';
+	                        
+	                        echo '<p class="stdformbutton">';
+	                        	echo Form::button('btnsave', 'Procesar', array('class' => 'submit radius2'));
+	                        echo '</p>';
+                    	echo Form::close();
+                    }
 					?>
-                    
-                    <div class='searchresults'>
-                    
-	                    <?php 
-	                    if(isset($cerda) && $cerda->loaded()){
-	                    	echo Form::open('reportes/reportesporcerda', array('method' => 'POST', 'target' => '_blank', 'class' => 'stdform', 'id' => 'formreportlistar'));
-								echo Form::hidden('IdCerda', $cerda->Id);
-		                    	echo '<p>';
-									echo Form::label('number', 'Numero');
-									echo '<span class="field">';
-									echo Form::input('number', $cerda->Numero, 
-										array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
-									echo '</span>';
-		                        echo '</p>';	
-		                    	echo '<p>';
-		                        	echo Form::label('datos', 'Datos');
-									echo '<span class="field">';
-									echo Form::select('datos', $datos);
-		                            echo '</span>';
-		                        echo '</p>';
-		                    	echo '<p>';
-									echo Form::label('desde', 'Fecha desde');
-									echo '<span class="field">';
-										echo Form::input('desde', date("d-m-Y"), array('id' => 'fielddate'));
-									echo '</span>';
-									echo '<div class="formwidgetbox" style="width: 300px">';
-				                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
-				                        echo '<div class="widgetcontent padding0">';
-				                            echo '<div id="datepicker"></div>';
-				                        echo '</div><!--widgetcontent-->';
-				                    echo '</div><!--widgetbox-->';
-								echo '</p>';
-								echo '<p>';			
-									echo Form::label('hasta', 'Fecha hasta');
-									echo '<span class="field">';
-										echo Form::input('hasta', date("d-m-Y"), array('id' => 'fielddate2'));
-									echo '</span>';
-									echo '<div class="formwidgetbox" style="width: 300px">';
-				                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
-				                        echo '<div class="widgetcontent padding0">';
-				                            echo '<div id="datepicker2"></div>';
-				                        echo '</div><!--widgetcontent-->';
-				                    echo '</div><!--widgetbox-->';
-								echo '</p>';
-		                        
-		                        echo '<p class="stdformbutton">';
-		                        	echo Form::button('btnsave', 'Procesar', array('class' => 'submit radius2'));
-		                        echo '</p>';
-	                    	echo Form::close();
-	                    }
-						?>
-						
-					</div><!--searchresults-->
                     
                 </div><!--content-->
                 

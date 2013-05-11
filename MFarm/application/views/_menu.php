@@ -27,7 +27,7 @@
                 <li id=<?php echo Helpers_Const::MENULACTANCIAID; ?> menuid=<?php echo $menuid ?>><a href="#" class="babybottle menudrop"><span>Lactancia</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmlactancias', 'action' => 'new')); ?>><span>Alta de registro</span></a></li>
+                			->uri(array('controller' => 'abmlactancias', 'action' => 'new')); ?>><span>Nuevo registro</span></a></li>
                     </ul>
                 </li>
                 <li id=<?php echo Helpers_Const::MENUREPORTESID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pdf menudrop"><span>Reportes</span></a>
