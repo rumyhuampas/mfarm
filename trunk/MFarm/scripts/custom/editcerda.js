@@ -1,6 +1,7 @@
 jQuery(document).ready(function(){
 	var idcerda = jQuery('#cerdacalendar').attr('name');
 	if(typeof(idcerda) != 'undefined'){
+		/*********** CERDA CALENDAR *************/
 		jQuery.post( 
 		    '/mfarm/abmcerdas/addevent/',
 		    {IdCerda: idcerda},
@@ -23,6 +24,56 @@ jQuery(document).ready(function(){
 				});
 	    	}
 	    );
+	    
+	    /************ CERDA  PESO CHART *************/
+	   jQuery.post( 
+		    '/mfarm/abmcerdas/getcerdachartdata/',
+		    {IdCerda: idcerda},
+		    function( data ){
+		    	data = JSON.parse(data);
+		    	var plot = jQuery.plot(jQuery("#cerdachart"),
+				   [ { data: data, label: "Peso", color: "#ff6138"}/*, { data: html5, label: "HTML5(x)", color: "#00a388"}*/ ], {
+					   series: {
+						   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
+						   points: { show: true }
+					   },
+					   legend: { position: 'nw'},
+					   grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
+					   yaxis: { min: 0, max: 200 }
+					 });
+					 
+				var previousPoint = null;
+				jQuery("#cerdachart").bind("plothover", function (event, pos, item) {
+					jQuery("#x").text(pos.x.toFixed(2));
+					jQuery("#y").text(pos.y.toFixed(2));
+					
+					if(item) {
+						if (previousPoint != item.dataIndex) {
+							previousPoint = item.dataIndex;
+								
+							jQuery("#tooltip").remove();
+							var x = item.datapoint[0].toFixed(2),
+							y = item.datapoint[1].toFixed(2);
+								
+							//showTooltip(item.pageX, item.pageY,	item.series.label + ": " + x + " = " + y);
+							showTooltip(item.pageX, item.pageY,	'Dia: ' + x + ' ' + item.series.label + ": " + y);
+						}
+					
+					} else {
+					   jQuery("#tooltip").remove();
+					   previousPoint = null;            
+					}
+				
+				});
+				
+				jQuery("#cerdachart").bind("plotclick", function (event, pos, item) {
+					if (item) {
+						//jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+						//plot.highlight(item.series, item.datapoint);
+					}
+				});
+		    }
+	    );
 	}
 	
 	jQuery('#serviciolink').click(function(){
@@ -41,14 +92,6 @@ jQuery(document).ready(function(){
 	},function(){
 		jQuery(this).switchClass('hover', 'default');
 	});
-	
-	if (jQuery('#number').val() != ''){
-		jQuery('.searchresults').slideDown();
-		loadcharts();
-	}
-	else{
-		jQuery('.searchresults').slideUp();
-	}
 	
 	/***** DATEPICKER *****/
 	jQuery('#datepicker').datepicker({
@@ -73,60 +116,6 @@ jQuery(document).ready(function(){
 			top: y + 5,
 			left: x + 5
 		}).appendTo("body").fadeIn(200);
-	}
-	
-	function loadcharts(){
-		var idcerda = jQuery('#cerdacalendar').attr('name');
-		if(typeof(idcerda) != 'undefined'){
-			jQuery.post( 
-			    '/mfarm/abmcerdas/getcerdachartdata/',
-			    {IdCerda: idcerda},
-			    function( data ){
-			    	data = JSON.parse(data);
-			    	var plot = jQuery.plot(jQuery("#cerdachart"),
-					   [ { data: data, label: "Peso", color: "#ff6138"}/*, { data: html5, label: "HTML5(x)", color: "#00a388"}*/ ], {
-						   series: {
-							   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
-							   points: { show: true }
-						   },
-						   legend: { position: 'nw'},
-						   grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
-						   yaxis: { min: 0, max: 200 }
-						 });
-						 
-					var previousPoint = null;
-					jQuery("#cerdachart").bind("plothover", function (event, pos, item) {
-						jQuery("#x").text(pos.x.toFixed(2));
-						jQuery("#y").text(pos.y.toFixed(2));
-						
-						if(item) {
-							if (previousPoint != item.dataIndex) {
-								previousPoint = item.dataIndex;
-									
-								jQuery("#tooltip").remove();
-								var x = item.datapoint[0].toFixed(2),
-								y = item.datapoint[1].toFixed(2);
-									
-								//showTooltip(item.pageX, item.pageY,	item.series.label + ": " + x + " = " + y);
-								showTooltip(item.pageX, item.pageY,	'Dia: ' + x + ' ' + item.series.label + ": " + y);
-							}
-						
-						} else {
-						   jQuery("#tooltip").remove();
-						   previousPoint = null;            
-						}
-					
-					});
-					
-					jQuery("#cerdachart").bind("plotclick", function (event, pos, item) {
-						if (item) {
-							//jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
-							//plot.highlight(item.series, item.datapoint);
-						}
-					});
-			    }
-		    );
-	   	}
 	}
 	
 	/******* CONFIRM DIALOG *********

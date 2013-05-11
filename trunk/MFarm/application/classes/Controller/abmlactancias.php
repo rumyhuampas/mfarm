@@ -10,34 +10,22 @@ class Controller_ABMLactancias extends Controller {
 			$this->response->body($view->render());
 		}
 		else{
-			if($_POST['alive'] != 0 || $_POST['dead'] != 0 || $_POST['momif'] != 0){
-				$parto = ORM::factory('parto');
-				$parto->IdCerda = $_POST['IdCerda'];
-				$parto->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$parto->Vivos = $_POST['alive'];
-				$parto->Muertos = $_POST['dead'];
-				$parto->Momificados = $_POST['momif'];
-				$parto->Observaciones = $_POST['obs'];
-				$parto->create();
+			if($_POST['adopt'] != 0 || $_POST['dead'] != 0){
+				$registro = ORM::factory('lactanciaaudit');
+				$registro->IdCerda = $_POST['IdCerda'];
+				$registro->IdParto = $_POST['IdParto'];
+				$registro->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$registro->Adoptados = $_POST['adopt'];
+				$registro->Muertos = $_POST['dead'];
+				$registro->Total = Helpers_Lactancia::getLast($_POST['IdCerda'])->Total + $_POST['adopt'] - $_POST['dead'];  
+				$registro->Observaciones = $_POST['obs'];
+				$registro->create();
 				
-				$cerda = ORM::factory('cerda', $parto->IdCerda);
-				$postpartoestado = Helpers_Const::ESTPOSTPARTO;
-				$cerda->IdEstado = Helpers_Estado::get($postpartoestado)->Id;
-				$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$cerda->Update();
-			
-				$cerdaaudit = ORM::factory('cerdaaudit');
-				$cerdaaudit->IdCerda = $cerda->Id;
-				$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$cerdaaudit->IdEstado = $cerda->IdEstado;
-				$cerdaaudit->Peso = $cerda->Peso;
-				$cerdaaudit->create();
-				
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
-					'msgtype' => 'msgsuccess', 'msgtext' => 'Parto agregado con exito.')));
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
+					'msgtype' => 'msgsuccess', 'msgtext' => 'Registro agregado con exito.')));
 			}
 			else{
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
 					'msgtype' => 'msgerror', 'msgtext' => 'Al menos uno de los campos debe ser mayor que 0')));
 			}	
 		}
@@ -51,16 +39,17 @@ class Controller_ABMLactancias extends Controller {
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->partos = Helpers_Cerda::getPartos($cerda->Id);
+				$view->lastparto = Helpers_Parto::getLast($cerda->Id);
+				$view->registros = Helpers_Cerda::getLactancias($cerda->Id);
 				$this->response->body($view->render());
 			}
 			else{
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
 					'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
 			}
 		}
 		else{
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
 				'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
 		}
 	}

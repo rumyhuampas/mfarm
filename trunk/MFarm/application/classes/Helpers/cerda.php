@@ -82,6 +82,28 @@ class Helpers_Cerda {
 				->find_all();
 		}
 	}
+
+	public static function getLactancias($id = NULL, $desde = NULL, $hasta = NULL){
+		if($id != NULL){
+			return ORM::factory('lactanciaaudit')
+				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
+				->where('IdCerda', '=', $id)->order_by('Fecha', 'ASC')->order_by('IdCerda', 'DESC')->find_all();
+		}
+		else{
+			if($desde == NULL){
+				$desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)';	
+			}
+			if($hasta == NULL){
+				$hasta = 'Now()';	
+			}
+			return ORM::factory('lactanciaaudit')
+				->join('cerdas')->on('cerdas.Id', '=', 'lactanciaaudit.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE lactanciaaudit.IdCerda=cerdas.id)'), 'Numero'))
+				->where(DB::expr('DATE(Fecha)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
+				->order_by('Fecha', 'DESC')->order_by('IdCerda', 'ASC')
+				->find_all();
+		}
+	}
 	
 	public static function getDestetes($id = NULL, $desde = NULL, $hasta = NULL){
 		if($id != NULL){

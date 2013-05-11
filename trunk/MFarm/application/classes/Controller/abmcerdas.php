@@ -30,7 +30,7 @@ class Controller_ABMCerdas extends Controller {
 				$cerdaaudit->create();
 				
 				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'new',
-					'msgtype' => 'msgsuccess', 'msgtext' => 'Cerda creada con exito.')));
+					'msgtype' => 'msgsuccess', 'msgtext' => 'Cerda agregada con exito.')));
 			}
 			else{
 				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'new',
