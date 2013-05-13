@@ -6,7 +6,7 @@ class Controller_ABMServicios extends Controller {
 		if(!isset($_POST['number'])){
 			$view = View::factory('newservicio');
 			$view->title = Helpers_Const::APPNAME." - ABM Servicio";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view->menuid = Helpers_Const::MENUSERVICIOSID;
 			$this->response->body($view->render());
 		}
 		else{
@@ -29,7 +29,7 @@ class Controller_ABMServicios extends Controller {
 		if(isset($_POST['numbersearch'])){
 			$view = View::factory('newservicio');
 			$view->title = Helpers_Const::APPNAME." - ABM Servicio";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view->menuid = Helpers_Const::MENUSERVICIOSID;
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){

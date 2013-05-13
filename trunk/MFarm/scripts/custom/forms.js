@@ -221,6 +221,44 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
+	jQuery("#formnewlactancia").validate({
+		rules: {
+			number: {
+				required: true,
+				digits: true
+			},
+			date: 'required',
+			adopt: {
+				required: true,
+				digits: true,
+				min: 0
+			},
+			dead: {
+				required: true,
+				digits: true,
+				min: 0
+			}
+		},
+		messages: {
+			number: {
+				required: "Por favor ingrese el numero de cerda",
+				digits: "Debe ingresar solo numeros"
+			},
+			date: "Por favor ingrese la fecha",
+			adopt: {
+				required: "Por favor ingrese el numero de lechones adoptados",
+				digits: "Debe ingresar solo numeros",
+				min: "El valor debe ser positivo"
+			},
+			dead: {
+				required: "Por favor ingrese el numero de lechones muertos",
+				digits: "Debe ingresar solo numeros",
+				min: "El valor debe ser positivo"
+			}
+		}
+	});
+	
+	//FORM VALIDATION
 	jQuery("#formedituser").validate({
 		rules: {
 			oldpass: {

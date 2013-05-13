@@ -9,6 +9,7 @@ class Helpers_Calendar {
 	const PFCELO42COLOR = '#D43F3F';
 	const PFPARTOCOLOR = '#6A9A1F';
 	const PARTOCOLOR = '#FFD800';
+	const DESTETECOLOR = '#6633FF';
 	
 	public static function getNewCerdaColors(){
 		return array('backgroundColor' => '#FF9900', 'borderColor' => '#404040', 'textColor' => '#303030');
@@ -36,6 +37,10 @@ class Helpers_Calendar {
 	
 	public static function getPartoColors(){
 		return array('backgroundColor' => '#FFD800', 'borderColor' => '#404040', 'textColor' => '#303030');
+	}
+	
+	public static function getDesteteColors(){
+		return array('backgroundColor' => '#6633FF', 'borderColor' => '#404040', 'textColor' => '#303030');
 	}
 	
 	public static function get21daysperiod(){

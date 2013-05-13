@@ -6,10 +6,13 @@ class Helpers_Const {
 	
 	/******** MENU *********/
 	const MENUINICIOID = '0';
-	const MENUCERDASID = '1';
-	const MENUABMID = '2';
-	const MENULACTANCIAID = '3';
-	const MENUREPORTESID = '4';
+	const MENUABMID = '1';
+	const MENUCERDASID = '2';
+	const MENUSERVICIOSID = '3';
+	const MENUPARTOSID = '4';
+	const MENUDESTETESID = '5';
+	const MENULACTANCIAID = '6';
+	const MENUREPORTESID = '7';
 	
 	/******** ESTADOS *********/
 	const ESTCELO = 'CELO';

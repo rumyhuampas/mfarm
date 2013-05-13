@@ -14,13 +14,13 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmestados')); ?>>Alta de Estado</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmestados')); ?>>Nuevo Estado</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Alta de Estado</span></h2>
+                    	<h2 class="form"><span>Nuevo Estado</span></h2>
                     </div><!--contenttitle-->
                     
                     <?php include Kohana::find_file('views', '_message'); ?>

@@ -16,7 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Alta de servicio</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Nuevo servicio</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -24,7 +24,7 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Alta de servicio</span></h2>
+                    	<h2 class="form"><span>Nuevo servicio</span></h2>
                     </div><!--contenttitle-->
                     
                     <?php echo Form::open('abmservicios/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));

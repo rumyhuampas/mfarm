@@ -16,7 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmpartos', 'action' => 'new')); ?>>Alta de parto</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmpartos', 'action' => 'new')); ?>>Nuevo parto</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -24,7 +24,7 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Alta de parto</span></h2>
+                    	<h2 class="form"><span>Nuevo parto</span></h2>
                     </div><!--contenttitle-->
                     
                     <?php echo Form::open('abmpartos/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));
@@ -177,7 +177,12 @@
 	                
 	                	<br clear="all" /> 
 	                	
-                	<?php
+	                	<div class="contenttitle">
+	                    	<h2 class="chart"><span>Ultimos partos (max 20)</span></h2>
+	                    </div><!--contenttitle-->
+	                    <br />
+	                    <?php
+	                    echo '<div id="partochart" style="height:300px; margin-right: 30px" name='.$cerda->Id.'></div>';
                 	}
 					?>
                     

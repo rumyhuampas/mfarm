@@ -16,7 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmdestetes', 'action' => 'new')); ?>>Alta de destete</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmdestetes', 'action' => 'new')); ?>>Nuevo destete</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -24,7 +24,7 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Alta de destete</span></h2>
+                    	<h2 class="form"><span>Nuevo destete</span></h2>
                     </div><!--contenttitle-->
                     
                     <?php
@@ -177,7 +177,13 @@
 			            </table>
 		                
 		               	<br clear="all" /> 
-	                <?php
+		               	
+		               	<div class="contenttitle">
+	                    	<h2 class="chart"><span>Ultimos destetes (max 20)</span></h2>
+	                    </div><!--contenttitle-->
+	                    <br />
+	                    <?php
+	                    echo '<div id="destetechart" style="height:300px; margin-right: 30px" name='.$cerda->Id.'></div>';
 	                } //isset($cerda)
 					?>
                     

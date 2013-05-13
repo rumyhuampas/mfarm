@@ -6,7 +6,7 @@ class Controller_ABMPartos extends Controller {
 		if(!isset($_POST['number'])){
 			$view=View::factory('newparto');
 			$view->title = Helpers_Const::APPNAME." - ABM Parto";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view->menuid = Helpers_Const::MENUPARTOSID;
 			$this->response->body($view->render());
 		}
 		else{
@@ -57,7 +57,7 @@ class Controller_ABMPartos extends Controller {
 		if(isset($_POST['numbersearch'])){
 			$view = View::factory('newparto');
 			$view->title = Helpers_Const::APPNAME." - ABM Parto";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view->menuid = Helpers_Const::MENUPARTOSID;
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
@@ -72,6 +72,13 @@ class Controller_ABMPartos extends Controller {
 		else{
 			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
 				'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
+		}
+	}
+	
+	public function action_getpartochartdata(){
+		if ($this->request->is_ajax()) {
+			$jsonarray = Helpers_Charts::getPartoData($_POST['IdCerda']);
+			echo json_encode($jsonarray);
 		}
 	}
 }

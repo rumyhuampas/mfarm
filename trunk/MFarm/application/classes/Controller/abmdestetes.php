@@ -6,7 +6,7 @@ class Controller_ABMDestetes extends Controller {
 		if(!isset($_POST['number'])){
 			$view = View::factory('newdestete');
 			$view->title = Helpers_Const::APPNAME." - ABM Destetes";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view->menuid = Helpers_Const::MENUDESTETESID;
 			$this->response->body($view->render());
 		}
 		else{
@@ -33,7 +33,7 @@ class Controller_ABMDestetes extends Controller {
 			$cerdaaudit->create();
 			
 			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmdestetes', 'action' => 'new',
-				'msgtype' => 'msgsuccess', 'msgtext' => 'Destete agregado con exito.')));	
+				'msgtype' => 'msgsuccess', 'msgtext' => 'Destete agregado con exito.')));
 		}
 	}
 
@@ -41,7 +41,7 @@ class Controller_ABMDestetes extends Controller {
 		if(isset($_POST['numbersearch'])){
 			$view = View::factory('newdestete');
 			$view->title = Helpers_Const::APPNAME." - ABM Destetes";
-			$view->menuid = Helpers_Const::MENUABMID;
+			$view->menuid = Helpers_Const::MENUDESTETESID;
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
@@ -56,6 +56,13 @@ class Controller_ABMDestetes extends Controller {
 		else{
 			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmdestetes', 'action' => 'new',
 				'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
+		}
+	}
+	
+	public function action_getdestetechartdata(){
+		if ($this->request->is_ajax()) {
+			$jsonarray = Helpers_Charts::getDesteteData($_POST['IdCerda']);
+			echo json_encode($jsonarray);
 		}
 	}
 }
