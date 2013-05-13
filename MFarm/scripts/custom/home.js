@@ -2,20 +2,22 @@ jQuery(document).ready(function(){
 	loadhomecalendar(jQuery('#new').is(':checked'), jQuery('#modif').is(':checked'),
 		jQuery('#servicio').is(':checked'),
     	jQuery('#celo21').is(':checked'), jQuery('#celo42').is(':checked'),
-    	jQuery('#probparto').is(':checked'), jQuery('#parto').is(':checked')); 
+    	jQuery('#probparto').is(':checked'), jQuery('#parto').is(':checked'),
+    	jQuery('#destete').is(':checked')); 
 	
 	jQuery(".calendarcheck").change(function() {
 	    loadhomecalendar(jQuery('#new').is(':checked'), jQuery('#modif').is(':checked'),
 	    	jQuery('#servicio').is(':checked'),
 	    	jQuery('#celo21').is(':checked'), jQuery('#celo42').is(':checked'),
-	    	jQuery('#probparto').is(':checked'), jQuery('#parto').is(':checked')); 
+	    	jQuery('#probparto').is(':checked'), jQuery('#parto').is(':checked'),
+	    	jQuery('#destete').is(':checked')); 
 	});
 	
-	function loadhomecalendar(newcerda, mod, serv, c21, c42, ppto, pto){
+	function loadhomecalendar(newcerda, mod, serv, c21, c42, ppto, pto, dest){
 		jQuery('#homecalendar').fullCalendar('removeEvents');
 		jQuery.post( 
 		    '/mfarm/home/addevent/',
-		    {newcerda: newcerda, modif: mod, servicio: serv, celo21: c21, celo42: c42, probparto: ppto, parto: pto},
+		    {newcerda: newcerda, modif: mod, servicio: serv, celo21: c21, celo42: c42, probparto: ppto, parto: pto, destete: dest},
 		    function( events ){
 		    	events = JSON.parse(events);
 		    	jQuery.each(events, function(i, data){

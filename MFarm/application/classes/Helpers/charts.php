@@ -4,16 +4,18 @@ class Helpers_Charts {
 	
 	/***********ABM CERDA**********/
 	public static function getCerdaPesoData($id){
-		$data = DB::select('Peso')->from('cerdaaudit')->where('IdCerda', '=', $id)->order_by('Fecha')->limit(20)->execute();
+		$data = DB::select('Peso')->from('cerdaaudit')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
 		$jsonarray = array();
+		$pos = count($data);
 		for($i=0; $i<count($data); $i++){
-			array_push($jsonarray, array((int)$i, (int)$data[$i]['Peso']));
+			array_push($jsonarray, array((int)$pos, (int)$data[$i]['Peso']));
+			$pos--;
 		}
 		return $jsonarray;
 	}
 	
 	public static function getCerdaCalendarData($idCerda, $modif = 'true', $serv = 'true', $celo21 = 'true',
-		$celo42 = 'true', $pparto = 'true', $parto = 'true', $desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)'){
+		$celo42 = 'true', $pparto = 'true', $parto = 'true', $destete = 'true', $desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)'){
 		
 		$result = array();
 		if($modif == 'true'){
@@ -87,7 +89,7 @@ class Helpers_Charts {
 			$result = array_merge($result, $pfparto);
 		}
 		if($parto == 'true'){
-			$parto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',partos.Id,\'\\\nVivos: \',partos.Vivos,\'\\\nMuertos: \',partos.Muertos,\'\\\nMomificados: \',partos.Momificados)'), 'title'), 
+			$parto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=partos.IdCerda),\'\\\nVivos: \',partos.Vivos,\'\\\nMuertos: \',partos.Muertos,\'\\\nMomificados: \',partos.Momificados)'), 'title'), 
 				array(Fecha, 'date'),
 				array(DB::expr('\''.Helpers_Calendar::PARTOCOLOR.'\''), 'backgroundColor'),
 				array(DB::expr('\'404040\''), 'borderColor'),
@@ -100,12 +102,26 @@ class Helpers_Charts {
 			->execute()->as_array();
 			$result = array_merge($result, $parto);
 		}
+		if($destete == 'true'){
+			$destete = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=destetes.IdCerda),\'\\\nLechones: \',destetes.Lechones,\'\\\nPeso Total: \',destetes.PesoTotal)'), 'title'), 
+				array(Fecha, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::DESTETECOLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('destetes')
+			->join('cerdas')->on('cerdas.Id', '=', 'destetes.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE('.$desde.')'))
+			->where('destetes.IdCerda', '=', $idCerda)
+			->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $destete);
+		}
 		return $result;
 	}
 	
 	/**********HOME************/
 	public static function getHomeCalendarData($altas = 'true', $serv = 'true', $celo21 = 'true',
-		$celo42 = 'true', $pparto = 'true', $parto = 'true', $desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)', $hasta = 'Now()'){
+		$celo42 = 'true', $pparto = 'true', $parto = 'true', $destete = 'true', $desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)', $hasta = 'Now()'){
 		
 		$result = array();
 		if($altas == 'true'){
@@ -174,7 +190,7 @@ class Helpers_Charts {
 			$result = array_merge($result, $pfparto);
 		}
 		if($parto == 'true'){
-			$parto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',partos.Id,\'\\\nVivos: \',partos.Vivos,\'\\\nMuertos: \',partos.Muertos,\'\\\nMomificados: \',partos.Momificados)'), 'title'), 
+			$parto = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=partos.IdCerda),\'\\\nVivos: \',partos.Vivos,\'\\\nMuertos: \',partos.Muertos,\'\\\nMomificados: \',partos.Momificados)'), 'title'), 
 				array(Fecha, 'date'),
 				array(DB::expr('\''.Helpers_Calendar::PARTOCOLOR.'\''), 'backgroundColor'),
 				array(DB::expr('\'404040\''), 'borderColor'),
@@ -185,6 +201,19 @@ class Helpers_Charts {
 			->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
 			->execute()->as_array();
 			$result = array_merge($result, $parto);
+		}
+		if($destete == 'true'){
+			$destete = DB::select(array(DB::expr('CONCAT(\'Cerda: \',(select Numero from cerdas where cerdas.Id=destetes.IdCerda),\'\\\nLechones: \',destetes.Lechones,\'\\\nPeso Total: \',destetes.PesoTotal)'), 'title'), 
+				array(Fecha, 'date'),
+				array(DB::expr('\''.Helpers_Calendar::DESTETECOLOR.'\''), 'backgroundColor'),
+				array(DB::expr('\'404040\''), 'borderColor'),
+				array(DB::expr('\'#303030\''), 'textColor'))
+			->from('destetes')
+			->join('cerdas')->on('cerdas.Id', '=', 'destetes.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+			->where(DB::expr('DATE(Fecha)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
+			->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
+			->execute()->as_array();
+			$result = array_merge($result, $destete);
 		}
 		return $result;
 	}
@@ -230,6 +259,44 @@ class Helpers_Charts {
 		$jsonarray = array();
 		for($i=0; $i<count($data); $i++){
 			array_push($jsonarray, array((int)$i, (int)$data[$i]['Lechones']));
+		}
+		return $jsonarray;
+	}
+	
+	/************** PARTOS *****************/
+	public static function getPartoData($id){
+		$data = DB::select(DB::expr('Vivos-Muertos-Momificados as Total'))->from('partos')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
+		$jsonarray = array();
+		$pos = count($data);
+		for($i=0; $i<count($data); $i++){
+			array_push($jsonarray, array((int)$pos, (int)$data[$i]['Total']));
+			$pos--;
+		}
+		return $jsonarray;
+	}
+	
+	/************** LACTANCIAS *****************/
+	public static function getLactanciaData($id, $idparto){
+		$data = DB::select(Total)->from('lactanciaaudit')
+		->where('IdCerda', '=', $id)->and_where('IdParto', '=', $idparto)
+		->order_by('Fecha', 'DESC')->limit(20)->execute();
+		$jsonarray = array();
+		$pos = count($data);
+		for($i=0; $i<count($data); $i++){
+			array_push($jsonarray, array((int)$pos, (int)$data[$i]['Total']));
+			$pos--;
+		}
+		return $jsonarray;
+	}
+	
+	/************** DESTETES *****************/
+	public static function getDesteteData($id){
+		$data = DB::select(Lechones)->from('destetes')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
+		$jsonarray = array();
+		$pos = count($data);
+		for($i=0; $i<count($data); $i++){
+			array_push($jsonarray, array((int)$pos, (int)$data[$i]['Lechones']));
+			$pos--;
 		}
 		return $jsonarray;
 	}

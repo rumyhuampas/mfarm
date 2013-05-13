@@ -39,8 +39,9 @@ class Controller_ABMLactancias extends Controller {
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->lastparto = Helpers_Parto::getLast($cerda->Id);
-				$view->registros = Helpers_Cerda::getLactancias($cerda->Id);
+				$lastparto = Helpers_Parto::getLast($cerda->Id);
+				$view->lastparto = $lastparto;
+				$view->registros = Helpers_Cerda::getLactancias($cerda->Id, $lastparto);
 				$this->response->body($view->render());
 			}
 			else{
@@ -51,6 +52,13 @@ class Controller_ABMLactancias extends Controller {
 		else{
 			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
 				'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
+		}
+	}
+
+	public function action_getlactanciachartdata(){
+		if ($this->request->is_ajax()) {
+			$jsonarray = Helpers_Charts::getLactanciaData($_POST['IdCerda'], $_POST['IdParto']);
+			echo json_encode($jsonarray);
 		}
 	}
 }

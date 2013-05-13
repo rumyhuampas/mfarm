@@ -120,7 +120,7 @@
 						?>
 						
 						<div class="contenttitle radiusbottom0">
-		                	<h2 class="table"><span>Variaciones durante la lactancia</span></h2>
+		                	<h2 class="table"><span>Registros de lactancia</span></h2>
 		                </div><!--contenttitle-->
 		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 		                    <colgroup>
@@ -164,7 +164,12 @@
 	                
 	                	<br clear="all" /> 
 	                	
-                	<?php
+	                	<div class="contenttitle">
+	                    	<h2 class="chart"><span>Variaciones durante lactancia (max 20)</span></h2>
+	                    </div><!--contenttitle-->
+	                    <br />
+	                    <?php
+	                    echo '<div id="lactanciachart" style="height:300px; margin-right: 30px" name='.$cerda->Id.' partoid='.$lastparto->Id.'></div>';
                 	}
 					?>
                     

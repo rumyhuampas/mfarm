@@ -4,6 +4,12 @@
       	<div class="leftmenu">
     		<ul>
             	<li id=<?php echo Helpers_Const::MENUINICIOID; ?> menuid=<?php echo $menuid ?>><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'home')); ?> class="dashboard"><span>Inicio</span></a></li>
+                <li id=<?php echo Helpers_Const::MENUABMID; ?> menuid=<?php echo $menuid ?>><a href="#" class="editor menudrop"><span>ABM</span></a>
+                	<ul>
+            			<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmestados', 'action' => 'new')); ?>><span>ABM de Estados</span></a></li>
+                    </ul>
+                </li>
                 <li id=<?php echo Helpers_Const::MENUCERDASID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pig menudrop"><span>Cerdas</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
@@ -12,22 +18,28 @@
                 			->uri(array('controller' => 'abmcerdas', 'action' => 'edit')); ?>><span>Modificar cerda</span></a></li>
                     </ul>
                 </li>
-                <li id=<?php echo Helpers_Const::MENUABMID; ?> menuid=<?php echo $menuid ?>><a href="#" class="editor menudrop"><span>ABM</span></a>
+                <li id=<?php echo Helpers_Const::MENUSERVICIOSID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pipette menudrop"><span>Servicios</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmestados', 'action' => 'new')); ?>><span>ABM de Estados</span></a></li>
-                		<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmservicios', 'action' => 'new')); ?>><span>ABM de Servicios</span></a></li>
-                		<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmpartos', 'action' => 'new')); ?>><span>ABM de Partos</span></a></li>
-                		<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmdestetes', 'action' => 'new')); ?>><span>ABM de Destetes</span></a></li>
+                			->uri(array('controller' => 'abmservicios', 'action' => 'new')); ?>><span>Nuevo servicio</span></a></li>
                     </ul>
                 </li>
-                <li id=<?php echo Helpers_Const::MENULACTANCIAID; ?> menuid=<?php echo $menuid ?>><a href="#" class="babybottle menudrop"><span>Lactancia</span></a>
+                <li id=<?php echo Helpers_Const::MENUPARTOSID; ?> menuid=<?php echo $menuid ?>><a href="#" class="stork menudrop"><span>Partos</span></a>
+                	<ul>
+            			<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmpartos', 'action' => 'new')); ?>><span>Nuevo parto</span></a></li>
+                    </ul>
+                </li>
+                <li id=<?php echo Helpers_Const::MENULACTANCIAID; ?> menuid=<?php echo $menuid ?>><a href="#" class="list menudrop"><span>Lactancia</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'abmlactancias', 'action' => 'new')); ?>><span>Nuevo registro</span></a></li>
+                    </ul>
+                </li>
+                <li id=<?php echo Helpers_Const::MENUDESTETESID; ?> menuid=<?php echo $menuid ?>><a href="#" class="babybottle menudrop"><span>Destetes</span></a>
+                	<ul>
+            			<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmdestetes', 'action' => 'new')); ?>><span>Nuevo servicio</span></a></li>
                     </ul>
                 </li>
                 <li id=<?php echo Helpers_Const::MENUREPORTESID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pdf menudrop"><span>Reportes</span></a>

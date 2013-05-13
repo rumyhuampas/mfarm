@@ -325,6 +325,12 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .leftmenu ul li a.pdf { background-position: -190px -227px; }
 .leftmenu ul li a.babybottle { background-image: url(../images/icons/default/babybottlesmall.png);
 	background-repeat: no-repeat; background-position: 8px center; background-size: 16px 16px; }
+.leftmenu ul li a.pipette { background-image: url(../images/icons/default/pipettesmall.png);
+	background-repeat: no-repeat; background-position: 8px center; background-size: 16px 16px; }
+.leftmenu ul li a.stork { background-image: url(../images/icons/default/storksmall.png);
+	background-repeat: no-repeat; background-position: 8px center; background-size: 16px 16px; }
+.leftmenu ul li a.list { background-image: url(../images/icons/default/listsmall.png);
+	background-repeat: no-repeat; background-position: 8px center; background-size: 16px 16px; }
 
 .leftmenu ul li .menutip { 
 	position: absolute; z-index: 100; left: 38px; top: 0; display: none; margin-left: 0; overflow: hidden;

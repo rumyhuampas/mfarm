@@ -15,7 +15,7 @@ class Controller_Home extends Controller {
 	public function action_addevent(){		
 		if ($this->request->is_ajax()) {
 			echo json_encode(Helpers_Charts::getHomeCalendarData($_POST['newcerda'],$_POST['servicio'],$_POST['celo21'],
-				$_POST['celo42'],$_POST['probparto'],$_POST['parto']));
+				$_POST['celo42'],$_POST['probparto'],$_POST['parto'],$_POST['destete']));
 		}	
 	}
 

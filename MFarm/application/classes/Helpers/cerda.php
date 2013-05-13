@@ -83,11 +83,19 @@ class Helpers_Cerda {
 		}
 	}
 
-	public static function getLactancias($id = NULL, $desde = NULL, $hasta = NULL){
+	public static function getLactancias($id = NULL, $idparto = NULL, $desde = NULL, $hasta = NULL){
 		if($id != NULL){
-			return ORM::factory('lactanciaaudit')
-				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
-				->where('IdCerda', '=', $id)->order_by('Fecha', 'ASC')->order_by('IdCerda', 'DESC')->find_all();
+			if($idparto != NULL){
+				return ORM::factory('lactanciaaudit')
+					->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
+					->where('IdCerda', '=', $id)->and_where('IdParto', '=', $idparto)
+					->order_by('Fecha', 'ASC')->order_by('IdCerda', 'DESC')->find_all();
+			}
+			else{
+				return ORM::factory('lactanciaaudit')
+					->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
+					->where('IdCerda', '=', $id)->order_by('Fecha', 'ASC')->order_by('IdCerda', 'DESC')->find_all();
+			}
 		}
 		else{
 			if($desde == NULL){
