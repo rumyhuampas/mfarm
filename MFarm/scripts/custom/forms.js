@@ -320,8 +320,7 @@ jQuery(document).ready(function(){
 				minlength: "El password debe tener al menos 4 caracteres"
 			}
 		}
-	});
-	
+	});	
 	
 	//for checkbox
 	jQuery('input[type=checkbox]').each(function(){
