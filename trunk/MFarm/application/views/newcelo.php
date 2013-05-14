@@ -1,6 +1,6 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
-<script src=<?php echo URL::base()."/scripts/custom/newcelo.js" ?> type="text/javascript"></script>
+<!--<script src=<?php echo URL::base()."/scripts/custom/newcelo.js" ?> type="text/javascript"></script>-->
 
 <body class="loggedin">
 
@@ -27,7 +27,7 @@
                     	<h2 class="form"><span>Repeticion de celo</span></h2>
                     </div><!--contenttitle-->
                     
-                    <?php echo Form::open('abmcelos/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));
+                    <?php echo Form::open('abmcerdacelos/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));
                     	echo '<p>';
 							echo Form::label('numbersearch', 'Numero de cerda');
 							echo '<span class="field">';
@@ -40,16 +40,27 @@
                     echo Form::close();
 
 					if(isset($cerda) && $cerda->loaded()){
-						echo Form::open('abmcelos/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewcelo'));
+						echo Form::open('abmcerdacelos/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewcelo'));
 
-							$EstadoPreñada = Helpers_Const::ESTPRENADA;
-							$IdEstadoPreñada = Helpers_Estado::get($EstadoPreñada)->Id;
-							if($cerda->IdEstado != $IdEstadoPreñada){
+							$EstadoCelo = Helpers_Const::ESTCELO;
+							$IdEstadoCelo = Helpers_Estado::get($EstadoCelo)->Id;
+							if($cerda->IdEstado != $IdEstadoCelo){
 								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 							    	echo '<a class="close"></a>';
-							    	echo '<p>La cerda no esta preñada.</p>';
+							    	echo '<p>La cerda no se encuentra en celo.</p>';
 								echo '</div>';
 							}
+							if($lastserv->loaded()){
+								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
+							    	echo '<a class="close"></a>';
+							    	echo '<p>La cerda aun no tiene un servicio.</p>';
+								echo '</div>';
+							}
+
+							echo '<div class="smallnotification noimgmsgalert" style="margin-left: 220px;">';
+						    	echo '<a class="close"></a>';
+						    	echo '<p></p>';
+							echo '</div>';
 						
 							echo Form::hidden('IdCerda', $cerda->Id);
 	                    	echo '<p>';
@@ -59,7 +70,7 @@
 									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';									
-							if($cerda->IdEstado == $IdEstadoPreñada){
+							if($cerda->IdEstado == $IdEstadoCelo){
 								echo '<p>';
 									echo Form::label('date', 'Fecha');
 									echo '<span class="field">';
@@ -74,42 +85,27 @@
 								echo '</p>';
 							}
 							echo '<p>';
-								echo Form::label('alive', 'Vivos');
+								echo Form::label('servdate', 'Fecha de ultimo servicio');
 								echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoPreñada){
-									echo Form::input('alive', '', array('type' => 'text', 'id' => 'alive', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
-								}
-								else{
-									echo Form::input('alive', '', array('type' => 'text', 'id' => 'alive', 'class' => 'smallinput'));
-								}
+									echo Form::input('servdate', $lastserv->FechaServicio, array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
-								echo Form::label('dead', 'Muertos');
+								echo Form::label('celo21date', 'Fecha probable de celo 21');
 								echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoPreñada){
-									echo Form::input('dead', '', array('type' => 'text', 'id' => 'dead', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
-								}
-								else{
-									echo Form::input('dead', '', array('type' => 'text', 'id' => 'dead', 'class' => 'smallinput'));
-								}
+									echo Form::input('celo21date', $lastserv->ProbableFechaCelo21, array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
-								echo Form::label('momif', 'Momificados');
+								echo Form::label('celo42date', 'Fecha probable de celo 42');
 								echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoPreñada){
-									echo Form::input('momif', '', array('type' => 'text', 'id' => 'momif', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
-								}
-								else{
-									echo Form::input('momif', '', array('type' => 'text', 'id' => 'momif', 'class' => 'smallinput'));
-								}
+									echo Form::input('celo42date', $lastserv->ProbableFechaCelo42, array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
                             	echo Form::label('obs', 'Observaciones');
                             	echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoPreñada){
+								if($cerda->IdEstado != $IdEstadoCelo){
                             		echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80" style="background-color: #DDDDDD" readonly></textarea>';
 								}
 								else{
@@ -119,7 +115,7 @@
 	                        echo '</p>';
 	                        
 	                        echo '<p class="stdformbutton">';
-								if($cerda->IdEstado != $IdEstadoPreñada){
+								if($cerda->IdEstado != $IdEstadoCelo){
 	                        		echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2', 'style' => 'background-color: #DDDDDD; color: #333333;', 'disabled'));
 								}
 								else{
@@ -130,7 +126,7 @@
 						?>
 						
 						<div class="contenttitle radiusbottom0">
-		                	<h2 class="table"><span>Partos</span></h2>
+		                	<h2 class="table"><span>Repeticiones de celo</span></h2>
 		                </div><!--contenttitle-->
 		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 		                    <colgroup>

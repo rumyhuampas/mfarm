@@ -16,6 +16,8 @@
                 			->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>><span>Nueva cerda</span></a></li>
             			<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'abmcerdas', 'action' => 'edit')); ?>><span>Modificar cerda</span></a></li>
+                		<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmcerdacelos', 'action' => 'new')); ?>><span>Repeticion de celo</span></a></li>
                     </ul>
                 </li>
                 <li id=<?php echo Helpers_Const::MENUSERVICIOSID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pipette menudrop"><span>Servicios</span></a>
