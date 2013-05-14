@@ -2,45 +2,47 @@
 
 class Helpers_Calendar {
 		
-	const ALTACOLOR = '#FF9900';
+	const ALTACOLOR = '#3366CC';//'#FF9900';
 	const MODIFCOLOR = '#909090';
-	const SERVCOLOR = '#00ACE9';
-	const PFCELO21COLOR = '#DB5800';
-	const PFCELO42COLOR = '#D43F3F';
+	const SERVCOLOR = '#D43F3F';//#00ACE9';
+	const PFCELO21COLOR = '#FF9933';
+	const PFCELO42COLOR = '#9933FF';
 	const PFPARTOCOLOR = '#6A9A1F';
 	const PARTOCOLOR = '#FFD800';
-	const DESTETECOLOR = '#6633FF';
+	const DESTETECOLOR = '#FF66FF';
+	const BORDERCOLOR = '#404040';
+	const TEXTCOLOR = '#303030';
 	
 	public static function getNewCerdaColors(){
-		return array('backgroundColor' => '#FF9900', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::ALTACOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getModificationColors(){
-		return array('backgroundColor' => '#909090', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::MODIFCOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getServicioColors(){
-		return array('backgroundColor' => '#00ACE9', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::SERVCOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getProbCelo21Colors(){
-		return array('backgroundColor' => '#DB5800', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::PFCELO21COLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getProbCelo42Colors(){
-		return array('backgroundColor' => '#D43F3F', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::PFCELO42COLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getProbPartoColors(){
-		return array('backgroundColor' => '#6A9A1F', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::PFPARTOCOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getPartoColors(){
-		return array('backgroundColor' => '#FFD800', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::PARTOCOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getDesteteColors(){
-		return array('backgroundColor' => '#6633FF', 'borderColor' => '#404040', 'textColor' => '#303030');
+		return array('backgroundColor' => Helpers_Calendar::DESTETECOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function get21daysperiod(){

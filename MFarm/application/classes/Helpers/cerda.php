@@ -165,6 +165,12 @@ class Helpers_Cerda {
 		$qry->order_by('IdCerda', 'DESC');
 		return $qry->find_all();
 	}
+
+	public static function getRepeticionesCelos($idserv){
+		return ORM::factory('cerdacelos')
+			->where('IdServicio', '=', $idserv)
+			->order_by('Fecha', 'ASC')->find_all();
+	}
 	
 	public static function getProbPartos($desde = NULL, $hasta = NULL){
 		if($desde == NULL){
@@ -190,6 +196,6 @@ class Helpers_Cerda {
 	public static function getMaxWeights(){
 		return DB::select('IdCerda', 'Peso', 'Fecha', 'Numero')
 			->from(DB::expr('(select ca.IdCerda, ca.peso, ca.fecha, c.numero from cerdaaudit ca, cerdas c where c.Id=ca.IdCerda order by ca.idcerda, ca.fecha desc) q'))
-			->group_by('idcerda')->order_by('Peso', 'DESC')->limit(10)->execute();
+			->group_by('idcerda')->order_by('Peso', 'DESC')->limit(12)->execute();
 	}
 }
