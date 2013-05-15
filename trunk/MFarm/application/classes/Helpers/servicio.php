@@ -11,9 +11,10 @@ class Helpers_Servicio {
 		}
 	}
 	
-	public static function getLast($IdCerda){
+	public static function getLast($IdCerda, $desde = NULL){
 		return ORM::factory('servicio')
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
-			->where('IdCerda', '=', $IdCerda)->order_by('FechaServicio', 'DESC')->limit(1)->find();
+			->where('IdCerda', '=', $IdCerda)->and_where('FechaServicio', '>=', $desde)
+			->order_by('FechaServicio', 'DESC')->limit(1)->find();
 	}
 }

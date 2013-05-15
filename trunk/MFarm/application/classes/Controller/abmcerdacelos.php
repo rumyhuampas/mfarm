@@ -10,46 +10,14 @@ class Controller_ABMCerdaCelos extends Controller {
 			$this->response->body($view->render());
 		}
 		else{
-			if($_POST['alive'] != 0 || $_POST['dead'] != 0 || $_POST['momif'] != 0){
-				$parto = ORM::factory('parto');
-				$parto->IdCerda = $_POST['IdCerda'];
-				$parto->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$parto->Vivos = $_POST['alive'];
-				$parto->Muertos = $_POST['dead'];
-				$parto->Momificados = $_POST['momif'];
-				$parto->Observaciones = $_POST['obs'];
-				$parto->create();
-				
-				$registro = ORM::factory('lactanciaaudit');
-				$registro->IdCerda = $_POST['IdCerda'];
-				$registro->IdParto = $parto->Id;
-				$registro->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$registro->Adoptados = 0;
-				$registro->Muertos = 0;
-				$registro->Total = $parto->Vivos - $parto->Muertos - $parto->Momificados;  
-				$registro->Observaciones = '';
-				$registro->create();
-				
-				$cerda = ORM::factory('cerda', $parto->IdCerda);
-				$postpartoestado = Helpers_Const::ESTPOSTPARTO;
-				$cerda->IdEstado = Helpers_Estado::get($postpartoestado)->Id;
-				$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$cerda->Update();
+			$rep = ORM::factory('cerdacelo');
+			$rep->IdServicio = $_POST['IdServicio'];
+			$rep->Fecha = date('Y-m-d H:i:s', strtotime($_POST['servdate']));
+			$rep->Observaciones = $_POST['obs'];
+			$rep->create();
 			
-				$cerdaaudit = ORM::factory('cerdaaudit');
-				$cerdaaudit->IdCerda = $cerda->Id;
-				$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$cerdaaudit->IdEstado = $cerda->IdEstado;
-				$cerdaaudit->Peso = $cerda->Peso;
-				$cerdaaudit->create();
-				
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdacelos', 'action' => 'new',
-					'msgtype' => 'msgsuccess', 'msgtext' => 'Parto agregado con exito.')));
-			}
-			else{
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdacelos', 'action' => 'new',
-					'msgtype' => 'msgerror', 'msgtext' => 'Al menos uno de los campos debe ser mayor que 0')));
-			}	
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdacelos', 'action' => 'new',
+				'msgtype' => 'msgsuccess', 'msgtext' => 'Registro agregado con exito.')));
 		}
 	}
 
@@ -61,9 +29,25 @@ class Controller_ABMCerdaCelos extends Controller {
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->lastserv = Helpers_Servicio::getLast($cerda->Id);
-				if($view->lastserv->loaded()){
-					$view->reps = Helpers_Cerda::getRepeticionesCelos($view->lastserv->Id);
+				$EstadoCelo = Helpers_Const::ESTCELO;
+				$IdEstadoCelo = Helpers_Estado::get($EstadoCelo)->Id;
+				if($cerda->IdEstado == $IdEstadoCelo){
+					$audit = Helpers_Cerda::getAudit($cerda->Id);
+					if(count($audit)>0){
+						$firstcelo = $audit[0];
+						for($i=0;$i<count($audit);$i++){
+							if($audit[$i]->IdEstado == $IdEstadoCelo){
+								$firstcelo = $audit[$i];
+							}
+							else{
+								break;
+							}
+						}
+						$view->lastserv = Helpers_Servicio::getLast($cerda->Id, $firstcelo->Fecha);
+						if($view->lastserv->loaded()){
+							$view->reps = Helpers_Cerda::getRepeticionesCelos($view->lastserv->Id);
+						}
+					}
 				}
 				$this->response->body($view->render());
 			}
