@@ -1,6 +1,6 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
-<!--<script src=<?php echo URL::base()."/scripts/custom/newcelo.js" ?> type="text/javascript"></script>-->
+<script src=<?php echo URL::base()."/scripts/custom/newcelo.js" ?> type="text/javascript"></script>
 
 <body class="loggedin">
 
@@ -50,19 +50,17 @@
 							    	echo '<p>La cerda no se encuentra en celo.</p>';
 								echo '</div>';
 							}
-							if($lastserv->loaded()){
-								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
+							if(!isset($lastserv) || !$lastserv->loaded()){
+								echo '<div class="smallnotification noimgmsgalert" style="margin-left: 220px;">';
 							    	echo '<a class="close"></a>';
 							    	echo '<p>La cerda aun no tiene un servicio.</p>';
 								echo '</div>';
-							}
-
-							echo '<div class="smallnotification noimgmsgalert" style="margin-left: 220px;">';
-						    	echo '<a class="close"></a>';
-						    	echo '<p></p>';
-							echo '</div>';
+							}							
 						
 							echo Form::hidden('IdCerda', $cerda->Id);
+							if(isset($lastserv) || $lastserv->loaded()){
+								echo Form::hidden('IdServicio', $lastserv->Id);
+							}
 	                    	echo '<p>';
 								echo Form::label('number', 'Numero');
 								echo '<span class="field">';
@@ -70,7 +68,7 @@
 									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';									
-							if($cerda->IdEstado == $IdEstadoCelo){
+							if($cerda->IdEstado == $IdEstadoCelo && (isset($lastserv) && $lastserv->loaded())){
 								echo '<p>';
 									echo Form::label('date', 'Fecha');
 									echo '<span class="field">';
@@ -87,19 +85,34 @@
 							echo '<p>';
 								echo Form::label('servdate', 'Fecha de ultimo servicio');
 								echo '<span class="field">';
-									echo Form::input('servdate', $lastserv->FechaServicio, array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									if(isset($lastserv) && $lastserv->loaded()){
+										echo Form::input('servdate', $lastserv->FechaServicio, array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
+									else{
+										echo Form::input('servdate', '', array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
 								echo Form::label('celo21date', 'Fecha probable de celo 21');
 								echo '<span class="field">';
-									echo Form::input('celo21date', $lastserv->ProbableFechaCelo21, array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									if(isset($lastserv) && $lastserv->loaded()){
+										echo Form::input('celo21date', $lastserv->ProbableFechaCelo21, array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
+									else{
+										echo Form::input('celo21date', '', array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
 								echo Form::label('celo42date', 'Fecha probable de celo 42');
 								echo '<span class="field">';
-									echo Form::input('celo42date', $lastserv->ProbableFechaCelo42, array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									if(isset($lastserv) && $lastserv->loaded()){
+										echo Form::input('celo42date', $lastserv->ProbableFechaCelo42, array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
+									else{
+										echo Form::input('celo42date', '', array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									}
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
@@ -115,7 +128,7 @@
 	                        echo '</p>';
 	                        
 	                        echo '<p class="stdformbutton">';
-								if($cerda->IdEstado != $IdEstadoCelo){
+								if($cerda->IdEstado != $IdEstadoCelo || (!isset($lastserv) || !$lastserv->loaded())){
 	                        		echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2', 'style' => 'background-color: #DDDDDD; color: #333333;', 'disabled'));
 								}
 								else{
@@ -126,7 +139,7 @@
 						?>
 						
 						<div class="contenttitle radiusbottom0">
-		                	<h2 class="table"><span>Repeticiones de celo</span></h2>
+		                	<h2 class="table"><span>Repeticiones de celo desde el ultimo servicio</span></h2>
 		                </div><!--contenttitle-->
 		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 		                    <colgroup>
@@ -135,34 +148,31 @@
 		                    </colgroup>
 		                    <thead>
 		                        <tr>
-		                            <th class="head0">Fecha de parto</th>
-		                            <th class="head1">Vivos</th>
-		                            <th class="head0">Muertos</th>
-		                            <th class="head1">Momificados</th>
-		                            <th class="head0">Total</th>
-		                            <th class="head1">Observaciones</th>
+		                            <th class="head0">Fecha de servicio</th>
+		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha probable de celo 21</th>
+		                            <th class="head1">Fecha probable de celo 42</th>
+		                            <th class="head0">Observaciones</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
 		                        <tr>
-		                            <th class="head0">Fecha de parto</th>
-		                            <th class="head1">Vivos</th>
-		                            <th class="head0">Muertos</th>
-		                            <th class="head1">Momificados</th>
-		                            <th class="head0">Total</th>
-		                            <th class="head1">Observaciones</th>
+		                            <th class="head0">Fecha de servicio</th>
+		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha probable de celo 21</th>
+		                            <th class="head1">Fecha probable de celo 42</th>
+		                            <th class="head0">Observaciones</th>
 		                        </tr>
 		                    </tfoot>
 		                    <tbody>
 		                    	<?php
-		                    		if(isset($partos)){ 
-			                    		foreach($partos as $parto){
+		                    		if(isset($reps) && isset($lastserv)){ 
+			                    		foreach($reps as $rep){
 			                    		echo '<tr>';
-				                            echo '<td>'.$parto->Fecha.'</td>';
-				                            echo '<td>'.$parto->Vivos.'</td>';
-				                            echo '<td>'.$parto->Muertos.'</td>';
-											echo '<td>'.$parto->Momificados.'</td>';
-											echo '<td>'.($parto->Vivos + $parto->Muertos + $parto->Momificados).'</td>';
+				                            echo '<td>'.$lastserv->FechaServicio.'</td>';
+				                            echo '<td>'.$rep->Fecha.'</td>';
+				                            echo '<td>'.$lastserv->ProbableFechaCelo21.'</td>';
+											echo '<td>'.$lastserv->ProbableFechaCelo42.'</td>';
 											echo '<td>'.$parto->Observaciones.'</td>';
 				                        echo '</tr>';
 										}
@@ -171,14 +181,8 @@
 		                    </tbody>
 		                </table>
 	                
-	                	<br clear="all" /> 
-	                	
-	                	<div class="contenttitle">
-	                    	<h2 class="chart"><span>Ultimos partos (max 20)</span></h2>
-	                    </div><!--contenttitle-->
-	                    <br />
-	                    <?php
-	                    echo '<div id="partochart" style="height:300px; margin-right: 30px" name='.$cerda->Id.'></div>';
+	                	<br clear="all" />
+	                <?php
                 	}
 					?>
                     

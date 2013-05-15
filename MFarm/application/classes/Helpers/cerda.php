@@ -167,7 +167,7 @@ class Helpers_Cerda {
 	}
 
 	public static function getRepeticionesCelos($idserv){
-		return ORM::factory('cerdacelos')
+		return ORM::factory('cerdacelo')
 			->where('IdServicio', '=', $idserv)
 			->order_by('Fecha', 'ASC')->find_all();
 	}
