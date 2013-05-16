@@ -5,6 +5,7 @@ class Helpers_Calendar {
 	const ALTACOLOR = '#3366CC';//'#FF9900';
 	const MODIFCOLOR = '#909090';
 	const SERVCOLOR = '#D43F3F';//#00ACE9';
+	const REPCOLOR = '#5DB8CF';
 	const PFCELO21COLOR = '#FF9933';
 	const PFCELO42COLOR = '#9933FF';
 	const PFPARTOCOLOR = '#6A9A1F';
@@ -23,6 +24,10 @@ class Helpers_Calendar {
 	
 	public static function getServicioColors(){
 		return array('backgroundColor' => Helpers_Calendar::SERVCOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
+	}
+	
+	public static function getRepColors(){
+		return array('backgroundColor' => Helpers_Calendar::REPCOLOR, 'borderColor' => Helpers_Calendar::BORDERCOLOR, 'textColor' => Helpers_Calendar::TEXTCOLOR);
 	}
 	
 	public static function getProbCelo21Colors(){

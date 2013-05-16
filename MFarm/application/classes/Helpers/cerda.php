@@ -166,6 +166,14 @@ class Helpers_Cerda {
 		return $qry->find_all();
 	}
 
+	public static function getRepeticiones($idcerda){
+		return DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Fecha', 'cerdacelos.Observaciones')
+			->from('servicios')
+			->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
+			->where('servicios.IdCerda', '=', $idcerda)
+			->order_by('cerdacelos.Fecha', 'ASC')->as_object()->execute();
+	}
+
 	public static function getRepeticionesCelos($idserv){
 		return ORM::factory('cerdacelo')
 			->where('IdServicio', '=', $idserv)

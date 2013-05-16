@@ -79,6 +79,9 @@ jQuery(document).ready(function(){
 	jQuery('#serviciolink').click(function(){
 		jQuery('#servicioform').submit();
 	});
+	jQuery('#replink').click(function(){
+		jQuery('#repform').submit();
+	});
 	jQuery('#partolink').click(function(){
 		jQuery('#partoform').submit();
 	});

@@ -12,7 +12,7 @@ class Controller_ABMCerdaCelos extends Controller {
 		else{
 			$rep = ORM::factory('cerdacelo');
 			$rep->IdServicio = $_POST['IdServicio'];
-			$rep->Fecha = date('Y-m-d H:i:s', strtotime($_POST['servdate']));
+			$rep->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$rep->Observaciones = $_POST['obs'];
 			$rep->create();
 			
