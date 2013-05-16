@@ -34,19 +34,25 @@
 					?>
 						<br clear="all" />
 	                	<ul class="formwidgetlist">
-							<li><a href="#" id="serviciolink" name="<?php echo $cerda->Id; ?>" class="pipeta">Agregar servicio</a></li>
+							<li><a href="#" id="serviciolink" name="<?php echo $cerda->Id; ?>" class="pipeta">Nuevo servicio</a></li>
 							<?php 
 							echo Form::open('abmservicios/search', array('method' => 'POST', 'id' => 'servicioform'));
 								echo Form::hidden('numbersearch', $cerda->Numero, array('id' => 'numbersearch'));
 							echo Form::close();
 							?>
-							<li><a href="#" id="partolink" name="<?php echo $cerda->Id; ?>" class="stork">Agregar parto</a></li>
+							<li><a href="#" id="replink" name="<?php echo $cerda->Id; ?>" class="undo">Repetir celo</a></li>
+							<?php 
+							echo Form::open('abmcerdacelos/search', array('method' => 'POST', 'id' => 'repform'));
+								echo Form::hidden('numbersearch', $cerda->Numero, array('id' => 'numbersearch'));
+							echo Form::close();
+							?>
+							<li><a href="#" id="partolink" name="<?php echo $cerda->Id; ?>" class="stork">Nuevo parto</a></li>
 							<?php 
 							echo Form::open('abmpartos/search', array('method' => 'POST', 'id' => 'partoform'));
 								echo Form::hidden('numbersearch', $cerda->Numero, array('id' => 'numbersearch'));
 							echo Form::close();
 							?>
-							<li><a href="#" id="destetelink" name="<?php echo $cerda->Id; ?>" class="babybottle">Agregar destete</a></li>
+							<li><a href="#" id="destetelink" name="<?php echo $cerda->Id; ?>" class="babybottle">Nuevo destete</a></li>
 							<?php 
 							echo Form::open('abmdestetes/search', array('method' => 'POST', 'id' => 'desteteform'));
 								echo Form::hidden('numbersearch', $cerda->Numero, array('id' => 'numbersearch'));
@@ -148,95 +154,138 @@
                     	echo Form::close();
 						?>
 
-						<div class="one_half">
-							<div class="contenttitle radiusbottom0">
-			                	<h2 class="table"><span>Modificaciones</span></h2>
-			                </div><!--contenttitle-->
-			                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
-			                    <colgroup>
-			                        <col class="con0" />
-			                        <col class="con1" />
-			                    </colgroup>
-			                    <thead>
-			                        <tr>
-			                            <th class="head0">Fecha de modificacion</th>
-			                            <th class="head1">Estado</th>
-			                            <th class="head0">Peso</th>
-			                            <th class="head1">Observaciones</th>
-			                        </tr>
-			                    </thead>
-			                    <tfoot>
-			                        <tr>
-			                            <th class="head0">Fecha de modificacion</th>
-			                            <th class="head1">Estado</th>
-			                            <th class="head0">Peso</th>
-			                            <th class="head1">Observaciones</th>
-			                        </tr>
-			                    </tfoot>
-			                    <tbody>
-			                    	<?php
-			                    		if(isset($audits)){ 
-				                    		foreach($audits as $audit){
+						<div class="contenttitle radiusbottom0">
+		                	<h2 class="table"><span>Modificaciones</span></h2>
+		                </div><!--contenttitle-->
+		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+		                    <colgroup>
+		                        <col class="con0" />
+		                        <col class="con1" />
+		                    </colgroup>
+		                    <thead>
+		                        <tr>
+		                            <th class="head0">Fecha de modificacion</th>
+		                            <th class="head1">Estado</th>
+		                            <th class="head0">Peso</th>
+		                            <th class="head1">Observaciones</th>
+		                        </tr>
+		                    </thead>
+		                    <tfoot>
+		                        <tr>
+		                            <th class="head0">Fecha de modificacion</th>
+		                            <th class="head1">Estado</th>
+		                            <th class="head0">Peso</th>
+		                            <th class="head1">Observaciones</th>
+		                        </tr>
+		                    </tfoot>
+		                    <tbody>
+		                    	<?php
+		                    		if(isset($audits)){ 
+			                    		foreach($audits as $audit){
+			                    		echo '<tr>';
+				                            echo '<td>'.$audit->Fecha.'</td>';
+				                            echo '<td>'.$audit->Estado.'</td>';
+				                            echo '<td>'.$audit->Peso.'</td>';
+											echo '<td>'.$audit->Observaciones.'</td>';
+				                        echo '</tr>';
+										}
+		                    		}
+								?>
+		                    </tbody>
+		                </table>
+		                
+		                <br clear="all" /><br />
+		            
+		            	<div class="contenttitle radiusbottom0">
+		                	<h2 class="table"><span>Servicios</span></h2>
+		                </div><!--contenttitle-->
+		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+		                    <colgroup>
+		                        <col class="con0" />
+		                        <col class="con1" />
+		                    </colgroup>
+		                    <thead>
+		                        <tr>
+		                            <th class="head0">Fecha de servicio</th>
+		                            <th class="head1">Macho</th>
+		                            <th class="head0">Probable fecha de celo 21</th>
+		                            <th class="head1">Probable fecha de celo 42</th>
+		                            <th class="head0">Probable fecha de parto</th>
+		                            <th class="head1">Observaciones</th>
+		                        </tr>
+		                    </thead>
+		                    <tfoot>
+		                        <tr>
+		                            <th class="head0">Fecha de servicio</th>
+		                            <th class="head1">Macho</th>
+		                            <th class="head0">Probable fecha de celo 21</th>
+		                            <th class="head1">Probable fecha de celo 42</th>
+		                            <th class="head0">Probable fecha de parto</th>
+		                            <th class="head1">Observaciones</th>
+		                        </tr>
+		                    </tfoot>
+		                    <tbody>
+		                    	<?php
+		                    		if(isset($servicios)){ 
+			                    		foreach($servicios as $servicio){
+			                    		echo '<tr>';
+				                            echo '<td>'.$servicio->FechaServicio.'</td>';
+				                            echo '<td>'.$servicio->Macho.'</td>';
+				                            echo '<td>'.$servicio->ProbableFechaCelo21.'</td>';
+											echo '<td>'.$servicio->ProbableFechaCelo42.'</td>';
+											echo '<td>'.$servicio->ProbableFechaParto.'</td>';
+											echo '<td>'.$servicio->Observaciones.'</td>';
+				                        echo '</tr>';
+										}
+		                    		}
+								?>
+		                    </tbody>
+		                </table>
+		                
+		                <br clear="all" /><br />
+	                
+		                <div class="contenttitle radiusbottom0">
+		                	<h2 class="table"><span>Repeticiones de celo</span></h2>
+		                </div><!--contenttitle-->
+		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+		                    <colgroup>
+		                        <col class="con0" />
+		                        <col class="con1" />
+		                    </colgroup>
+		                    <thead>
+		                        <tr>
+		                            <th class="head0">Fecha de servicio</th>
+		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha probable de celo 21</th>
+		                            <th class="head1">Fecha probable de celo 42</th>
+		                            <th class="head0">Observaciones</th>
+		                        </tr>
+		                    </thead>
+		                    <tfoot>
+		                        <tr>
+		                            <th class="head0">Fecha de servicio</th>
+		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha probable de celo 21</th>
+		                            <th class="head1">Fecha probable de celo 42</th>
+		                            <th class="head0">Observaciones</th>
+		                        </tr>
+		                    </tfoot>
+		                    <tbody>
+		                    	<?php
+		                    		if(isset($reps)){
+			                    		foreach($reps as $rep){
 				                    		echo '<tr>';
-					                            echo '<td>'.$audit->Fecha.'</td>';
-					                            echo '<td>'.$audit->Estado.'</td>';
-					                            echo '<td>'.$audit->Peso.'</td>';
-												echo '<td>'.$audit->Observaciones.'</td>';
+					                            echo '<td>'.$rep->FechaServicio.'</td>';
+					                            echo '<td>'.$rep->Fecha.'</td>';
+					                            echo '<td>'.$rep->ProbableFechaCelo21.'</td>';
+												echo '<td>'.$rep->ProbableFechaCelo42.'</td>';
+												echo '<td>'.$rep->Observaciones.'</td>';
 					                        echo '</tr>';
-											}
-			                    		}
-									?>
-			                    </tbody>
-			                </table>
-			            </div><!--one_half-->
-			            
-			            <div class="one_half last">
-			            	<div class="contenttitle radiusbottom0">
-			                	<h2 class="table"><span>Servicios</span></h2>
-			                </div><!--contenttitle-->
-			                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
-			                    <colgroup>
-			                        <col class="con0" />
-			                        <col class="con1" />
-			                    </colgroup>
-			                    <thead>
-			                        <tr>
-			                            <th class="head0">Fecha de servicio</th>
-			                            <th class="head1">Macho</th>
-			                            <th class="head0">Probable fecha de celo 21</th>
-			                            <th class="head1">Probable fecha de celo 42</th>
-			                            <th class="head0">Probable fecha de parto</th>
-			                            <th class="head1">Observaciones</th>
-			                        </tr>
-			                    </thead>
-			                    <tfoot>
-			                        <tr>
-			                            <th class="head0">Fecha de servicio</th>
-			                            <th class="head1">Macho</th>
-			                            <th class="head0">Probable fecha de celo 21</th>
-			                            <th class="head1">Probable fecha de celo 42</th>
-			                            <th class="head0">Probable fecha de parto</th>
-			                            <th class="head1">Observaciones</th>
-			                        </tr>
-			                    </tfoot>
-			                    <tbody>
-			                    	<?php
-			                    		if(isset($servicios)){ 
-				                    		foreach($servicios as $servicio){
-				                    		echo '<tr>';
-					                            echo '<td>'.$servicio->FechaServicio.'</td>';
-					                            echo '<td>'.$servicio->Macho.'</td>';
-					                            echo '<td>'.$servicio->ProbableFechaCelo21.'</td>';
-												echo '<td>'.$servicio->ProbableFechaCelo42.'</td>';
-												echo '<td>'.$servicio->ProbableFechaParto.'</td>';
-												echo '<td>'.$servicio->Observaciones.'</td>';
-					                        echo '</tr>';
-											}
-			                    		}
-									?>
-			                    </tbody>
-			                </table>
-		                </div><!--one_half-->
+										}
+		                    		}
+								?>
+		                    </tbody>
+		                </table>
 		                
 		                <br clear="all" /><br />
 		                
@@ -334,7 +383,7 @@
 									?>
 			                    </tbody>
 			                </table>
-		                </div><!--one half-->
+		                </div><!--one half last-->
 		                
 		                <br clear="all" /><br />
 		                

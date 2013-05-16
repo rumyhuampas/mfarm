@@ -173,7 +173,7 @@
 				                            echo '<td>'.$rep->Fecha.'</td>';
 				                            echo '<td>'.$lastserv->ProbableFechaCelo21.'</td>';
 											echo '<td>'.$lastserv->ProbableFechaCelo42.'</td>';
-											echo '<td>'.$parto->Observaciones.'</td>';
+											echo '<td>'.$rep->Observaciones.'</td>';
 				                        echo '</tr>';
 										}
 		                    		}

@@ -48,18 +48,30 @@ class Controller_Login extends Controller {
 			$repass = $_POST['repassword'];
 			
 			if($user != '' && $pass != '' && $repass != ''){
-				if($pass == $repass){
-					$newuser = ORM::factory('user');
-					$newuser->UserName = $user;
-					$newuser->Password = $pass;
-					$newuser->create();
-					
-					HTTP::redirect(Route::get('msg')->uri(array('controller' => 'login', 
-						'msgtype' => 'msgsuccess', 'msgtext' => 'Usuario creado correctamente.')));
+				if(strlen($user) >= 4){
+					if(strlen($pass) >= 4 && strlen($repass) >= 4){
+						if($pass == $repass){
+							$newuser = ORM::factory('user');
+							$newuser->UserName = $user;
+							$newuser->Password = $pass;
+							$newuser->create();
+							
+							HTTP::redirect(Route::get('msg')->uri(array('controller' => 'login', 
+								'msgtype' => 'msgsuccess', 'msgtext' => 'Usuario creado correctamente.')));
+						}
+						else{
+							HTTP::redirect(Route::get('msg')->uri(array('controller' => 'login',
+								'msgtype' => 'msgerror', 'msgtext' => 'Las contrasenas deben ser iguales.')));
+						}
+					}
+					else{
+						HTTP::redirect(Route::get('msg')->uri(array('controller' => 'login',
+							'msgtype' => 'msgerror', 'msgtext' => 'Las contrasenas debe tener al menos 4 caracteres.')));
+					}
 				}
 				else{
 					HTTP::redirect(Route::get('msg')->uri(array('controller' => 'login',
-						'msgtype' => 'msgerror', 'msgtext' => 'Las contrasenas deben ser iguales.')));
+							'msgtype' => 'msgerror', 'msgtext' => 'El nombre de usuario debe tener al menos 4 caracteres.')));
 				}
 			}
 			else{
