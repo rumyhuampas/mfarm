@@ -45,7 +45,7 @@ class Controller_ABMCerdaCelos extends Controller {
 						}
 						$view->lastserv = Helpers_Servicio::getLast($cerda->Id, $firstcelo->Fecha);
 						if($view->lastserv->loaded()){
-							$view->reps = Helpers_Cerda::getRepeticionesCelos($view->lastserv->Id);
+							$view->reps = Helpers_Cerda::getRepeticiones($cerda->Id, 20);
 						}
 					}
 				}

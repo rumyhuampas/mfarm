@@ -50,15 +50,17 @@
 							    	echo '<p>La cerda no se encuentra en celo.</p>';
 								echo '</div>';
 							}
-							if(!isset($lastserv) || !$lastserv->loaded()){
-								echo '<div class="smallnotification noimgmsgalert" style="margin-left: 220px;">';
-							    	echo '<a class="close"></a>';
-							    	echo '<p>La cerda aun no tiene un servicio.</p>';
-								echo '</div>';
-							}							
+							else{
+								if(!isset($lastserv) || !$lastserv->loaded()){
+									echo '<div class="smallnotification noimgmsgalert" style="margin-left: 220px;">';
+								    	echo '<a class="close"></a>';
+								    	echo '<p>La cerda aun no tiene un servicio.</p>';
+									echo '</div>';
+								}
+							}
 						
 							echo Form::hidden('IdCerda', $cerda->Id);
-							if(isset($lastserv) || $lastserv->loaded()){
+							if(isset($lastserv) && $lastserv->loaded()){
 								echo Form::hidden('IdServicio', $lastserv->Id);
 							}
 	                    	echo '<p>';
@@ -169,10 +171,10 @@
 		                    		if(isset($reps) && isset($lastserv)){ 
 			                    		foreach($reps as $rep){
 			                    		echo '<tr>';
-				                            echo '<td>'.$lastserv->FechaServicio.'</td>';
+				                            echo '<td>'.$rep->FechaServicio.'</td>';
 				                            echo '<td>'.$rep->Fecha.'</td>';
-				                            echo '<td>'.$lastserv->ProbableFechaCelo21.'</td>';
-											echo '<td>'.$lastserv->ProbableFechaCelo42.'</td>';
+				                            echo '<td>'.$rep->ProbableFechaCelo21.'</td>';
+											echo '<td>'.$rep->ProbableFechaCelo42.'</td>';
 											echo '<td>'.$rep->Observaciones.'</td>';
 				                        echo '</tr>';
 										}

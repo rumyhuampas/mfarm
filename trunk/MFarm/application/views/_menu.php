@@ -41,7 +41,7 @@
                 <li id=<?php echo Helpers_Const::MENUDESTETESID; ?> menuid=<?php echo $menuid ?>><a href="#" class="babybottle menudrop"><span>Destetes</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmdestetes', 'action' => 'new')); ?>><span>Nuevo servicio</span></a></li>
+                			->uri(array('controller' => 'abmdestetes', 'action' => 'new')); ?>><span>Nuevo destete</span></a></li>
                     </ul>
                 </li>
                 <li id=<?php echo Helpers_Const::MENUREPORTESID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pdf menudrop"><span>Reportes</span></a>
