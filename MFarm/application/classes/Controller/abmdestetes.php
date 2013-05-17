@@ -11,8 +11,8 @@ class Controller_ABMDestetes extends Controller {
 		}
 		else{
 			$lechones = $_POST['lechones'];
-			$total = Helpers_Lactancia::getLast($_POST['IdCerda'])->Total; 
-			if($lechones){
+			$lastlactancia = Helpers_Lactancia::getLast($_POST['IdCerda']); 
+			if($lechones <= $lastlactancia->Total){
 				$destete = ORM::factory('destete');
 				$destete->IdCerda = $_POST['IdCerda'];
 				$destete->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
@@ -22,7 +22,17 @@ class Controller_ABMDestetes extends Controller {
 				$destete->Observaciones = $_POST['obs'];
 				$destete->create();
 				
-				$cerda = ORM::factory('cerda', $destete->IdCerda);
+				$lactancia = ORM::factory('lactanciaaudit');
+				$lactancia->IdCerda = $_POST['IdCerda'];
+				$lactancia->IdParto = $lastlactancia->IdParto;
+				$lactancia->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$lactancia->Adoptados = 0;
+				$lactancia->Muertos = 0;
+				$lactancia->Total = $lastlactancia->Total - $lechones;
+				$lactancia->Observaciones = 'DESTETE + '.$lechones;
+				$lactancia->create();
+				
+				/*$cerda = ORM::factory('cerda', $destete->IdCerda);
 				$vaciaestado = Helpers_Const::ESTVACIA;
 				$cerda->IdEstado = Helpers_Estado::get($vaciaestado)->Id;
 				$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
@@ -33,10 +43,14 @@ class Controller_ABMDestetes extends Controller {
 				$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
 				$cerdaaudit->IdEstado = $cerda->IdEstado;
 				$cerdaaudit->Peso = $cerda->Peso;
-				$cerdaaudit->create();
+				$cerdaaudit->create();*/
 				
 				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmdestetes', 'action' => 'new',
 					'msgtype' => 'msgsuccess', 'msgtext' => 'Destete agregado con exito.')));
+			}
+			else{
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmdestetes', 'action' => 'new',
+					'msgtype' => 'msgerror', 'msgtext' => 'Los lechones destetados ('.$lechones.') son mayores a los lechones en lactancia ('.$lastlactancia->Total.').')));
 			}
 		}
 	}
