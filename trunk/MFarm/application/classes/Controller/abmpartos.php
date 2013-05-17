@@ -27,7 +27,7 @@ class Controller_ABMPartos extends Controller {
 				$registro->Adoptados = 0;
 				$registro->Muertos = 0;
 				$registro->Total = $parto->Vivos - $parto->Muertos - $parto->Momificados;  
-				$registro->Observaciones = '';
+				$registro->Observaciones = 'PARTO';
 				$registro->create();
 				
 				$cerda = ORM::factory('cerda', $parto->IdCerda);
