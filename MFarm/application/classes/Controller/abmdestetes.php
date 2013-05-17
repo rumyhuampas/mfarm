@@ -10,30 +10,34 @@ class Controller_ABMDestetes extends Controller {
 			$this->response->body($view->render());
 		}
 		else{
-			$destete = ORM::factory('destete');
-			$destete->IdCerda = $_POST['IdCerda'];
-			$destete->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$destete->Lechones = $_POST['lechones'];
-			$destete->Dias = $_POST['days'];
-			$destete->PesoTotal = $_POST['weight'];
-			$destete->Observaciones = $_POST['obs'];
-			$destete->create();
+			$lechones = $_POST['lechones'];
+			$total = Helpers_Lactancia::getLast($_POST['IdCerda'])->Total; 
+			if($lechones){
+				$destete = ORM::factory('destete');
+				$destete->IdCerda = $_POST['IdCerda'];
+				$destete->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$destete->Lechones = $_POST['lechones'];
+				$destete->Dias = $_POST['days'];
+				$destete->PesoTotal = $_POST['weight'];
+				$destete->Observaciones = $_POST['obs'];
+				$destete->create();
+				
+				$cerda = ORM::factory('cerda', $destete->IdCerda);
+				$vaciaestado = Helpers_Const::ESTVACIA;
+				$cerda->IdEstado = Helpers_Estado::get($vaciaestado)->Id;
+				$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$cerda->Update();
 			
-			$cerda = ORM::factory('cerda', $destete->IdCerda);
-			$vaciaestado = Helpers_Const::ESTVACIA;
-			$cerda->IdEstado = Helpers_Estado::get($vaciaestado)->Id;
-			$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerda->Update();
-		
-			$cerdaaudit = ORM::factory('cerdaaudit');
-			$cerdaaudit->IdCerda = $cerda->Id;
-			$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerdaaudit->IdEstado = $cerda->IdEstado;
-			$cerdaaudit->Peso = $cerda->Peso;
-			$cerdaaudit->create();
-			
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmdestetes', 'action' => 'new',
-				'msgtype' => 'msgsuccess', 'msgtext' => 'Destete agregado con exito.')));
+				$cerdaaudit = ORM::factory('cerdaaudit');
+				$cerdaaudit->IdCerda = $cerda->Id;
+				$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+				$cerdaaudit->IdEstado = $cerda->IdEstado;
+				$cerdaaudit->Peso = $cerda->Peso;
+				$cerdaaudit->create();
+				
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmdestetes', 'action' => 'new',
+					'msgtype' => 'msgsuccess', 'msgtext' => 'Destete agregado con exito.')));
+			}
 		}
 	}
 

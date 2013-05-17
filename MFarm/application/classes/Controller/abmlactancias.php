@@ -11,18 +11,29 @@ class Controller_ABMLactancias extends Controller {
 		}
 		else{
 			if($_POST['adopt'] != 0 || $_POST['dead'] != 0){
-				$registro = ORM::factory('lactanciaaudit');
-				$registro->IdCerda = $_POST['IdCerda'];
-				$registro->IdParto = $_POST['IdParto'];
-				$registro->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-				$registro->Adoptados = $_POST['adopt'];
-				$registro->Muertos = $_POST['dead'];
-				$registro->Total = Helpers_Lactancia::getLast($_POST['IdCerda'])->Total + $_POST['adopt'] - $_POST['dead'];  
-				$registro->Observaciones = $_POST['obs'];
-				$registro->create();
-				
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
-					'msgtype' => 'msgsuccess', 'msgtext' => 'Registro agregado con exito.')));
+				$totalactual = Helpers_Lactancia::getLast($_POST['IdCerda'])->Total;
+				$adopt = $_POST['adopt'];
+				$dead = $_POST['dead'];
+				$total = $totalactual + $adopt - $dead;
+				if($total >= 0){
+					$registro = ORM::factory('lactanciaaudit');
+					$registro->IdCerda = $_POST['IdCerda'];
+					$registro->IdParto = $_POST['IdParto'];
+					$registro->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+					$registro->Adoptados = $adopt;
+					$registro->Muertos = $dead;
+					$registro->Total = $total;  
+					$registro->Observaciones = $_POST['obs'];
+					$registro->create();
+					
+					HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
+						'msgtype' => 'msgsuccess', 'msgtext' => 'Registro agregado con exito.')));
+				}
+				else{
+					HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',
+						'msgtype' => 'msgerror',
+						'msgtext' => 'El total de lechones no puede ser negativo - Lechones ('.$totalactual.') + Adoptados ('.$adopt.') - Muertos ('.$dead.') = Nuevo Total ('.$total.')')));
+				}
 			}
 			else{
 				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmlactancias', 'action' => 'new',

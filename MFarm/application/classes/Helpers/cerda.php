@@ -166,19 +166,21 @@ class Helpers_Cerda {
 		return $qry->find_all();
 	}
 
-	public static function getRepeticiones($idcerda){
-		return DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Fecha', 'cerdacelos.Observaciones')
+	public static function getRepeticiones($idcerda, $limit = NULL){
+		$qry = DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Fecha', 'cerdacelos.Observaciones')
 			->from('servicios')
 			->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
-			->where('servicios.IdCerda', '=', $idcerda)
-			->order_by('cerdacelos.Fecha', 'ASC')->as_object()->execute();
+			->where('servicios.IdCerda', '=', $idcerda)->order_by('cerdacelos.Fecha', 'ASC');
+			if($limit != NULL){
+				$qry = $qry->limit($limit);
+			}
+		return $qry->as_object()->execute();
 	}
 
-	public static function getRepeticionesCelos($idserv){
+	/*public static function getRepeticionesCelos(){
 		return ORM::factory('cerdacelo')
-			->where('IdServicio', '=', $idserv)
-			->order_by('Fecha', 'ASC')->find_all();
-	}
+			->order_by('Fecha', 'DESC')->limit(20)->find_all();
+	}*/
 	
 	public static function getProbPartos($desde = NULL, $hasta = NULL){
 		if($desde == NULL){
