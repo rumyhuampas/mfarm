@@ -75,6 +75,12 @@
 								echo '</p>';
 							}
 							echo '<p>';
+								echo Form::label('total', 'Total de lechones');
+								echo '<span class="field">';
+									echo Form::input('total', $total, array('type' => 'text', 'id' => 'total', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
 								echo Form::label('lechones', 'Lechones');
 								echo '<span class="field">';
 								if($cerda->IdEstado != $IdEstadoPostParto){
@@ -82,17 +88,6 @@
 								}
 								else{
 									echo Form::input('lechones', '', array('type' => 'text', 'id' => 'lechones', 'class' => 'smallinput'));
-								}
-								echo '</span>';
-	                        echo '</p>';
-							echo '<p>';
-								echo Form::label('days', 'Dias');
-								echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoPostParto){
-									echo Form::input('days', '', array('type' => 'text', 'id' => 'days', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
-								}
-								else{
-									echo Form::input('days', '', array('type' => 'text', 'id' => 'days', 'class' => 'smallinput'));
 								}
 								echo '</span>';
 	                        echo '</p>';

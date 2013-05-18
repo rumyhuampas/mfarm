@@ -52,6 +52,7 @@ class Controller_ABMCerdas extends Controller {
 				$view->servicios = Helpers_Cerda::getServicios($cerda->Id);
 				$view->reps = Helpers_Cerda::getRepeticiones($cerda->Id);
 				$view->partos = Helpers_Cerda::getPartos($cerda->Id);
+				$view->lactancias = Helpers_Cerda::getLactancias($cerda->Id);
 				$view->destetes = Helpers_Cerda::getDestetes($cerda->Id);
 				$this->response->body($view->render());
 			}
@@ -68,7 +69,7 @@ class Controller_ABMCerdas extends Controller {
 
 	public function action_addevent(){		
 		if ($this->request->is_ajax()) {
-			echo json_encode(Helpers_Charts::getCerdaCalendarData($_POST['IdCerda']));
+			echo json_encode(Helpers_Charts::getCalendarData($_POST['IdCerda'], 'false'));
 		}
 	}
 

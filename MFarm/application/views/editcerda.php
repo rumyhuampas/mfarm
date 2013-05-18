@@ -337,9 +337,9 @@
 			                </table>
 			            </div><!--one half-->
 			            
-		                <div class="one_half last">
+			            <div class="one_half last">
 			                <div class="contenttitle radiusbottom0">
-			                	<h2 class="table"><span>Destetes</span></h2>
+			                	<h2 class="table"><span>Modificaciones en lactancia</span></h2>
 			                </div><!--contenttitle-->
 			                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 			                    <colgroup>
@@ -348,42 +348,90 @@
 			                    </colgroup>
 			                    <thead>
 			                        <tr>
-			                            <th class="head0">Fecha de destete</th>
-			                            <th class="head1">Lechones</th>
-			                            <th class="head0">Dias</th>
-			                            <th class="head1">Peso total</th>
-			                            <th class="head0">Peso promedio por unidad</th>
+			                            <th class="head0">Fecha de parto</th>
+			                            <th class="head1">Fecha de modificacion</th>
+			                            <th class="head0">Adoptados</th>
+			                            <th class="head1">Muertos en lactancia</th>
+			                            <th class="head0">Total</th>
 			                            <th class="head1">Observaciones</th>
 			                        </tr>
 			                    </thead>
 			                    <tfoot>
 			                        <tr>
-			                            <th class="head0">Fecha de destete</th>
-			                            <th class="head1">Lechones</th>
-			                            <th class="head0">Dias</th>
-			                            <th class="head1">Peso total</th>
-			                            <th class="head0">Peso promedio por unidad</th>
+			                            <th class="head0">Fecha de parto</th>
+			                            <th class="head1">Fecha de modificacion</th>
+			                            <th class="head0">Adoptados</th>
+			                            <th class="head1">Muertos en lactancia</th>
+			                            <th class="head0">Total</th>
 			                            <th class="head1">Observaciones</th>
 			                        </tr>
 			                    </tfoot>
 			                    <tbody>
 			                    	<?php
-			                    		if(isset($destetes)){ 
-				                    		foreach($destetes as $destete){
+			                    		if(isset($lactancias)){ 
+				                    		foreach($lactancias as $lactancia){
 				                    		echo '<tr>';
-					                            echo '<td>'.$destete->Fecha.'</td>';
-					                            echo '<td>'.$destete->Lechones.'</td>';
-					                            echo '<td>'.$destete->Dias.'</td>';
-												echo '<td>'.$destete->PesoTotal.'</td>';
-												echo '<td>'.($destete->PesoTotal/$destete->Lechones).'</td>';
-												echo '<td>'.$destete->Observaciones.'</td>';
+					                            echo '<td>'.$lactancia->FechaParto.'</td>';
+					                            echo '<td>'.$lactancia->Fecha.'</td>';
+					                            echo '<td>'.$lactancia->Adoptados.'</td>';
+												echo '<td>'.$lactancia->Muertos.'</td>';
+												echo '<td>'.$lactancia->Total.'</td>';
+												echo '<td>'.$lactancia->Observaciones.'</td>';
 					                        echo '</tr>';
 											}
 			                    		}
 									?>
 			                    </tbody>
 			                </table>
-		                </div><!--one half last-->
+			            </div><!--one half last-->
+			            
+			            <br clear="all" /><br />
+			            
+		                <div class="contenttitle radiusbottom0">
+		                	<h2 class="table"><span>Destetes</span></h2>
+		                </div><!--contenttitle-->
+		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+		                    <colgroup>
+		                        <col class="con0" />
+		                        <col class="con1" />
+		                    </colgroup>
+		                    <thead>
+		                        <tr>
+		                            <th class="head0">Fecha de destete</th>
+		                            <th class="head1">Lechones</th>
+		                            <th class="head0">Dias</th>
+		                            <th class="head1">Peso total</th>
+		                            <th class="head0">Peso promedio por unidad</th>
+		                            <th class="head1">Observaciones</th>
+		                        </tr>
+		                    </thead>
+		                    <tfoot>
+		                        <tr>
+		                            <th class="head0">Fecha de destete</th>
+		                            <th class="head1">Lechones</th>
+		                            <th class="head0">Dias</th>
+		                            <th class="head1">Peso total</th>
+		                            <th class="head0">Peso promedio por unidad</th>
+		                            <th class="head1">Observaciones</th>
+		                        </tr>
+		                    </tfoot>
+		                    <tbody>
+		                    	<?php
+		                    		if(isset($destetes)){ 
+			                    		foreach($destetes as $destete){
+			                    		echo '<tr>';
+				                            echo '<td>'.$destete->Fecha.'</td>';
+				                            echo '<td>'.$destete->Lechones.'</td>';
+				                            echo '<td>'.$destete->Dias.'</td>';
+											echo '<td>'.$destete->PesoTotal.'</td>';
+											echo '<td>'.($destete->PesoTotal/$destete->Lechones).'</td>';
+											echo '<td>'.$destete->Observaciones.'</td>';
+				                        echo '</tr>';
+										}
+		                    		}
+								?>
+		                    </tbody>
+		                </table>
 		                
 		                <br clear="all" /><br />
 		                

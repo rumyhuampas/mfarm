@@ -12,12 +12,14 @@ class Controller_ABMDestetes extends Controller {
 		else{
 			$lechones = $_POST['lechones'];
 			$lastlactancia = Helpers_Lactancia::getLast($_POST['IdCerda']); 
+			$lastparto = Helpers_Parto::getLast($_POST['IdCerda']);
 			if($lechones <= $lastlactancia->Total){
 				$destete = ORM::factory('destete');
 				$destete->IdCerda = $_POST['IdCerda'];
 				$destete->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
 				$destete->Lechones = $_POST['lechones'];
-				$destete->Dias = $_POST['days'];
+				$fechaparto = $lastparto->Fecha;
+				$destete->Dias = (strtotime($destete->Fecha) - strtotime($fechaparto))/(60*60*24);
 				$destete->PesoTotal = $_POST['weight'];
 				$destete->Observaciones = $_POST['obs'];
 				$destete->create();
@@ -29,7 +31,7 @@ class Controller_ABMDestetes extends Controller {
 				$lactancia->Adoptados = 0;
 				$lactancia->Muertos = 0;
 				$lactancia->Total = $lastlactancia->Total - $lechones;
-				$lactancia->Observaciones = 'DESTETE + '.$lechones;
+				$lactancia->Observaciones = 'DESTETE - '.$lechones;
 				$lactancia->create();
 				
 				/*$cerda = ORM::factory('cerda', $destete->IdCerda);
@@ -63,6 +65,7 @@ class Controller_ABMDestetes extends Controller {
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
+				$view->total = Helpers_Lactancia::getLast($cerda->Id)->Total;
 				$view->destetes = Helpers_Cerda::getDestetes($cerda->Id);
 				$this->response->body($view->render());
 			}
