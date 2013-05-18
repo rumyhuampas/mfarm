@@ -31,11 +31,13 @@ class Helpers_Cerda {
 			->find_all();
 	}
 	
-	public static function getServicios($id = NULL, $desde = NULL, $hasta = NULL){
-		if($id != NULL){
+	public static function getServicios($idCerda = NULL, $desde = NULL, $hasta = NULL){
+		if($idCerda != NULL){
 			return ORM::factory('servicio')
 				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
-				->where('IdCerda', '=', $id)->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')->find_all();
+				->where('IdCerda', '=', $idCerda)
+				->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
+				->limit(100)->find_all();
 		}
 		else{
 			if($desde == NULL){
@@ -53,19 +55,21 @@ class Helpers_Cerda {
 		}
 	}
 	
-	public static function getAudit($id){
+	public static function getAudit($idCerda){
 		return ORM::factory('cerdaaudit')
 			->select(array(DB::expr('(SELECT Nombre FROM estados WHERE estados.Id=cerdaaudit.IdEstado)'), 'Estado'))
-			->where('IdCerda', '=', $id)
+			->where('IdCerda', '=', $idCerda)
 			->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
-			->find_all();
+			->limit(100)->find_all();
 	}
 	
-	public static function getPartos($id = NULL, $desde = NULL, $hasta = NULL){
-		if($id != NULL){
+	public static function getPartos($idCerda = NULL, $desde = NULL, $hasta = NULL){
+		if($idCerda != NULL){
 			return ORM::factory('parto')
 				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=parto.IdCerda)'), 'Numero'))
-				->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')->find_all();
+				->where('IdCerda', '=', $idCerda)
+				->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
+				->limit(100)->find_all();
 		}
 		else{
 			if($desde == NULL){
@@ -83,18 +87,22 @@ class Helpers_Cerda {
 		}
 	}
 
-	public static function getLactancias($id = NULL, $idparto = NULL, $desde = NULL, $hasta = NULL){
-		if($id != NULL){
-			if($idparto != NULL){
+	public static function getLactancias($idCerda = NULL, $idParto = NULL, $desde = NULL, $hasta = NULL){
+		if($idCerda != NULL){
+			if($idParto != NULL){
 				return ORM::factory('lactanciaaudit')
 					->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
-					->where('IdCerda', '=', $id)->and_where('IdParto', '=', $idparto)
-					->order_by('Fecha', 'ASC')->order_by('IdCerda', 'DESC')->find_all();
+					->select(array(DB::expr('(SELECT partos.Fecha FROM partos WHERE partos.id=lactanciaaudit.IdParto)'), 'FechaParto'))
+					->where('lactanciaaudit.IdCerda', '=', $idCerda)->and_where('lactanciaaudit.IdParto', '=', $idParto)
+					->order_by('lactanciaaudit.Fecha', 'DESC')->order_by('lactanciaaudit.IdCerda', 'DESC')->find_all();
 			}
 			else{
 				return ORM::factory('lactanciaaudit')
 					->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
-					->where('IdCerda', '=', $id)->order_by('Fecha', 'ASC')->order_by('IdCerda', 'DESC')->find_all();
+					->select(array(DB::expr('(SELECT partos.Fecha FROM partos WHERE partos.id=lactanciaaudit.IdParto)'), 'FechaParto'))
+					->where('lactanciaaudit.IdCerda', '=', $idCerda)
+					->order_by('lactanciaaudit.Fecha', 'DESC')->order_by('lactanciaaudit.IdCerda', 'DESC')
+					->limit(100)->find_all();
 			}
 		}
 		else{
@@ -107,18 +115,21 @@ class Helpers_Cerda {
 			return ORM::factory('lactanciaaudit')
 				->join('cerdas')->on('cerdas.Id', '=', 'lactanciaaudit.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE lactanciaaudit.IdCerda=cerdas.id)'), 'Numero'))
-				->where(DB::expr('DATE(Fecha)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
-				->order_by('Fecha', 'DESC')->order_by('IdCerda', 'ASC')
+				->select(array(DB::expr('(SELECT partos.Fecha FROM partos WHERE partos.id=lactanciaaudit.IdParto)'), 'FechaParto'))
+				->where(DB::expr('DATE(lactanciaaudit.Fecha)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
+				->order_by('lactanciaaudit.Fecha', 'DESC')->order_by('lactanciaaudit.IdCerda', 'DESC')
 				->find_all();
 		}
 	}
 	
-	public static function getDestetes($id = NULL, $desde = NULL, $hasta = NULL){
-		if($id != NULL){
+	public static function getDestetes($idCerda = NULL, $desde = NULL, $hasta = NULL){
+		if($idCerda != NULL){
 			return ORM::factory('destete')
 				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=destete.IdCerda)'), 'Numero'))
 				->select(DB::expr('ROUND(pesototal/lechones, 2) as PesoProm'))
-				->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')->find_all();
+				->where('IdCerda', '=', $idCerda)
+				->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC')
+				->limit(100)->find_all();
 		}
 		else{
 			if($desde == NULL){
@@ -142,11 +153,11 @@ class Helpers_Cerda {
 			->join('cerdas')->on('cerdas.Id', '=', 'servicio.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'));
 		
-		if($hasta == NULL){
-			$hasta = 'Now()';	
-		}
 		if($desde == NULL){
 			$desde = 'Now()';	
+		}
+		if($hasta == NULL){
+			$hasta = 'Now()';	
 		}
 		if($celo21 != NULL && $celo42 != NULL){
 			$qry->where(DB::expr('DATE(ProbableFechaCelo21)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
@@ -166,21 +177,32 @@ class Helpers_Cerda {
 		return $qry->find_all();
 	}
 
-	public static function getRepeticiones($idcerda, $limit = NULL){
-		$qry = DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Fecha', 'cerdacelos.Observaciones')
-			->from('servicios')
-			->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
-			->where('servicios.IdCerda', '=', $idcerda)->order_by('cerdacelos.Fecha', 'ASC');
-			if($limit != NULL){
-				$qry = $qry->limit($limit);
+	public static function getRepeticiones($idCerda = NULL, $desde = NULL, $hasta = NULL){
+		if($idCerda != NULL){
+			return DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Fecha', 'cerdacelos.Observaciones')
+				->from('servicios')
+				->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
+				->where('servicios.IdCerda', '=', $idCerda)->order_by('cerdacelos.Fecha', 'DESC')
+				->limit(100)
+				->as_object()->execute();
+		}
+		else{
+			if($desde == NULL){
+				$desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)';
 			}
-		return $qry->as_object()->execute();
+			if($hasta == NULL){
+				$hasta = 'Now()';	
+			}
+			return DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'cerdacelos.Fecha', 'cerdacelos.Observaciones')
+				->from('servicios')
+				->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
+				->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
+				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE servicios.IdCerda=cerdas.id)'), 'Numero'))
+				->where(DB::expr('DATE(cerdacelos.Fecha)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
+				->order_by('cerdacelos.Fecha', 'DESC')->order_by('IdCerda', 'DESC')
+				->as_object()->execute();
+		}
 	}
-
-	/*public static function getRepeticionesCelos(){
-		return ORM::factory('cerdacelo')
-			->order_by('Fecha', 'DESC')->limit(20)->find_all();
-	}*/
 	
 	public static function getProbPartos($desde = NULL, $hasta = NULL){
 		if($desde == NULL){

@@ -141,7 +141,7 @@
 						?>
 						
 						<div class="contenttitle radiusbottom0">
-		                	<h2 class="table"><span>Repeticiones de celo desde el ultimo servicio</span></h2>
+		                	<h2 class="table"><span>Repeticiones de celo</span></h2>
 		                </div><!--contenttitle-->
 		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 		                    <colgroup>
@@ -168,7 +168,7 @@
 		                    </tfoot>
 		                    <tbody>
 		                    	<?php
-		                    		if(isset($reps) && isset($lastserv)){ 
+		                    		if(isset($reps)){ 
 			                    		foreach($reps as $rep){
 			                    		echo '<tr>';
 				                            echo '<td>'.$rep->FechaServicio.'</td>';
