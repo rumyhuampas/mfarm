@@ -150,7 +150,7 @@
 		                    		if(isset($registros)){ 
 			                    		foreach($registros as $registro){
 			                    		echo '<tr>';
-				                            echo '<td>'.$registro->Fecha.'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($registro->Fecha)).'</td>';
 				                            echo '<td>'.$registro->Adoptados.'</td>';
 				                            echo '<td>'.$registro->Muertos.'</td>';
 											echo '<td>'.$registro->Total.'</td>';

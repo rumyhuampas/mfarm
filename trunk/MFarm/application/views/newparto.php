@@ -162,7 +162,7 @@
 		                    		if(isset($partos)){ 
 			                    		foreach($partos as $parto){
 			                    		echo '<tr>';
-				                            echo '<td>'.$parto->Fecha.'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($parto->Fecha)).'</td>';
 				                            echo '<td>'.$parto->Vivos.'</td>';
 				                            echo '<td>'.$parto->Muertos.'</td>';
 											echo '<td>'.$parto->Momificados.'</td>';

@@ -158,7 +158,7 @@
 	                    		if(isset($destetes)){ 
 		                    		foreach($destetes as $destete){
 		                    		echo '<tr>';
-			                            echo '<td>'.$destete->Fecha.'</td>';
+			                            echo '<td>'.date('d-m-Y H:i:s', strtotime($destete->Fecha)).'</td>';
 			                            echo '<td>'.$destete->Lechones.'</td>';
 			                            echo '<td>'.$destete->Dias.'</td>';
 										echo '<td>'.$destete->PesoTotal.'</td>';

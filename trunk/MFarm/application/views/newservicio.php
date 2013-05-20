@@ -16,7 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Nuevo servicio</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmservicios', 'action' => 'new')); ?>>Nuevo servicio</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -123,6 +123,7 @@
 		                            <th class="head1">Probable fecha de celo 42</th>
 		                            <th class="head0">Probable fecha de parto</th>
 		                            <th class="head1">Observaciones</th>
+		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
@@ -133,6 +134,7 @@
 		                            <th class="head1">Probable fecha de celo 42</th>
 		                            <th class="head0">Probable fecha de parto</th>
 		                            <th class="head1">Observaciones</th>
+		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </tfoot>
 		                    <tbody>
@@ -140,12 +142,17 @@
 		                    		if(isset($servicios)){ 
 			                    		foreach($servicios as $servicio){
 			                    		echo '<tr>';
-				                            echo '<td>'.$servicio->FechaServicio.'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($servicio->FechaServicio)).'</td>';
 				                            echo '<td>'.$servicio->Macho.'</td>';
-				                            echo '<td>'.$servicio->ProbableFechaCelo21.'</td>';
-											echo '<td>'.$servicio->ProbableFechaCelo42.'</td>';
-											echo '<td>'.$servicio->ProbableFechaParto.'</td>';
+				                            echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo21)).'</td>';
+											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo42)).'</td>';
+											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaParto)).'</td>';
 											echo '<td>'.$servicio->Observaciones.'</td>';
+											echo '<td class="center">';
+				                            	echo '<a href='.URL::base().Route::get('default')
+				                            		->uri(array('controller' => 'abmservicios', 'action' => 'edit', 'id' => $servicio->Id)).'>
+				                            		Modificar</a>';
+											echo '</td>';
 				                        echo '</tr>';
 										}
 		                    		}

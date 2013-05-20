@@ -48,7 +48,7 @@
                         	<?php 
                         		foreach($lastmodif as $lm){
                         			echo '<p>';
-		                            echo '<span class="radius2">'.$lm->Fecha.'</span> <br />';
+		                            echo '<span class="radius2">'.date('d-m-Y H:i:s', strtotime($lm->Fecha)).'</span> <br />';
 									echo 'Cerda: <b>'.$lm->Numero.'</b><br />';
 									echo 'Estado: <b>'.$lm->Estado.'</b> - Peso: <b>'.$lm->Peso.'</b>';
 		                            echo '</p>';
