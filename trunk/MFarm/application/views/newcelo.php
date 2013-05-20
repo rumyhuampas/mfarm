@@ -1,6 +1,6 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
-<script src=<?php echo URL::base()."/scripts/custom/newcelo.js" ?> type="text/javascript"></script>
+<script src=<?php echo URL::base()."/scripts/custom/datepicker.js" ?> type="text/javascript"></script>
 
 <body class="loggedin">
 
@@ -155,6 +155,7 @@
 		                            <th class="head0">Fecha probable de celo 21</th>
 		                            <th class="head1">Fecha probable de celo 42</th>
 		                            <th class="head0">Observaciones</th>
+		                            <th class="head1">&nbsp;</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
@@ -164,6 +165,7 @@
 		                            <th class="head0">Fecha probable de celo 21</th>
 		                            <th class="head1">Fecha probable de celo 42</th>
 		                            <th class="head0">Observaciones</th>
+		                            <th class="head1">&nbsp;</th>
 		                        </tr>
 		                    </tfoot>
 		                    <tbody>
@@ -176,6 +178,11 @@
 				                            echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo21)).'</td>';
 											echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo42)).'</td>';
 											echo '<td>'.$rep->Observaciones.'</td>';
+											echo '<td class="center">';
+				                            	echo '<a href='.URL::base().Route::get('default')
+				                            		->uri(array('controller' => 'abmcerdacelos', 'action' => 'edit', 'id' => $rep->Id)).'>
+				                            		Modificar</a>';
+											echo '</td>';
 				                        echo '</tr>';
 										}
 		                    		}

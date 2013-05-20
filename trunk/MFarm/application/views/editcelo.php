@@ -16,8 +16,8 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmservicios', 'action' => 'new')); ?>>Nuevo servicio</a></li>
-                	<li class="current"><a href="#">Modificar servicio</a></li>
+                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdacelos', 'action' => 'new')); ?>>Nuevo celo</a></li>
+                	<li class="current"><a href="#">Modificar celo</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -25,25 +25,24 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Modificar servicio</span></h2>
+                    	<h2 class="form"><span>Modificar repeticion de celo</span></h2>
                     </div><!--contenttitle-->
-                    
-                    <?php
-					if(isset($servicio) && $servicio->loaded()){
-						echo Form::open('abmservicios/edit', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formeditservicio'));						
-							echo Form::hidden('IdCerda', $servicio->IdCerda);
-							echo Form::hidden('IdServicio', $servicio->Id);
+
+					<?php
+					if(isset($celo) && count($celo) > 0){
+						echo Form::open('abmcerdacelos/edit', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formeditcelo'));
+							echo Form::hidden('IdCelo', $celo[0]->Id);
 	                    	echo '<p>';
 								echo Form::label('number', 'Numero');
 								echo '<span class="field">';
-								echo Form::input('number', $servicio->Numero, 
+								echo Form::input('number', $celo[0]->Numero, 
 									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
-	                        echo '</p>';
+	                        echo '</p>';									
 							echo '<p>';
 								echo Form::label('date', 'Fecha');
 								echo '<span class="field">';
-									echo Form::input('date', date('d-m-Y H:i:s', strtotime($servicio->FechaServicio)), array('id' => 'fielddate'));
+									echo Form::input('date', date("d-m-Y H:i:s", strtotime($celo[0]->Fecha)), array('id' => 'fielddate'));
 								echo '</span>';
 								echo '<div class="formwidgetbox" style="width: 300px">';
 			                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
@@ -53,15 +52,27 @@
 			                    echo '</div><!--widgetbox-->';
 							echo '</p>';
 							echo '<p>';
-								echo Form::label('male', 'Macho');
+								echo Form::label('servdate', 'Fecha de ultimo servicio');
 								echo '<span class="field">';
-									echo Form::input('male', $servicio->Macho, array('type' => 'text', 'id' => 'male', 'class' => 'smallinput'));
+									echo Form::input('servdate', date('d-m-Y H:i:s', strtotime($celo[0]->FechaServicio)), array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('celo21date', 'Fecha probable de celo 21');
+								echo '<span class="field">';
+									echo Form::input('celo21date', date('d-m-Y', strtotime($celo[0]->ProbableFechaCelo21)), array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('celo42date', 'Fecha probable de celo 42');
+								echo '<span class="field">';
+									echo Form::input('celo42date', date('d-m-Y', strtotime($celo[0]->ProbableFechaCelo42)), array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
                             	echo Form::label('obs', 'Observaciones');
                             	echo '<span class="field">';
-									echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80">'.$servicio->Observaciones.'</textarea>';
+									echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80">'.$celo[0]->Observaciones.'</textarea>';
 								echo '</span>';
 	                        echo '</p>';
 	                        
@@ -70,10 +81,8 @@
 	                        echo '</p>';
 	                    echo Form::close();
 						?>
-	                
-	                	<br clear="all" /> 
-	                	
-                	<?php
+	                	<br clear="all" />
+	                <?php
                 	}
 					?>
                     

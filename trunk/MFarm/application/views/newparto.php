@@ -1,5 +1,6 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
+<script src=<?php echo URL::base()."/scripts/custom/datepicker.js" ?> type="text/javascript"></script>
 <script src=<?php echo URL::base()."/scripts/custom/newparto.js" ?> type="text/javascript"></script>
 
 <body class="loggedin">
