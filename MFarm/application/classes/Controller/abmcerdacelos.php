@@ -66,4 +66,23 @@ class Controller_ABMCerdaCelos extends Controller {
 			echo json_encode($jsonarray);
 		}
 	}
+	
+	public function action_edit(){
+		if(!isset($_POST['number'])){
+			$view = View::factory('editcelo');
+			$view->title = Helpers_Const::APPNAME." - ABM Celos";
+			$view->menuid = Helpers_Const::MENUCERDASID;
+			$view->celo = Helpers_Celo::get($this->request->param('id'));
+			$this->response->body($view->render());
+		}
+		else{
+			$celo = ORM::factory('cerdacelo', $_POST['IdCelo']);
+			$celo->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+			$celo->Observaciones = $_POST['obs'];
+			$celo->update();
+			
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdacelos', 'action' => 'new',
+				'msgtype' => 'msgsuccess', 'msgtext' => 'Repeticion de celo modificada con exito.')));	
+		}
+	}
 }

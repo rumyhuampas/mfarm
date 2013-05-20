@@ -179,7 +179,7 @@ class Helpers_Cerda {
 
 	public static function getRepeticiones($idCerda = NULL, $desde = NULL, $hasta = NULL){
 		if($idCerda != NULL){
-			return DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Fecha', 'cerdacelos.Observaciones')
+			return DB::select('cerdacelos.Id', 'FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Fecha', 'cerdacelos.Observaciones')
 				->from('servicios')
 				->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
 				->where('servicios.IdCerda', '=', $idCerda)->order_by('cerdacelos.Fecha', 'DESC')
@@ -193,7 +193,7 @@ class Helpers_Cerda {
 			if($hasta == NULL){
 				$hasta = 'Now()';	
 			}
-			return DB::select('FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'cerdacelos.Fecha', 'cerdacelos.Observaciones')
+			return DB::select('cerdacelos.Id', 'FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'cerdacelos.Fecha', 'cerdacelos.Observaciones')
 				->from('servicios')
 				->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 				->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
