@@ -46,4 +46,27 @@ class Controller_ABMServicios extends Controller {
 				'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
 		}
 	}
+	
+	public function action_edit(){
+		if(!isset($_POST['number'])){
+			$view = View::factory('editservicio');
+			$view->title = Helpers_Const::APPNAME." - ABM Servicio";
+			$view->menuid = Helpers_Const::MENUSERVICIOSID;
+			$view->servicio = Helpers_Servicio::get($this->request->param('id'));
+			$this->response->body($view->render());
+		}
+		else{
+			$servicio = ORM::factory('servicio', $_POST['IdServicio']);
+			$servicio->FechaServicio = date('Y-m-d H:i:s', strtotime($_POST['date']));
+			$servicio->Macho = $_POST['male'];
+			$servicio->ProbableFechaCelo21 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get21daysperiod());
+			$servicio->ProbableFechaCelo42 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get42daysperiod());
+			$servicio->ProbableFechaParto = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::getbirthperiod());
+			$servicio->Observaciones = $_POST['obs'];
+			$servicio->update();
+			
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmservicios', 'action' => 'new',
+				'msgtype' => 'msgsuccess', 'msgtext' => 'Servicio modificado con exito.')));	
+		}
+	}
 }

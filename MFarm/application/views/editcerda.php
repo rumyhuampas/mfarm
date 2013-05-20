@@ -16,7 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Alta de cerda</a></li>
+                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Nueva cerda</a></li>
                 	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'edit')); ?>>Modificar cerda</a></li>
                 </ul><!--maintabmenu-->                
             	                
@@ -183,7 +183,7 @@
 		                    		if(isset($audits)){ 
 			                    		foreach($audits as $audit){
 			                    		echo '<tr>';
-				                            echo '<td>'.$audit->Fecha.'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($audit->Fecha)).'</td>';
 				                            echo '<td>'.$audit->Estado.'</td>';
 				                            echo '<td>'.$audit->Peso.'</td>';
 											echo '<td>'.$audit->Observaciones.'</td>';
@@ -229,11 +229,11 @@
 		                    		if(isset($servicios)){ 
 			                    		foreach($servicios as $servicio){
 			                    		echo '<tr>';
-				                            echo '<td>'.$servicio->FechaServicio.'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($servicio->FechaServicio)).'</td>';
 				                            echo '<td>'.$servicio->Macho.'</td>';
-				                            echo '<td>'.$servicio->ProbableFechaCelo21.'</td>';
-											echo '<td>'.$servicio->ProbableFechaCelo42.'</td>';
-											echo '<td>'.$servicio->ProbableFechaParto.'</td>';
+				                            echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo21)).'</td>';
+											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo42)).'</td>';
+											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaParto)).'</td>';
 											echo '<td>'.$servicio->Observaciones.'</td>';
 				                        echo '</tr>';
 										}
@@ -275,10 +275,10 @@
 		                    		if(isset($reps)){
 			                    		foreach($reps as $rep){
 				                    		echo '<tr>';
-					                            echo '<td>'.$rep->FechaServicio.'</td>';
-					                            echo '<td>'.$rep->Fecha.'</td>';
-					                            echo '<td>'.$rep->ProbableFechaCelo21.'</td>';
-												echo '<td>'.$rep->ProbableFechaCelo42.'</td>';
+					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->FechaServicio)).'</td>';
+					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->Fecha)).'</td>';
+					                            echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo21)).'</td>';
+												echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo42)).'</td>';
 												echo '<td>'.$rep->Observaciones.'</td>';
 					                        echo '</tr>';
 										}
@@ -323,7 +323,7 @@
 			                    		if(isset($partos)){ 
 				                    		foreach($partos as $parto){
 				                    		echo '<tr>';
-					                            echo '<td>'.$parto->Fecha.'</td>';
+					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($parto->Fecha)).'</td>';
 					                            echo '<td>'.$parto->Vivos.'</td>';
 					                            echo '<td>'.$parto->Muertos.'</td>';
 												echo '<td>'.$parto->Momificados.'</td>';
@@ -371,8 +371,8 @@
 			                    		if(isset($lactancias)){ 
 				                    		foreach($lactancias as $lactancia){
 				                    		echo '<tr>';
-					                            echo '<td>'.$lactancia->FechaParto.'</td>';
-					                            echo '<td>'.$lactancia->Fecha.'</td>';
+					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($lactancia->FechaParto)).'</td>';
+					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($lactancia->Fecha)).'</td>';
 					                            echo '<td>'.$lactancia->Adoptados.'</td>';
 												echo '<td>'.$lactancia->Muertos.'</td>';
 												echo '<td>'.$lactancia->Total.'</td>';
@@ -420,7 +420,7 @@
 		                    		if(isset($destetes)){ 
 			                    		foreach($destetes as $destete){
 			                    		echo '<tr>';
-				                            echo '<td>'.$destete->Fecha.'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($destete->Fecha)).'</td>';
 				                            echo '<td>'.$destete->Lechones.'</td>';
 				                            echo '<td>'.$destete->Dias.'</td>';
 											echo '<td>'.$destete->PesoTotal.'</td>';

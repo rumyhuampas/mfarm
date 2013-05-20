@@ -88,7 +88,7 @@
 								echo Form::label('servdate', 'Fecha de ultimo servicio');
 								echo '<span class="field">';
 									if(isset($lastserv) && $lastserv->loaded()){
-										echo Form::input('servdate', $lastserv->FechaServicio, array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+										echo Form::input('servdate', date('d-m-Y H:i:s', strtotime($lastserv->FechaServicio)), array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 									}
 									else{
 										echo Form::input('servdate', '', array('type' => 'text', 'id' => 'servdate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
@@ -99,7 +99,7 @@
 								echo Form::label('celo21date', 'Fecha probable de celo 21');
 								echo '<span class="field">';
 									if(isset($lastserv) && $lastserv->loaded()){
-										echo Form::input('celo21date', $lastserv->ProbableFechaCelo21, array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+										echo Form::input('celo21date', date('d-m-Y', strtotime($lastserv->ProbableFechaCelo21)), array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 									}
 									else{
 										echo Form::input('celo21date', '', array('type' => 'text', 'id' => 'celo21date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
@@ -110,7 +110,7 @@
 								echo Form::label('celo42date', 'Fecha probable de celo 42');
 								echo '<span class="field">';
 									if(isset($lastserv) && $lastserv->loaded()){
-										echo Form::input('celo42date', $lastserv->ProbableFechaCelo42, array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+										echo Form::input('celo42date', date('d-m-Y', strtotime($lastserv->ProbableFechaCelo42)), array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 									}
 									else{
 										echo Form::input('celo42date', '', array('type' => 'text', 'id' => 'celo42date', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
@@ -171,10 +171,10 @@
 		                    		if(isset($reps)){ 
 			                    		foreach($reps as $rep){
 			                    		echo '<tr>';
-				                            echo '<td>'.$rep->FechaServicio.'</td>';
-				                            echo '<td>'.$rep->Fecha.'</td>';
-				                            echo '<td>'.$rep->ProbableFechaCelo21.'</td>';
-											echo '<td>'.$rep->ProbableFechaCelo42.'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->FechaServicio)).'</td>';
+				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->Fecha)).'</td>';
+				                            echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo21)).'</td>';
+											echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo42)).'</td>';
 											echo '<td>'.$rep->Observaciones.'</td>';
 				                        echo '</tr>';
 										}

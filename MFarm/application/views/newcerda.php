@@ -90,7 +90,7 @@
 		                            echo '<td>'.$cerda->Numero.'</td>';
 									echo '<td>'.$cerda->Estado.'</td>';
 									echo '<td>'.$cerda->Peso.'</td>';
-									echo '<td>'.$cerda->Created_On.'</td>';
+									echo '<td>'.date('d-m-Y H:i:s', strtotime($cerda->Created_On)).'</td>';
 									echo '<td class="center">';
 									if($cerda->Estado == Helpers_Const::ESTMUERTA){
 		                            	echo '<a href='.URL::base().Route::get('default')
