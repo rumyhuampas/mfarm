@@ -11,7 +11,7 @@ class Controller_ABMDestetes extends Controller {
 		}
 		else{
 			$lechones = $_POST['lechones'];
-			$lastlactancia = Helpers_Lactancia::getLast($_POST['IdCerda']); 
+			$lastlactancia = Helpers_Lactancia::getLastByCerda($_POST['IdCerda']); 
 			$lastparto = Helpers_Parto::getLast($_POST['IdCerda']);
 			if($lechones <= $lastlactancia->Total){
 				$destete = ORM::factory('destete');
@@ -65,7 +65,7 @@ class Controller_ABMDestetes extends Controller {
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->total = Helpers_Lactancia::getLast($cerda->Id)->Total;
+				$view->total = Helpers_Lactancia::getLastByCerda($cerda->Id)->Total;
 				$view->destetes = Helpers_Cerda::getDestetes($cerda->Id);
 				$this->response->body($view->render());
 			}
