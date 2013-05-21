@@ -2,16 +2,22 @@
 
 class Helpers_Lactancia {
 	
-	public static function get($idCerda = NULL){
-		if($idCerda != NULL){
-			return ORM::factory('lactanciaaudit')->where('IdCerda', '=', $idCerda);
+	public static function get($id = NULL){
+		if($id != NULL){
+			return ORM::factory('lactanciaaudit')
+				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
+				->where('Id', '=', $id)->find();
 		}
 		else{
-			return ORM::factory('lactanciaaudit')->order_by('Fecha', 'ASC')->find_all();
+			return ORM::factory('lactanciaaudit')
+				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
+				->order_by('Fecha', 'ASC')->find_all();
 		}
 	}
 	
-	public static function getLast($IdCerda){
-		return ORM::factory('lactanciaaudit')->where('IdCerda', '=', $IdCerda)->order_by('Fecha', 'DESC')->limit(1)->find();
+	public static function getLastByCerda($IdCerda){
+		return ORM::factory('lactanciaaudit')
+			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
+			->where('IdCerda', '=', $IdCerda)->order_by('Fecha', 'DESC')->limit(1)->find();
 	}
 }

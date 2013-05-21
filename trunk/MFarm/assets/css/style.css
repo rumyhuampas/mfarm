@@ -455,6 +455,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .widgetlist li a.babybottle { background-image: url(../images/icons/default/babybottle.png); }
 .widgetlist li a.stork { background-image: url(../images/icons/default/stork.png); }
 .widgetlist li a.undo { background-image: url(../images/icons/default/undo.png); }
+.widgetlist li a.list { background-image: url(../images/icons/default/list.png); }
 
 .formwidgetlist { list-style: none; margin-left:220px;}
 .formwidgetlist li { float: left; margin-right: 10px; margin-bottom: 10px; }
@@ -481,6 +482,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 .formwidgetlist li a.babybottle { background-image: url(../images/icons/default/babybottle.png); }
 .formwidgetlist li a.stork { background-image: url(../images/icons/default/stork.png); }
 .formwidgetlist li a.undo { background-image: url(../images/icons/default/undo.png); }
+.formwidgetlist li a.list { background-image: url(../images/icons/default/list.png); }
 
 /*************** STANDARD TABLES **************/
 /*************** tables.html ******************/

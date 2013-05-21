@@ -85,6 +85,9 @@ jQuery(document).ready(function(){
 	jQuery('#partolink').click(function(){
 		jQuery('#partoform').submit();
 	});
+	jQuery('#lactancialink').click(function(){
+		jQuery('#lactanciaform').submit();
+	});
 	jQuery('#destetelink').click(function(){
 		jQuery('#desteteform').submit();
 	});

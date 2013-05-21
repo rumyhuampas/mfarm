@@ -53,6 +53,12 @@
 								echo Form::hidden('numbersearch', $cerda->Numero, array('id' => 'numbersearch'));
 							echo Form::close();
 							?>
+							<li><a href="#" id="lactancialink" name="<?php echo $cerda->Id; ?>" class="list">Nuevo registro de lactancia</a></li>
+							<?php 
+							echo Form::open('abmlactancias/search', array('method' => 'POST', 'id' => 'lactanciaform'));
+								echo Form::hidden('numbersearch', $cerda->Numero, array('id' => 'numbersearch'));
+							echo Form::close();
+							?>
 							<li><a href="#" id="destetelink" name="<?php echo $cerda->Id; ?>" class="babybottle">Nuevo destete</a></li>
 							<?php 
 							echo Form::open('abmdestetes/search', array('method' => 'POST', 'id' => 'desteteform'));

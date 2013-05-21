@@ -146,6 +146,7 @@
 		                            <th class="head1">Momificados</th>
 		                            <th class="head0">Total</th>
 		                            <th class="head1">Observaciones</th>
+		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
@@ -156,6 +157,7 @@
 		                            <th class="head1">Momificados</th>
 		                            <th class="head0">Total</th>
 		                            <th class="head1">Observaciones</th>
+		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </tfoot>
 		                    <tbody>
@@ -169,6 +171,11 @@
 											echo '<td>'.$parto->Momificados.'</td>';
 											echo '<td>'.($parto->Vivos + $parto->Muertos + $parto->Momificados).'</td>';
 											echo '<td>'.$parto->Observaciones.'</td>';
+											echo '<td class="center">';
+				                            	echo '<a href='.URL::base().Route::get('default')
+				                            		->uri(array('controller' => 'abmpartos', 'action' => 'edit', 'id' => $parto->Id)).'>
+				                            		Modificar</a>';
+											echo '</td>';
 				                        echo '</tr>';
 										}
 		                    		}
