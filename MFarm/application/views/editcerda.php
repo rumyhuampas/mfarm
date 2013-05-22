@@ -261,8 +261,8 @@
 		                    </colgroup>
 		                    <thead>
 		                        <tr>
-		                            <th class="head0">Fecha de servicio</th>
-		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha de repeticion de celo</th>
+		                            <th class="head1">Fecha de servicio</th>
 		                            <th class="head0">Fecha probable de celo 21</th>
 		                            <th class="head1">Fecha probable de celo 42</th>
 		                            <th class="head0">Observaciones</th>
@@ -270,8 +270,8 @@
 		                    </thead>
 		                    <tfoot>
 		                        <tr>
-		                            <th class="head0">Fecha de servicio</th>
-		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha de repeticion de celo</th>
+		                            <th class="head1">Fecha de servicio</th>
 		                            <th class="head0">Fecha probable de celo 21</th>
 		                            <th class="head1">Fecha probable de celo 42</th>
 		                            <th class="head0">Observaciones</th>
@@ -282,8 +282,8 @@
 		                    		if(isset($reps)){
 			                    		foreach($reps as $rep){
 				                    		echo '<tr>';
-					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->FechaServicio)).'</td>';
 					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->Fecha)).'</td>';
+												echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->FechaServicio)).'</td>';
 					                            echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo21)).'</td>';
 												echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo42)).'</td>';
 												echo '<td>'.$rep->Observaciones.'</td>';
@@ -355,8 +355,8 @@
 			                    </colgroup>
 			                    <thead>
 			                        <tr>
-			                            <th class="head0">Fecha de parto</th>
-			                            <th class="head1">Fecha de modificacion</th>
+			                            <th class="head0">Fecha de modificacion</th>
+			                            <th class="head1">Fecha de parto</th>
 			                            <th class="head0">Adoptados</th>
 			                            <th class="head1">Muertos en lactancia</th>
 			                            <th class="head0">Total</th>
@@ -365,8 +365,8 @@
 			                    </thead>
 			                    <tfoot>
 			                        <tr>
-			                            <th class="head0">Fecha de parto</th>
-			                            <th class="head1">Fecha de modificacion</th>
+			                            <th class="head0">Fecha de modificacion</th>
+			                            <th class="head1">Fecha de parto</th>
 			                            <th class="head0">Adoptados</th>
 			                            <th class="head1">Muertos en lactancia</th>
 			                            <th class="head0">Total</th>
@@ -378,8 +378,8 @@
 			                    		if(isset($lactancias)){ 
 				                    		foreach($lactancias as $lactancia){
 				                    		echo '<tr>';
-					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($lactancia->FechaParto)).'</td>';
 					                            echo '<td>'.date('d-m-Y H:i:s', strtotime($lactancia->Fecha)).'</td>';
+												echo '<td>'.date('d-m-Y H:i:s', strtotime($lactancia->FechaParto)).'</td>';
 					                            echo '<td>'.$lactancia->Adoptados.'</td>';
 												echo '<td>'.$lactancia->Muertos.'</td>';
 												echo '<td>'.$lactancia->Total.'</td>';

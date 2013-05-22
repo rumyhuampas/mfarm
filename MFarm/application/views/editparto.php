@@ -31,6 +31,14 @@
 					<?php
 					if(isset($parto) && $parto->loaded()){
 						echo Form::open('abmpartos/edit', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formeditparto'));
+						
+							if(isset($registros) && count($registros) > 1){
+								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
+							    	echo '<a class="close"></a>';
+							    	echo '<p>El parto tiene registros de lactancia asociados. No se pueden modificar todos los datos.</p>';
+								echo '</div>';
+							}
+							
 							echo Form::hidden('IdParto', $parto->Id);
 	                    	echo '<p>';
 								echo Form::label('number', 'Numero');
@@ -38,35 +46,60 @@
 								echo Form::input('number', $parto->Numero, 
 									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
-	                        echo '</p>';									
-							echo '<p>';
-								echo Form::label('date', 'Fecha');
-								echo '<span class="field">';
-									echo Form::input('date', date("d-m-Y H:i:s", strtotime($parto->Fecha)), array('id' => 'fielddate'));
-								echo '</span>';
-								echo '<div class="formwidgetbox" style="width: 300px">';
-			                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
-			                        echo '<div class="widgetcontent padding0">';
-			                            echo '<div id="datepicker"></div>';
-			                        echo '</div><!--widgetcontent-->';
-			                    echo '</div><!--widgetbox-->';
-							echo '</p>';
+	                        echo '</p>';
+							if(isset($registros) && count($registros) > 1){
+								echo '<p>';
+									echo Form::label('date', 'Fecha');
+									echo '<span class="field">';
+										echo Form::input('date', date("d-m-Y H:i:s", strtotime($parto->Fecha)), array('id' => 'fielddate', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									echo '</span>';
+								echo '</p>';
+							}
+							else{									
+								echo '<p>';
+									echo Form::label('date', 'Fecha');
+									echo '<span class="field">';
+										echo Form::input('date', date("d-m-Y H:i:s", strtotime($parto->Fecha)), array('id' => 'fielddate'));
+									echo '</span>';
+									echo '<div class="formwidgetbox" style="width: 300px">';
+				                        echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
+				                        echo '<div class="widgetcontent padding0">';
+				                            echo '<div id="datepicker"></div>';
+				                        echo '</div><!--widgetcontent-->';
+				                    echo '</div><!--widgetbox-->';
+								echo '</p>';
+							}
 							echo '<p>';
 								echo Form::label('alive', 'Vivos');
 								echo '<span class="field">';
+								if(isset($registros) && count($registros) > 1){
+									echo Form::input('alive', $parto->Vivos, array('type' => 'text', 'id' => 'alive', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								}
+								else{
 									echo Form::input('alive', $parto->Vivos, array('type' => 'text', 'id' => 'alive', 'class' => 'smallinput'));
+								}
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
 								echo Form::label('dead', 'Muertos');
 								echo '<span class="field">';
+								if(isset($registros) && count($registros) > 1){
+									echo Form::input('dead', $parto->Muertos, array('type' => 'text', 'id' => 'dead', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								}
+								else{
 									echo Form::input('dead', $parto->Muertos, array('type' => 'text', 'id' => 'dead', 'class' => 'smallinput'));
+								}
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
 								echo Form::label('momif', 'Momificados');
 								echo '<span class="field">';
+								if(isset($registros) && count($registros) > 1){
+									echo Form::input('momif', $parto->Momificados, array('type' => 'text', 'id' => 'momif', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								}
+								else{
 									echo Form::input('momif', $parto->Momificados, array('type' => 'text', 'id' => 'momif', 'class' => 'smallinput'));
+								}
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';

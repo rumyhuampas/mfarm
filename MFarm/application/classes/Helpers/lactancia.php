@@ -15,6 +15,15 @@ class Helpers_Lactancia {
 		}
 	}
 	
+	public static function getByParto($idParto = NULL){
+		if($idParto != NULL){
+			return ORM::factory('lactanciaaudit')
+				->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
+				->where('IdParto', '=', $idParto)
+				->order_by('Fecha', 'ASC')->find_all();
+		}
+	}
+	
 	public static function getLastByCerda($IdCerda){
 		return ORM::factory('lactanciaaudit')
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
