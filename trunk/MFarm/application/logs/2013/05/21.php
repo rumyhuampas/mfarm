@@ -14,3 +14,6 @@
 #7 C:\wamp\www\mfarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #8 C:\wamp\www\mfarm\index.php(118): Kohana_Request->execute()
 #9 {main} in C:\wamp\www\mfarm\modules\database\classes\Kohana\Database\Query.php:251
+2013-05-21 20:22:10 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Database_MySQL_Result::loaded() ~ APPPATH\views\editparto.php [ 35 ] in :
+2013-05-21 20:22:10 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :

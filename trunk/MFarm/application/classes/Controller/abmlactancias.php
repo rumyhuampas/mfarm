@@ -72,34 +72,4 @@ class Controller_ABMLactancias extends Controller {
 			echo json_encode($jsonarray);
 		}
 	}
-	
-	public function action_edit(){
-		if(!isset($_POST['number'])){
-			$view = View::factory('editlactancia');
-			$view->title = Helpers_Const::APPNAME." - ABM Lactancia";
-			$view->menuid = Helpers_Const::MENULACTANCIAID;
-			$view->registro = Helpers_Lactancia::get($this->request->param('id'));
-			$this->response->body($view->render());
-		}
-		else{
-			/*$parto = ORM::factory('parto', $_POST['IdParto']);
-			
-			$cerdaaudit = ORM::factory('cerdaaudit')
-				->where('IdCerda', '=', $parto->IdCerda)
-				->and_where('Fecha', '=', $parto->Fecha)
-				->and_where('IdEstado', '=', Helpers_Estado::get(Helpers_Const::ESTPOSTPARTO)->Id)->find();
-			$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerdaaudit->update();
-			
-			$parto->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$parto->Vivos = $_POST['alive'];
-			$parto->Muertos = $_POST['dead'];
-			$parto->Momificados = $_POST['momif'];
-			$parto->Observaciones = $_POST['obs'];
-			$parto->update();
-			
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmpartos', 'action' => 'new',
-				'msgtype' => 'msgsuccess', 'msgtext' => 'Parto modificado con exito.')));*/	
-		}
-	}
 }

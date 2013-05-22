@@ -150,8 +150,8 @@
 		                    </colgroup>
 		                    <thead>
 		                        <tr>
-		                            <th class="head0">Fecha de servicio</th>
-		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha de repeticion de celo</th>
+		                            <th class="head1">Fecha de servicio</th>
 		                            <th class="head0">Fecha probable de celo 21</th>
 		                            <th class="head1">Fecha probable de celo 42</th>
 		                            <th class="head0">Observaciones</th>
@@ -160,8 +160,8 @@
 		                    </thead>
 		                    <tfoot>
 		                        <tr>
-		                            <th class="head0">Fecha de servicio</th>
-		                            <th class="head1">Fecha de repeticion de celo</th>
+		                            <th class="head0">Fecha de repeticion de celo</th>
+		                            <th class="head1">Fecha de servicio</th>
 		                            <th class="head0">Fecha probable de celo 21</th>
 		                            <th class="head1">Fecha probable de celo 42</th>
 		                            <th class="head0">Observaciones</th>
@@ -173,8 +173,8 @@
 		                    		if(isset($reps)){ 
 			                    		foreach($reps as $rep){
 			                    		echo '<tr>';
-				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->FechaServicio)).'</td>';
 				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->Fecha)).'</td>';
+											echo '<td>'.date('d-m-Y H:i:s', strtotime($rep->FechaServicio)).'</td>';
 				                            echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo21)).'</td>';
 											echo '<td>'.date('d-m-Y', strtotime($rep->ProbableFechaCelo42)).'</td>';
 											echo '<td>'.$rep->Observaciones.'</td>';

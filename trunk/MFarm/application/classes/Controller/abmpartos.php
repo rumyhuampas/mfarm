@@ -28,7 +28,6 @@ class Controller_ABMPartos extends Controller {
 				$registro->Muertos = 0;
 				$registro->Total = $parto->Vivos - $parto->Muertos - $parto->Momificados;  
 				$registro->Observaciones = 'PARTO';
-				$registro->CanEdit = 'N';
 				$registro->create();
 				
 				$cerda = ORM::factory('cerda', $parto->IdCerda);
@@ -89,6 +88,7 @@ class Controller_ABMPartos extends Controller {
 			$view->title = Helpers_Const::APPNAME." - ABM Parto";
 			$view->menuid = Helpers_Const::MENUCERDASID;
 			$view->parto = Helpers_Parto::get($this->request->param('id'));
+			$view->registros = Helpers_Lactancia::getByParto($this->request->param('id'));
 			$this->response->body($view->render());
 		}
 		else{
@@ -100,6 +100,12 @@ class Controller_ABMPartos extends Controller {
 				->and_where('IdEstado', '=', Helpers_Estado::get(Helpers_Const::ESTPOSTPARTO)->Id)->find();
 			$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$cerdaaudit->update();
+			
+			if(Helpers_CerdaAudit::IsLast($cerdaaudit->Id)){
+				$cerda = ORM::factory('cerda', $parto->IdCerda);
+				$cerda->Modified_On = $cerdaaudit->Fecha;
+				$cerda->update();
+			}
 			
 			$registro = ORM::factory('lactanciaaudit')
 				->where('IdCerda', '=', $parto->IdCerda)

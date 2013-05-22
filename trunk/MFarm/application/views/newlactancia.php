@@ -135,7 +135,6 @@
 		                            <th class="head0">Muertos</th>
 		                            <th class="head1">Total</th>
 		                            <th class="head0">Observaciones</th>
-		                            <th class="head1">&nbsp;</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
@@ -145,7 +144,6 @@
 		                            <th class="head0">Muertos</th>
 		                            <th class="head1">Total</th>
 		                            <th class="head0">Observaciones</th>
-		                            <th class="head1">&nbsp;</th>
 		                        </tr>
 		                    </tfoot>
 		                    <tbody>
@@ -158,13 +156,6 @@
 				                            echo '<td>'.$registro->Muertos.'</td>';
 											echo '<td>'.$registro->Total.'</td>';
 											echo '<td>'.$registro->Observaciones.'</td>';
-											echo '<td class="center">';
-												if($registro->CanEdit != 'N'){
-				                            		echo '<a href='.URL::base().Route::get('default')
-				                            			->uri(array('controller' => 'abmlactancias', 'action' => 'edit', 'id' => $registro->Id)).'>
-				                            			Modificar</a>';
-												}
-											echo '</td>';
 				                        echo '</tr>';
 										}
 		                    		}
