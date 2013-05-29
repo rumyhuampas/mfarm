@@ -112,6 +112,7 @@ class Controller_ABMPartos extends Controller {
 				->and_where('IdParto', '=', $parto->Id)
 				->and_where('Fecha', '=', $parto->Fecha)->find();
 			$registro->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+			$registro->Total = $_POST['alive'] - $_POST['dead'] - $_POST['momif'];
 			$registro->update();
 			
 			$parto->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
