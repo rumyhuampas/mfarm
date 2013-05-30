@@ -64,6 +64,12 @@ class Controller_Reportes extends Controller {
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
 				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta));
 			}
+			if($datosarray[$_POST['datos']] == Helpers_Const::DATOLACTANCIAS){
+				$reportTitle = Helpers_Const::DATOLACTANCIAS.' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
+				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
+				array_push($pdf->tables, Helpers_Reportes::getLactanciaReport($reportTitle, $desde, $hasta));
+			}
 			if($datosarray[$_POST['datos']] == Helpers_Const::DATODESTETES){
 				$reportTitle = Helpers_Const::DATODESTETES.' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
@@ -81,6 +87,8 @@ class Controller_Reportes extends Controller {
 				array_push($pdf->tables, Helpers_Reportes::getRepsReport($reportTitle, $desde, $hasta));
 				$reportTitle = Helpers_Const::DATOPARTOS.' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta));
+				$reportTitle = Helpers_Const::DATOLACTANCIAS.' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getLactanciaReport($reportTitle, $desde, $hasta));
 				$reportTitle = Helpers_Const::DATODESTETES.' - Desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($reportTitle, $desde, $hasta));
 			}
@@ -172,6 +180,12 @@ class Controller_Reportes extends Controller {
 				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
 				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 			}
+			if($datosarray[$_POST['datos']] == Helpers_Const::DATOLACTANCIAS){
+				$reportTitle = Helpers_Const::DATOLACTANCIAS.' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
+				$hasta = date('Y-m-d H:i:s', strtotime($_POST['hasta']));
+				array_push($pdf->tables, Helpers_Reportes::getLactanciaReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
+			}
 			if($datosarray[$_POST['datos']] == Helpers_Const::DATODESTETES){
 				$reportTitle = Helpers_Const::DATODESTETES.' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				$desde = date('Y-m-d H:i:s', strtotime($_POST['desde']));
@@ -189,6 +203,8 @@ class Controller_Reportes extends Controller {
 				array_push($pdf->tables, Helpers_Reportes::getRepsReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 				$reportTitle = Helpers_Const::DATOPARTOS.' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				array_push($pdf->tables, Helpers_Reportes::getPartoReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
+				$reportTitle = Helpers_Const::DATOLACTANCIAS.' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
+				array_push($pdf->tables, Helpers_Reportes::getLactanciaReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 				$reportTitle = Helpers_Const::DATODESTETES.' - Cerda: '.$_POST['number'].' - desde: '.$_POST['desde']. ' - hasta: '.$_POST['hasta'];
 				array_push($pdf->tables, Helpers_Reportes::getDesteteReport($reportTitle, $desde, $hasta, $_POST['IdCerda']));
 			}

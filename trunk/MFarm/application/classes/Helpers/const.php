@@ -26,6 +26,7 @@ class Helpers_Const {
 	const DATOSERVICIOS = 'SERVICIOS';
 	const DATOREPS = 'REPETICIONES DE CELO';
 	const DATOPARTOS = 'PARTOS';
+	const DATOLACTANCIAS = 'MODIFICACIONES EN LACTANCIA';
 	const DATODESTETES = 'DESTETES';
 	const DATOCOMPLETO = 'COMPLETO';
 	
@@ -40,6 +41,9 @@ class Helpers_Const {
 	
 	public static function PARTOSCOLNAMES() { return array('Numero', 'Fecha', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
 	public static function PARTOSCOLTITLES() { return array('Numero de cerda', 'Fecha de parto', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
+	
+	public static function LACTANCIASCOLNAMES() { return array('Numero', 'Fecha', 'FechaParto', 'Adoptados', 'Muertos', 'Total', 'Observaciones'); }
+	public static function LACTANCIASCOLTITLES() { return array('Numero de cerda', 'Fecha de modificacion', 'Fecha de parto', 'Adoptados', 'Muertos', 'Total', 'Observaciones'); }
 
 	public static function DESTETESCOLNAMES() { return array('Numero', 'Fecha', 'Lechones', 'Dias', 'PesoTotal', 'PesoProm', 'Observaciones'); }
 	public static function DESTETESCOLTITLES() { return array('Numero de cerda', 'Fecha de destete', 'Lechones', 'Dias', 'Peso Total', 'Peso promedio', 'Observaciones'); }
@@ -55,6 +59,9 @@ class Helpers_Const {
 	
 	public static function CERDAPARTOSCOLNAMES() { return array('Fecha', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
 	public static function CERDAPARTOSCOLTITLES() { return array('Fecha de parto', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
+
+	public static function CERDALACTANCIASCOLNAMES() { return array('Fecha', 'FechaParto', 'Adoptados', 'Muertos', 'Total', 'Observaciones'); }
+	public static function CERDALACTANCIASCOLTITLES() { return array('Fecha de modificacion', 'Fecha de parto', 'Adoptados', 'Muertos', 'Total', 'Observaciones'); }
 
 	public static function CERDADESTETESCOLNAMES() { return array('Fecha', 'Lechones', 'Dias', 'PesoTotal', 'PesoProm', 'Observaciones'); }
 	public static function CERDADESTETESCOLTITLES() { return array('Fecha de destete', 'Lechones', 'Dias', 'Peso Total', 'Peso promedio', 'Observaciones'); }

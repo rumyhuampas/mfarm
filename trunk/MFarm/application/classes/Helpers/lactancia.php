@@ -24,6 +24,20 @@ class Helpers_Lactancia {
 		}
 	}
 	
+	public static function getByDates($desde, $hasta, $IdCerda = NULL){
+		$qry = DB::select(DB::expr('partos.Fecha AS FechaParto'), 'cerdas.Numero', 'lactanciaaudit.Fecha', 'lactanciaaudit.Adoptados', 'lactanciaaudit.Muertos', 'lactanciaaudit.Total', 'lactanciaaudit.Observaciones')
+			->from('lactanciaaudit')
+			->join('partos')->on('partos.Id', '=', 'lactanciaaudit.IdParto')
+			->join('cerdas')->on('cerdas.Id', '=', 'lactanciaaudit.IdCerda')
+			->where(DB::expr('DATE(lactanciaaudit.Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+			->and_where(DB::expr('DATE(lactanciaaudit.Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'));
+		if($IdCerda != NULL){
+			$qry->and_where('lactanciaaudit.IdCerda', '=', $IdCerda);
+		}
+		$qry->order_by('lactanciaaudit.Fecha', 'ASC');
+		return $qry->execute()->as_array();
+	}
+	
 	public static function getLastByCerda($IdCerda){
 		return ORM::factory('lactanciaaudit')
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=lactanciaaudit.IdCerda)'), 'Numero'))
