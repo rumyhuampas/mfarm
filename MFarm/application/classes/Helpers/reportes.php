@@ -61,6 +61,21 @@ class Helpers_Reportes {
 		return $report;
 	}
 	
+	public static function getLactanciaReport($reportTitle = '', $desde = 'Now()', $hasta = 'Now()', $IdCerda = NULL){
+		$report = new Helpers_ReportTable;
+		$report->reportTitle = $reportTitle;
+		if($IdCerda == NULL){
+			$report->colTitles = Helpers_Const::LACTANCIASCOLTITLES();
+			$report->colNames = Helpers_Const::LACTANCIASCOLNAMES();
+		}
+		else{
+			$report->colTitles = Helpers_Const::CERDALACTANCIASCOLTITLES();
+			$report->colNames = Helpers_Const::CERDALACTANCIASCOLNAMES();
+		}
+		$report->rows = Helpers_Lactancia::getByDates($desde, $hasta, $IdCerda);
+		return $report;
+	}
+	
 	public static function getDesteteReport($reportTitle = '', $desde = 'Now()', $hasta = 'Now()', $IdCerda = NULL){
 		$report = new Helpers_ReportTable;
 		$report->reportTitle = $reportTitle;
