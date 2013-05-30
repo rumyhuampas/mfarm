@@ -31,6 +31,21 @@ class Helpers_Reportes {
 		return $report;
 	}
 	
+	public static function getRepsReport($reportTitle = '', $desde = 'Now()', $hasta = 'Now()', $IdCerda = NULL){
+		$report = new Helpers_ReportTable;
+		$report->reportTitle = $reportTitle;
+		if($IdCerda == NULL){
+			$report->colTitles = Helpers_Const::REPSCOLTITLES();
+			$report->colNames = Helpers_Const::REPSCOLNAMES();
+		}
+		else{
+			$report->colTitles = Helpers_Const::CERDAREPSCOLTITLES();
+			$report->colNames = Helpers_Const::CERDAREPSCOLNAMES();
+		}
+		$report->rows = Helpers_Celo::getByDates($desde, $hasta, $IdCerda);
+		return $report;
+	}
+	
 	public static function getPartoReport($reportTitle = '', $desde = 'Now()', $hasta = 'Now()', $IdCerda = NULL){
 		$report = new Helpers_ReportTable;
 		$report->reportTitle = $reportTitle;

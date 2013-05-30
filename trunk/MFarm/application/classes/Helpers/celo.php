@@ -20,4 +20,18 @@ class Helpers_Celo {
 				->as_object()->execute();
 		}
 	}
+
+	public static function getByDates($desde, $hasta, $IdCerda = NULL){
+		$qry = DB::select('cerdacelos.Id', 'cerdas.Numero', 'servicios.FechaServicio', 'servicios.ProbableFechaCelo21', 'servicios.ProbableFechaCelo42', 'cerdacelos.Fecha', 'cerdacelos.Observaciones')
+			->from('cerdacelos')
+			->join('servicios')->on('servicios.Id', '=', 'cerdacelos.IdServicio')
+			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')
+			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE("'.$desde.'")'))
+			->and_where(DB::expr('DATE(Fecha)'), '<=', DB::expr('DATE("'.$hasta.'")'));
+		if($IdCerda != NULL){
+			$qry->and_where('IdCerda', '=', $IdCerda);
+		}
+		$qry->order_by('Fecha', 'ASC');
+		return $qry->execute()->as_array();
+	}
 }

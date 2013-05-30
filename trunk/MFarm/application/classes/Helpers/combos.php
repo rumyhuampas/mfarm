@@ -7,6 +7,6 @@ class Helpers_Combos {
 	}
 	
 	public static function getTiposDeReportes(){
-		return array(Helpers_Const::DATOMODIF, Helpers_Const::DATOSERVICIOS, Helpers_Const::DATOPARTOS, Helpers_Const::DATODESTETES, Helpers_Const::DATOCOMPLETO);
+		return array(Helpers_Const::DATOMODIF, Helpers_Const::DATOSERVICIOS, Helpers_Const::DATOREPS, Helpers_Const::DATOPARTOS, Helpers_Const::DATODESTETES, Helpers_Const::DATOCOMPLETO);
 	}
 }

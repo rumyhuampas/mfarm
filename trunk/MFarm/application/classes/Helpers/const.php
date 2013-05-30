@@ -24,6 +24,7 @@ class Helpers_Const {
 	/******** DATOS *********/
 	const DATOMODIF = 'MODIFICACIONES';
 	const DATOSERVICIOS = 'SERVICIOS';
+	const DATOREPS = 'REPETICIONES DE CELO';
 	const DATOPARTOS = 'PARTOS';
 	const DATODESTETES = 'DESTETES';
 	const DATOCOMPLETO = 'COMPLETO';
@@ -33,6 +34,9 @@ class Helpers_Const {
 	
 	public static function SERVICIOSCOLNAMES() { return array('Numero', 'FechaServicio', 'Macho', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'ProbableFechaParto', 'Observaciones'); }
 	public static function SERVICIOSCOLTITLES() { return array('Numero de cerda', 'Fecha de servicio', 'Macho', 'Probable fecha de celo 21', 'Probable fecha de celo 42', 'Probable fecha de parto', 'Observaciones'); }
+	
+	public static function REPSCOLNAMES() { return array('Numero', 'Fecha', 'FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Observaciones'); }
+	public static function REPSCOLTITLES() { return array('Numero de cerda', 'Fecha de repeticion de celo', 'Fecha de servicio', 'Probable fecha de celo 21', 'Probable fecha de celo 42', 'Probable fecha de parto'); }
 	
 	public static function PARTOSCOLNAMES() { return array('Numero', 'Fecha', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
 	public static function PARTOSCOLTITLES() { return array('Numero de cerda', 'Fecha de parto', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
@@ -45,6 +49,9 @@ class Helpers_Const {
 	
 	public static function CERDASERVICIOSCOLNAMES() { return array('FechaServicio', 'Macho', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'ProbableFechaParto', 'Observaciones'); }
 	public static function CERDASERVICIOSCOLTITLES() { return array('Fecha de servicio', 'Macho', 'Probable fecha de celo 21', 'Probable fecha de celo 42', 'Probable fecha de parto', 'Observaciones'); }
+	
+	public static function CERDAREPSCOLNAMES() { return array('Fecha', 'FechaServicio', 'ProbableFechaCelo21', 'ProbableFechaCelo42', 'Observaciones'); }
+	public static function CERDAREPSCOLTITLES() { return array('Fecha de repeticion de celo', 'Fecha de servicio', 'Probable fecha de celo 21', 'Probable fecha de celo 42', 'Observaciones'); }
 	
 	public static function CERDAPARTOSCOLNAMES() { return array('Fecha', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
 	public static function CERDAPARTOSCOLTITLES() { return array('Fecha de parto', 'Vivos', 'Muertos', 'Momificados', 'Observaciones'); }
