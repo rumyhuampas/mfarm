@@ -6,7 +6,7 @@
 		<div class="loginboxinner radius3">
 	    	<div class="loginheader">
 	    		<h1 class="bebas">Crear usuario</h1>
-	        	<div class="logo"><img src=<?php echo URL::base()."assets/images/starlight_admin_template_logo.png" ?> alt="" /></div>
+	        	<div class="logo"><img src=<?php echo URL::base()."assets/images/porkman2.png" ?> alt="" /></div>
 	    	</div><!--loginheader-->
 	        
 	        <div class="loginform">

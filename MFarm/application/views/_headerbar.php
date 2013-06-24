@@ -19,8 +19,9 @@
 	<div class="headerinner">
     	
         <a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'home', 'action' => 'index')); ?>>
-        	<img src=<?php echo URL::base()."assets/images/starlight_admin_template_logo_small.png" ?> alt="" />
+        	<img src=<?php echo URL::base()."assets/images/porkman2.png" ?> alt="" />
         </a>
+        <!--<div class="title">PORKMAN</div>-->
         
           
         <div class="headright">

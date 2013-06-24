@@ -6,7 +6,7 @@
 		<div class="loginboxinner radius3">
 	    	<div class="loginheader">
 	    		<h1 class="bebas">Ingresar</h1>
-	        	<div class="logo"><img src=<?php echo URL::base()."assets/images/starlight_admin_template_logo.png" ?> alt="" /></div>
+	        	<div class="logo"><img src=<?php echo URL::base()."assets/images/porkman.png" ?> alt="" /></div>
 	    	</div><!--loginheader-->
 	        
 	        <div class="loginform">
@@ -28,6 +28,11 @@
 					echo Form::close();
 	        	?>
 	        </div><!--loginform-->
+	        
+	        <div class="footer_right">
+				Escribenos a: <a href="#">porkman@outlook.com</a>
+			</div><!--footer-->
+			
 	    </div><!--loginboxinner-->
 	</div><!--loginbox-->
 

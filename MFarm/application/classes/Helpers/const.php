@@ -2,7 +2,7 @@
 
 class Helpers_Const {
 	/******** APLICACION *********/
-	const APPNAME = 'MFarm';
+	const APPNAME = 'PorkMan';
 	
 	/******** MENU *********/
 	const MENUINICIOID = '0';
