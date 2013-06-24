@@ -130,6 +130,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 	-moz-box-shadow: 1px 1px 3px #666; -webkit-box-shadow: 1px 1px 3px #666; box-shadow: 1px 1px 3px #666; 
 }
 .headerinner { padding: 10px; }
+.headerinner .title { font-size: 24px; color:#FFFFFF; }
 .headercolumn { height: 33px; padding: 12px 10px; border-left: 1px solid #444; border-right: 1px solid #272727; float: left; position: relative; }
 
 .headleft { position: absolute; top: 0; left: 0; }
@@ -1261,6 +1262,9 @@ a.btn_table { background-position: -82px -480px; }
 /************** all pages ************/
 
 .footer { margin: 10px 0; font-size: 11px; }
+.footer .copyright { float: left; }
+.footer .mail { display: block; text-align: right; position: relative; }
+.footer_right { font-size: 11px; text-align: right; }
 
 
 /**************  KOHANA ERROR **************/

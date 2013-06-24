@@ -40,7 +40,7 @@ class Helpers_Charts {
 			->from('cerdaaudit')
 			->where('cerdaaudit.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE('.$desde.')'));
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$modif->where('cerdaaudit.IdCerda', '=', $idCerda);
 			}
 			$modif->order_by('Fecha', 'DESC')->order_by('Id', 'DESC');
@@ -55,7 +55,7 @@ class Helpers_Charts {
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'));
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$servicios->where('servicios.IdCerda', '=', $idCerda);
 			}
 			$servicios->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC');
@@ -70,7 +70,7 @@ class Helpers_Charts {
 				array(DB::expr('\'#303030\''), 'textColor'))
 			->from('servicios')
 			->join('cerdacelos')->on('servicios.Id', '=', 'cerdacelos.IdServicio');
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$reps->where('servicios.IdCerda', '=', $idCerda);
 			}
 			$reps->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
@@ -87,7 +87,7 @@ class Helpers_Charts {
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'));
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$pfcelo21->where('servicios.IdCerda', '=', $idCerda);
 			}
 			$pfcelo21->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC');
@@ -102,7 +102,7 @@ class Helpers_Charts {
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'));
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$pfcelo42->where('servicios.IdCerda', '=', $idCerda);
 			}
 			$pfcelo42->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC');
@@ -117,7 +117,7 @@ class Helpers_Charts {
 			->from('servicios')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicios.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->where(DB::expr('DATE(FechaServicio)'), '>=', DB::expr('DATE('.$desde.')'));
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$pfparto->where('servicios.IdCerda', '=', $idCerda);
 			}
 			$pfparto->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC');
@@ -132,7 +132,7 @@ class Helpers_Charts {
 			->from('partos')
 			->join('cerdas')->on('cerdas.Id', '=', 'partos.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE('.$desde.')'));
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$parto->where('partos.IdCerda', '=', $idCerda);
 			}
 			$parto->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC');
@@ -147,7 +147,7 @@ class Helpers_Charts {
 			->from('destetes')
 			->join('cerdas')->on('cerdas.Id', '=', 'destetes.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->where(DB::expr('DATE(Fecha)'), '>=', DB::expr('DATE('.$desde.')'));
-			if($IdCerda != NULL){
+			if($idCerda != NULL){
 				$destete->where('destetes.IdCerda', '=', $idCerda);
 			}
 			$destete->order_by('Fecha', 'DESC')->order_by('IdCerda', 'DESC');
