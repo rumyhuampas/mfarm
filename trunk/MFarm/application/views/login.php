@@ -30,6 +30,7 @@
 	        </div><!--loginform-->
 	        
 	        <div class="footer_right">
+	            <?php Helpers_Utils::getDayWeek(); ?>
 				Escribenos a: <a href="#">porkman@outlook.com</a>
 			</div><!--footer-->
 			
