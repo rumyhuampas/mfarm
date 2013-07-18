@@ -3,7 +3,8 @@
 	$_username = $_sess->get('currentuser');
 	$_userid = $_sess->get('currentuserid');
 	if($_userid == ''){
-		HTTP::redirect(Route::get('default')->uri(array('controller' => 'login')));	
+		HTTP::redirect("../mmain/");
+		//HTTP::redirect(Route::get('default')->uri(array('controller' => 'login')));	
 	}
 	$_altasCount = count(Helpers_Cerda::getAltas('Now()'));
 	$_serviciosCount = count(Helpers_Cerda::getServicios(NULL, 'Now()'));
@@ -68,9 +69,10 @@
                 </a>
                 <div class="userdrop">
                     <ul>
-                        <li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmusers', 'action' => 'edit')); ?>>Perfil</a></li>
-                        <li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmusers', 'action' => 'new')); ?>>Usuarios del sistema</a></li>
-                        <li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'login', 'action' => 'exit')); ?> >Salir</a></li>
+                        <li><a href=<?php echo "../mmain/abmusers/edit" ?>>Perfil</a></li>
+                        <li><a href=<?php echo "../mmain/abmusers/new" ?>>Usuarios del sistema</a></li>
+                        <li><a href=<?php echo "../mmain/welcome" ?> >Menu principal</a></li>
+                        <li><a href=<?php echo "../mmain/login/exit" ?> >Salir</a></li>
                     </ul>
                 </div><!--userdrop-->
             </div><!--headercolumn-->
