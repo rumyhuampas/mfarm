@@ -72,7 +72,7 @@
                         <li><a href=<?php echo URL::base()."../mmain/abmusers/edit" ?>>Perfil</a></li>
                         <li><a href=<?php echo URL::base()."../mmain/abmusers/new" ?>>Usuarios del sistema</a></li>
                         <li><a href=<?php echo URL::base()."../mmain/welcome" ?> >Menu principal</a></li>
-                        <li><a href=<?php echo URL::base()."../mmain/login/exit" ?> >Salir</a></li>
+                        <!--<li><a href=<?php echo URL::base()."../mmain/login/exit" ?> >Salir</a></li>-->
                     </ul>
                 </div><!--userdrop-->
             </div><!--headercolumn-->
