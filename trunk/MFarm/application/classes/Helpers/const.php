@@ -13,6 +13,7 @@ class Helpers_Const {
 	const MENUDESTETESID = '5';
 	const MENULACTANCIAID = '6';
 	const MENUREPORTESID = '7';
+	const MENUVENTASID = '8';
 	
 	/******** ESTADOS *********/
 	const ESTCELO = 'CELO';
