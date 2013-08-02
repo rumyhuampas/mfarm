@@ -8,6 +8,8 @@
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'abmestados', 'action' => 'new')); ?>><span>ABM de Estados</span></a></li>
+                		<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmclientes', 'action' => 'new')); ?>><span>ABM de Clientes</span></a></li>
                     </ul>
                 </li>
                 <li id=<?php echo Helpers_Const::MENUCERDASID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pig menudrop"><span>Cerdas</span></a>
