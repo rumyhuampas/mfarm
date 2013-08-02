@@ -7,75 +7,42 @@ class Controller_Ventas extends Controller {
 			$view = View::factory('newventa');
 			$view->title = Helpers_Const::APPNAME." - Ventas";
 			$view->menuid = Helpers_Const::MENUVENTASID;
-			$view->ventas = Helpers_Venta::get();
 			$this->response->body($view->render());
 		}
 		else{
-			if(!Helpers_Cerda::exists($_POST['number'])){
-				$cerda = ORM::factory('cerda');
-				$cerda->Numero = $_POST['number'];
-				$cerda->IdEstado = $_POST['estado'];
-				$cerda->Peso = $_POST['weight'];
-				$cerda->Modified_On = DB::expr('Now()');
-				$cerda->Created_On = DB::expr('Now()');
-				$cerda->create();
-				
-				$cerdaaudit = ORM::factory('cerdaaudit');
-				$cerdaaudit->IdCerda = $cerda->Id;
-				$cerdaaudit->Fecha = DB::expr('Now()');
-				$cerdaaudit->IdEstado = $_POST['estado'];
-				$cerdaaudit->Peso = $_POST['weight'];
-				$cerdaaudit->Observaciones = $_POST['obs'];
-				$cerdaaudit->create();
-				
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'new',
-					'msgtype' => 'msgsuccess', 'msgtext' => 'Cerda agregada con exito.')));
-			}
-			else{
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'new',
-					'msgtype' => 'msgerror', 'msgtext' => 'La cerda ya existe.')));
-			}	
+			$venta = ORM::factory('venta');
+			$venta->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
+			$cliente = Helpers_Cliente::get($_POST['dni']);
+			$venta->IdCliente = $cliente->Id;
+			$venta->Kilos = $_POST['kilos'];
+			$venta->PUnit = $_POST['punit'];
+			$venta->Saldo = $_POST['total'];
+			$venta->create();
+			
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
+				'msgtype' => 'msgsuccess', 'msgtext' => 'Venta agregada con exito.')));	
 		}
 	}
 
 	public function action_search(){
-		if(isset($_POST['numbersearch'])){
-			$view = View::factory('editcerda');
-			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
-			$view->menuid = Helpers_Const::MENUCERDASID;
-			$view->estados = Helpers_Combos::getEstados();
-			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
-			$view->cerda = $cerda;
-			if($cerda->loaded()){
-				$view->audits = Helpers_Cerda::getAudit($cerda->Id);
-				$view->servicios = Helpers_Cerda::getServicios($cerda->Id);
-				$view->reps = Helpers_Cerda::getRepeticiones($cerda->Id);
-				$view->partos = Helpers_Cerda::getPartos($cerda->Id);
-				$view->lactancias = Helpers_Cerda::getLactancias($cerda->Id);
-				$view->destetes = Helpers_Cerda::getDestetes($cerda->Id);
+		if(isset($_POST['dnisearch'])){
+			$view = View::factory('newventa');
+			$view->title = Helpers_Const::APPNAME." - Ventas";
+			$view->menuid = Helpers_Const::MENUVENTASID;
+			$view->ventas = Helpers_Venta::get();
+			$cliente = Helpers_Cliente::get($_POST['dnisearch']);
+			$view->cliente = $cliente;
+			if($cliente->loaded()){
 				$this->response->body($view->render());
 			}
 			else{
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'edit',
-					'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
+					'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
 			}
 		}
 		else{
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'edit',
-				'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
-		}
-	}
-
-	public function action_addevent(){		
-		if ($this->request->is_ajax()) {
-			echo json_encode(Helpers_Charts::getCalendarData($_POST['IdCerda'], 'false'));
-		}
-	}
-
-	public function action_getcerdachartdata(){
-		if ($this->request->is_ajax()) {
-			$jsonarray = Helpers_Charts::getCerdaPesoData($_POST['IdCerda']);
-			echo json_encode($jsonarray);
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'edit',
+				'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
 		}
 	}
 
@@ -105,25 +72,5 @@ class Controller_Ventas extends Controller {
 			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'edit',
 				'msgtype' => 'msgsuccess', 'msgtext' => 'Cerda modificada con exito.')));	
 		}
-	}
-	
-	public function action_revivir(){
-		$IdCerda = $this->request->param('id');
-		$cerda = ORM::factory('cerda', $IdCerda);
-		$vacia = Helpers_Const::ESTVACIA;
-		$cerda->IdEstado = Helpers_Estado::get($vacia)->Id;
-		$cerda->Modified_On = DB::expr('Now()');
-		$cerda->Update();
-	
-		$cerdaaudit = ORM::factory('cerdaaudit');
-		$cerdaaudit->IdCerda = $cerda->Id;
-		$cerdaaudit->Fecha = DB::expr('Now()');
-		$cerdaaudit->IdEstado = $cerda->IdEstado;
-		$cerdaaudit->Peso = $cerda->Peso;
-		$cerdaaudit->Observaciones = 'CERDA REVIVIDA';
-		$cerdaaudit->create();
-		
-		HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'edit',
-			'msgtype' => 'msgsuccess', 'msgtext' => 'Cerda modificada con exito.')));	
 	}
 }

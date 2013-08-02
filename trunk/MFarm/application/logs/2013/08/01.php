@@ -59,3 +59,60 @@
 #6 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #7 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
 #8 {main} in C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php:699
+2013-08-01 23:22:23 --- CRITICAL: ErrorException [ 2 ]: Creating default object from empty value ~ APPPATH\classes\Controller\ventas.php [ 14 ] in C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php:14
+2013-08-01 23:22:23 --- DEBUG: #0 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(14): Kohana_Core::error_handler(2, 'Creating defaul...', 'C:\xampp\htdocs...', 14, Array)
+#1 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_new()
+#2 [internal function]: Kohana_Controller->execute()
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#4 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#7 {main} in C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php:14
+2013-08-01 23:23:01 --- CRITICAL: ErrorException [ 2 ]: Creating default object from empty value ~ APPPATH\classes\Controller\ventas.php [ 14 ] in C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php:14
+2013-08-01 23:23:01 --- DEBUG: #0 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(14): Kohana_Core::error_handler(2, 'Creating defaul...', 'C:\xampp\htdocs...', 14, Array)
+#1 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_new()
+#2 [internal function]: Kohana_Controller->execute()
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#4 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#7 {main} in C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php:14
+2013-08-01 23:24:12 --- CRITICAL: Kohana_Exception [ 0 ]: The DNI property does not exist in the Model_Venta class ~ MODPATH\orm\classes\Kohana\ORM.php [ 684 ] in C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php:600
+2013-08-01 23:24:12 --- DEBUG: #0 C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php(600): Kohana_ORM->get('DNI')
+#1 C:\xampp\htdocs\MFarm\application\views\newventa.php(135): Kohana_ORM->__get('DNI')
+#2 C:\xampp\htdocs\MFarm\system\classes\Kohana\View.php(61): include('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\View.php(348): Kohana_View::capture('C:\xampp\htdocs...', Array)
+#4 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(36): Kohana_View->render()
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_search()
+#6 [internal function]: Kohana_Controller->execute()
+#7 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#8 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#10 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#11 {main} in C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php:600
+2013-08-01 23:28:34 --- CRITICAL: Database_Exception [ 1054 ]: Unknown column 'ventas.IdCliente' in 'where clause' [ SELECT (SELECT DNI FROM clientes WHERE ventas.IdCliente=clientes.Id) AS `DNI`, `venta`.`Id` AS `Id`, `venta`.`Fecha` AS `Fecha`, `venta`.`IdCliente` AS `IdCliente`, `venta`.`Kilos` AS `Kilos`, `venta`.`PUnit` AS `PUnit`, `venta`.`Saldo` AS `Saldo`, `venta`.`Activa` AS `Activa` FROM `ventas` AS `venta` ORDER BY `Fecha` ASC ] ~ MODPATH\database\classes\Kohana\Database\MySQL.php [ 194 ] in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
+2013-08-01 23:28:34 --- DEBUG: #0 C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT (SELECT ...', 'Model_Venta', Array)
+#1 C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php(1060): Kohana_Database_Query->execute(Object(Database_MySQL))
+#2 C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php(1001): Kohana_ORM->_load_result(true)
+#3 C:\xampp\htdocs\MFarm\application\classes\Helpers\venta.php(14): Kohana_ORM->find_all()
+#4 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(32): Helpers_Venta::get()
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_search()
+#6 [internal function]: Kohana_Controller->execute()
+#7 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#8 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#10 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#11 {main} in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
+2013-08-01 23:29:04 --- CRITICAL: Kohana_Exception [ 0 ]: The Nombre property does not exist in the Model_Venta class ~ MODPATH\orm\classes\Kohana\ORM.php [ 684 ] in C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php:600
+2013-08-01 23:29:04 --- DEBUG: #0 C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php(600): Kohana_ORM->get('Nombre')
+#1 C:\xampp\htdocs\MFarm\application\views\newventa.php(136): Kohana_ORM->__get('Nombre')
+#2 C:\xampp\htdocs\MFarm\system\classes\Kohana\View.php(61): include('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\View.php(348): Kohana_View::capture('C:\xampp\htdocs...', Array)
+#4 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(36): Kohana_View->render()
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_search()
+#6 [internal function]: Kohana_Controller->execute()
+#7 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#8 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#10 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#11 {main} in C:\xampp\htdocs\MFarm\modules\orm\classes\Kohana\ORM.php:600

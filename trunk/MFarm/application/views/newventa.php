@@ -1,7 +1,7 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
 <script src=<?php echo URL::base()."/scripts/custom/datepicker.js" ?> type="text/javascript"></script>
-<script src=<?php echo URL::base()."/scripts/custom/newdestete.js" ?> type="text/javascript"></script>
+<script src=<?php echo URL::base()."/scripts/custom/newventa.js" ?> type="text/javascript"></script>
 
 <body class="loggedin">
 
@@ -41,16 +41,22 @@
                         echo '</p>';
                     echo Form::close();
 
-					if(isset($venta) && $venta->loaded()){
+					if(isset($cliente) && $cliente->loaded()){
 						echo Form::open('ventas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewventa'));
-						
 	                    	echo '<p>';
-								echo Form::label('number', 'Numero');
+								echo Form::label('dni', 'DNI');
 								echo '<span class="field">';
-								echo Form::input('number', $venta->Numero, 
-									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo Form::input('dni', $cliente->DNI, 
+									array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
-	                        echo '</p>';									
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('name', 'Nombre');
+								echo '<span class="field">';
+								echo Form::input('name', $cliente->Nombre, 
+									array('type' => 'text', 'id' => 'name', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo '</span>';
+	                        echo '</p>';
 							echo '<p>';
 								echo Form::label('date', 'Fecha');
 								echo '<span class="field">';
@@ -64,9 +70,23 @@
 			                    echo '</div><!--widgetbox-->';
 							echo '</p>';
 							echo '<p>';
-								echo Form::label('total', 'Total de lechones');
+								echo Form::label('kilos', 'Kilos');
 								echo '<span class="field">';
-									echo Form::input('total', $total, array('type' => 'text', 'id' => 'total', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo Form::input('kilos', '', 
+									array('type' => 'text', 'id' => 'kilos', 'class' => 'smallinput'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('punit', 'Precio por unidad');
+								echo '<span class="field">';
+								echo Form::input('punit', '', 
+									array('type' => 'text', 'id' => 'punit', 'class' => 'smallinput'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('total', 'Total');
+								echo '<span class="field">';
+									echo Form::input('total', '', array('type' => 'text', 'id' => 'total', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 	                        
@@ -86,36 +106,40 @@
 			                </colgroup>
 			                <thead>
 			                	<tr>
-			                    	<th class="head0">Fecha de destete</th>
-			                        <th class="head1">Lechones</th>
-			                        <th class="head0">Dias</th>
-			                        <th class="head1">Peso total</th>
-			                        <th class="head0">Peso promedio por unidad</th>
-			                        <th class="head1">Observaciones</th>
+			                    	<th class="head0">ID</th>
+			                        <th class="head1">DNI</th>
+			                        <th class="head0">Nombre</th>
+			                        <th class="head1">Kilos</th>
+			                        <th class="head0">Precio por unidad</th>
+			                        <th class="head1">Total</th>
+			                        <th class="head0">Saldo</th>
 			                    </tr>
 			                </thead>
 			                <tfoot>
 			                    <tr>
-			                    	<th class="head0">Fecha de destete</th>
-			                        <th class="head1">Lechones</th>
-			                        <th class="head0">Dias</th>
-			                        <th class="head1">Peso total</th>
-			                        <th class="head0">Peso promedio por unidad</th>
-			                        <th class="head1">Observaciones</th>
+			                    	<th class="head0">ID</th>
+			                        <th class="head1">DNI</th>
+			                        <th class="head0">Nombre</th>
+			                        <th class="head1">Kilos</th>
+			                        <th class="head0">Precio por unidad</th>
+			                        <th class="head1">Total</th>
+			                        <th class="head0">Saldo</th>
 			                    </tr>
 			                </tfoot>
 			                <tbody>
 			                <?php
-	                    		if(isset($destetes)){ 
-		                    		foreach($destetes as $destete){
-		                    		echo '<tr>';
-			                            echo '<td>'.date('d-m-Y H:i:s', strtotime($destete->Fecha)).'</td>';
-			                            echo '<td>'.$destete->Lechones.'</td>';
-			                            echo '<td>'.$destete->Dias.'</td>';
-										echo '<td>'.$destete->PesoTotal.'</td>';
-										echo '<td>'.$destete->PesoProm.'</td>';
-										echo '<td>'.$destete->Observaciones.'</td>';
-			                        echo '</tr>';
+	                    		if(isset($ventas)){ 
+		                    		foreach($ventas as $venta){
+		                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
+			                    		echo '<tr>';
+				                            echo '<td>'.$venta->Id.'</td>';
+				                            echo '<td>'.$cliente->DNI.'</td>';
+				                            echo '<td>'.$cliente->Nombre.'</td>';
+											echo '<td>'.$venta->Kilos.'</td>';
+											echo '<td>'.$venta->PUnit.'</td>';
+											echo '<td>'.$venta->Kilos * $venta->PUnit.'</td>';
+											echo '<td>'.$venta->Saldo.'</td>';
+				                        echo '</tr>';
 									}
 	                    		}
 							?>
