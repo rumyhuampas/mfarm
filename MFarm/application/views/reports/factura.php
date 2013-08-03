@@ -15,6 +15,10 @@
         	<div class="maincontentinner">               
             	     
             	<div class="content">
+            		<div class="one">
+            			<div style="width: 80px; text-align:center; font-size: 40px; margin-left: auto; margin-right: auto">C</div>	
+            		</div>
+            			
             		<div class="one_half">
                     	<div class="widgetbox">
 	                        <div class="widgetcontent announcement" height="130px">
@@ -29,7 +33,7 @@
                     <div class="one_half last" style="margin-left:3%;">
                     	<div class="widgetbox">
 	                        <div class="widgetcontent announcement" height="130px">
-	                        	<div>FACTURA:</div>
+	                        	<div>FACTURA</div>
 	                        	<div>N: <b><?php echo str_pad($_venta->Id, 14, '0', STR_PAD_LEFT); ?></b></div>
 	                        	<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
 	                                <thead>

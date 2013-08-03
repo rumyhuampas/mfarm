@@ -8,6 +8,7 @@ class Controller_Ventas extends Controller {
 			$view->title = Helpers_Const::APPNAME." - Ventas";
 			$view->menuid = Helpers_Const::MENUVENTASID;
 			$view->_ventaid = $this->request->param('id');
+			$view->ventas = Helpers_Venta::get();
 			$this->response->body($view->render());
 		}
 		else{
@@ -15,8 +16,8 @@ class Controller_Ventas extends Controller {
 			$venta->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$cliente = Helpers_Cliente::get($_POST['dni']);
 			$venta->IdCliente = $cliente->Id;
-			$venta->Kilos = $_POST['kilos'];
-			$venta->PUnit = $_POST['punit'];
+			//$venta->Kilos = $_POST['kilos'];
+			//$venta->PUnit = $_POST['punit'];
 			$venta->Total = $_POST['total'];
 			$venta->Saldo = $_POST['total'];
 			$venta->create();
