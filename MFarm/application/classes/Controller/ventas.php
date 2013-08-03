@@ -7,6 +7,7 @@ class Controller_Ventas extends Controller {
 			$view = View::factory('newventa');
 			$view->title = Helpers_Const::APPNAME." - Ventas";
 			$view->menuid = Helpers_Const::MENUVENTASID;
+			$view->_ventaid = $this->request->param('id');
 			$this->response->body($view->render());
 		}
 		else{
@@ -16,11 +17,12 @@ class Controller_Ventas extends Controller {
 			$venta->IdCliente = $cliente->Id;
 			$venta->Kilos = $_POST['kilos'];
 			$venta->PUnit = $_POST['punit'];
+			$venta->Total = $_POST['total'];
 			$venta->Saldo = $_POST['total'];
 			$venta->create();
 			
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
-				'msgtype' => 'msgsuccess', 'msgtext' => 'Venta agregada con exito.')));	
+			HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'new',
+				'id' => $venta->Id, 'msgtype' => 'msgsuccess', 'msgtext' => 'Venta agregada con exito.')));
 		}
 	}
 
@@ -43,6 +45,18 @@ class Controller_Ventas extends Controller {
 		else{
 			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'edit',
 				'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
+		}
+	}
+	
+	public function action_printfactura(){
+		$venta = ORM::factory('venta', $_POST['ventaid']);
+		if($venta->loaded()){
+			$pdf = Helpers_Reportes::createFactura($venta->Id);
+			$this->response->headers(array('Content-Type' => 'application/pdf'));
+			Helpers_Reportes::show($pdf);
+		}
+		else{
+			//errorpdf
 		}
 	}
 
@@ -69,7 +83,7 @@ class Controller_Ventas extends Controller {
 			$cerdaaudit->Observaciones = $_POST['obs'];
 			$cerdaaudit->create();
 			
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmcerdas', 'action' => 'edit',
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'edit',
 				'msgtype' => 'msgsuccess', 'msgtext' => 'Cerda modificada con exito.')));	
 		}
 	}

@@ -11,4 +11,14 @@ jQuery(document).ready(function(){
 		var total = punit * kilos;
 		jQuery('#total').val(total);
 	});
+	
+	var ventaid = jQuery('[name=_ventaid]');
+	if(ventaid.attr('value') != undefined){
+		jQuery('#formprintfactura' + ventaid.attr('value')).submit();	
+	}
+	
+	jQuery('[name=reprint]').click (function ()
+	{
+		jQuery(this).closest("form").submit();
+	});
 });
