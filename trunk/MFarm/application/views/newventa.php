@@ -70,20 +70,6 @@
 			                    echo '</div><!--widgetbox-->';
 							echo '</p>';
 							echo '<p>';
-								echo Form::label('kilos', 'Kilos');
-								echo '<span class="field">';
-								echo Form::input('kilos', '', 
-									array('type' => 'text', 'id' => 'kilos', 'class' => 'smallinput'));
-								echo '</span>';
-	                        echo '</p>';
-							echo '<p>';
-								echo Form::label('punit', 'Precio por kilo');
-								echo '<span class="field">';
-								echo Form::input('punit', '', 
-									array('type' => 'text', 'id' => 'punit', 'class' => 'smallinput'));
-								echo '</span>';
-	                        echo '</p>';
-							echo '<p>';
 								echo Form::label('total', 'Total');
 								echo '<span class="field">';
 									echo Form::input('total', '', array('type' => 'text', 'id' => 'total', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
@@ -96,74 +82,146 @@
 	                    echo Form::close();
 						?>
 						
+						<div class="contenttitle">
+		                	<h2 class="form"><span>Agregar producto</span></h2>
+		                </div><!--contenttitle-->
+		                <?php
+		                echo Form::open('ventas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewventa'));
+							echo '<p>';
+								echo Form::label('cant', 'Cantidad');
+								echo '<span class="field">';
+								echo Form::input('cant', '', 
+									array('type' => 'text', 'id' => 'cant', 'class' => 'smallinput'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('det', 'Detalle');
+								echo '<span class="field">';
+								echo Form::input('det', '', 
+									array('type' => 'text', 'id' => 'det', 'class' => 'smallinput'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('punit', 'Precio unitario');
+								echo '<span class="field">';
+								echo Form::input('punit', '', 
+									array('type' => 'text', 'id' => 'punit', 'class' => 'smallinput'));
+								echo '</span>';
+	                        echo '</p>';
+	                        echo '<p>';
+								echo Form::label('totalprod', 'Total');
+								echo '<span class="field">';
+									echo Form::input('totalprod', '', array('type' => 'text', 'id' => 'totalprod', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo '</span>';
+	                        echo '</p>';
+							
+							echo '<p class="stdformbutton">';
+								echo '<span class="stdbtn btn_black" id="btnadd">Agregar</span>';
+								//echo Form::button('btnadd', 'Agregar', array('class' => 'submit radius2'));
+	                        echo '</p>';
+						echo Form::close();
+		                ?>
+		                
+						
 						<div class="contenttitle radiusbottom0">
-			            	<h2 class="table"><span>Ventas</span></h2>
+			            	<h2 class="table"><span>Productos</span></h2>
 			            </div><!--contenttitle-->
-			            <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+			            <table cellpadding="0" cellspacing="0" border="0" id="tableprod" class="stdtable stdtablecb">
 			            	<colgroup>
 			                	<col class="con0" />
 			                    <col class="con1" />
 			                </colgroup>
 			                <thead>
 			                	<tr>
-			                    	<th class="head0">ID</th>
-			                        <th class="head1">DNI</th>
-			                        <th class="head0">Nombre</th>
-			                        <th class="head1">Kilos</th>
-			                        <th class="head0">Precio por kilo</th>
+			                    	<th class="head0">Cant.</th>
+			                        <th class="head1" width="50%">Detalle</th>
+			                        <th class="head0">P. Unit.</th>
 			                        <th class="head1">Total</th>
-			                        <th class="head0">Saldo</th>
 			                        <th class="head1">&nbsp;</th>
 			                    </tr>
 			                </thead>
 			                <tfoot>
 			                    <tr>
-			                    	<th class="head0">ID</th>
-			                        <th class="head1">DNI</th>
-			                        <th class="head0">Nombre</th>
-			                        <th class="head1">Kilos</th>
-			                        <th class="head0">Precio por kilo</th>
+			                    	<th class="head0"></th>
+			                        <th class="head0" width="50%"></th>
 			                        <th class="head1">Total</th>
-			                        <th class="head0">Saldo</th>
+			                        <th class="head1"></th>
 			                        <th class="head1">&nbsp;</th>
 			                    </tr>
 			                </tfoot>
 			                <tbody>
-			                <?php
-	                    		if(isset($ventas)){ 
-		                    		foreach($ventas as $venta){
-		                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
-			                    		echo '<tr>';
-				                            echo '<td>'.$venta->Id.'</td>';
-				                            echo '<td>'.$cliente->DNI.'</td>';
-				                            echo '<td>'.$cliente->Nombre.'</td>';
-											echo '<td>'.$venta->Kilos.'</td>';
-											echo '<td>'.$venta->PUnit.'</td>';
-											echo '<td>'.$venta->Total.'</td>';
-											echo '<td>'.$venta->Saldo.'</td>';
-											echo '<td class="center">';
-												echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
-													echo Form::hidden('ventaid', $venta->Id);
-													echo '<a href="#" name="reprint">Imprimir factura</a>';
-												echo Form::close();
-				                            	echo '<a href='.URL::base().Route::get('default')
-				                            		->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
-				                            		Agregar pago</a>';
-											echo '</td>';
-				                        echo '</tr>';
-									}
-	                    		}
-								if(isset($_ventaid)){
-									echo Form::hidden('_ventaid', $_ventaid);
-								}
-							?>
 			                </tbody>
 			            </table>
 		                
-		               	<br clear="all" /> 
-	                    <?php
+		               	<br clear="all" />
+	               	
+					<?php
 	                } //isset($cerda)
 					?>
+					
+					<div class="contenttitle radiusbottom0">
+		            	<h2 class="table"><span>Ventas</span></h2>
+		            </div><!--contenttitle-->
+		            <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+		            	<colgroup>
+		                	<col class="con0" />
+		                    <col class="con1" />
+		                </colgroup>
+		                <thead>
+		                	<tr>
+		                    	<th class="head0">ID</th>
+		                        <th class="head1">DNI</th>
+		                        <th class="head0">Nombre</th>
+		                        <th class="head1">Kilos</th>
+		                        <th class="head0">Precio por kilo</th>
+		                        <th class="head1">Total</th>
+		                        <th class="head0">Saldo</th>
+		                        <th class="head1">&nbsp;</th>
+		                    </tr>
+		                </thead>
+		                <tfoot>
+		                    <tr>
+		                    	<th class="head0">ID</th>
+		                        <th class="head1">DNI</th>
+		                        <th class="head0">Nombre</th>
+		                        <th class="head1">Kilos</th>
+		                        <th class="head0">Precio por kilo</th>
+		                        <th class="head1">Total</th>
+		                        <th class="head0">Saldo</th>
+		                        <th class="head1">&nbsp;</th>
+		                    </tr>
+		                </tfoot>
+		                <tbody>
+		                <?php
+                    		if(isset($ventas)){ 
+	                    		foreach($ventas as $venta){
+	                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
+		                    		echo '<tr>';
+			                            echo '<td>'.$venta->Id.'</td>';
+			                            echo '<td>'.$cliente->DNI.'</td>';
+			                            echo '<td>'.$cliente->Nombre.'</td>';
+										echo '<td>'.$venta->Total.'</td>';
+										echo '<td>'.$venta->Saldo.'</td>';
+										echo '<td class="center">';
+											echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
+												echo Form::hidden('ventaid', $venta->Id);
+												echo '<a href="#" name="reprint">Imprimir factura</a>';
+											echo Form::close();
+			                            	echo '<a href='.URL::base().Route::get('default')
+			                            		->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
+			                            		Agregar pago</a>';
+										echo '</td>';
+			                        echo '</tr>';
+								}
+                    		}
+							if(isset($_ventaid)){
+								echo Form::hidden('_ventaid', $_ventaid);
+							}
+						?>
+		                </tbody>
+		            </table>
+	                
+	               	<br clear="all" />
                     
                 </div><!--content-->
                 
