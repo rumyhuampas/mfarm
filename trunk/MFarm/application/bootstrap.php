@@ -124,6 +124,11 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+Route::set('msgid', '<controller>/<action>/<id>/<msgtype>/<msgtext>')
+	->defaults(array(
+		'controller' => 'home',
+		'action'     => 'index'
+));
 Route::set('msg', '<controller>/<action>/<msgtype>/<msgtext>')
 	->defaults(array(
 		'controller' => 'login',

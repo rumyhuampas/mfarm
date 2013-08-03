@@ -43,52 +43,52 @@
                     <div class="one_half">
                     
                     	<div class="widgetbox">
-                        <div class="title"><h2 class="tabbed"><span>Ultimas modificaciones</span></h2></div>
-                        <div class="widgetcontent announcement">
-                        	<?php 
-                        		foreach($lastmodif as $lm){
-                        			echo '<p>';
-		                            echo '<span class="radius2">'.date('d-m-Y H:i:s', strtotime($lm->Fecha)).'</span> <br />';
-									echo 'Cerda: <b>'.$lm->Numero.'</b><br />';
-									echo 'Estado: <b>'.$lm->Estado.'</b> - Peso: <b>'.$lm->Peso.'</b>';
-		                            echo '</p>';
-								}
-                        	?>
-                        </div><!--widgetcontent-->
-                    </div><!--widgetbox-->
+	                        <div class="title"><h2 class="tabbed"><span>Ultimas modificaciones</span></h2></div>
+	                        <div class="widgetcontent announcement">
+	                        	<?php 
+	                        		foreach($lastmodif as $lm){
+	                        			echo '<p>';
+			                            echo '<span class="radius2">'.date('d-m-Y H:i:s', strtotime($lm->Fecha)).'</span> <br />';
+										echo 'Cerda: <b>'.$lm->Numero.'</b><br />';
+										echo 'Estado: <b>'.$lm->Estado.'</b> - Peso: <b>'.$lm->Peso.'</b>';
+			                            echo '</p>';
+									}
+	                        	?>
+	                        </div><!--widgetcontent-->
+	                    </div><!--widgetbox-->
                         
                     </div><!--one_half-->
                     
                     <div class="one_half last">
                     
                         <div class="widgetbox">
-                        <div class="title"><h2 class="tabbed"><span>Mayores pesos</span></h2></div>
-                        <div class="widgetcontent padding0 statement">
-                           <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
-                           		<colgroup>
-                                    <col class="con0" />
-                                    <col class="con1" />
-                                    <col class="con0" />
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th class="head0">Cerda</th>
-                                        <th class="head1">Peso</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<?php 
-		                        		for($i=0; $i<count($maxweights); $i++){
-		                        			echo '<tr>';
-				                            echo '<td>'.$maxweights[$i]['Numero'].'</td>';
-											echo '<td>'.$maxweights[$i]['Peso'].'</td>';
-				                            echo '</tr>';
-										}
-		                        	?>
-                                </tbody>
-                            </table>
-                        </div><!--widgetcontent-->
-                    </div><!--widgetbox-->                        
+	                        <div class="title"><h2 class="tabbed"><span>Mayores pesos</span></h2></div>
+	                        <div class="widgetcontent padding0 statement">
+	                           <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+	                           		<colgroup>
+	                                    <col class="con0" />
+	                                    <col class="con1" />
+	                                    <col class="con0" />
+	                                </colgroup>
+	                                <thead>
+	                                    <tr>
+	                                        <th class="head0">Cerda</th>
+	                                        <th class="head1">Peso</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                	<?php 
+			                        		for($i=0; $i<count($maxweights); $i++){
+			                        			echo '<tr>';
+					                            echo '<td>'.$maxweights[$i]['Numero'].'</td>';
+												echo '<td>'.$maxweights[$i]['Peso'].'</td>';
+					                            echo '</tr>';
+											}
+			                        	?>
+	                                </tbody>
+	                            </table>
+	                        </div><!--widgetcontent-->
+	                    </div><!--widgetbox-->                        
                     </div><!--one_half-->
                     
                     <br clear="all" />

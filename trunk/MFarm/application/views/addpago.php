@@ -17,7 +17,8 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'new')); ?>>Nueva venta</a></li>
+                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'new')); ?>>Nueva venta</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'addpago')); ?>>Agregar pago</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -25,15 +26,15 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Nueva venta</span></h2>
+                    	<h2 class="form"><span>Agergar pago</span></h2>
                     </div><!--contenttitle-->
                     
                     <?php
-                    echo Form::open('ventas/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcliente'));
+                    echo Form::open('ventas/searchventa', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcliente'));
                     	echo '<p>';
-							echo Form::label('dnisearch', 'Dni');
+							echo Form::label('numbersearch', 'Numero');
 							echo '<span class="field">';
-							echo Form::input('dnisearch', '', array('type' => 'text', 'id' => 'dnisearch', 'class' => 'smallinput'));
+							echo Form::input('numbersearch', '', array('type' => 'text', 'id' => 'numbersearch', 'class' => 'smallinput'));
                             echo '</span>';
 						echo '</p>';
 						echo '<p class="stdformbutton">';
@@ -41,12 +42,12 @@
                         echo '</p>';
                     echo Form::close();
 
-					if(isset($cliente) && $cliente->loaded()){
+					if(isset($venta) && $venta->loaded()){
 						echo Form::open('ventas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewventa'));
 	                    	echo '<p>';
-								echo Form::label('dni', 'DNI');
+								echo Form::label('number', 'Numero');
 								echo '<span class="field">';
-								echo Form::input('dni', $cliente->DNI, 
+								echo Form::input('number', $venta->id, 
 									array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
@@ -113,7 +114,6 @@
 			                        <th class="head0">Precio por kilo</th>
 			                        <th class="head1">Total</th>
 			                        <th class="head0">Saldo</th>
-			                        <th class="head1">&nbsp;</th>
 			                    </tr>
 			                </thead>
 			                <tfoot>
@@ -125,7 +125,6 @@
 			                        <th class="head0">Precio por kilo</th>
 			                        <th class="head1">Total</th>
 			                        <th class="head0">Saldo</th>
-			                        <th class="head1">&nbsp;</th>
 			                    </tr>
 			                </tfoot>
 			                <tbody>
@@ -141,21 +140,9 @@
 											echo '<td>'.$venta->PUnit.'</td>';
 											echo '<td>'.$venta->Total.'</td>';
 											echo '<td>'.$venta->Saldo.'</td>';
-											echo '<td class="center">';
-												echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
-													echo Form::hidden('ventaid', $venta->Id);
-													echo '<a href="#" name="reprint">Imprimir factura</a>';
-												echo Form::close();
-				                            	echo '<a href='.URL::base().Route::get('default')
-				                            		->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
-				                            		Agregar pago</a>';
-											echo '</td>';
 				                        echo '</tr>';
 									}
 	                    		}
-								if(isset($_ventaid)){
-									echo Form::hidden('_ventaid', $_ventaid);
-								}
 							?>
 			                </tbody>
 			            </table>

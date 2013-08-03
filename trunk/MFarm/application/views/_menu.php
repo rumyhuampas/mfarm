@@ -54,7 +54,7 @@
                 			->uri(array('controller' => 'reportes', 'action' => 'reportesporcerda')); ?>><span>Por cerda</span></a></li>
                     </ul>
                 </li>
-                <li id=<?php echo Helpers_Const::MENUVENTASID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pdf menudrop"><span>Ventas</span></a>
+                <li id=<?php echo Helpers_Const::MENUVENTASID; ?> menuid=<?php echo $menuid ?>><a href="#" class="sale menudrop"><span>Ventas</span></a>
                 	<ul>
             			<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'ventas', 'action' => 'new')); ?>><span>Nueva venta</span></a></li>

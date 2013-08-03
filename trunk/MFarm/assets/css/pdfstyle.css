@@ -48,7 +48,8 @@ button,input,select,textarea { font-size: 12px; margin: 0; }
 /************ COLUMNS ***************/
 /************ used by all pages *****/
 
-.one_half{ width:48.5%; }
+.one{ width:100%; }
+.one_half{ width:48.5%;}
 .one_third{ width:31.16%; }
 .two_third{ width:65.83%; }
 .one_fourth{ width:22.5%; }
@@ -300,7 +301,7 @@ button,input,select,textarea { font-size: 12px; margin: 0; }
 
 .widgetbox { 
 	background: #fff; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; margin-bottom: 10px; 
-	-moz-box-shadow: 1px 1px 2px #eee; -webkit-box-shadow: 1px 1px 2px #eee; box-shadow: 1px 1px 2px #eee; 
+	/*-moz-box-shadow: 1px 1px 2px #eee; -webkit-box-shadow: 1px 1px 2px #eee; box-shadow: 1px 1px 2px #eee;*/ 
 }
 .widgetbox .title { 
 	background: #222; -moz-border-radius: 2px 2px 0 0; -webkit-border-radius: 2px 2px 0 0;
@@ -315,8 +316,12 @@ button,input,select,textarea { font-size: 12px; margin: 0; }
 	-moz-border-radius: 0 2px 0 0; -webkit-border-radius: 0 2px 0 0; border-radius: 0 2px 0 0; text-shadow: 1px 1px #222;
 }
 .widgetbox .widgetcontent { 
-	border: 1px solid #ddd; border-top: 0; padding: 10px; line-height: 21px; 
-	-moz-border-radius: 0 0 2px 2px; -webkit-border-radius: 0 0 2px 2px; border-radius: 0 0 2px 2px; 
+	border: 1px solid #ddd; 
+	/*border-top: 0;*/
+	 padding: 10px; line-height: 21px; 
+	-moz-border-radius: 0 0 2px 2px;
+	-webkit-border-radius: 0 0 2px 2px; 
+	border-radius: 0 0 2px 2px; 
 }
 
 .formwidgetbox { 
@@ -337,7 +342,9 @@ button,input,select,textarea { font-size: 12px; margin: 0; }
 }
 .formwidgetbox .widgetcontent { 
 	border: 1px solid #ddd; border-top: 0; padding: 10px; line-height: 21px; 
-	-moz-border-radius: 0 0 2px 2px; -webkit-border-radius: 0 0 2px 2px; border-radius: 0 0 2px 2px; 
+	-moz-border-radius: 0 0 2px 2px; 
+	-webkit-border-radius: 0 0 2px 2px; 
+	border-radius: 0 0 2px 2px; 
 }
 
 .widgetcontent ul.linklist { list-style: none; }
