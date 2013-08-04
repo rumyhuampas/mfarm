@@ -3,6 +3,7 @@
 <?php
 	$_venta = Helpers_Venta::get($_id);
 	$_cliente = ORM::factory('cliente', $_venta->IdCliente);
+	$_ventadetalle = Helpers_VentaDetalle::get($_id);
 ?>
 
 <body class="loggedin">
@@ -80,7 +81,7 @@
 	                           <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
 	                                <thead>
 	                                    <tr>
-	                                        <th class="head0">Cant. kilos</th>
+	                                        <th class="head0">Cant.</th>
 	                                        <th class="head1" style="width:50%">Detalle</th>
 	                                        <th class="head0">P. Unit</th>
 	                                        <th class="head1">Total</th>
@@ -91,25 +92,29 @@
 	                                		<th></th>
 	                                        <th style="width:50%"></th>
 	                                        <th class="head1">Total</th>
-	                                        <th class="head1"><?php echo $_venta->Total ?></th>
+	                                        <th class="head1"><?php echo '$ '.$_venta->Total ?></th>
 	                                    </tr>
 	                                </tfoot>
 	                                <tbody>
-	                                	<tr>
-	                                		<td><?php echo $_venta->Kilos ?></td>
-	                                		<td>Kilos de cerdo</td>
-	                                		<td><?php echo $_venta->PUnit ?></td>
-	                                		<td><?php echo $_venta->Total ?></td>
-	                                	</tr>
 	                                	<?php
-	                                		for($i=0;$i<20;$i++){
-	                                			echo "<tr>";
-	                                			echo "<td></td>";
-												echo "<td></td>";
-												echo "<td></td>";
-												echo "<td></td>";
-												echo "</tr>";
+	                                		foreach($_ventadetalle as $vd){
+	                                			echo '<tr>';
+													echo '<td>'.$vd->Cant.'</td>';
+													echo '<td>'.$vd->Detalle.'</td>';
+													echo '<td>$ '.$vd->PUnit.'</td>';
+													echo '<td>$ '.$vd->Total.'</td>';
+												echo '</tr>';
 	                                		}
+	                                		if(count($_ventadetalle) < 20){
+		                                		for($i=0;$i<(20-count($_ventadetalle));$i++){
+		                                			echo "<tr>";
+		                                			echo "<td></td>";
+													echo "<td></td>";
+													echo "<td></td>";
+													echo "<td></td>";
+													echo "</tr>";
+		                                		}
+											}
 	                                	?>
 	                                </tbody>
 	                            </table>

@@ -43,6 +43,7 @@
 
 					if(isset($cliente) && $cliente->loaded()){
 						echo Form::open('ventas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewventa'));
+							//echo Form::hidden('idcliente', $cliente->IdCliente);
 	                    	echo '<p>';
 								echo Form::label('dni', 'DNI');
 								echo '<span class="field">';
@@ -77,7 +78,8 @@
 	                        echo '</p>';
 	                        
 	                        echo '<p class="stdformbutton">';
-								echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2'));
+								echo '<span class="stdbtn btn_black" id="btnsave">Guardar</span>';
+								//echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2'));
 	                        echo '</p>';
 	                    echo Form::close();
 						?>

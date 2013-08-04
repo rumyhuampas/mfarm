@@ -1,15 +1,42 @@
 jQuery(document).ready(function(){
+	
+	jQuery('#dnisearch').focus();
+	
+	jQuery('#btnsave').click(function(){
+		var table = [];
+		jQuery('#tableprod tbody tr').each(function(index){
+			table.push([
+				jQuery(this).find('td[name=tdcantprod]').html(),
+				jQuery(this).find('td[name=tddetprod]').html(),
+				jQuery(this).find('td[name=tdpunitprod]').html(),
+				jQuery(this).find('td[name=tdtotalprod]').html()
+				]);
+		});
+		jQuery.post( 
+	    	'/mfarm/ventas/new/',
+	    	{
+		    	date: jQuery('[name=date]').val(),
+		    	dni: jQuery('[name=dni]').val(),
+		    	total: jQuery('[name=total]').val(),
+		    	prodtable: table
+	    	},
+		    function( data ){
+		    	window.location.replace(data);
+		    }
+    	);
+	});
+	
 	jQuery('#punit').focusout(function(){
 		var punit = parseFloat(jQuery('#punit').val());
-		var kilos = parseFloat(jQuery('#kilos').val());
-		var total = punit * kilos;
-		jQuery('#total').val(total);
+		var cant = parseFloat(jQuery('#cant').val());
+		var total = punit * cant;
+		jQuery('#totalprod').val(total);
 	});
-	jQuery('#kilos').focusout(function(){
+	jQuery('#cant').focusout(function(){
 		var punit = parseFloat(jQuery('#punit').val());
-		var kilos = parseFloat(jQuery('#kilos').val());
-		var total = punit * kilos;
-		jQuery('#total').val(total);
+		var cant = parseFloat(jQuery('#cant').val());
+		var total = punit * cant;
+		jQuery('#totalprod').val(total);
 	});
 	
 	var ventaid = jQuery('[name=_ventaid]');
@@ -29,29 +56,35 @@ jQuery(document).ready(function(){
 		var total = jQuery('#totalprod').val();
 		jQuery('#tableprod > tbody:last').append(
 			'<tr>' +
-			'<td>' + cant + '</td>' +
-			'<td>' + det + '</td>' +
-			'<td>' + punit + '</td>' +
-			'<td>' + total + '</td>' +
-			'<td><span class="stdbtn" name="removeprod">Eliminar</span></td>' +
+			'<td name="tdcantprod">' + cant + '</td>' +
+			'<td name="tddetprod">' + det + '</td>' +
+			'<td name="tdpunitprod">' + punit + '</td>' +
+			'<td name="tdtotalprod">' + total + '</td>' +
+			'<td align="center"><span class="stdbtn" name="removeprod">Eliminar</span></td>' +
 			'</tr>');
 		jQuery('#cant').val('');
 		jQuery('#det').val('');
 		jQuery('#punit').val('');
+		jQuery('#totalprod').val('');
+		
+		updatetotalventa();
 	});
 	
-	function removeprod(){
-		alert('test');
-	}
-	
-	jQuery('[name=removeprod]').click(function(){
-		alert('click');
-		/*var tr = $(this).closest('tr');
+	jQuery(document).on('click', '[name=removeprod]', function() {
+    	var tr = jQuery(this).closest('tr');
 		tr.css("background-color","#FF3700");
 
         tr.fadeOut(400, function(){
             tr.remove();
+            updatetotalventa();
         });
-        return false;*/
 	});
+	
+	function updatetotalventa(){
+		var tot = 0;
+		jQuery('#tableprod tbody tr').each(function(index){
+			tot = tot + parseFloat(jQuery(this).find('td[name=tdtotalprod]').html());
+		});
+		jQuery('#total').val(tot);
+	}
 });
