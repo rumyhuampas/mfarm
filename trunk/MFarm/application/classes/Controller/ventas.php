@@ -16,14 +16,23 @@ class Controller_Ventas extends Controller {
 			$venta->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$cliente = Helpers_Cliente::get($_POST['dni']);
 			$venta->IdCliente = $cliente->Id;
-			//$venta->Kilos = $_POST['kilos'];
-			//$venta->PUnit = $_POST['punit'];
 			$venta->Total = $_POST['total'];
 			$venta->Saldo = $_POST['total'];
 			$venta->create();
 			
-			HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'new',
-				'id' => $venta->Id, 'msgtype' => 'msgsuccess', 'msgtext' => 'Venta agregada con exito.')));
+			$prodtable = $_POST['prodtable'];
+			for($i=0; $i<count($prodtable);$i++){
+				$ventadetalle = ORM::factory('ventadetalle');
+				$ventadetalle->IdVenta = $venta->Id;
+				$ventadetalle->Cant = $prodtable[$i][0];
+				$ventadetalle->Detalle = $prodtable[$i][1];
+				$ventadetalle->PUnit = $prodtable[$i][2];
+				$ventadetalle->Total = $prodtable[$i][3];
+				$ventadetalle->create();
+			}
+			
+			echo URL::base().Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'new',
+				'id' => $venta->Id, 'msgtype' => 'msgsuccess', 'msgtext' => 'Venta agregada con exito.'));
 		}
 	}
 
