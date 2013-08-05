@@ -26,22 +26,10 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Agergar pago</span></h2>
+                    	<h2 class="form"><span>Agregar pago</span></h2>
                     </div><!--contenttitle-->
                     
                     <?php
-                    echo Form::open('ventas/searchventa', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcliente'));
-                    	echo '<p>';
-							echo Form::label('numbersearch', 'Numero');
-							echo '<span class="field">';
-							echo Form::input('numbersearch', '', array('type' => 'text', 'id' => 'numbersearch', 'class' => 'smallinput'));
-                            echo '</span>';
-						echo '</p>';
-						echo '<p class="stdformbutton">';
-                        	echo Form::button('btnsearch', 'Buscar', array('class' => 'submit radius2'));
-                        echo '</p>';
-                    echo Form::close();
-
 					if(isset($venta) && $venta->loaded()){
 						echo Form::open('ventas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewventa'));
 	                    	echo '<p>';
@@ -54,7 +42,7 @@
 							echo '<p>';
 								echo Form::label('name', 'Nombre');
 								echo '<span class="field">';
-								echo Form::input('name', $cliente->Nombre, 
+								echo Form::input('name', '', 
 									array('type' => 'text', 'id' => 'name', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
@@ -98,7 +86,7 @@
 						?>
 						
 						<div class="contenttitle radiusbottom0">
-			            	<h2 class="table"><span>Ventas</span></h2>
+			            	<h2 class="table"><span>Pagos</span></h2>
 			            </div><!--contenttitle-->
 			            <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 			            	<colgroup>
