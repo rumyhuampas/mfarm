@@ -26,7 +26,7 @@
 	                        	<div align="center">
 	                        		<img src=<?php echo URL::base()."assets/images/porkmanblack.png" ?> alt="" />
 		                        	<br clear="all" /><br />
-		                        	<div style="text-align:center; margin-top: 30px;">I.V.A. Responsable Inscripto</div>
+		                        	<div style="text-align:center; margin-top: 30px;">I.V.A. <?php echo Helpers_Config::get('IVA')->Value; ?></div>
 	                        	</div>
 	                        </div><!--widgetcontent-->
 	                    </div><!--widgetbox-->
@@ -39,20 +39,20 @@
 	                        	<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
 	                                <thead>
 	                                    <tr>
-	                                        <th class="head0" width="33%">DIA</th>
+	                                        <th class="head0" width="33%" style="border-left: 1px solid #ccc;">DIA</th>
 	                                        <th class="head0" width="33%">MES</th>
 	                                        <th class="head0" width="33%">ANO</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
 	                                	<tr>
-		                                	<td align="center" style="border: 1px solid #EEEEEE;"><?php echo date("d", strtotime($_venta->Fecha)); ?></td>
-	                        				<td align="center" style="border: 1px solid #EEEEEE;"><?php echo date("m", strtotime($_venta->Fecha)); ?></td>
-	                        				<td align="center" style="border: 1px solid #EEEEEE;"><?php echo date("y", strtotime($_venta->Fecha)); ?></td>
+		                                	<td align="center" style="border-left: 1px solid #666;"><?php echo date("d", strtotime($_venta->Fecha)); ?></td>
+	                        				<td align="center"><?php echo date("m", strtotime($_venta->Fecha)); ?></td>
+	                        				<td align="center"><?php echo date("y", strtotime($_venta->Fecha)); ?></td>
                         				</tr>
 	                                </tbody>
 	                            </table>
-	                            <div>CUIT:</div>
+	                            <div>CUIT: <?php echo Helpers_Config::get('IVA')->Value; ?></div>
 	                        </div><!--widgetcontent-->
 	                    </div><!--widgetbox-->
                     </div><!--one_half-->
@@ -62,14 +62,6 @@
 	                        <div class="widgetcontent announcement">
 	                        	<div>Senor(es): <b><?php echo $_cliente->Nombre; ?></b></div>
 	                        	<div>Domicilio: <b><?php echo $_cliente->Direccion; ?></b></div>
-	                        </div><!--widgetcontent-->
-	                    </div><!--widgetbox-->
-                    </div>
-                    
-                    <div class="one">
-	                	<div class="widgetbox">
-	                        <div class="widgetcontent announcement">
-	                        	IVA
 	                        </div><!--widgetcontent-->
 	                    </div><!--widgetbox-->
                     </div>
@@ -89,8 +81,8 @@
 	                                </thead>
 	                                <tfoot>
 	                                	<tr>
-	                                		<th></th>
-	                                        <th style="width:50%"></th>
+	                                		<th style="border-left: 1px solid #eee;"></th>
+	                                        <th style="width:50%;"></th>
 	                                        <th class="head1">Total</th>
 	                                        <th class="head1"><?php echo '$ '.$_venta->Total ?></th>
 	                                    </tr>
@@ -99,7 +91,7 @@
 	                                	<?php
 	                                		foreach($_ventadetalle as $vd){
 	                                			echo '<tr>';
-													echo '<td>'.$vd->Cant.'</td>';
+													echo '<td style="border-left: 1px solid #666;">'.$vd->Cant.'</td>';
 													echo '<td>'.$vd->Detalle.'</td>';
 													echo '<td>$ '.$vd->PUnit.'</td>';
 													echo '<td>$ '.$vd->Total.'</td>';
@@ -107,12 +99,12 @@
 	                                		}
 	                                		if(count($_ventadetalle) < 20){
 		                                		for($i=0;$i<(20-count($_ventadetalle));$i++){
-		                                			echo "<tr>";
-		                                			echo "<td></td>";
-													echo "<td></td>";
-													echo "<td></td>";
-													echo "<td></td>";
-													echo "</tr>";
+		                                			echo '<tr>';
+		                                			echo '<td style="border-left: 1px solid #666;"></td>';
+													echo '<td></td>';
+													echo '<td></td>';
+													echo '<td></td>';
+													echo '</tr>';
 		                                		}
 											}
 	                                	?>
@@ -125,7 +117,7 @@
                     <div class="one">
 	                	<div class="widgetbox">
 	                        <div class="widgetcontent announcement">
-	                        	Direccion
+	                        	<div style="text-align: center;"><?php echo Helpers_Config::get('Direccion')->Value; ?></div>
 	                        </div><!--widgetcontent-->
 	                    </div><!--widgetbox-->
                     </div>

@@ -174,8 +174,6 @@
 		                    	<th class="head0">ID</th>
 		                        <th class="head1">DNI</th>
 		                        <th class="head0">Nombre</th>
-		                        <th class="head1">Kilos</th>
-		                        <th class="head0">Precio por kilo</th>
 		                        <th class="head1">Total</th>
 		                        <th class="head0">Saldo</th>
 		                        <th class="head1">&nbsp;</th>
@@ -186,8 +184,6 @@
 		                    	<th class="head0">ID</th>
 		                        <th class="head1">DNI</th>
 		                        <th class="head0">Nombre</th>
-		                        <th class="head1">Kilos</th>
-		                        <th class="head0">Precio por kilo</th>
 		                        <th class="head1">Total</th>
 		                        <th class="head0">Saldo</th>
 		                        <th class="head1">&nbsp;</th>

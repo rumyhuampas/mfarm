@@ -70,12 +70,12 @@ class Controller_Ventas extends Controller {
 		}
 	}
 
-	public function action_edit(){
+	public function action_addpago(){
 		if(!isset($_POST['number'])){
-			$view=View::factory('editcerda');
-			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
-			$view->menuid = Helpers_Const::MENUCERDASID;
-			$view->estados = Helpers_Combos::getEstados();
+			$view=View::factory('addpago');
+			$view->title = Helpers_Const::APPNAME." - ABM Venta";
+			$view->menuid = Helpers_Const::MENUVENTASID;
+			$view->_idventa = $this->request->param('id');
 			$this->response->body($view->render());
 		}
 		else{

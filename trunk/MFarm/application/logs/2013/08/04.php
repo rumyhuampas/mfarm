@@ -18,3 +18,18 @@
 2013-08-04 17:51:25 --- CRITICAL: ErrorException [ 1 ]: Call to undefined function create() ~ APPPATH\classes\Controller\ventas.php [ 31 ] in :
 2013-08-04 17:51:25 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
 #1 {main} in :
+2013-08-04 18:45:52 --- CRITICAL: ErrorException [ 1 ]: Class 'Helpers_Config' not found ~ APPPATH\classes\Controller\config.php [ 9 ] in :
+2013-08-04 18:45:52 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-08-04 21:01:56 --- CRITICAL: ErrorException [ 1 ]: Class 'Model_config' not found ~ MODPATH\orm\classes\Kohana\ORM.php [ 46 ] in :
+2013-08-04 21:01:56 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-08-04 21:02:42 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Database_MySQL_Result::loaded() ~ APPPATH\views\config.php [ 32 ] in :
+2013-08-04 21:02:42 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-08-04 21:14:31 --- CRITICAL: ErrorException [ 1 ]: Cannot use object of type Model_Config as array ~ APPPATH\views\config.php [ 36 ] in :
+2013-08-04 21:14:31 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-08-04 21:20:36 --- CRITICAL: ErrorException [ 1 ]: Cannot use object of type Model_Config as array ~ APPPATH\views\config.php [ 39 ] in :
+2013-08-04 21:20:36 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
