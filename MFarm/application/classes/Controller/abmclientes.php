@@ -3,7 +3,7 @@
 class Controller_ABMClientes extends Controller {
 
 	public function action_new(){
-		if(!isset($_POST['dni'])){
+		if(!isset($_POST['cuil'])){
 			$view = View::factory('newcliente');
 			$view->title = Helpers_Const::APPNAME." - ABM Cliente";
 			$view->menuid = Helpers_Const::MENUABMID;
@@ -11,10 +11,10 @@ class Controller_ABMClientes extends Controller {
 			$this->response->body($view->render());
 		}
 		else{
-			if(!Helpers_Cliente::exists($_POST['dni'])){
+			if(!Helpers_Cliente::exists($_POST['cuil'])){
 				$cliente = ORM::factory('cliente');
-				$cliente->DNI = $_POST['dni'];
 				$cliente->CUIL = $_POST['cuil'];
+				$cliente->DNI = $_POST['dni'];
 				$cliente->Nombre = $_POST['name'];
 				$cliente->Direccion = $_POST['address'];
 				$cliente->Telefono = $_POST['phone'];
@@ -34,11 +34,11 @@ class Controller_ABMClientes extends Controller {
 	}
 
 	public function action_search(){
-		if(isset($_POST['dnisearch'])){
+		if(isset($_POST['cuildnisearch'])){
 			$view = View::factory('editcliente');
 			$view->title = Helpers_Const::APPNAME." - ABM Cliente";
 			$view->menuid = Helpers_Const::MENUABMID;
-			$cliente = Helpers_Cliente::get($_POST['dnisearch']);
+			$cliente = Helpers_Cliente::get($_POST['cuildnisearch']);
 			$view->cliente = $cliente;
 			if($cliente->loaded()){
 				$this->response->body($view->render());
@@ -55,15 +55,15 @@ class Controller_ABMClientes extends Controller {
 	}
 
 	public function action_edit(){
-		if(!isset($_POST['dni'])){
+		if(!isset($_POST['cuil'])){
 			$view=View::factory('editcliente');
 			$view->title = Helpers_Const::APPNAME." - ABM Cliente";
 			$view->menuid = Helpers_Const::MENUABMID;
 			$this->response->body($view->render());
 		}
 		else{
-			$cliente = Helpers_Cliente::get($_POST['dni']);
-			$cliente->CUIL = $_POST['cuil'];
+			$cliente = Helpers_Cliente::get($_POST['cuil']);
+			$cliente->CUIL = $_POST['dni'];
 			$cliente->Nombre = $_POST['name'];
 			$cliente->Direccion = $_POST['address'];
 			$cliente->Telefono = $_POST['phone'];

@@ -325,9 +325,6 @@ jQuery(document).ready(function(){
 	//FORM VALIDATION
 	jQuery("#formnewcliente").validate({
 		rules: {
-			dni: {
-				required: true
-			},
 			cuil: {
 				required: true,
 				minlength: 10
@@ -337,9 +334,6 @@ jQuery(document).ready(function(){
 			}
 		},
 		messages: {
-			dni: {
-				required: "Por favor ingrese el dni del cliente"
-			},
 			cuil: {
 				required: "Por favor ingrese el cuil del cliente",
 				minlength: "El cuil debe tener al menos 10 caracteres"

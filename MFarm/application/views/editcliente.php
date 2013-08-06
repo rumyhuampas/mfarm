@@ -1,5 +1,7 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
+<script src=<?php echo URL::base()."/scripts/custom/editcliente.js" ?> type="text/javascript"></script>
+
 <body class="loggedin">
 
 	<?php include Kohana::find_file('views', '_headerbar'); ?>
@@ -30,9 +32,9 @@
 					
 					echo Form::open('abmclientes/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcliente'));
                     	echo '<p>';
-							echo Form::label('dnisearch', 'DNI');
+							echo Form::label('cuildnisearch', 'CUIL / DNI');
 							echo '<span class="field">';
-							echo Form::input('dnisearch', '', array('type' => 'text', 'id' => 'dnisearch', 'class' => 'smallinput'));
+							echo Form::input('cuildnisearch', '', array('type' => 'text', 'id' => 'cuildnisearch', 'class' => 'smallinput'));
                             echo '</span>';
 						echo '</p>';
 						echo '<p class="stdformbutton">';
@@ -42,17 +44,17 @@
 
 					if(isset($cliente) && $cliente->loaded()){
 						echo Form::open('abmclientes/edit', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formeditcliente'));
-	                    	echo '<p>';
-	                        	echo Form::label('dni', 'DNI');
-								echo '<span class="field">';
-									echo Form::input('dni', $cliente->DNI, 
-										array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
-	                            echo '</span>';
-	                        echo '</p>';
 							echo '<p>';
 	                        	echo Form::label('cuil', 'CUIL');
 								echo '<span class="field">';
-								echo Form::input('cuil', $cliente->CUIL, array('type' => 'text', 'id' => 'cuil', 'class' => 'smallinput'));	
+								echo Form::input('cuil', $cliente->CUIL, 
+										array('type' => 'text', 'id' => 'cuil', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));	
+	                            echo '</span>';
+	                        echo '</p>';
+	                    	echo '<p>';
+	                        	echo Form::label('dni', 'DNI');
+								echo '<span class="field">';
+									echo Form::input('dni', $cliente->DNI, array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput'));
 	                            echo '</span>';
 	                        echo '</p>';
 							echo '<p>';

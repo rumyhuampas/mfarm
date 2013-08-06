@@ -31,9 +31,9 @@
                     <?php
                     echo Form::open('ventas/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcliente'));
                     	echo '<p>';
-							echo Form::label('dnisearch', 'Dni');
+							echo Form::label('cuildnisearch', 'CUIL / DNI');
 							echo '<span class="field">';
-							echo Form::input('dnisearch', '', array('type' => 'text', 'id' => 'dnisearch', 'class' => 'smallinput'));
+							echo Form::input('cuildnisearch', '', array('type' => 'text', 'id' => 'cuildnisearch', 'class' => 'smallinput'));
                             echo '</span>';
 						echo '</p>';
 						echo '<p class="stdformbutton">';
@@ -45,10 +45,10 @@
 						echo Form::open('ventas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewventa'));
 							//echo Form::hidden('idcliente', $cliente->IdCliente);
 	                    	echo '<p>';
-								echo Form::label('dni', 'DNI');
+								echo Form::label('cuil', 'CUIL');
 								echo '<span class="field">';
-								echo Form::input('dni', $cliente->DNI, 
-									array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo Form::input('cuil', $cliente->CUIL, 
+									array('type' => 'text', 'id' => 'cuil', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
@@ -172,7 +172,7 @@
 		                <thead>
 		                	<tr>
 		                    	<th class="head0">ID</th>
-		                        <th class="head1">DNI</th>
+		                        <th class="head1">CUIL</th>
 		                        <th class="head0">Nombre</th>
 		                        <th class="head1">Total</th>
 		                        <th class="head0">Saldo</th>
@@ -182,7 +182,7 @@
 		                <tfoot>
 		                    <tr>
 		                    	<th class="head0">ID</th>
-		                        <th class="head1">DNI</th>
+		                        <th class="head1">CUIL</th>
 		                        <th class="head0">Nombre</th>
 		                        <th class="head1">Total</th>
 		                        <th class="head0">Saldo</th>
@@ -196,7 +196,7 @@
 	                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
 		                    		echo '<tr>';
 			                            echo '<td>'.$venta->Id.'</td>';
-			                            echo '<td>'.$cliente->DNI.'</td>';
+			                            echo '<td>'.$cliente->CUIL.'</td>';
 			                            echo '<td>'.$cliente->Nombre.'</td>';
 										echo '<td>'.$venta->Total.'</td>';
 										echo '<td>'.$venta->Saldo.'</td>';

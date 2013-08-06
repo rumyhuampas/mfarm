@@ -2,15 +2,16 @@
 
 class Helpers_Cliente {
 	
-	public static function exists($dni){
-		$cliente = ORM::factory('cliente')->where('DNI', '=', $dni)->find();
+	public static function exists($cuil){
+		$cliente = ORM::factory('cliente')->where('CUIL', '=', $cuil)->find();
 		return $cliente->loaded();
 	}
 	
-	public static function get($dni = NULL){
-		if($dni != NULL){
+	public static function get($cuildni = NULL){
+		if($cuildni != NULL){
 			return ORM::factory('cliente')
-				->where('DNI', '=', $dni)->find();
+				->where('CUIL', '=', $cuildni)
+				->or_where('DNI', '=', $cuildni)->find();
 		}
 		else{
 			return ORM::factory('cliente')

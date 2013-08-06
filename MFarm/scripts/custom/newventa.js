@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
 	    	'/mfarm/ventas/new/',
 	    	{
 		    	date: jQuery('[name=date]').val(),
-		    	dni: jQuery('[name=dni]').val(),
+		    	cuil: jQuery('[name=cuil]').val(),
 		    	total: jQuery('[name=total]').val(),
 		    	prodtable: table
 	    	},
