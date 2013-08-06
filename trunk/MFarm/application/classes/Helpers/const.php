@@ -66,4 +66,9 @@ class Helpers_Const {
 
 	public static function CERDADESTETESCOLNAMES() { return array('Fecha', 'Lechones', 'Dias', 'PesoTotal', 'PesoProm', 'Observaciones'); }
 	public static function CERDADESTETESCOLTITLES() { return array('Fecha de destete', 'Lechones', 'Dias', 'Peso Total', 'Peso promedio', 'Observaciones'); }
+	
+	/************* TIPOS DE PAGOS ***************/
+	const TPEFECTIVO = 'Efectivo';
+	const TPCHEQUE = 'Cheque';
+	const TPDEPOSITO = 'Deposito en cuenta';
 }

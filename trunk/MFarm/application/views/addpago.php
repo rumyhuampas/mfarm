@@ -31,18 +31,20 @@
                     
                     <?php
 					if(isset($venta) && $venta->loaded()){
-						echo Form::open('ventas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewventa'));
+						$cliente = ORM::factory('cliente', $venta->IdCliente);
+						echo Form::open('ventas/addpago', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formaddpago'));
+	                    	echo Form::hidden('idventa', $venta->Id);
 	                    	echo '<p>';
-								echo Form::label('number', 'Numero');
+								echo Form::label('cuil', 'CUIL');
 								echo '<span class="field">';
-								echo Form::input('number', $venta->id, 
-									array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo Form::input('cuil', $cliente->CUIL, 
+									array('type' => 'text', 'id' => 'cuil', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
 								echo Form::label('name', 'Nombre');
 								echo '<span class="field">';
-								echo Form::input('name', '', 
+								echo Form::input('name', $cliente->Nombre, 
 									array('type' => 'text', 'id' => 'name', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
@@ -59,25 +61,36 @@
 			                    echo '</div><!--widgetbox-->';
 							echo '</p>';
 							echo '<p>';
-								echo Form::label('kilos', 'Kilos');
-								echo '<span class="field">';
-								echo Form::input('kilos', '', 
-									array('type' => 'text', 'id' => 'kilos', 'class' => 'smallinput'));
-								echo '</span>';
-	                        echo '</p>';
-							echo '<p>';
-								echo Form::label('punit', 'Precio por kilo');
-								echo '<span class="field">';
-								echo Form::input('punit', '', 
-									array('type' => 'text', 'id' => 'punit', 'class' => 'smallinput'));
-								echo '</span>';
-	                        echo '</p>';
-							echo '<p>';
 								echo Form::label('total', 'Total');
 								echo '<span class="field">';
-									echo Form::input('total', '', array('type' => 'text', 'id' => 'total', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									echo Form::input('total', $venta->Total, array('type' => 'text', 'id' => 'total', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('saldo', 'Saldo');
+								echo '<span class="field">';
+									echo Form::input('saldo', $venta->Saldo, array('type' => 'text', 'id' => 'saldo', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+	                        	echo Form::label('tpago', 'Tipo de pago');
+								echo '<span class="field">';
+									echo Form::select('tpago', $tpagos, '', array('id' => 'tpago'));
+	                            echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+								echo Form::label('monto', 'Monto');
+								echo '<span class="field">';
+									echo Form::input('monto', '', array('type' => 'text', 'id' => 'monto', 'class' => 'smallinput'));
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
+                            	echo Form::label('obs', 'Observaciones');
+                            	echo '<span class="field">';
+									echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80"></textarea>';
+								echo '</span>';
+	                        echo '</p>';
+							
 	                        
 	                        echo '<p class="stdformbutton">';
 								echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2'));
@@ -96,38 +109,34 @@
 			                <thead>
 			                	<tr>
 			                    	<th class="head0">ID</th>
-			                        <th class="head1">DNI</th>
-			                        <th class="head0">Nombre</th>
-			                        <th class="head1">Kilos</th>
-			                        <th class="head0">Precio por kilo</th>
-			                        <th class="head1">Total</th>
+			                    	<th class="head1">Fecha</th>
+			                        <th class="head0">Tipo de Pago</th>
+			                        <th class="head1">Monto</th>
 			                        <th class="head0">Saldo</th>
+			                        <th class="head1">Observaciones</th>
 			                    </tr>
 			                </thead>
 			                <tfoot>
 			                    <tr>
 			                    	<th class="head0">ID</th>
-			                        <th class="head1">DNI</th>
-			                        <th class="head0">Nombre</th>
-			                        <th class="head1">Kilos</th>
-			                        <th class="head0">Precio por kilo</th>
-			                        <th class="head1">Total</th>
+			                    	<th class="head1">Fecha</th>
+			                        <th class="head0">Tipo de Pago</th>
+			                        <th class="head1">Monto</th>
 			                        <th class="head0">Saldo</th>
+			                        <th class="head1">Observaciones</th>
 			                    </tr>
 			                </tfoot>
 			                <tbody>
 			                <?php
-	                    		if(isset($ventas)){ 
-		                    		foreach($ventas as $venta){
-		                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
+	                    		if(isset($pagos)){ 
+		                    		foreach($pagos as $pago){
 			                    		echo '<tr>';
-				                            echo '<td>'.$venta->Id.'</td>';
-				                            echo '<td>'.$cliente->DNI.'</td>';
-				                            echo '<td>'.$cliente->Nombre.'</td>';
-											echo '<td>'.$venta->Kilos.'</td>';
-											echo '<td>'.$venta->PUnit.'</td>';
-											echo '<td>'.$venta->Total.'</td>';
-											echo '<td>'.$venta->Saldo.'</td>';
+				                            echo '<td>'.$pago->Id.'</td>';
+											echo '<td>'.$pago->Fecha.'</td>';
+											echo '<td>'.$pago->Tipo.'</td>';
+											echo '<td>'.$pago->Monto.'</td>';
+											echo '<td>'.$pago->Saldo.'</td>';
+											echo '<td>'.$pago->Observaciones.'</td>';
 				                        echo '</tr>';
 									}
 	                    		}

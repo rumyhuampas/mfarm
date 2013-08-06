@@ -30,15 +30,15 @@
                     
                     <?php echo Form::open('abmclientes/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewcliente'));
                     	echo '<p>';
-                        	echo Form::label('dni', 'DNI');
-							echo '<span class="field">';
-							echo Form::input('dni', '', array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput'));
-                            echo '</span>';
-                        echo '</p>';
-						echo '<p>';
                         	echo Form::label('cuil', 'CUIL');
 							echo '<span class="field">';
 							echo Form::input('cuil', '', array('type' => 'text', 'id' => 'cuil', 'class' => 'smallinput'));
+                            echo '</span>';
+                        echo '</p>';
+                    	echo '<p>';
+                        	echo Form::label('dni', 'DNI');
+							echo '<span class="field">';
+							echo Form::input('dni', '', array('type' => 'text', 'id' => 'dni', 'class' => 'smallinput'));
                             echo '</span>';
                         echo '</p>';
                         echo '<p>';
@@ -107,7 +107,7 @@
 									echo '<td>'.$cliente->Telefono.'</td>';
 									echo '<td class="center">';
 										echo Form::open('abmclientes/search', array('method' => 'POST', 'class' => 'stdform'));
-	                            		echo Form::hidden('dnisearch', $cliente->DNI);
+	                            		echo Form::hidden('cuildnisearch', $cliente->CUIL);
 										echo '<a href="#" name="editcliente">Editar</a>';
 										echo Form::close();	
 									echo '</td>';

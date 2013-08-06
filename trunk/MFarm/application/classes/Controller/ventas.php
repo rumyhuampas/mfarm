@@ -3,7 +3,7 @@
 class Controller_Ventas extends Controller {
 
 	public function action_new(){
-		if(!isset($_POST['dni'])){
+		if(!isset($_POST['cuil'])){
 			$view = View::factory('newventa');
 			$view->title = Helpers_Const::APPNAME." - Ventas";
 			$view->menuid = Helpers_Const::MENUVENTASID;
@@ -14,7 +14,7 @@ class Controller_Ventas extends Controller {
 		else{
 			$venta = ORM::factory('venta');
 			$venta->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cliente = Helpers_Cliente::get($_POST['dni']);
+			$cliente = Helpers_Cliente::get($_POST['cuil']);
 			$venta->IdCliente = $cliente->Id;
 			$venta->Total = $_POST['total'];
 			$venta->Saldo = $_POST['total'];
@@ -37,12 +37,12 @@ class Controller_Ventas extends Controller {
 	}
 
 	public function action_search(){
-		if(isset($_POST['dnisearch'])){
+		if(isset($_POST['cuildnisearch'])){
 			$view = View::factory('newventa');
 			$view->title = Helpers_Const::APPNAME." - Ventas";
 			$view->menuid = Helpers_Const::MENUVENTASID;
 			$view->ventas = Helpers_Venta::get();
-			$cliente = Helpers_Cliente::get($_POST['dnisearch']);
+			$cliente = Helpers_Cliente::get($_POST['cuildnisearch']);
 			$view->cliente = $cliente;
 			if($cliente->loaded()){
 				$this->response->body($view->render());
@@ -71,30 +71,42 @@ class Controller_Ventas extends Controller {
 	}
 
 	public function action_addpago(){
-		if(!isset($_POST['number'])){
+		$idventa = $this->request->param('id'); 
+		if(!isset($_POST['monto'])){
 			$view=View::factory('addpago');
 			$view->title = Helpers_Const::APPNAME." - ABM Venta";
 			$view->menuid = Helpers_Const::MENUVENTASID;
-			$view->_idventa = $this->request->param('id');
+			$view->venta = Helpers_Venta::get($idventa);
+			$view->tpagos = Helpers_Combos::getTiposDePagos();
+			$view->pagos = Helpers_VentaPago::get($idventa);
 			$this->response->body($view->render());
 		}
 		else{
-			$cerda = Helpers_Cerda::get($_POST['number']);
-			$cerda->IdEstado = $_POST['estado'];
-			$cerda->Peso = $_POST['weight'];
-			$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerda->Update();
-		
-			$cerdaaudit = ORM::factory('cerdaaudit');
-			$cerdaaudit->IdCerda = $cerda->Id;
-			$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerdaaudit->IdEstado = $_POST['estado'];
-			$cerdaaudit->Peso = $_POST['weight'];
-			$cerdaaudit->Observaciones = $_POST['obs'];
-			$cerdaaudit->create();
-			
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'edit',
-				'msgtype' => 'msgsuccess', 'msgtext' => 'Cerda modificada con exito.')));	
+			$saldo = (float)$_POST['saldo'];
+			$monto = (float)$_POST['monto'];
+			if($saldo >= $monto){
+				$newsaldo = $saldo - $monto;
+				
+				$venta = Helpers_Venta::get($_POST['idventa']);
+				$venta->Saldo = $newsaldo;
+				$venta->update();
+				
+				$ventapago = ORM::factory('ventapago');
+				$ventapago->Fecha = date('Y-m-d', strtotime($_POST['date']));
+				$ventapago->IdVenta = $venta->Id;
+				$ventapago->Tipo = $_POST['tpago'];
+				$ventapago->Monto = $_POST['monto'];
+				$ventapago->Saldo = $newsaldo;
+				$ventapago->Observaciones = $_POST['obs'];
+				$ventapago->create();
+				
+				HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],
+					'msgtype' => 'msgsuccess', 'msgtext' => 'Pago agregado con exito.')));
+			}
+			else{
+				HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],
+					'msgtype' => 'msgerror', 'msgtext' => 'El monto no puede ser mayor al saldo.')));
+			}
 		}
 	}
 }
