@@ -52,7 +52,7 @@
                         				</tr>
 	                                </tbody>
 	                            </table>
-	                            <div>CUIT: <?php echo Helpers_Config::get('IVA')->Value; ?></div>
+	                            <div>CUIT: <?php echo Helpers_Config::get('CUIT')->Value; ?></div>
 	                        </div><!--widgetcontent-->
 	                    </div><!--widgetbox-->
                     </div><!--one_half-->
