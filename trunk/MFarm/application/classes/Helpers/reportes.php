@@ -25,13 +25,31 @@ class Helpers_Reportes {
 		$stylesheet = file_get_contents('assets/css/pdfstyle.css');
 		$pdf->get_mpdf()->WriteHTML($stylesheet, 1);
 			
-		$pdf->get_mpdf()->SetTitle(Helpers_Const::APPNAME.' - Venta');
-		$pdf->get_mpdf()->SetSubject('Venta');
+		$pdf->get_mpdf()->SetTitle(Helpers_Const::APPNAME.' - Factura');
+		$pdf->get_mpdf()->SetSubject('Factura');
 		$pdf->get_mpdf()->SetAuthor(Helpers_Const::APPNAME);
 		$pdf->get_mpdf()->SetCreator(Helpers_Const::APPNAME);
 		
-		$pdf->title = Helpers_Const::APPNAME.' - Venta';
-		$pdf->filename = Helpers_Const::APPNAME.' - venta.pdf';
+		$pdf->title = Helpers_Const::APPNAME.' - Factura';
+		$pdf->filename = Helpers_Const::APPNAME.' - factura.pdf';
+		
+		$pdf->_id = $id;
+		
+		return $pdf;
+	}
+	
+	public static function createRecibo($id){
+		$pdf = Helpers_Reportes::create('reports/recibo', 'A4-L');
+		$stylesheet = file_get_contents('assets/css/pdfstyle.css');
+		$pdf->get_mpdf()->WriteHTML($stylesheet, 1);
+			
+		$pdf->get_mpdf()->SetTitle(Helpers_Const::APPNAME.' - Recibo');
+		$pdf->get_mpdf()->SetSubject('Recibo');
+		$pdf->get_mpdf()->SetAuthor(Helpers_Const::APPNAME);
+		$pdf->get_mpdf()->SetCreator(Helpers_Const::APPNAME);
+		
+		$pdf->title = Helpers_Const::APPNAME.' - Recibo';
+		$pdf->filename = Helpers_Const::APPNAME.' - recibo.pdf';
 		
 		$pdf->_id = $id;
 		

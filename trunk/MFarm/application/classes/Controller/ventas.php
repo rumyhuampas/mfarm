@@ -71,12 +71,13 @@ class Controller_Ventas extends Controller {
 	}
 
 	public function action_addpago(){
-		$idventa = $this->request->param('id'); 
+		$idventa = $this->request->param('id');
 		if(!isset($_POST['monto'])){
 			$view=View::factory('addpago');
 			$view->title = Helpers_Const::APPNAME." - ABM Venta";
 			$view->menuid = Helpers_Const::MENUVENTASID;
 			$view->venta = Helpers_Venta::get($idventa);
+			$view->_pagoid = $this->request->param('secid');
 			$view->tpagos = Helpers_Combos::getTiposDePagos();
 			$view->pagos = Helpers_VentaPago::get($idventa);
 			$this->response->body($view->render());
@@ -97,16 +98,30 @@ class Controller_Ventas extends Controller {
 				$ventapago->Tipo = $_POST['tpago'];
 				$ventapago->Monto = $_POST['monto'];
 				$ventapago->Saldo = $newsaldo;
+				$ventapago->Concepto = $_POST['conc'];
 				$ventapago->Observaciones = $_POST['obs'];
 				$ventapago->create();
 				
-				HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],
-					'msgtype' => 'msgsuccess', 'msgtext' => 'Pago agregado con exito.')));
+				echo URL::base().Route::get('msgsecid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 
+					'id' => $_POST['idventa'], 'secid' => $ventapago->Id,
+					'msgtype' => 'msgsuccess', 'msgtext' => 'Pago agregado con exito.'));
 			}
 			else{
-				HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],
-					'msgtype' => 'msgerror', 'msgtext' => 'El monto no puede ser mayor al saldo.')));
+				echo URL::base().Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],
+					'msgtype' => 'msgerror', 'msgtext' => 'El monto no puede ser mayor al saldo.'));
 			}
+		}
+	}
+
+	public function action_printrecibo(){
+		$pago = ORM::factory('ventapago', $_POST['pagoid']);
+		if($pago->loaded()){
+			$pdf = Helpers_Reportes::createRecibo($pago->Id);
+			$this->response->headers(array('Content-Type' => 'application/pdf'));
+			Helpers_Reportes::show($pdf);
+		}
+		else{
+			//errorpdf
 		}
 	}
 }

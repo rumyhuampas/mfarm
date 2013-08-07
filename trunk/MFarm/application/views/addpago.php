@@ -1,7 +1,7 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
 <script src=<?php echo URL::base()."/scripts/custom/datepicker.js" ?> type="text/javascript"></script>
-<script src=<?php echo URL::base()."/scripts/custom/newventa.js" ?> type="text/javascript"></script>
+<script src=<?php echo URL::base()."/scripts/custom/addpago.js" ?> type="text/javascript"></script>
 
 <body class="loggedin">
 
@@ -85,6 +85,12 @@
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
+                            	echo Form::label('conc', 'Concepto');
+                            	echo '<span class="field">';
+									echo '<textarea name="conc" id="conc" class="longinput" rows="5" cols="80"></textarea>';
+								echo '</span>';
+	                        echo '</p>';
+							echo '<p>';
                             	echo Form::label('obs', 'Observaciones');
                             	echo '<span class="field">';
 									echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80"></textarea>';
@@ -93,7 +99,8 @@
 							
 	                        
 	                        echo '<p class="stdformbutton">';
-								echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2'));
+								echo '<span class="stdbtn btn_black" id="btnsave">Guardar</span>';
+								//echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2'));
 	                        echo '</p>';
 	                    echo Form::close();
 						?>
@@ -114,6 +121,7 @@
 			                        <th class="head1">Monto</th>
 			                        <th class="head0">Saldo</th>
 			                        <th class="head1">Observaciones</th>
+			                        <th class="head0">&nbsp;</th>
 			                    </tr>
 			                </thead>
 			                <tfoot>
@@ -124,6 +132,7 @@
 			                        <th class="head1">Monto</th>
 			                        <th class="head0">Saldo</th>
 			                        <th class="head1">Observaciones</th>
+			                        <th class="head0">&nbsp;</th>
 			                    </tr>
 			                </tfoot>
 			                <tbody>
@@ -137,9 +146,18 @@
 											echo '<td>'.$pago->Monto.'</td>';
 											echo '<td>'.$pago->Saldo.'</td>';
 											echo '<td>'.$pago->Observaciones.'</td>';
+											echo '<td class="center">';
+												echo Form::open('ventas/printrecibo', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintrecibo'.$pago->Id));
+													echo Form::hidden('pagoid', $pago->Id);
+													echo '<a href="#" name="reprint">Imprimir pago</a>';
+												echo Form::close();
+											echo '</td>';
 				                        echo '</tr>';
 									}
 	                    		}
+								if(isset($_pagoid)){
+									echo Form::hidden('_pagoid', $_pagoid);
+								}
 							?>
 			                </tbody>
 			            </table>
