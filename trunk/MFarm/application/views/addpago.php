@@ -12,6 +12,8 @@
      	<div class="mainwrapperinner">
          	
         	<?php include Kohana::find_file('views', '_menu'); ?>
+        	
+        	<?php include Kohana::find_file('views/dialogs', 'yesno'); ?>
         
         <div class="maincontent noright">
         	<div class="maincontentinner">
@@ -151,6 +153,11 @@
 													echo Form::hidden('pagoid', $pago->Id);
 													echo '<a href="#" name="reprint">Imprimir pago</a>';
 												echo Form::close();
+												echo Form::open('ventas/deletepago', array('method' => 'POST', 'id' => 'formdeletepago'));
+													echo Form::hidden('idventa', $venta->Id);
+													echo Form::hidden('pagoid', $pago->Id);
+													echo '<a href="#" id="activator" name="delete">Eliminar</a>';
+												echo Form::close();
 											echo '</td>';
 				                        echo '</tr>';
 									}
@@ -177,8 +184,7 @@
                         
      	</div><!--mainwrapperinner-->
     </div><!--mainwrapper-->
-	<!-- END OF MAIN CONTENT -->
-    
+	<!-- END OF MAIN CONTENT -->    
 
 </body>
 

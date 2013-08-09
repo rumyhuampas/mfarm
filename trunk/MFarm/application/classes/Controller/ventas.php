@@ -124,4 +124,24 @@ class Controller_Ventas extends Controller {
 			//errorpdf
 		}
 	}
+	
+	public function action_deletepago(){
+		if(isset($_POST['pagoid'])){
+			$venta = ORM::factory('venta', $_POST['idventa']);
+			$pago = ORM::factory('ventapago', $_POST['pagoid']);
+			if($pago->loaded() && $venta->loaded()){
+				$venta->Saldo = $venta->Saldo + $pago->Monto;
+				$venta->update();
+				
+				$pago->delete();
+				
+				HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],
+					'msgtype' => 'msgsuccess', 'msgtext' => 'Pago eliminado con exito.')));
+			}
+			else{
+				HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],
+					'msgtype' => 'msgerror', 'msgtext' => 'Ocurrio un error al eliminar.')));
+			}
+		}
+	}
 }
