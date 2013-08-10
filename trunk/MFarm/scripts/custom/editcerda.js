@@ -92,13 +92,6 @@ jQuery(document).ready(function(){
 		jQuery('#desteteform').submit();
 	});
 	
-	/------- WIDGET LIST HOVER --------/
-	jQuery('.formwidgetlist a').hover(function(){
-		jQuery(this).switchClass('default', 'hover');
-	},function(){
-		jQuery(this).switchClass('hover', 'default');
-	});
-	
 	function showTooltip(x, y, contents) {
 		jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
 			position: 'absolute',

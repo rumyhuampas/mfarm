@@ -17,7 +17,6 @@ class Controller_Ventas extends Controller {
 			$cliente = Helpers_Cliente::get($_POST['cuil']);
 			$venta->IdCliente = $cliente->Id;
 			$venta->Total = $_POST['total'];
-			$venta->Saldo = $_POST['total'];
 			$venta->create();
 			
 			$prodtable = $_POST['prodtable'];
@@ -86,18 +85,11 @@ class Controller_Ventas extends Controller {
 			$saldo = (float)$_POST['saldo'];
 			$monto = (float)$_POST['monto'];
 			if($saldo >= $monto){
-				$newsaldo = $saldo - $monto;
-				
-				$venta = Helpers_Venta::get($_POST['idventa']);
-				$venta->Saldo = $newsaldo;
-				$venta->update();
-				
 				$ventapago = ORM::factory('ventapago');
 				$ventapago->Fecha = date('Y-m-d', strtotime($_POST['date']));
-				$ventapago->IdVenta = $venta->Id;
+				$ventapago->IdVenta = $_POST['idventa'];
 				$ventapago->Tipo = $_POST['tpago'];
 				$ventapago->Monto = $_POST['monto'];
-				$ventapago->Saldo = $newsaldo;
 				$ventapago->Concepto = $_POST['conc'];
 				$ventapago->Observaciones = $_POST['obs'];
 				$ventapago->create();
@@ -127,12 +119,8 @@ class Controller_Ventas extends Controller {
 	
 	public function action_deletepago(){
 		if(isset($_POST['pagoid'])){
-			$venta = ORM::factory('venta', $_POST['idventa']);
 			$pago = ORM::factory('ventapago', $_POST['pagoid']);
-			if($pago->loaded() && $venta->loaded()){
-				$venta->Saldo = $venta->Saldo + $pago->Monto;
-				$venta->update();
-				
+			if($pago->loaded()){
 				$pago->delete();
 				
 				HTTP::redirect(Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $_POST['idventa'],

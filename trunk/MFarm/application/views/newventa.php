@@ -28,6 +28,13 @@
                     	<h2 class="form"><span>Nueva venta</span></h2>
                     </div><!--contenttitle-->
                     
+                    <br clear="all" />
+                	<ul class="formwidgetlist">
+						<li><a href="<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmclientes', 'action' => 'new')); ?>" 
+							id="clientelink" class="add">Nuevo cliente</a></li>
+					</ul>
+					<br clear="all" />
+					
                     <?php
                     echo Form::open('ventas/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcliente'));
                     	echo '<p>';
@@ -199,7 +206,7 @@
 			                            echo '<td>'.$cliente->CUIL.'</td>';
 			                            echo '<td>'.$cliente->Nombre.'</td>';
 										echo '<td>'.$venta->Total.'</td>';
-										echo '<td>'.$venta->Saldo.'</td>';
+										echo '<td>'.Helpers_VentaPago::getSaldoVenta($venta->Id).'</td>';
 										echo '<td class="center">';
 											echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
 												echo Form::hidden('ventaid', $venta->Id);

@@ -134,6 +134,19 @@ jQuery(document).ready(function(){
 		}
 	});
 	
+	/*------- WIDGET LIST HOVER --------*/
+	jQuery('.widgetlist a').hover(function(){
+		jQuery(this).switchClass('default', 'hover');
+	},function(){
+		jQuery(this).switchClass('hover', 'default');
+	});
+	
+	jQuery('.formwidgetlist a').hover(function(){
+		jQuery(this).switchClass('default', 'hover');
+	},function(){
+		jQuery(this).switchClass('hover', 'default');
+	});
+	
 	//wrap menu to em when click will return to true
 	//this code is required in order the code (next below this code) to work.
 

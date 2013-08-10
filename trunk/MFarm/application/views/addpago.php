@@ -71,7 +71,7 @@
 							echo '<p>';
 								echo Form::label('saldo', 'Saldo');
 								echo '<span class="field">';
-									echo Form::input('saldo', $venta->Saldo, array('type' => 'text', 'id' => 'saldo', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+									echo Form::input('saldo', Helpers_VentaPago::getSaldoVenta($venta->Id), array('type' => 'text', 'id' => 'saldo', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
 							echo '<p>';
@@ -146,7 +146,7 @@
 											echo '<td>'.$pago->Fecha.'</td>';
 											echo '<td>'.$pago->Tipo.'</td>';
 											echo '<td>'.$pago->Monto.'</td>';
-											echo '<td>'.$pago->Saldo.'</td>';
+											echo '<td>'.Helpers_VentaPago::getSaldo($pago->Id).'</td>';
 											echo '<td>'.$pago->Observaciones.'</td>';
 											echo '<td class="center">';
 												echo Form::open('ventas/printrecibo', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintrecibo'.$pago->Id));
@@ -156,7 +156,7 @@
 												echo Form::open('ventas/deletepago', array('method' => 'POST', 'id' => 'formdeletepago'));
 													echo Form::hidden('idventa', $venta->Id);
 													echo Form::hidden('pagoid', $pago->Id);
-													echo '<a href="#" id="activator" name="delete">Eliminar</a>';
+													echo '<a href="#" name="delete">Eliminar</a>';
 												echo Form::close();
 											echo '</td>';
 				                        echo '</tr>';
