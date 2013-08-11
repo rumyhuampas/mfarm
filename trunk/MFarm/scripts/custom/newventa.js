@@ -29,13 +29,13 @@ jQuery(document).ready(function(){
 	jQuery('#punit').focusout(function(){
 		var punit = parseFloat(jQuery('#punit').val());
 		var cant = parseFloat(jQuery('#cant').val());
-		var total = punit * cant;
+		var total = (punit * cant).toFixed(2);
 		jQuery('#totalprod').val(total);
 	});
 	jQuery('#cant').focusout(function(){
 		var punit = parseFloat(jQuery('#punit').val());
 		var cant = parseFloat(jQuery('#cant').val());
-		var total = punit * cant;
+		var total = (punit * cant).toFixed(2);
 		jQuery('#totalprod').val(total);
 	});
 	
