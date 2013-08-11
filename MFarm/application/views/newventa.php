@@ -18,6 +18,7 @@
             	
             	<ul class="maintabmenu">
                 	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'new')); ?>>Nueva venta</a></li>
+                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'history')); ?>>Historico de ventas</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -169,7 +170,7 @@
 					?>
 					
 					<div class="contenttitle radiusbottom0">
-		            	<h2 class="table"><span>Ventas</span></h2>
+		            	<h2 class="table"><span>Ventas activas</span></h2>
 		            </div><!--contenttitle-->
 		            <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 		            	<colgroup>
@@ -179,21 +180,23 @@
 		                <thead>
 		                	<tr>
 		                    	<th class="head0">ID</th>
-		                        <th class="head1">CUIL</th>
-		                        <th class="head0">Nombre</th>
-		                        <th class="head1">Total</th>
-		                        <th class="head0">Saldo</th>
-		                        <th class="head1">&nbsp;</th>
+		                    	<th class="head1">Fecha</th>
+		                        <th class="head0">CUIL</th>
+		                        <th class="head1">Nombre</th>
+		                        <th class="head0">Total</th>
+		                        <th class="head1">Saldo</th>
+		                        <th class="head0">&nbsp;</th>
 		                    </tr>
 		                </thead>
 		                <tfoot>
 		                    <tr>
 		                    	<th class="head0">ID</th>
-		                        <th class="head1">CUIL</th>
-		                        <th class="head0">Nombre</th>
-		                        <th class="head1">Total</th>
-		                        <th class="head0">Saldo</th>
-		                        <th class="head1">&nbsp;</th>
+		                    	<th class="head1">Fecha</th>
+		                        <th class="head0">CUIL</th>
+		                        <th class="head1">Nombre</th>
+		                        <th class="head0">Total</th>
+		                        <th class="head1">Saldo</th>
+		                        <th class="head0">&nbsp;</th>
 		                    </tr>
 		                </tfoot>
 		                <tbody>
@@ -203,6 +206,7 @@
 	                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
 		                    		echo '<tr>';
 			                            echo '<td>'.$venta->Id.'</td>';
+										echo '<td>'.$venta->Fecha.'</td>';
 			                            echo '<td>'.$cliente->CUIL.'</td>';
 			                            echo '<td>'.$cliente->Nombre.'</td>';
 										echo '<td>'.$venta->Total.'</td>';
