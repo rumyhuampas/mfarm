@@ -6,13 +6,13 @@
 		HTTP::redirect(URL::base()."../mmain/");
 		//HTTP::redirect(Route::get('default')->uri(array('controller' => 'login')));	
 	}
-	$_altasCount = count(Helpers_Cerda::getAltas('Now()'));
+	/*$_altasCount = count(Helpers_Cerda::getAltas('Now()'));
 	$_serviciosCount = count(Helpers_Cerda::getServicios(NULL, 'Now()'));
 	$_partosCount = count(Helpers_Cerda::getPartos(NULL, 'Now()'));
 	$_destetesCount = count(Helpers_Cerda::getDestetes(NULL, 'Now()'));
 	$_celosCount = count(Helpers_Cerda::getCelos(NULL,NULL,true,true));
 	$_probpartoCount = count(Helpers_Cerda::getProbPartos('Now()'));
-	$_eventsCount = $_altasCount + $_serviciosCount + $_partosCount + $_destetesCount + $_celosCount + $_probpartoCount;
+	$_eventsCount = $_altasCount + $_serviciosCount + $_partosCount + $_destetesCount + $_celosCount + $_probpartoCount;*/
 ?>
 
 <!-- START OF HEADER -->
