@@ -21,7 +21,7 @@ class Helpers_Cerda {
 		}
 	}
 	
-	public static function getAltas($desde = NULL){
+	/*public static function getAltas($desde = NULL){
 		if($desde == NULL){
 			$desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)';
 		}
@@ -53,7 +53,7 @@ class Helpers_Cerda {
 				->order_by('FechaServicio', 'DESC')->order_by('IdCerda', 'DESC')
 				->find_all();
 		}
-	}
+	}*/
 	
 	public static function getAudit($idCerda){
 		return ORM::factory('cerdaaudit')
@@ -148,7 +148,7 @@ class Helpers_Cerda {
 		}
 	}
 
-	public static function getCelos($desde = NULL, $hasta = NULL, $celo21 = NULL, $celo42 = NULL){
+	/*public static function getCelos($desde = NULL, $hasta = NULL, $celo21 = NULL, $celo42 = NULL){
 		$qry = 	ORM::factory('servicio')
 			->join('cerdas')->on('cerdas.Id', '=', 'servicio.IdCerda')->where('cerdas.IdEstado', '<>', Helpers_Estado::getEndStatus()->Id)
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'));
@@ -216,7 +216,7 @@ class Helpers_Cerda {
 			->select(array(DB::expr('(SELECT Numero FROM cerdas WHERE cerdas.id=servicio.IdCerda)'), 'Numero'))
 			->where(DB::expr('DATE(ProbableFechaParto)'), 'BETWEEN', DB::expr('DATE('.$desde.') AND DATE('.$hasta.')'))
 			->order_by('IdCerda', 'DESC')->find_all();
-	}
+	}*/
 	
 	public static function getLastModifications(){
 		return ORM::factory('cerdaaudit')

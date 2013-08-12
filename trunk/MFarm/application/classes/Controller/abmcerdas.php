@@ -49,8 +49,8 @@ class Controller_ABMCerdas extends Controller {
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
 				$view->audits = Helpers_Cerda::getAudit($cerda->Id);
-				$view->servicios = Helpers_Cerda::getServicios($cerda->Id);
-				$view->reps = Helpers_Cerda::getRepeticiones($cerda->Id);
+				//$view->servicios = Helpers_Cerda::getServicios($cerda->Id);
+				//$view->reps = Helpers_Cerda::getRepeticiones($cerda->Id);
 				$view->partos = Helpers_Cerda::getPartos($cerda->Id);
 				$view->lactancias = Helpers_Cerda::getLactancias($cerda->Id);
 				$view->destetes = Helpers_Cerda::getDestetes($cerda->Id);
