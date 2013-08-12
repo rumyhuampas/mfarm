@@ -1,4 +1,4 @@
-<div class="overlay" id="overlay" style="display:none;"></div>
+<div class="boxoverlay" id="overlay" style="display:none;"></div>
  
 <div class="box" id="box">
 	<h1>¿Esta seguro?</h1>

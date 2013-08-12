@@ -4,13 +4,13 @@ class Controller_ABMServicios extends Controller {
 
 	public function action_new(){
 		if(!isset($_POST['number'])){
-			$view = View::factory('newservicio');
-			$view->title = Helpers_Const::APPNAME." - ABM Servicio";
+			$view = View::factory('newprena');
+			$view->title = Helpers_Const::APPNAME." - ABM Prena";
 			$view->menuid = Helpers_Const::MENUPRENAID;
 			$this->response->body($view->render());
 		}
 		else{
-			$servicio = ORM::factory('servicio');
+			$servicio = ORM::factory('prena');
 			$servicio->IdCerda = $_POST['IdCerda'];
 			$servicio->FechaServicio = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$servicio->Macho = $_POST['male'];

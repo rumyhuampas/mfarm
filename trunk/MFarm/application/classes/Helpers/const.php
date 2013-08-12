@@ -8,7 +8,7 @@ class Helpers_Const {
 	const MENUINICIOID = '0';
 	const MENUABMID = '1';
 	const MENUCERDASID = '2';
-	const MENUSERVICIOSID = '3';
+	const MENUPRENAID = '3';
 	const MENUPARTOSID = '4';
 	const MENUDESTETESID = '5';
 	const MENULACTANCIAID = '6';
@@ -16,11 +16,11 @@ class Helpers_Const {
 	const MENUVENTASID = '8';
 	
 	/******** ESTADOS *********/
-	const ESTCELO = 'CELO';
-	const ESTMUERTA = 'MUERTA';	
-	const ESTVACIA = 'VACIA';	
-	const ESTPRENADA = 'PRENADA';
-	const ESTPOSTPARTO = 'POSTPARTO';
+	const ESTCACHORRA = 'CACHORRA PREPARACION';
+	const ESTGESTANTE = 'GESTANTE';
+	const ESTLACTANCIA = 'LACTANCIA';
+	const ESTVACA = 'VACIA';
+	const ESTMUERTA = 'MUERTA';
 	
 	/******** DATOS *********/
 	const DATOMODIF = 'MODIFICACIONES';
