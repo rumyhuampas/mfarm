@@ -116,6 +116,13 @@
 							echo '<p>';
 	                        	echo Form::label('estado', 'Estado');
 								echo '<span class="field">';
+									echo Form::input('estado', ORM::factory('estado', $cerda->IdEstado)->Nombre, 
+										array('type' => 'text', 'id' => 'estado', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
+	                            echo '</span>';
+	                        echo '</p>';
+							/*echo '<p>';
+	                        	echo Form::label('estado', 'Estado');
+								echo '<span class="field">';
 								if($cerda->IdEstado == Helpers_Estado::getEndStatus()->Id){
 									echo Form::select('estado', $estados, $cerda->IdEstado,
 										array('id' => 'cerdaestado', 'style' => 'background-color: #DDDDDD', 'disabled'));
@@ -125,7 +132,7 @@
 										array('id' => 'cerdaestado'));
 								}
 	                            echo '</span>';
-	                        echo '</p>';
+	                        echo '</p>';*/
 							echo '<p>';
 	                        	echo Form::label('weight', 'Peso');
 								echo '<span class="field">';

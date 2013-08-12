@@ -6,8 +6,8 @@
             	<li id=<?php echo Helpers_Const::MENUINICIOID; ?> menuid=<?php echo $menuid ?>><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'home')); ?> class="dashboard"><span>Inicio</span></a></li>
                 <li id=<?php echo Helpers_Const::MENUABMID; ?> menuid=<?php echo $menuid ?>><a href="#" class="editor menudrop"><span>ABM</span></a>
                 	<ul>
-            			<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmestados', 'action' => 'new')); ?>><span>ABM de Estados</span></a></li>
+            			<!--<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmestados', 'action' => 'new')); ?>><span>ABM de Estados</span></a></li>-->
                 		<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'abmclientes', 'action' => 'new')); ?>><span>ABM de Clientes</span></a></li>
                     </ul>
@@ -22,8 +22,10 @@
                 			->uri(array('controller' => 'abmcerdacelos', 'action' => 'new')); ?>><span>Repeticion de celo</span></a></li>
                     </ul>
                 </li>
-                <li id=<?php echo Helpers_Const::MENUSERVICIOSID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pipette menudrop"><span>Servicios</span></a>
+                <li id=<?php echo Helpers_Const::MENUPRENAID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pipette menudrop"><span>Prenas</span></a>
                 	<ul>
+                		<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmprenas', 'action' => 'new')); ?>><span>Nueva prena</span></a></li>
             			<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'abmservicios', 'action' => 'new')); ?>><span>Nuevo servicio</span></a></li>
                     </ul>

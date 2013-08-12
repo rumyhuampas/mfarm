@@ -1354,7 +1354,7 @@ a.btn_table { background-position: -82px -480px; }
 #confirmBox .blue:hover{background-color: #aaa;}*/
 
 /**************** MODAL DIALOG **********************/  
-.overlay{
+.boxoverlay{
   	background-color:#EBECFF;
   	opacity:0.9;
     position:fixed;

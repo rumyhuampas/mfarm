@@ -33,12 +33,12 @@
 							echo Form::input('number', '', array('type' => 'text', 'id' => 'number', 'class' => 'smallinput'));
                             echo '</span>';
                         echo '</p>';
-						echo '<p>';
+						/*echo '<p>';
                         	echo Form::label('estado', 'Estado');
 							echo '<span class="field">';
 							echo Form::select('estado', $estados);
                             echo '</span>';
-                        echo '</p>';
+                        echo '</p>';*/
 						echo '<p>';
                         	echo Form::label('weight', 'Peso');
 							echo '<span class="field">';

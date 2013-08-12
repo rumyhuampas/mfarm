@@ -7,7 +7,7 @@ class Controller_ABMCerdas extends Controller {
 			$view = View::factory('newcerda');
 			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
 			$view->menuid = Helpers_Const::MENUCERDASID;
-			$view->estados = Helpers_Combos::getEstados();
+			//$view->estados = Helpers_Combos::getEstados();
 			$view->cerdas = Helpers_Cerda::get();
 			$this->response->body($view->render());
 		}
@@ -15,7 +15,7 @@ class Controller_ABMCerdas extends Controller {
 			if(!Helpers_Cerda::exists($_POST['number'])){
 				$cerda = ORM::factory('cerda');
 				$cerda->Numero = $_POST['number'];
-				$cerda->IdEstado = $_POST['estado'];
+				$cerda->IdEstado = Helpers_Estado::get(Helpers_Const::ESTCACHORRA)->Id;
 				$cerda->Peso = $_POST['weight'];
 				$cerda->Modified_On = DB::expr('Now()');
 				$cerda->Created_On = DB::expr('Now()');
@@ -24,7 +24,7 @@ class Controller_ABMCerdas extends Controller {
 				$cerdaaudit = ORM::factory('cerdaaudit');
 				$cerdaaudit->IdCerda = $cerda->Id;
 				$cerdaaudit->Fecha = DB::expr('Now()');
-				$cerdaaudit->IdEstado = $_POST['estado'];
+				$cerdaaudit->IdEstado = Helpers_Estado::get(Helpers_Const::ESTCACHORRA)->Id;
 				$cerdaaudit->Peso = $_POST['weight'];
 				$cerdaaudit->Observaciones = $_POST['obs'];
 				$cerdaaudit->create();
@@ -44,7 +44,7 @@ class Controller_ABMCerdas extends Controller {
 			$view = View::factory('editcerda');
 			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
 			$view->menuid = Helpers_Const::MENUCERDASID;
-			$view->estados = Helpers_Combos::getEstados();
+			//$view->estados = Helpers_Combos::getEstados();
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
@@ -85,12 +85,12 @@ class Controller_ABMCerdas extends Controller {
 			$view=View::factory('editcerda');
 			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
 			$view->menuid = Helpers_Const::MENUCERDASID;
-			$view->estados = Helpers_Combos::getEstados();
+			//$view->estados = Helpers_Combos::getEstados();
 			$this->response->body($view->render());
 		}
 		else{
 			$cerda = Helpers_Cerda::get($_POST['number']);
-			$cerda->IdEstado = $_POST['estado'];
+			//$cerda->IdEstado = $_POST['estado'];
 			$cerda->Peso = $_POST['weight'];
 			$cerda->Modified_On = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$cerda->Update();
@@ -98,7 +98,7 @@ class Controller_ABMCerdas extends Controller {
 			$cerdaaudit = ORM::factory('cerdaaudit');
 			$cerdaaudit->IdCerda = $cerda->Id;
 			$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			$cerdaaudit->IdEstado = $_POST['estado'];
+			//$cerdaaudit->IdEstado = $_POST['estado'];
 			$cerdaaudit->Peso = $_POST['weight'];
 			$cerdaaudit->Observaciones = $_POST['obs'];
 			$cerdaaudit->create();
