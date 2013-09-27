@@ -20,6 +20,7 @@
             	
             	<ul class="maintabmenu">
                 	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'new')); ?>>Nueva venta</a></li>
+                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'history')); ?>>Historico de ventas</a></li>
                 	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'addpago')); ?>>Agregar pago</a></li>
                 </ul><!--maintabmenu-->                
             	                
@@ -145,8 +146,8 @@
 				                            echo '<td>'.$pago->Id.'</td>';
 											echo '<td>'.$pago->Fecha.'</td>';
 											echo '<td>'.$pago->Tipo.'</td>';
-											echo '<td>'.$pago->Monto.'</td>';
-											echo '<td>'.Helpers_VentaPago::getSaldo($pago->Id).'</td>';
+											echo '<td>$ '.$pago->Monto.'</td>';
+											echo '<td>$ '.Helpers_VentaPago::getSaldo($pago->Id).'</td>';
 											echo '<td>'.$pago->Observaciones.'</td>';
 											echo '<td class="center">';
 												echo Form::open('ventas/printrecibo', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintrecibo'.$pago->Id));
