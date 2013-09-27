@@ -201,6 +201,7 @@
 		                </tfoot>
 		                <tbody>
 		                <?php
+		                	echo $ventas->count();
                     		if(isset($ventas)){ 
 	                    		foreach($ventas as $venta){
 	                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
@@ -209,8 +210,8 @@
 										echo '<td>'.$venta->Fecha.'</td>';
 			                            echo '<td>'.$cliente->CUIL.'</td>';
 			                            echo '<td>'.$cliente->Nombre.'</td>';
-										echo '<td>'.$venta->Total.'</td>';
-										echo '<td>'.Helpers_VentaPago::getSaldoVenta($venta->Id).'</td>';
+										echo '<td>$ '.$venta->Total.'</td>';
+										echo '<td>$ '.Helpers_VentaPago::getSaldoVenta($venta->Id).'</td>';
 										echo '<td class="center">';
 											echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
 												echo Form::hidden('ventaid', $venta->Id);
