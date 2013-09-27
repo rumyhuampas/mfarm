@@ -201,7 +201,6 @@
 		                </tfoot>
 		                <tbody>
 		                <?php
-		                	echo $ventas->count();
                     		if(isset($ventas)){ 
 	                    		foreach($ventas as $venta){
 	                    			$cliente = ORM::factory('cliente', $venta->IdCliente);

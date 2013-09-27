@@ -74,13 +74,16 @@
 			                            echo '<td>'.$venta->Fecha.'</td>';
 			                            echo '<td>'.$cliente->CUIL.'</td>';
 			                            echo '<td>'.$cliente->Nombre.'</td>';
-										echo '<td>'.$venta->Total.'</td>';
-										echo '<td>'.$saldo.'</td>';
+										echo '<td>$ '.$venta->Total.'</td>';
+										echo '<td>$ '.$saldo.'</td>';
 										echo '<td class="center">';
 											echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
 												echo Form::hidden('ventaid', $venta->Id);
 												echo '<a href="#" name="reprint">Imprimir factura</a>';
 											echo Form::close();
+											echo '<a href='.URL::base().Route::get('default')
+			                            		->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
+			                            		Ver pagos</a>';
 										echo '</td>';
 			                        echo '</tr>';
 								}
