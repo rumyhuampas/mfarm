@@ -35,24 +35,26 @@
 		                </colgroup>
 		                <thead>
 		                	<tr>
-		                    	<th class="head0">ID</th>
-		                    	<th class="head1">Fecha</th>
-		                        <th class="head0">CUIL</th>
-		                        <th class="head1">Nombre</th>
-		                        <th class="head0">Total</th>
-		                        <th class="head1">Saldo</th>
-		                        <th class="head0">&nbsp;</th>
+		                		<th class="head0">Finalizada</th>
+		                    	<th class="head1">ID</th>
+		                    	<th class="head0">Fecha</th>
+		                        <th class="head1">CUIL</th>
+		                        <th class="head0">Nombre</th>
+		                        <th class="head1">Total</th>
+		                        <th class="head0">Saldo</th>
+		                        <th class="head1">&nbsp;</th>
 		                    </tr>
 		                </thead>
 		                <tfoot>
 		                    <tr>
-		                    	<th class="head0">ID</th>
-		                    	<th class="head1">Fecha</th>
-		                        <th class="head0">CUIL</th>
-		                        <th class="head1">Nombre</th>
-		                        <th class="head0">Total</th>
-		                        <th class="head1">Saldo</th>
-		                        <th class="head0">&nbsp;</th>
+		                    	<th class="head0">Finalizada</th>
+		                    	<th class="head1">ID</th>
+		                    	<th class="head0">Fecha</th>
+		                        <th class="head1">CUIL</th>
+		                        <th class="head0">Nombre</th>
+		                        <th class="head1">Total</th>
+		                        <th class="head0">Saldo</th>
+		                        <th class="head1">&nbsp;</th>
 		                    </tr>
 		                </tfoot>
 		                <tbody>
@@ -60,13 +62,20 @@
                     		if(isset($ventas)){ 
 	                    		foreach($ventas as $venta){
 	                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
+									$saldo = Helpers_VentaPago::getSaldoVenta($venta->Id);
 		                    		echo '<tr>';
+										if($saldo > 0){
+											echo '<td width="5%"></td>';
+										}
+										else{
+											echo '<td align="center"><img src='.URL::base()."assets/images/icons/default/ok.png".' alt=""></img></td>';
+										}
 			                            echo '<td>'.$venta->Id.'</td>';
 			                            echo '<td>'.$venta->Fecha.'</td>';
 			                            echo '<td>'.$cliente->CUIL.'</td>';
 			                            echo '<td>'.$cliente->Nombre.'</td>';
 										echo '<td>'.$venta->Total.'</td>';
-										echo '<td>'.Helpers_VentaPago::getSaldoVenta($venta->Id).'</td>';
+										echo '<td>'.$saldo.'</td>';
 										echo '<td class="center">';
 											echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
 												echo Form::hidden('ventaid', $venta->Id);
