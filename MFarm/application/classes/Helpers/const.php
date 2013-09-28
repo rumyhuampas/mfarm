@@ -71,4 +71,10 @@ class Helpers_Const {
 	const TPEFECTIVO = 'Efectivo';
 	const TPCHEQUE = 'Cheque';
 	const TPDEPOSITO = 'Deposito en cuenta';
+	
+	/************* USER PROFILE ***************/
+	const UPADMIN = 'ADMIN';
+	const UPVENTA = 'VENTA';
+	const UPGRANJA = 'GRANJA';
+	const UPESTADISTICO = 'ESTADISTICO';
 }
