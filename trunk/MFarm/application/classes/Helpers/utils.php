@@ -17,4 +17,8 @@ class Helpers_Utils {
 		    //echo date('m/d/Y', strtotime($year."W".$week_number.$day))."\n";
 		}*/
 	}
+	
+	public static function strContains($str, $val){
+		return strpos($str, $val) !== false;
+	}
 }

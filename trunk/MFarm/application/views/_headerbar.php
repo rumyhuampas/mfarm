@@ -28,6 +28,9 @@
           
         <div class="headright">
         	<div class="headercolumn">&nbsp;</div>
+        	<?php
+        	if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN)){
+        	?>
         	<div id="searchPanel" class="headercolumn">
             	<div class="searchbox">
                     <form action="<?php echo URL::base().'abmcerdas/search' ?>" method="post">
@@ -35,6 +38,9 @@
                     </form>
                 </div><!--searchbox-->
             </div><!--headercolumn-->
+            <?php
+            }
+            ?>
         	
         	
         	<div id="notiPanel" class="headercolumn">
@@ -71,8 +77,14 @@
                 <div class="userdrop">
                     <ul>
                         <li><a href=<?php echo URL::base()."../mmain/abmusers/edit" ?>>Perfil</a></li>
+                        <?php
+		                if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN)){
+		                ?>
                         <li><a href=<?php echo URL::base()."../mmain/abmusers/new" ?>>Usuarios del sistema</a></li>
                         <li><a href=<?php echo URL::base()."../mfarm/config/index" ?>>Configuracion</a></li>
+                        <?php
+						}
+                        ?>
                         <li><a href=<?php echo URL::base()."../mmain/welcome" ?> >Menu principal</a></li>
                         <!--<li><a href=<?php echo URL::base()."../mmain/login/exit" ?> >Salir</a></li>-->
                     </ul>
