@@ -5,7 +5,8 @@
     		<ul>
             	<li id=<?php echo Helpers_Const::MENUINICIOID; ?> menuid=<?php echo $menuid ?>><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'home')); ?> class="dashboard"><span>Inicio</span></a></li>
                 <?php
-                if($_userprofile == Helpers_Const::UPADMIN || $_userprofile == Helpers_Const::UPVENTA){
+                if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN) ||
+                	Helpers_Utils::strContains($_userprofile, Helpers_Const::UPVENTA)){
                 ?>
                 <li id=<?php echo Helpers_Const::MENUABMID; ?> menuid=<?php echo $menuid ?>><a href="#" class="editor menudrop"><span>ABM</span></a>
                 	<ul>
@@ -19,7 +20,8 @@
                 }
                 ?>
                 <?php
-                if($_userprofile == Helpers_Const::UPADMIN || $_userprofile == Helpers_Const::UPGRANJA){
+                if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN) ||
+                	Helpers_Utils::strContains($_userprofile, Helpers_Const::UPGRANJA)){
                 ?>
                 <li id=<?php echo Helpers_Const::MENUCERDASID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pig menudrop"><span>Cerdas</span></a>
                 	<ul>
@@ -61,7 +63,8 @@
                 }
                 ?>
                 <?php
-                if($_userprofile == Helpers_Const::UPADMIN || $_userprofile == Helpers_Const::UPESTADISTICO){
+                if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN) ||
+                	Helpers_Utils::strContains($_userprofile, Helpers_Const::UPESTADISTICO)){
                 ?>
                 <li id=<?php echo Helpers_Const::MENUREPORTESID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pdf menudrop"><span>Reportes</span></a>
                 	<ul>
@@ -75,7 +78,8 @@
                 }
                 ?>
                 <?php
-                if($_userprofile == Helpers_Const::UPADMIN || $_userprofile == Helpers_Const::UPVENTA){
+                if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN) ||
+                	Helpers_Utils::strContains($_userprofile, Helpers_Const::UPVENTA)){
                 ?>
                 <li id=<?php echo Helpers_Const::MENUVENTASID; ?> menuid=<?php echo $menuid ?>><a href="#" class="sale menudrop"><span>Ventas</span></a>
                 	<ul>
