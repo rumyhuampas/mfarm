@@ -10,18 +10,22 @@ class Controller_ABMPrenas extends Controller {
 			$this->response->body($view->render());
 		}
 		else{
-			$servicio = ORM::factory('prena');
-			$servicio->IdCerda = $_POST['IdCerda'];
+			$prena = ORM::factory('prena');
+			$prena->IdCerda = $_POST['IdCerda'];
+			$prena->ProbFechaCelo21 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get21daysperiod());
+			$prena->ProbFechaCelo42 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get42daysperiod());
+			$prena->ProbFechaParto = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::getbirthperiod());
+			$prena->create();
+			
+			$servicio = ORM::factory('servicio');
+			$servicio->IdPrena = $prena->Id;
 			$servicio->FechaServicio = date('Y-m-d H:i:s', strtotime($_POST['date']));
 			$servicio->Macho = $_POST['male'];
-			$servicio->ProbableFechaCelo21 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get21daysperiod());
-			$servicio->ProbableFechaCelo42 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get42daysperiod());
-			$servicio->ProbableFechaParto = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::getbirthperiod());
 			$servicio->Observaciones = $_POST['obs'];
 			$servicio->create();
 			
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmservicios', 'action' => 'new',
-				'msgtype' => 'msgsuccess', 'msgtext' => 'Servicio agregado con exito.')));	
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmprenas', 'action' => 'new',
+				'msgtype' => 'msgsuccess', 'msgtext' => 'Prena agregada con exito.')));	
 		}
 	}
 
@@ -37,12 +41,12 @@ class Controller_ABMPrenas extends Controller {
 				$this->response->body($view->render());
 			}
 			else{
-				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmservicios', 'action' => 'new',
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmprenas', 'action' => 'new',
 					'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
 			}
 		}
 		else{
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmservicios', 'action' => 'new',
+			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmprenas', 'action' => 'new',
 				'msgtype' => 'msgalert', 'msgtext' => 'La cerda no existe.')));
 		}
 	}
