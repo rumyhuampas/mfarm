@@ -47,7 +47,7 @@
 							if($cerda->IdEstado != $IdEstadoCachorra){
 								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 							    	echo '<a class="close"></a>';
-							    	echo '<p>La cerda no se encuentra en celo.</p>';
+							    	echo '<p>La cerda no se encuentra en cachorra preparacion.</p>';
 								echo '</div>';
 							}
 						
@@ -108,7 +108,7 @@
 						?>
 						
 						<div class="contenttitle radiusbottom0">
-		                	<h2 class="table"><span>Servicios</span></h2>
+		                	<h2 class="table"><span>Prenas</span></h2>
 		                </div><!--contenttitle-->
 		                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 		                    <colgroup>
@@ -117,23 +117,19 @@
 		                    </colgroup>
 		                    <thead>
 		                        <tr>
-		                            <th class="head0">Fecha de servicio</th>
-		                            <th class="head1">Macho</th>
+		                            <th class="head0">Fecha de prena</th>
 		                            <th class="head0">Probable fecha de celo 21</th>
 		                            <th class="head1">Probable fecha de celo 42</th>
 		                            <th class="head0">Probable fecha de parto</th>
-		                            <th class="head1">Observaciones</th>
 		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
 		                        <tr>
 		                            <th class="head0">Fecha de servicio</th>
-		                            <th class="head1">Macho</th>
 		                            <th class="head0">Probable fecha de celo 21</th>
 		                            <th class="head1">Probable fecha de celo 42</th>
-		                            <th class="head0">Probable fecha de parto</th>
-		                            <th class="head1">Observaciones</th>
+		                            <th class="head0">Probable fecha de parto</th>s
 		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </tfoot>
