@@ -11,6 +11,7 @@ class Helpers_Combos {
 	}
 	
 	public static function getTiposDePagos(){
-		return array(Helpers_Const::TPEFECTIVO, Helpers_Const::TPCHEQUE, Helpers_Const::TPDEPOSITO);
+		return array(Helpers_Const::TPEFECTIVO => Helpers_Const::TPEFECTIVO, Helpers_Const::TPCHEQUE => Helpers_Const::TPCHEQUE,
+			Helpers_Const::TPDEPOSITO => Helpers_Const::TPDEPOSITO);
 	}
 }
