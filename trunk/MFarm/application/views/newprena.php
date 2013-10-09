@@ -16,7 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmservicios', 'action' => 'new')); ?>>Nuevo servicio</a></li>
+                	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmservicios', 'action' => 'new')); ?>>Nueva prena</a></li>
                 </ul><!--maintabmenu-->                
             	                
                 <div class="content">
@@ -24,10 +24,10 @@
                 	<?php include Kohana::find_file('views', '_message'); ?>
                     
                     <div class="contenttitle">
-                    	<h2 class="form"><span>Nuevo servicio</span></h2>
+                    	<h2 class="form"><span>Nueva prena</span></h2>
                     </div><!--contenttitle-->
                     
-                    <?php echo Form::open('abmservicios/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));
+                    <?php echo Form::open('abmprenas/search', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formsearchcerda'));
                     	echo '<p>';
 							echo Form::label('numbersearch', 'Numero de cerda');
 							echo '<span class="field">';
@@ -40,11 +40,11 @@
                     echo Form::close();
 
 					if(isset($cerda) && $cerda->loaded()){
-						echo Form::open('abmservicios/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewservicio'));
+						echo Form::open('abmprenas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewservicio'));
 							
-							$EstadoCelo = Helpers_Const::ESTCELO;
-							$IdEstadoCelo = Helpers_Estado::get($EstadoCelo)->Id;
-							if($cerda->IdEstado != $IdEstadoCelo){
+							$EstadoCachorra = Helpers_Const::ESTCACHORRA;
+							$IdEstadoCachorra = Helpers_Estado::get($EstadoCachorra)->Id;
+							if($cerda->IdEstado != $IdEstadoCachorra){
 								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 							    	echo '<a class="close"></a>';
 							    	echo '<p>La cerda no se encuentra en celo.</p>';
@@ -59,7 +59,7 @@
 									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
-							if($cerda->IdEstado == $IdEstadoCelo){
+							if($cerda->IdEstado == $IdEstadoCachorra){
 								echo '<p>';
 									echo Form::label('date', 'Fecha');
 									echo '<span class="field">';
@@ -76,7 +76,7 @@
 							echo '<p>';
 								echo Form::label('male', 'Macho');
 								echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoCelo){
+								if($cerda->IdEstado != $IdEstadoCachorra){
 									echo Form::input('male', '', array('type' => 'text', 'id' => 'male', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								}
 								else{
@@ -87,7 +87,7 @@
 							echo '<p>';
                             	echo Form::label('obs', 'Observaciones');
                             	echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoCelo){
+								if($cerda->IdEstado != $IdEstadoCachorra){
                             		echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80" style="background-color: #DDDDDD" readonly></textarea>';
 								}
 								else{
@@ -97,7 +97,7 @@
 	                        echo '</p>';
 	                        
 	                        echo '<p class="stdformbutton">';
-								if($cerda->IdEstado != $IdEstadoCelo){
+								if($cerda->IdEstado != $IdEstadoCachorra){
 	                        		echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2', 'style' => 'background-color: #DDDDDD; color: #333333;', 'disabled'));
 								}
 								else{

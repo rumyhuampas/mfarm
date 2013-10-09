@@ -14,3 +14,18 @@
 2013-10-08 21:12:48 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected ')' ~ APPPATH\classes\Helpers\ventapago.php [ 42 ] in :
 2013-10-08 21:12:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
 #1 {main} in :
+2013-10-08 22:09:46 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Helpers_Cerda::getServicios() ~ APPPATH\classes\Controller\abmservicios.php [ 36 ] in :
+2013-10-08 22:09:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-10-08 22:11:14 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Helpers_Cerda::getServicios() ~ APPPATH\classes\Controller\abmservicios.php [ 36 ] in :
+2013-10-08 22:11:14 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-10-08 23:32:35 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Helpers_Cerda::getServicios() ~ APPPATH\classes\Controller\abmservicios.php [ 36 ] in :
+2013-10-08 23:32:35 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-10-08 23:32:59 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Helpers_Cerda::getServicios() ~ APPPATH\classes\Controller\abmservicios.php [ 36 ] in :
+2013-10-08 23:32:59 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2013-10-08 23:33:26 --- CRITICAL: ErrorException [ 1 ]: Undefined class constant 'ESTCELO' ~ APPPATH\views\newprena.php [ 45 ] in :
+2013-10-08 23:33:26 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
