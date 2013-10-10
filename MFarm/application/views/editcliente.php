@@ -16,6 +16,7 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
+            		<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmclientes', 'action' => 'list')); ?>>Clientes</a></li>
                 	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmclientes', 'action' => 'new')); ?>>Nuevo cliente</a></li>
                 	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmclientes', 'action' => 'edit')); ?>>Modificar cliente</a></li>
                 </ul><!--maintabmenu-->                

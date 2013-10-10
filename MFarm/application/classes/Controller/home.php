@@ -6,7 +6,17 @@ class Controller_Home extends Controller {
 	{
 		$view=View::factory('home');
 		$view->title = Helpers_Const::APPNAME.' - Inicio';
-		$view->menuid = Helpers_Const::MENUINICIOID;
+        if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN) ||
+        	Helpers_Utils::strContains($_userprofile, Helpers_Const::UPGRANJA)){
+			$view->menuid = Helpers_Const::MENUINICIOID;
+		}
+		else{
+			if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPVENTA)){
+        		$view=View::factory('newventa');
+				$view->title = Helpers_Const::APPNAME.' - Ventas';
+        		$view->menuid = Helpers_Const::MENUVENTASID;
+			}
+		}
 		$view->lastmodif = Helpers_Cerda::getLastModifications();
 		$view->maxweights = Helpers_Cerda::getMaxWeights();
 		$this->response->body($view->render());

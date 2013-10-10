@@ -2,6 +2,14 @@
 
 class Controller_ABMClientes extends Controller {
 
+	public function action_list(){
+		$view = View::factory('listcliente');
+			$view->title = Helpers_Const::APPNAME." - ABM Cliente";
+			$view->menuid = Helpers_Const::MENUABMID;
+			$view->clientes = Helpers_Cliente::get();
+			$this->response->body($view->render());
+	}
+	
 	public function action_new(){
 		if(!isset($_POST['cuil'])){
 			$view = View::factory('newcliente');

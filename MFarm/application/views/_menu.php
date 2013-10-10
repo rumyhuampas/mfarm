@@ -3,7 +3,14 @@
     
       	<div class="leftmenu">
     		<ul>
+    			<?php
+                if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN) ||
+                	Helpers_Utils::strContains($_userprofile, Helpers_Const::UPGRANJA)){
+                ?>
             	<li id=<?php echo Helpers_Const::MENUINICIOID; ?> menuid=<?php echo $menuid ?>><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'home')); ?> class="dashboard"><span>Inicio</span></a></li>
+            	<?php
+				}
+            	?>
                 <?php
                 if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPADMIN) ||
                 	Helpers_Utils::strContains($_userprofile, Helpers_Const::UPVENTA)){
@@ -13,7 +20,7 @@
             			<!--<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'abmestados', 'action' => 'new')); ?>><span>ABM de Estados</span></a></li>-->
                 		<li><a href=<?php echo URL::base().Route::get('default')
-                			->uri(array('controller' => 'abmclientes', 'action' => 'new')); ?>><span>ABM de Clientes</span></a></li>
+                			->uri(array('controller' => 'abmclientes', 'action' => 'list')); ?>><span>ABM de Clientes</span></a></li>
                     </ul>
                 </li>
                 <?php
