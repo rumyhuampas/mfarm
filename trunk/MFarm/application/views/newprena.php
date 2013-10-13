@@ -118,18 +118,18 @@
 		                    <thead>
 		                        <tr>
 		                            <th class="head0">Fecha de prena</th>
-		                            <th class="head0">Probable fecha de celo 21</th>
-		                            <th class="head1">Probable fecha de celo 42</th>
-		                            <th class="head0">Probable fecha de parto</th>
+		                            <th class="head1">Probable fecha de celo 21</th>
+		                            <th class="head0">Probable fecha de celo 42</th>
+		                            <th class="head1">Probable fecha de parto</th>
 		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
 		                        <tr>
 		                            <th class="head0">Fecha de servicio</th>
-		                            <th class="head0">Probable fecha de celo 21</th>
-		                            <th class="head1">Probable fecha de celo 42</th>
-		                            <th class="head0">Probable fecha de parto</th>s
+		                            <th class="head1">Probable fecha de celo 21</th>
+		                            <th class="head0">Probable fecha de celo 42</th>
+		                            <th class="head1">Probable fecha de parto</th>
 		                            <th class="head0">&nbsp;</th>
 		                        </tr>
 		                    </tfoot>
