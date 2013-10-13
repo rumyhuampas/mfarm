@@ -8,7 +8,11 @@
 		<h1 class="loadingtitle">Cargando</h1>
 	</div>
 
-	<?php include Kohana::find_file('views', '_headerbar'); ?>
+	<?php include Kohana::find_file('views', '_headerbar'); 
+		if(Helpers_Utils::strContains($_userprofile, Helpers_Const::UPVENTA)){
+			HTTP::redirect(Route::get('default')->uri(array('controller' => 'ventas', 'action' => 'new')));
+		}
+	?>
         
     <!-- START OF MAIN CONTENT -->
     <div class="mainwrapper">
