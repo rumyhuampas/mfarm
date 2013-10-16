@@ -15,6 +15,7 @@ class Controller_ABMPrenas extends Controller {
 			$prena->ProbFechaCelo21 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get21daysperiod());
 			$prena->ProbFechaCelo42 = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::get42daysperiod());
 			$prena->ProbFechaParto = date('Y-m-d H:i:s', strtotime($_POST['date']) + Helpers_Calendar::getbirthperiod());
+			$prena->Estado = Helpers_Const::ESTENCURSO;
 			$prena->create();
 			
 			$servicio = ORM::factory('servicio');
