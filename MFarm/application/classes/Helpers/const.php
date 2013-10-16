@@ -22,6 +22,9 @@ class Helpers_Const {
 	const ESTVACA = 'VACIA';
 	const ESTMUERTA = 'MUERTA';
 	
+	const ESTENCURSO = 'EN CURSO';
+	const ESTFINALIZADO = 'FINALIZADO';
+	
 	/******** DATOS *********/
 	const DATOMODIF = 'MODIFICACIONES';
 	const DATOSERVICIOS = 'SERVICIOS';
