@@ -36,7 +36,7 @@ class Controller_Ventas extends Controller {
 	}
 
 	public function action_search(){
-		if(isset($_POST['cuildnisearch']) && $_POST['cuildnisearch']){
+		if(isset($_POST['cuildnisearch']) && $_POST['cuildnisearch'] != ''){
 			$view = View::factory('newventa');
 			$view->title = Helpers_Const::APPNAME." - Ventas";
 			$view->menuid = Helpers_Const::MENUVENTASID;
