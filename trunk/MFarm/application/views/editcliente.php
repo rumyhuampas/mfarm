@@ -38,10 +38,30 @@
 							echo Form::input('cuildnisearch', '', array('type' => 'text', 'id' => 'cuildnisearch', 'class' => 'smallinput'));
                             echo '</span>';
 						echo '</p>';
+						echo '<p>';
+							echo Form::label('namesearch', 'Nombre');
+							echo '<span class="field">';
+							echo Form::input('namesearch', '', array('type' => 'text', 'id' => 'namesearch', 'class' => 'smallinput'));
+                            echo '</span>';
+						echo '</p>';
 						echo '<p class="stdformbutton">';
                         	echo Form::button('btnsearch', 'Buscar', array('class' => 'submit radius2'));
                         echo '</p>';
                     echo Form::close();
+					
+					if(isset($clientes)){
+						//<div class="widgetcontent padding0">
+						echo "<div class='contenttitle'>";
+		                	echo "<h2 class='table'><span>Seleccionar cliente</span></h2>";
+		                echo "</div><!--contenttitle-->";
+                            echo "<ul class='activitylist'>";
+								foreach($clientes as $c){
+                            		echo "<li class='user'><a href='#' name='clientresult' clientcuil='".$c->CUIL."'><strong>".$c->Nombre."</strong></a></li>";
+								}
+                            echo "</ul>";
+                        //</div>
+                        echo "<br clear='all' />";
+					} 
 
 					if(isset($cliente) && $cliente->loaded()){
 						echo Form::open('abmclientes/edit', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formeditcliente'));

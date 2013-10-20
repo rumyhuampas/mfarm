@@ -42,7 +42,7 @@ class Controller_ABMClientes extends Controller {
 	}
 
 	public function action_search(){
-		if(isset($_POST['cuildnisearch'])){
+		if(isset($_POST['cuildnisearch']) && $_POST['cuildnisearch'] != ''){
 			$view = View::factory('editcliente');
 			$view->title = Helpers_Const::APPNAME." - ABM Cliente";
 			$view->menuid = Helpers_Const::MENUABMID;
@@ -57,8 +57,24 @@ class Controller_ABMClientes extends Controller {
 			}
 		}
 		else{
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmclientes', 'action' => 'edit',
-				'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
+			if(isset($_POST['namesearch']) && $_POST['namesearch'] != ''){
+				$view = View::factory('editcliente');
+				$view->title = Helpers_Const::APPNAME." - ABM Cliente";
+				$view->menuid = Helpers_Const::MENUABMID;
+				$clientes = Helpers_Cliente::getByName($_POST['namesearch']);
+				$view->clientes = $clientes;
+				if(count($clientes) > 0){
+					$this->response->body($view->render());
+				}
+				else{
+					HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmclientes', 'action' => 'edit',
+						'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
+				}
+			}
+			else{
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'abmclientes', 'action' => 'edit',
+					'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));	
+			}
 		}
 	}
 

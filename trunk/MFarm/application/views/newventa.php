@@ -58,7 +58,7 @@
 					if(isset($clientes)){
 						//<div class="widgetcontent padding0">
 						echo "<div class='contenttitle'>";
-		                	echo "<h2 class='table'><span>Agregar producto</span></h2>";
+		                	echo "<h2 class='table'><span>Seleccionar cliente</span></h2>";
 		                echo "</div><!--contenttitle-->";
                             echo "<ul class='activitylist'>";
 								foreach($clientes as $c){
