@@ -18,4 +18,16 @@ class Helpers_Cliente {
 				->order_by('Nombre', 'ASC')->find_all();
 		}
 	}
+	
+	public static function getByName($name = NULL){
+		if($name != NULL){
+			return ORM::factory('cliente')
+				->where('Nombre', ' LIKE ', '%'.$name.'%')
+				->order_by('Nombre', 'ASC')->find_all();
+		}
+		else{
+			return ORM::factory('cliente')
+				->order_by('Nombre', 'ASC')->find_all();
+		}
+	}
 }

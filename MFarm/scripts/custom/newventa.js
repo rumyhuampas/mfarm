@@ -44,6 +44,14 @@ jQuery(document).ready(function(){
 		jQuery('#formprintfactura' + ventaid.attr('value')).submit();	
 	}
 	
+	jQuery('[name=clientresult]').click (function ()
+	{
+		if(jQuery(this).attr('clientcuil') != undefined){
+			jQuery('#cuildnisearch').val(jQuery(this).attr('clientcuil'));
+			jQuery('#formsearchcliente').submit();	
+		}
+	});
+	
 	jQuery('[name=reprint]').click (function ()
 	{
 		jQuery(this).closest("form").submit();

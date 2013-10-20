@@ -36,7 +36,7 @@ class Controller_Ventas extends Controller {
 	}
 
 	public function action_search(){
-		if(isset($_POST['cuildnisearch'])){
+		if(isset($_POST['cuildnisearch']) && $_POST['cuildnisearch']){
 			$view = View::factory('newventa');
 			$view->title = Helpers_Const::APPNAME." - Ventas";
 			$view->menuid = Helpers_Const::MENUVENTASID;
@@ -48,12 +48,29 @@ class Controller_Ventas extends Controller {
 			}
 			else{
 				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
-					'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
+					'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));	
 			}
 		}
 		else{
-			HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'edit',
-				'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
+			if(isset($_POST['namesearch']) && $_POST['namesearch'] != ''){
+				$view = View::factory('newventa');
+				$view->title = Helpers_Const::APPNAME." - Ventas";
+				$view->menuid = Helpers_Const::MENUVENTASID;
+				$view->ventas = Helpers_Venta::getActive();
+				$clientes = Helpers_Cliente::getByName($_POST['namesearch']);
+				$view->clientes = $clientes;
+				if(count($clientes) > 0){
+					$this->response->body($view->render());
+				}
+				else{
+					HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
+						'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
+				}
+			}
+			else{
+				HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
+					'msgtype' => 'msgalert', 'msgtext' => 'El cliente no existe.')));
+			}
 		}
 	}
 	
