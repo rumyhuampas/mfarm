@@ -17,7 +17,8 @@
         	<div class="maincontentinner">
             	
             	<ul class="maintabmenu">
-                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Nueva cerda</a></li>
+                	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'list')); ?>>Cerdas</a></li>
+        			<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Nueva cerda</a></li>
                 	<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'edit')); ?>>Modificar cerda</a></li>
                 </ul><!--maintabmenu-->                
             	                

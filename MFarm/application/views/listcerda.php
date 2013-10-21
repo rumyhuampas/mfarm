@@ -1,5 +1,7 @@
 <?php include Kohana::find_file('views', '_header'); ?>
 
+<script src=<?php echo URL::base()."/scripts/custom/listcerda.js" ?> type="text/javascript"></script>
+
 <body class="loggedin">
 
 	<?php include Kohana::find_file('views', '_headerbar'); ?>
@@ -14,55 +16,16 @@
         	<div class="maincontentinner">
         		
         		<ul class="maintabmenu">
-        			<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'list')); ?>>Cerdas</a></li>
-        			<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Nueva cerda</a></li>
+        			<li class="current"><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'list')); ?>>Cerdas</a></li>
+        			<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>>Nueva cerda</a></li>
                 	<li><a href=<?php echo URL::base().Route::get('default')->uri(array('controller' => 'abmcerdas', 'action' => 'edit')); ?>>Modificar cerda</a></li>
                 </ul><!--maintabmenu-->
             	                
                 <div class="content">
-                    
-                    <div class="contenttitle">
-                    	<h2 class="form"><span>Nueva cerda</span></h2>
-                    </div><!--contenttitle-->
-                    
-                    <?php include Kohana::find_file('views', '_message'); ?>
-                    
-                    <?php echo Form::open('abmcerdas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewcerda'));
-                    	echo '<p>';
-                        	echo Form::label('number', 'Numero de Cerda');
-							echo '<span class="field">';
-							echo Form::input('number', '', array('type' => 'text', 'id' => 'number', 'class' => 'smallinput'));
-                            echo '</span>';
-                        echo '</p>';
-						/*echo '<p>';
-                        	echo Form::label('estado', 'Estado');
-							echo '<span class="field">';
-							echo Form::select('estado', $estados);
-                            echo '</span>';
-                        echo '</p>';*/
-						echo '<p>';
-                        	echo Form::label('weight', 'Peso');
-							echo '<span class="field">';
-							echo Form::input('weight', '', array('type' => 'text', 'id' => 'weight', 'class' => 'smallinput'));
-                            echo '</span>';
-                        echo '</p>';
-						echo '<p>';
-                        	echo Form::label('obs', 'Observaciones');
-                        	echo '<span class="field">';
-								echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80"></textarea>';
-							echo '</span>';
-                        echo '</p>';
-                        
-                        echo '<p class="stdformbutton">';
-                        	echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2'));
-                        echo '</p>';
-                    echo Form::close();
-					?>
-					<!--
+					
 					<div class="contenttitle radiusbottom0">
 	                	<h2 class="table"><span>Cerdas</span></h2>
-	                </div>--><!--contenttitle-->
-	                <!--
+	                </div><!--contenttitle-->
 	                <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
 	                    <colgroup>
 	                        <col class="con0" />
@@ -87,7 +50,7 @@
 	                        </tr>
 	                    </tfoot>
 	                    <tbody>
-	                    	<?php /*foreach($cerdas as $cerda){
+	                    	<?php foreach($cerdas as $cerda){
 	                    		echo '<tr>';
 		                            echo '<td>'.$cerda->Numero.'</td>';
 									echo '<td>'.$cerda->Estado.'</td>';
@@ -99,13 +62,18 @@
 		                            		->uri(array('controller' => 'abmcerdas', 'action' => 'revivir', 'id' => $cerda->Id)).'>
 		                            		Revivir</a>';
 									}
+									else{
+										echo Form::open('abmcerdas/search', array('method' => 'POST', 'class' => 'stdform'));
+	                            		echo Form::hidden('numbersearch', $cerda->Numero);
+										echo '<a href="#" name="editcerda">Editar</a>';
+										echo Form::close();
+									}
 									echo '</td>';
 		                        echo '</tr>';
-	                   		}*/
+	                    	}
 							?>
 	                    </tbody>
-	                </table>
-	                -->                
+	                </table>                
 
                     <br clear="all" />
                     

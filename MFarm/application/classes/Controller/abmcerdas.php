@@ -2,13 +2,21 @@
 
 class Controller_ABMCerdas extends Controller {
 
+	public function action_list(){
+		$view = View::factory('listcerda');
+		$view->title = Helpers_Const::APPNAME." - ABM Cerda";
+		$view->menuid = Helpers_Const::MENUCERDASID;
+		$view->cerdas = Helpers_Cerda::get();
+		$this->response->body($view->render());
+	}
+
 	public function action_new(){
 		if(!isset($_POST['number'])){
 			$view = View::factory('newcerda');
 			$view->title = Helpers_Const::APPNAME." - ABM Cerda";
 			$view->menuid = Helpers_Const::MENUCERDASID;
 			//$view->estados = Helpers_Combos::getEstados();
-			$view->cerdas = Helpers_Cerda::get();
+			//$view->cerdas = Helpers_Cerda::get();
 			$this->response->body($view->render());
 		}
 		else{

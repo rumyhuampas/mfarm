@@ -4,10 +4,10 @@ class Controller_ABMClientes extends Controller {
 
 	public function action_list(){
 		$view = View::factory('listcliente');
-			$view->title = Helpers_Const::APPNAME." - ABM Cliente";
-			$view->menuid = Helpers_Const::MENUABMID;
-			$view->clientes = Helpers_Cliente::get();
-			$this->response->body($view->render());
+		$view->title = Helpers_Const::APPNAME." - ABM Cliente";
+		$view->menuid = Helpers_Const::MENUABMID;
+		$view->clientes = Helpers_Cliente::get();
+		$this->response->body($view->render());
 	}
 	
 	public function action_new(){
@@ -15,7 +15,7 @@ class Controller_ABMClientes extends Controller {
 			$view = View::factory('newcliente');
 			$view->title = Helpers_Const::APPNAME." - ABM Cliente";
 			$view->menuid = Helpers_Const::MENUABMID;
-			$view->clientes = Helpers_Cliente::get();
+			//$view->clientes = Helpers_Cliente::get();
 			$this->response->body($view->render());
 		}
 		else{

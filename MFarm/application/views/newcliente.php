@@ -103,7 +103,7 @@
 	                        </tr>
 	                    </tfoot>
 	                    <tbody>
-	                    	<?php foreach($clientes as $cliente){
+	                    	<?php /*foreach($clientes as $cliente){
 	                    		echo '<tr>';
 		                            echo '<td>'.$cliente->DNI.'</td>';
 									echo '<td>'.$cliente->CUIL.'</td>';
@@ -116,7 +116,7 @@
 										echo Form::close();	
 									echo '</td>';
 		                        echo '</tr>';
-	                    	}
+	                   		}*/
 							?>
 	                    </tbody>
 	                </table>    
