@@ -32,6 +32,8 @@
                 ?>
                 <li id=<?php echo Helpers_Const::MENUCERDASID; ?> menuid=<?php echo $menuid ?>><a href="#" class="pig menudrop"><span>Cerdas</span></a>
                 	<ul>
+                		<li><a href=<?php echo URL::base().Route::get('default')
+                			->uri(array('controller' => 'abmcerdas', 'action' => 'list')); ?>><span>Cerdas</span></a></li>
             			<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'abmcerdas', 'action' => 'new')); ?>><span>Nueva cerda</span></a></li>
             			<li><a href=<?php echo URL::base().Route::get('default')
