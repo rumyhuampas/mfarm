@@ -21,6 +21,13 @@ class Helpers_Cerda {
 		}
 	}
 	
+	public static function getPrenas($IdCerda){
+		return ORM::factory('prena')
+			->where('IdCerda', '=', $IdCerda)
+			->order_by('Id', 'DESC')
+			->find_all();
+	}
+	
 	/*public static function getAltas($desde = NULL){
 		if($desde == NULL){
 			$desde = 'DATE_SUB(NOW(), INTERVAL 365 DAY)';
