@@ -106,7 +106,7 @@ class Controller_ABMCerdas extends Controller {
 			$cerdaaudit = ORM::factory('cerdaaudit');
 			$cerdaaudit->IdCerda = $cerda->Id;
 			$cerdaaudit->Fecha = date('Y-m-d H:i:s', strtotime($_POST['date']));
-			//$cerdaaudit->IdEstado = $_POST['estado'];
+			$cerdaaudit->IdEstado = Helpers_Estado::get($_POST['estado'])->Id;
 			$cerdaaudit->Peso = $_POST['weight'];
 			$cerdaaudit->Observaciones = $_POST['obs'];
 			$cerdaaudit->create();

@@ -42,6 +42,13 @@
 					if(isset($cerda) && $cerda->loaded()){
 						echo Form::open('abmprenas/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewservicio'));
 							
+							$CerdaHasActivePrena = Helpers_Prena::cerdaHasActivePrena($cerda->Id);
+							if($CerdaHasActivePrena == true){
+								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
+							    	echo '<a class="close"></a>';
+							    	echo '<p>La cerda ya tiene una prena activa. Debe ingresar servicios a la misma o cerrar la prena activa.</p>';
+								echo '</div>';
+							}
 							$EstadoCachorra = Helpers_Const::ESTCACHORRA;
 							$IdEstadoCachorra = Helpers_Estado::get($EstadoCachorra)->Id;
 							if($cerda->IdEstado != $IdEstadoCachorra){
@@ -59,7 +66,7 @@
 									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
-							if($cerda->IdEstado == $IdEstadoCachorra){
+							if($cerda->IdEstado == $IdEstadoCachorra && $CerdaHasActivePrena == false){
 								echo '<p>';
 									echo Form::label('date', 'Fecha');
 									echo '<span class="field">';
@@ -76,7 +83,7 @@
 							echo '<p>';
 								echo Form::label('male', 'Macho');
 								echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoCachorra){
+								if($cerda->IdEstado != $IdEstadoCachorra || $CerdaHasActivePrena == true){
 									echo Form::input('male', '', array('type' => 'text', 'id' => 'male', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								}
 								else{
@@ -87,7 +94,7 @@
 							echo '<p>';
                             	echo Form::label('obs', 'Observaciones');
                             	echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoCachorra){
+								if($cerda->IdEstado != $IdEstadoCachorra || $CerdaHasActivePrena == true){
                             		echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80" style="background-color: #DDDDDD" readonly></textarea>';
 								}
 								else{
@@ -97,7 +104,7 @@
 	                        echo '</p>';
 	                        
 	                        echo '<p class="stdformbutton">';
-								if($cerda->IdEstado != $IdEstadoCachorra){
+								if($cerda->IdEstado != $IdEstadoCachorra || $CerdaHasActivePrena == true){
 	                        		echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2', 'style' => 'background-color: #DDDDDD; color: #333333;', 'disabled'));
 								}
 								else{
@@ -117,38 +124,34 @@
 		                    </colgroup>
 		                    <thead>
 		                        <tr>
-		                            <th class="head0">Fecha de prena</th>
 		                            <th class="head1">Probable fecha de celo 21</th>
 		                            <th class="head0">Probable fecha de celo 42</th>
 		                            <th class="head1">Probable fecha de parto</th>
-		                            <th class="head0">&nbsp;</th>
+		                            <th class="head0">Estado</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
 		                        <tr>
-		                            <th class="head0">Fecha de servicio</th>
 		                            <th class="head1">Probable fecha de celo 21</th>
 		                            <th class="head0">Probable fecha de celo 42</th>
 		                            <th class="head1">Probable fecha de parto</th>
-		                            <th class="head0">&nbsp;</th>
+		                            <th class="head0">Estado</th>
 		                        </tr>
 		                    </tfoot>
 		                    <tbody>
 		                    	<?php
-		                    		if(isset($servicios)){ 
-			                    		foreach($servicios as $servicio){
+		                    		if(isset($prenas)){ 
+			                    		foreach($prenas as $prena){
 			                    		echo '<tr>';
-				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($servicio->FechaServicio)).'</td>';
-				                            echo '<td>'.$servicio->Macho.'</td>';
-				                            echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo21)).'</td>';
-											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo42)).'</td>';
-											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaParto)).'</td>';
-											echo '<td>'.$servicio->Observaciones.'</td>';
-											echo '<td class="center">';
+				                            echo '<td>'.date('d-m-Y', strtotime($prena->ProbFechaCelo21)).'</td>';
+											echo '<td>'.date('d-m-Y', strtotime($prena->ProbFechaCelo42)).'</td>';
+											echo '<td>'.date('d-m-Y', strtotime($prena->ProbFechaParto)).'</td>';
+											echo '<td>'.$prena->Estado.'</td>';
+											/*echo '<td class="center">';
 				                            	echo '<a href='.URL::base().Route::get('default')
-				                            		->uri(array('controller' => 'abmservicios', 'action' => 'edit', 'id' => $servicio->Id)).'>
+				                            		->uri(array('controller' => 'abmprenas', 'action' => 'edit', 'id' => $servicio->Id)).'>
 				                            		Modificar</a>';
-											echo '</td>';
+											echo '</td>';*/
 				                        echo '</tr>';
 										}
 		                    		}
