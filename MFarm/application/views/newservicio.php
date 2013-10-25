@@ -42,9 +42,9 @@
 					if(isset($cerda) && $cerda->loaded()){
 						echo Form::open('abmservicios/new', array('method' => 'POST', 'class' => 'stdform', 'id' => 'formnewservicio'));
 							
-							$EstadoCelo = Helpers_Const::ESTCELO;
-							$IdEstadoCelo = Helpers_Estado::get($EstadoCelo)->Id;
-							if($cerda->IdEstado != $IdEstadoCelo){
+							$EstadoCachorra = Helpers_Const::ESTCACHORRA;
+							$IdEstadoCachorra = Helpers_Estado::get($EstadoCachorra)->Id;
+							if($cerda->IdEstado != $IdEstadoCachorra){
 								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 							    	echo '<a class="close"></a>';
 							    	echo '<p>La cerda no se encuentra en celo.</p>';
@@ -59,7 +59,7 @@
 									array('type' => 'text', 'id' => 'number', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
-							if($cerda->IdEstado == $IdEstadoCelo){
+							if($cerda->IdEstado == $IdEstadoCachorra){
 								echo '<p>';
 									echo Form::label('date', 'Fecha');
 									echo '<span class="field">';
@@ -76,7 +76,7 @@
 							echo '<p>';
 								echo Form::label('male', 'Macho');
 								echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoCelo){
+								if($cerda->IdEstado != $IdEstadoCachorra){
 									echo Form::input('male', '', array('type' => 'text', 'id' => 'male', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								}
 								else{
@@ -87,7 +87,7 @@
 							echo '<p>';
                             	echo Form::label('obs', 'Observaciones');
                             	echo '<span class="field">';
-								if($cerda->IdEstado != $IdEstadoCelo){
+								if($cerda->IdEstado != $IdEstadoCachorra){
                             		echo '<textarea name="obs" id="obs" class="longinput" rows="5" cols="80" style="background-color: #DDDDDD" readonly></textarea>';
 								}
 								else{
@@ -97,7 +97,7 @@
 	                        echo '</p>';
 	                        
 	                        echo '<p class="stdformbutton">';
-								if($cerda->IdEstado != $IdEstadoCelo){
+								if($cerda->IdEstado != $IdEstadoCachorra){
 	                        		echo Form::button('btnsave', 'Guardar', array('class' => 'submit radius2', 'style' => 'background-color: #DDDDDD; color: #333333;', 'disabled'));
 								}
 								else{
@@ -119,22 +119,16 @@
 		                        <tr>
 		                            <th class="head0">Fecha de servicio</th>
 		                            <th class="head1">Macho</th>
-		                            <th class="head0">Probable fecha de celo 21</th>
-		                            <th class="head1">Probable fecha de celo 42</th>
-		                            <th class="head0">Probable fecha de parto</th>
-		                            <th class="head1">Observaciones</th>
-		                            <th class="head0">&nbsp;</th>
+		                            <th class="head0">Observaciones</th>
+		                            <th class="head1">&nbsp;</th>
 		                        </tr>
 		                    </thead>
 		                    <tfoot>
 		                        <tr>
 		                            <th class="head0">Fecha de servicio</th>
 		                            <th class="head1">Macho</th>
-		                            <th class="head0">Probable fecha de celo 21</th>
-		                            <th class="head1">Probable fecha de celo 42</th>
-		                            <th class="head0">Probable fecha de parto</th>
-		                            <th class="head1">Observaciones</th>
-		                            <th class="head0">&nbsp;</th>
+		                            <th class="head0">Observaciones</th>
+		                            <th class="head1">&nbsp;</th>
 		                        </tr>
 		                    </tfoot>
 		                    <tbody>
@@ -144,9 +138,6 @@
 			                    		echo '<tr>';
 				                            echo '<td>'.date('d-m-Y H:i:s', strtotime($servicio->FechaServicio)).'</td>';
 				                            echo '<td>'.$servicio->Macho.'</td>';
-				                            echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo21)).'</td>';
-											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaCelo42)).'</td>';
-											echo '<td>'.date('d-m-Y', strtotime($servicio->ProbableFechaParto)).'</td>';
 											echo '<td>'.$servicio->Observaciones.'</td>';
 											echo '<td class="center">';
 				                            	echo '<a href='.URL::base().Route::get('default')

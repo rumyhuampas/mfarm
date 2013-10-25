@@ -33,7 +33,8 @@ class Controller_ABMServicios extends Controller {
 			$cerda = Helpers_Cerda::get($_POST['numbersearch']);
 			$view->cerda = $cerda;
 			if($cerda->loaded()){
-				$view->servicios = Helpers_Cerda::getServicios($cerda->Id);
+				$activePrena = Helpers_Prena::getActivePrena($cerda->Id);
+				$view->servicios = Helpers_Prena::gerPrenaServicios($activePrena->Id);
 				$this->response->body($view->render());
 			}
 			else{

@@ -458,7 +458,8 @@
 	                    <?php include Kohana::find_file('views', '_calendarlegend'); ?>
 	                    <br />
 	                    <?php
-	                    	echo '<div class="content bigcalendar" id="cerdacalendar" name='.$cerda->Id.'></div>';
+	                    	//-------------CALENDARIO---------------
+	                    	//echo '<div class="content bigcalendar" id="cerdacalendar" name='.$cerda->Id.'></div>';
 						?>
 						<br/>
 						
@@ -466,7 +467,8 @@
 	                    	<h2 class="chart"><span>Ultimas variaciones de peso (max 20)</span></h2>
 	                    </div><!--contenttitle-->
 	                    <br />
-						<div id="cerdachart" style="height:300px; margin-right: 30px"></div>
+	                    <!-----------------VARIACIONES DE PESO----------->
+						<!--<div id="cerdachart" style="height:300px; margin-right: 30px"></div>-->
 						
 					<?php
 					}

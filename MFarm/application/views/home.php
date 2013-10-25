@@ -40,7 +40,8 @@
                     <br />
                     <?php include Kohana::find_file('views', '_calendarlegend'); ?>
                     <br />
-                    <div class="bigcalendar" id="homecalendar"></div>
+                    <!-------------------CALENDARIO---------------------->
+                    <!--<div class="bigcalendar" id="homecalendar"></div>-->
             
                     <br /><br />
                     
