@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Versión del servidor:         5.5.27 - MySQL Community Server (GPL)
 -- SO del servidor:              Win32
--- HeidiSQL Versión:             8.0.0.4396
+-- HeidiSQL Versión:             8.1.0.4545
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS `cerdacelos` (
   `Fecha` datetime NOT NULL,
   `Observaciones` varchar(30000) COLLATE latin1_spanish_ci NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `FK_cerdacelos_servicios` (`IdServicio`),
-  CONSTRAINT `FK_cerdacelos_servicios` FOREIGN KEY (`IdServicio`) REFERENCES `servicios` (`Id`)
+  KEY `FK_cerdacelos_servicios` (`IdServicio`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -58,6 +57,34 @@ CREATE TABLE IF NOT EXISTS `cerdas` (
   PRIMARY KEY (`Id`),
   KEY `FK_cerdas_estados` (`IdEstado`),
   CONSTRAINT `FK_cerdas_estados` FOREIGN KEY (`IdEstado`) REFERENCES `estados` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+
+-- Volcando estructura para tabla mfarm.clientes
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `Id` int(10) NOT NULL AUTO_INCREMENT,
+  `DNI` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `CUIL` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `Nombre` varchar(300) COLLATE latin1_spanish_ci NOT NULL,
+  `Direccion` varchar(300) COLLATE latin1_spanish_ci NOT NULL,
+  `Telefono` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `Observaciones` varchar(30000) COLLATE latin1_spanish_ci NOT NULL,
+  `Modified_On` datetime NOT NULL,
+  `Created_On` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+
+-- Volcando estructura para tabla mfarm.config
+CREATE TABLE IF NOT EXISTS `config` (
+  `Id` int(10) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `Value` varchar(300) COLLATE latin1_spanish_ci NOT NULL,
+  PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
@@ -128,30 +155,79 @@ CREATE TABLE IF NOT EXISTS `partos` (
 -- La exportación de datos fue deseleccionada.
 
 
--- Volcando estructura para tabla mfarm.servicios
-CREATE TABLE IF NOT EXISTS `servicios` (
+-- Volcando estructura para tabla mfarm.prenas
+CREATE TABLE IF NOT EXISTS `prenas` (
   `Id` int(10) NOT NULL AUTO_INCREMENT,
   `IdCerda` int(10) NOT NULL,
-  `FechaServicio` datetime NOT NULL,
-  `Macho` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
-  `ProbableFechaCelo21` date NOT NULL,
-  `ProbableFechaCelo42` date NOT NULL,
-  `ProbableFechaParto` date NOT NULL,
-  `Observaciones` varchar(30000) COLLATE latin1_spanish_ci NOT NULL,
+  `ProbFechaCelo21` date NOT NULL,
+  `ProbFechaCelo42` date NOT NULL,
+  `ProbFechaParto` date NOT NULL,
+  `Estado` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `FK_servicios_cerdas` (`IdCerda`),
-  CONSTRAINT `FK_servicios_cerdas` FOREIGN KEY (`IdCerda`) REFERENCES `cerdas` (`Id`)
+  KEY `FK_prenas_cerdas` (`IdCerda`),
+  CONSTRAINT `FK_prenas_cerdas` FOREIGN KEY (`IdCerda`) REFERENCES `cerdas` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
 
--- Volcando estructura para tabla mfarm.users
-CREATE TABLE IF NOT EXISTS `users` (
+-- Volcando estructura para tabla mfarm.servicios
+CREATE TABLE IF NOT EXISTS `servicios` (
   `Id` int(10) NOT NULL AUTO_INCREMENT,
-  `UserName` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
-  `Password` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
-  PRIMARY KEY (`Id`)
+  `IdPrena` int(10) NOT NULL,
+  `FechaServicio` datetime NOT NULL,
+  `Macho` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `Observaciones` varchar(30000) COLLATE latin1_spanish_ci NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FK_servicios_prenas` (`IdPrena`),
+  CONSTRAINT `FK_servicios_prenas` FOREIGN KEY (`IdPrena`) REFERENCES `prenas` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+
+-- Volcando estructura para tabla mfarm.ventadetalle
+CREATE TABLE IF NOT EXISTS `ventadetalle` (
+  `Id` int(10) NOT NULL AUTO_INCREMENT,
+  `IdVenta` int(10) NOT NULL,
+  `Cant` float NOT NULL,
+  `Detalle` varchar(500) COLLATE latin1_spanish_ci NOT NULL,
+  `PUnit` float NOT NULL,
+  `Total` float NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FK_ventadetalle_ventas` (`IdVenta`),
+  CONSTRAINT `FK_ventadetalle_ventas` FOREIGN KEY (`IdVenta`) REFERENCES `ventas` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+
+-- Volcando estructura para tabla mfarm.ventapagos
+CREATE TABLE IF NOT EXISTS `ventapagos` (
+  `Id` int(10) NOT NULL AUTO_INCREMENT,
+  `Fecha` date NOT NULL,
+  `IdVenta` int(10) NOT NULL,
+  `Tipo` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `Monto` float NOT NULL,
+  `Concepto` varchar(30000) COLLATE latin1_spanish_ci NOT NULL,
+  `Observaciones` varchar(30000) COLLATE latin1_spanish_ci NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FK_ventapagos_ventas` (`IdVenta`),
+  CONSTRAINT `FK_ventapagos_ventas` FOREIGN KEY (`IdVenta`) REFERENCES `ventas` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+
+-- Volcando estructura para tabla mfarm.ventas
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `Id` int(10) NOT NULL AUTO_INCREMENT,
+  `Fecha` datetime NOT NULL,
+  `IdCliente` int(10) NOT NULL,
+  `Total` float NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FK_ventas_clientes` (`IdCliente`),
+  CONSTRAINT `FK_ventas_clientes` FOREIGN KEY (`IdCliente`) REFERENCES `clientes` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
