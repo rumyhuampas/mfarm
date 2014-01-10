@@ -117,7 +117,8 @@ Kohana::modules(array(
 	 'orm'        	=> MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-	'mpdf' 			=> MODPATH.'mpdf'
+	'mpdf' 			=> MODPATH.'mpdf',
+	'mysqli'        => MODPATH.'mysqli'
 	));
 
 /**
