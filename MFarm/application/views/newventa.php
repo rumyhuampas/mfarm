@@ -226,7 +226,7 @@
 	                    			$cliente = ORM::factory('cliente', $venta->IdCliente);
 		                    		echo '<tr>';
 			                            echo '<td>'.$venta->Id.'</td>';
-										echo '<td>'.$venta->Fecha.'</td>';
+										echo '<td>'.date('d-m-Y H:i:s', strtotime($venta->Fecha)).'</td>';
 			                            echo '<td>'.$cliente->CUIL.'</td>';
 			                            echo '<td>'.$cliente->Nombre.'</td>';
 										echo '<td>$ '.$venta->Total.'</td>';
@@ -236,6 +236,10 @@
 												echo Form::hidden('ventaid', $venta->Id);
 												echo '<a href="#" name="reprint">Imprimir factura</a>';
 											echo Form::close();
+                                            echo Form::open('ventas/printestadoventa', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintestadoventa'.$venta->Id));
+                                                echo Form::hidden('ventaid', $venta->Id);
+                                                echo '<a href="#" name="reprint">Imprimir estado de venta</a>';
+                                            echo Form::close();
 			                            	echo '<a href='.URL::base().Route::get('default')
 			                            		->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
 			                            		Agregar pago</a>';
