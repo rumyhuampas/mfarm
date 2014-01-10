@@ -37,6 +37,24 @@ class Helpers_Reportes {
 		
 		return $pdf;
 	}
+    
+    public static function createEstadoVenta($id){
+        $pdf = Helpers_Reportes::create('reports/estadoventa', 'A4');
+        $stylesheet = file_get_contents('assets/css/pdfstyle.css');
+        $pdf->get_mpdf()->WriteHTML($stylesheet, 1);
+            
+        $pdf->get_mpdf()->SetTitle(Helpers_Const::APPNAME.' - Estado Venta');
+        $pdf->get_mpdf()->SetSubject('Estado Venta');
+        $pdf->get_mpdf()->SetAuthor(Helpers_Const::APPNAME);
+        $pdf->get_mpdf()->SetCreator(Helpers_Const::APPNAME);
+        
+        $pdf->title = Helpers_Const::APPNAME.' - Estado Venta';
+        $pdf->filename = Helpers_Const::APPNAME.' - estadoventa.pdf';
+        
+        $pdf->_id = $id;
+        
+        return $pdf;
+    }
 	
 	public static function createRecibo($id){
 		$pdf = Helpers_Reportes::create('reports/recibo', 'A4-L');

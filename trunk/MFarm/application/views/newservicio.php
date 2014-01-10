@@ -47,7 +47,7 @@
 							if($cerda->IdEstado != $IdEstadoCachorra){
 								echo '<div class="smallnotification noimgmsgerror" style="margin-left: 220px;">';
 							    	echo '<a class="close"></a>';
-							    	echo '<p>La cerda no se encuentra en celo.</p>';
+							    	echo '<p>La cerda no esta vacia.</p>';
 								echo '</div>';
 							}
 						

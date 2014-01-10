@@ -85,6 +85,18 @@ class Controller_Ventas extends Controller {
 			//errorpdf
 		}
 	}
+	
+	public function action_printestadoventa(){
+        $venta = ORM::factory('venta', $_POST['ventaid']);
+        if($venta->loaded()){
+            $pdf = Helpers_Reportes::createEstadoVenta($venta->Id);
+            $this->response->headers(array('Content-Type' => 'application/pdf'));
+            Helpers_Reportes::show($pdf);
+        }
+        else{
+            //errorpdf
+        }
+    }
 
 	public function action_addpago(){
 		$idventa = $this->request->param('id');
