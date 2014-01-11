@@ -26,7 +26,7 @@ jQuery(document).ready(function(){
 	    );
 	    
 	    /************ CERDA  PESO CHART *************/
-	   jQuery.post( 
+	   	jQuery.post( 
 		    '/mfarm/abmcerdas/getcerdachartdata/',
 		    {IdCerda: idcerda},
 		    function( data ){
