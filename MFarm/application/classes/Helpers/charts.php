@@ -215,7 +215,7 @@ class Helpers_Charts {
 	
 	/************** LACTANCIAS *****************/
 	public static function getLactanciaData($id, $idparto){
-		$data = DB::select(Total)->from('lactanciaaudit')
+		$data = DB::select('Total')->from('lactanciaaudit')
 		->where('IdCerda', '=', $id)->and_where('IdParto', '=', $idparto)
 		->order_by('Fecha', 'DESC')->limit(20)->execute();
 		$jsonarray = array();
@@ -229,7 +229,7 @@ class Helpers_Charts {
 	
 	/************** DESTETES *****************/
 	public static function getDesteteData($id){
-		$data = DB::select(Lechones)->from('destetes')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
+		$data = DB::select('Lechones')->from('destetes')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
 		$jsonarray = array();
 		$pos = count($data);
 		for($i=0; $i<count($data); $i++){
@@ -238,4 +238,19 @@ class Helpers_Charts {
 		}
 		return $jsonarray;
 	}
+    
+    /************** VENTAS *****************/
+    public static function getVentasData(){
+        $data = DB::select(array(DB::expr('CONCAT(MONTH(Fecha), YEAR(Fecha))'), 'Year'), array(DB::expr('SUM(Total)'), 'Total'))
+            ->from('ventas')
+            ->where('Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL 12 MONTH)'))
+            ->group_by(DB::expr('YEAR(Fecha)'))->group_by(DB::expr('MONTH(Fecha)'))
+            ->order_by('Fecha', 'DESC')->execute();
+        $jsonarray = array();
+        for($i=0; $i<count($data); $i++){
+            $jsonarray['year'] = $data[$i]['Year'];
+            $jsonarray['sales'] = $data[$i]['Total'];
+        }
+        return $jsonarray;
+    }
 }

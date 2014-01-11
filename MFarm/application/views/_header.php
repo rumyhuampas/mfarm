@@ -19,7 +19,11 @@
 		    <link rel="stylesheet" media="screen" href="css/ie7.css"/>
 		<![endif]-->
 		<script src=<?php echo URL::base()."/scripts/plugins/jquery-1.7.min.js" ?> type="text/javascript"></script>
+		
+		<script src=<?php echo URL::base()."/scripts/plugins/chartjs/jquery-1.10.2.min.js" ?> type="text/javascript"></script>
+		
 		<script src=<?php echo URL::base()."/scripts/plugins/jquery-ui-1.8.16.custom.min.js" ?> type="text/javascript"></script>
+		
 		<script src=<?php echo URL::base()."/scripts/plugins/jquery.validate.min.js" ?> type="text/javascript"></script>
 		<script src=<?php echo URL::base()."/scripts/plugins/jquery.dataTables.min.js" ?> type="text/javascript"></script>
 		<script src=<?php echo URL::base()."/scripts/plugins/jquery.flot.min.js" ?> type="text/javascript"></script>
@@ -30,6 +34,13 @@
 		<script src=<?php echo URL::base()."/scripts/custom/general.js" ?> type="text/javascript"></script>
 		<script src=<?php echo URL::base()."/scripts/custom/calendar.js" ?> type="text/javascript"></script>
 		<script src=<?php echo URL::base()."/scripts/custom/forms.js" ?> type="text/javascript"></script>
+		
+		<!-- CHARTJS -->
+		
+		<script src=<?php echo URL::base()."/scripts/plugins/chartjs/knockout-3.0.0.js" ?> type="text/javascript"></script>
+		<script src=<?php echo URL::base()."/scripts/plugins/chartjs/globalize.min.js" ?> type="text/javascript"></script>
+		<script src=<?php echo URL::base()."/scripts/plugins/chartjs/dx.chartjs.js" ?> type="text/javascript"></script>
+
 		<!--<script src=<?php echo URL::base()."/scripts/custom/dashboard.js" ?> type="text/javascript"></script>-->
 		<!--
 		<script src=<?php echo URL::base()."/scripts/custom/tables.js" ?> type="text/javascript"></script>-->

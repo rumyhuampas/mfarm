@@ -96,6 +96,8 @@
                 			->uri(array('controller' => 'ventas', 'action' => 'new')); ?>><span>Nueva venta</span></a></li>
                 		<li><a href=<?php echo URL::base().Route::get('default')
                 			->uri(array('controller' => 'ventas', 'action' => 'history')); ?>><span>Historico</span></a></li>
+                		<li><a href=<?php echo URL::base().Route::get('default')
+                            ->uri(array('controller' => 'ventas', 'action' => 'reportes')); ?>><span>Reportes</span></a></li>
                     </ul>
                 </li>
                 <?php

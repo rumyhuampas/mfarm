@@ -169,4 +169,19 @@ class Controller_Ventas extends Controller {
 		$view->ventas = Helpers_Venta::get();
 		$this->response->body($view->render());
 	}
+
+    public function action_reportes(){
+        $view = View::factory('reportesdeventa');
+        $view->title = Helpers_Const::APPNAME." - Ventas";
+        $view->menuid = Helpers_Const::MENUVENTASID;
+        //$view->ventas = Helpers_Venta::get();
+        $this->response->body($view->render());
+    }
+    
+    public function action_getventachartdata(){
+        if ($this->request->is_ajax()) {
+            $jsonarray = Helpers_Charts::getVentasData();
+            echo json_encode($jsonarray);
+        }
+    }
 }
