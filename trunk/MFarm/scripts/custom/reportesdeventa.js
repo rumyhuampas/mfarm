@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
 	    '/mfarm/ventas/getventachartdata/',
 	    function( data ){
 	    	data = JSON.parse(data);
-	    	/*jQuery("#ventachart").dxChart({
+	    	jQuery("#ventachart").dxChart({
 			    dataSource: data,
 			    commonSeriesSettings: {
 			        argumentField: "year"
@@ -32,12 +32,12 @@ jQuery(document).ready(function(){
 			            right: false
 			        }       
 			    }
-			});*/
+			});
 	    }
     );
 	    
 	    
-   	var dataSource = [
+   	/*var dataSource = [
 	    { year: 1950, sales: 546, pay: 332 },
 	    { year: 1960, sales: 605, pay: 417 },
 	    { year: 1970, sales: 656, pay: 513 },
@@ -50,8 +50,6 @@ jQuery(document).ready(function(){
 	    { year: 2040, sales: 680, pay: 1178 },
 	    { year: 2050, sales: 650, pay: 1231 }
 
-	];
+	];*/
 	
-	
-
 });

@@ -241,16 +241,18 @@ class Helpers_Charts {
     
     /************** VENTAS *****************/
     public static function getVentasData(){
-        $data = DB::select(array(DB::expr('CONCAT(MONTH(Fecha), YEAR(Fecha))'), 'Year'), array(DB::expr('SUM(Total)'), 'Total'))
-            ->from('ventas')
-            ->where('Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL 12 MONTH)'))
-            ->group_by(DB::expr('YEAR(Fecha)'))->group_by(DB::expr('MONTH(Fecha)'))
-            ->order_by('Fecha', 'DESC')->execute();
+        $data = DB::select(array(DB::expr('CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha))'), 'Year'), 
+            array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
+            DB::expr('(select sum(vp.monto) from ventapagos vp where concat(month(vp.fecha), year(vp.fecha)) = concat(month(v.fecha), year(v.fecha))) as Pagos'))
+            ->from(array('ventas', 'v'))
+            ->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL 12 MONTH)'))
+            ->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
+            ->order_by('v.Fecha', 'ASC')->execute();
         $jsonarray = array();
         for($i=0; $i<count($data); $i++){
-            $jsonarray['year'] = $data[$i]['Year'];
-            $jsonarray['sales'] = $data[$i]['Total'];
+            array_push($jsonarray, array('year' => $data[$i]['Year'], 'sales' => (float)$data[$i]['Total'], 'pay' => (float)$data[$i]['Pagos']));
         }
+            
         return $jsonarray;
     }
 }
