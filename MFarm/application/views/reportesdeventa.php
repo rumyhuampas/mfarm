@@ -22,53 +22,61 @@
                 <div class="content">
                     
                     <div class="contenttitle">
-                        <h2 class="chart"><span>Ventas y saldos ultimos meses</span></h2>
+                        <h2 class="chart"><span>Ventas y pagos ultimos meses</span></h2>
                     </div><!--contenttitle-->
                     <br />
                     <!-----------------VENTAS ULT MESES----------->
                     <div id="ventachart" style="height:400px; margin-right: 30px"></div>
                     
                     <div class="contenttitle">
-                        <h2 class="form"><span>Datos</span></h2>
+                        <h2 class="form"><span>Totales</span></h2>
                     </div><!--contenttitle-->
+                    <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+                        <colgroup>
+                            <col class="con0" />
+                            <col class="con1" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="head0">Tipo</th>
+                                <th class="head1">Valor</th>
+                                <th class="head0">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="head0">Tipo</th>
+                                <th class="head1">Valor</th>
+                                <th class="head0">&nbsp;</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                        <?php
+                            if(isset($totales)){ 
+                                foreach($totales as $tot){
+                                    echo '<tr>';
+                                        echo '<td>'.$tot['key'].'</td>';
+                                        echo '<td>$ '.$tot['sales'].'</td>';
+                                        echo '<td class="center">';
+                                            /*echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
+                                                echo Form::hidden('ventaid', $venta->Id);
+                                                echo '<a href="#" name="reprint">Imprimir factura</a>';
+                                            echo Form::close();
+                                            echo Form::open('ventas/printestadoventa', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintestadoventa'.$venta->Id));
+                                                echo Form::hidden('ventaid', $venta->Id);
+                                                echo '<a href="#" name="reprint">Imprimir estado de venta</a>';
+                                            echo Form::close();
+                                            echo '<a href='.URL::base().Route::get('default')
+                                                ->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
+                                                Agregar pago</a>';*/
+                                        echo '</td>';
+                                    echo '</tr>';
+                                }
+                            }
+                        ?>
+                        </tbody>
+                    </table>
                     
-                    <?php /*echo Form::open('reportes/reportesporfecha', array('method' => 'POST', 'target' => '_blank', 'class' => 'stdform', 'id' => 'formreportlistar'));
-                        echo '<p>';
-                            echo Form::label('datos', 'Datos');
-                            echo '<span class="field">';
-                            echo Form::select('datos', $datos);
-                            echo '</span>';
-                        echo '</p>';
-                        echo '<p>';
-                            echo Form::label('desde', 'Fecha desde');
-                            echo '<span class="field">';
-                                echo Form::input('desde', date("d-m-Y"), array('id' => 'fielddate'));
-                            echo '</span>';
-                            echo '<div class="formwidgetbox" style="width: 300px">';
-                                echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
-                                echo '<div class="widgetcontent padding0">';
-                                    echo '<div id="datepicker"></div>';
-                                echo '</div><!--widgetcontent-->';
-                            echo '</div><!--widgetbox-->';
-                        echo '</p>';
-                        echo '<p>';         
-                            echo Form::label('hasta', 'Fecha hasta');
-                            echo '<span class="field">';
-                                echo Form::input('hasta', date("d-m-Y"), array('id' => 'fielddate2'));
-                            echo '</span>';
-                            echo '<div class="formwidgetbox" style="width: 300px">';
-                                echo '<div class="title"><h2 class="calendar"><span>Calendario</span></h2></div>';
-                                echo '<div class="widgetcontent padding0">';
-                                    echo '<div id="datepicker2"></div>';
-                                echo '</div><!--widgetcontent-->';
-                            echo '</div><!--widgetbox-->';
-                        echo '</p>';
-                        
-                        echo '<p class="stdformbutton">';
-                            echo Form::button('btnsave', 'Procesar', array('class' => 'submit radius2'));
-                        echo '</p>';
-                    echo Form::close();*/
-                    ?>
                     
                 </div><!--content-->
                 

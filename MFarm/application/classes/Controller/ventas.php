@@ -175,6 +175,7 @@ class Controller_Ventas extends Controller {
         $view->title = Helpers_Const::APPNAME." - Ventas";
         $view->menuid = Helpers_Const::MENUVENTASID;
         //$view->ventas = Helpers_Venta::get();
+        $view->totales = Helpers_Venta::getTotals();
         $this->response->body($view->render());
     }
     
