@@ -86,3 +86,50 @@
 #12 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #13 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
 #14 {main} in :
+2014-01-11 21:35:20 --- CRITICAL: ErrorException [ 1 ]: Call to undefined function debug() ~ APPPATH\classes\Helpers\charts.php [ 250 ] in :
+2014-01-11 21:35:20 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :
+2014-01-11 21:40:24 --- CRITICAL: ErrorException [ 2 ]: array_push() expects at least 2 parameters, 1 given ~ APPPATH\classes\Helpers\charts.php [ 251 ] in :
+2014-01-11 21:40:24 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'array_push() ex...', 'C:\xampp\htdocs...', 251, Array)
+#1 C:\xampp\htdocs\MFarm\application\classes\Helpers\charts.php(251): array_push(Array)
+#2 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(183): Helpers_Charts::getVentasData()
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_getventachartdata()
+#4 [internal function]: Kohana_Controller->execute()
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#6 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#8 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#9 {main} in :
+2014-01-11 22:42:07 --- CRITICAL: Database_Exception [ 1064 ]: [1064] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' YEAR(Fecha)) AS `Year`, SUM(Total) AS `Total` FROM `ventas` WHERE `Fecha` > DAT' at line 1 ( SELECT CONCAT(MONTH(Fecha), -, YEAR(Fecha)) AS `Year`, SUM(Total) AS `Total` FROM `ventas` WHERE `Fecha` > DATE_SUB(NOW(), INTERVAL 12 MONTH) GROUP BY YEAR(Fecha), MONTH(Fecha) ORDER BY `Fecha` DESC ) ~ MODPATH\mysqli\classes\kohana\database\mysqli.php [ 182 ] in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
+2014-01-11 22:42:07 --- DEBUG: #0 C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php(251): Kohana_Database_MySQLi->query(1, 'SELECT CONCAT(M...', false, Array)
+#1 C:\xampp\htdocs\MFarm\application\classes\Helpers\charts.php(248): Kohana_Database_Query->execute()
+#2 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(183): Helpers_Charts::getVentasData()
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_getventachartdata()
+#4 [internal function]: Kohana_Controller->execute()
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#6 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#8 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#9 {main} in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
+2014-01-11 22:43:17 --- CRITICAL: Database_Exception [ 1064 ]: [1064] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), YEAR(Fecha)) AS `Year`, SUM(Total) AS `Total` FROM `ventas` WHERE `Fecha` > D' at line 1 ( SELECT CONCAT(CONCAT(MONTH(Fecha), -), YEAR(Fecha)) AS `Year`, SUM(Total) AS `Total` FROM `ventas` WHERE `Fecha` > DATE_SUB(NOW(), INTERVAL 12 MONTH) GROUP BY YEAR(Fecha), MONTH(Fecha) ORDER BY `Fecha` DESC ) ~ MODPATH\mysqli\classes\kohana\database\mysqli.php [ 182 ] in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
+2014-01-11 22:43:17 --- DEBUG: #0 C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php(251): Kohana_Database_MySQLi->query(1, 'SELECT CONCAT(C...', false, Array)
+#1 C:\xampp\htdocs\MFarm\application\classes\Helpers\charts.php(248): Kohana_Database_Query->execute()
+#2 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(183): Helpers_Charts::getVentasData()
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_getventachartdata()
+#4 [internal function]: Kohana_Controller->execute()
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#6 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#8 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#9 {main} in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
+2014-01-11 23:10:48 --- CRITICAL: Database_Exception [ 1064 ]: [1064] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select sum(vp.monto) from ventapagos vp where concat(month(vp.fecha), year(vp.fe' at line 1 ( SELECT CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha)) AS `Year`, ROUND(SUM(v.Total), 2) AS `Total`, select sum(vp.monto) from ventapagos vp where concat(month(vp.fecha), year(vp.fecha)) = concat(month(v.fecha), year(v.fecha)) FROM `ventas` AS `v` WHERE `v`.`Fecha` > DATE_SUB(NOW(), INTERVAL 12 MONTH) GROUP BY YEAR(v.Fecha), MONTH(v.Fecha) ORDER BY `v`.`Fecha` ASC ) ~ MODPATH\mysqli\classes\kohana\database\mysqli.php [ 182 ] in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
+2014-01-11 23:10:48 --- DEBUG: #0 C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php(251): Kohana_Database_MySQLi->query(1, 'SELECT CONCAT(C...', false, Array)
+#1 C:\xampp\htdocs\MFarm\application\classes\Helpers\charts.php(250): Kohana_Database_Query->execute()
+#2 C:\xampp\htdocs\MFarm\application\classes\Controller\ventas.php(183): Helpers_Charts::getVentasData()
+#3 C:\xampp\htdocs\MFarm\system\classes\Kohana\Controller.php(84): Controller_Ventas->action_getventachartdata()
+#4 [internal function]: Kohana_Controller->execute()
+#5 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ventas))
+#6 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 C:\xampp\htdocs\MFarm\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#8 C:\xampp\htdocs\MFarm\index.php(118): Kohana_Request->execute()
+#9 {main} in C:\xampp\htdocs\MFarm\modules\database\classes\Kohana\Database\Query.php:251
