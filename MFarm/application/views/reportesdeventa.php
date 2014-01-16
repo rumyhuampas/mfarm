@@ -28,55 +28,70 @@
                     <!-----------------VENTAS ULT MESES----------->
                     <div id="ventachart" style="height:400px; margin-right: 30px"></div>
                     
-                    <div class="contenttitle">
-                        <h2 class="form"><span>Totales</span></h2>
-                    </div><!--contenttitle-->
-                    <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
-                        <colgroup>
-                            <col class="con0" />
-                            <col class="con1" />
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th class="head0">Tipo</th>
-                                <th class="head1">Valor</th>
-                                <th class="head0">&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th class="head0">Tipo</th>
-                                <th class="head1">Valor</th>
-                                <th class="head0">&nbsp;</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        <?php
-                            if(isset($totales)){ 
-                                foreach($totales as $tot){
-                                    echo '<tr>';
-                                        echo '<td>'.$tot['key'].'</td>';
-                                        echo '<td>$ '.$tot['sales'].'</td>';
-                                        echo '<td class="center">';
-                                            /*echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
-                                                echo Form::hidden('ventaid', $venta->Id);
-                                                echo '<a href="#" name="reprint">Imprimir factura</a>';
-                                            echo Form::close();
-                                            echo Form::open('ventas/printestadoventa', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintestadoventa'.$venta->Id));
-                                                echo Form::hidden('ventaid', $venta->Id);
-                                                echo '<a href="#" name="reprint">Imprimir estado de venta</a>';
-                                            echo Form::close();
-                                            echo '<a href='.URL::base().Route::get('default')
-                                                ->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
-                                                Agregar pago</a>';*/
-                                        echo '</td>';
-                                    echo '</tr>';
-                                }
-                            }
-                        ?>
-                        </tbody>
-                    </table>
+                    <br clear="all">
                     
+                    <div class="contenttitle">
+                        <h2 class="chart"><span>Totales</span></h2>
+                    </div><!--contenttitle-->
+                    <br />
+                        
+                    <div class="one_half">
+                        <!-----------------VENTAS ULT MESES----------->
+                        <div id="ventatotchart" style="height:400px; margin-right: 30px"></div>
+                    </div>
+                    
+                    <div class="one_half last">
+                        <!--<div class="contenttitle">
+                            <h2 class="form"><span>Totales</span></h2>
+                        </div><!--contenttitle-->
+                        <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+                            <colgroup>
+                                <col class="con0" />
+                                <col class="con1" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="head0">Tipo</th>
+                                    <th class="head1">Valor</th>
+                                    <th class="head0">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th class="head0">Tipo</th>
+                                    <th class="head1">Valor</th>
+                                    <th class="head0">&nbsp;</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            <?php
+                                if(isset($totales)){ 
+                                    foreach($totales as $tot){
+                                        echo '<tr>';
+                                            echo '<td>'.$tot['key'].'</td>';
+                                            echo '<td>$ '.$tot['sales'].'</td>';
+                                            echo '<td class="center">';
+                                                /*echo Form::open('ventas/printfactura', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintfactura'.$venta->Id));
+                                                    echo Form::hidden('ventaid', $venta->Id);
+                                                    echo '<a href="#" name="reprint">Imprimir factura</a>';
+                                                echo Form::close();
+                                                echo Form::open('ventas/printestadoventa', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintestadoventa'.$venta->Id));
+                                                    echo Form::hidden('ventaid', $venta->Id);
+                                                    echo '<a href="#" name="reprint">Imprimir estado de venta</a>';
+                                                echo Form::close();
+                                                echo '<a href='.URL::base().Route::get('default')
+                                                    ->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
+                                                    Agregar pago</a>';*/
+                                            echo '</td>';
+                                        echo '</tr>';
+                                    }
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div><!--one_half-->
+                    
+                    <br clear="all">
                     
                 </div><!--content-->
                 

@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
 	
 	//FORM VALIDATION
-	jQuery("#form1").validate({
+	$("#form1").validate({
 		rules: {
 			firstname: "required",
 			lastname: "required",
@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formnewcerda").validate({
+	$("#formnewcerda").validate({
 		rules: {
 			number: {
 				required: true,
@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formsearchcerda").validate({
+	$("#formsearchcerda").validate({
 		rules: {
 			numbersearch: {
 				required: true,
@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formeditcerda").validate({
+	$("#formeditcerda").validate({
 		rules: {
 			number: {
 				required: true,
@@ -95,7 +95,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formnewestado").validate({
+	$("#formnewestado").validate({
 		rules: {
 			name: "required"
 		},
@@ -105,7 +105,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formnewservicio").validate({
+	$("#formnewservicio").validate({
 		rules: {
 			number: {
 				required: true,
@@ -125,7 +125,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formnewparto").validate({
+	$("#formnewparto").validate({
 		rules: {
 			number: {
 				required: true,
@@ -173,7 +173,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formnewdestete").validate({
+	$("#formnewdestete").validate({
 		rules: {
 			number: {
 				required: true,
@@ -221,7 +221,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formnewlactancia").validate({
+	$("#formnewlactancia").validate({
 		rules: {
 			number: {
 				required: true,
@@ -259,7 +259,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formedituser").validate({
+	$("#formedituser").validate({
 		rules: {
 			oldpass: {
 				required: true,
@@ -291,7 +291,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formnewuser").validate({
+	$("#formnewuser").validate({
 		rules: {
 			username: {
 				required: true,
@@ -323,7 +323,7 @@ jQuery(document).ready(function(){
 	});	
 	
 	//FORM VALIDATION
-	jQuery("#formnewcliente").validate({
+	$("#formnewcliente").validate({
 		rules: {
 			cuil: {
 				required: true,
@@ -345,7 +345,7 @@ jQuery(document).ready(function(){
 	});
 	
 	//FORM VALIDATION
-	jQuery("#formeditcliente").validate({
+	$("#formeditcliente").validate({
 		rules: {
 			dni: {
 				required: true
@@ -373,7 +373,7 @@ jQuery(document).ready(function(){
 	});	
 	
 	//for checkbox
-	jQuery('input[type=checkbox]').each(function(){
+	$('input[type=checkbox]').each(function(){
 		var t = jQuery(this);
 		if(t.is(':checked')){
 			t.wrap('<span class="checkbox checked"></span>');

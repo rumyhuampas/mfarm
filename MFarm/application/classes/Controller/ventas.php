@@ -185,4 +185,11 @@ class Controller_Ventas extends Controller {
             echo json_encode($jsonarray);
         }
     }
+    
+    public function action_getventatotchartdata(){
+        if ($this->request->is_ajax()) {
+            $jsonarray = Helpers_Charts::getVentasTotData();
+            echo json_encode($jsonarray);
+        }
+    }
 }

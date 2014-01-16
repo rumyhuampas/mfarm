@@ -371,7 +371,7 @@ jQuery(document).ready(function(){
 	}
 	
 	//autocomplete
-	var availableTags = [
+	/*var availableTags = [
 			"ActionScript",
 			"AppleScript",
 			"Asp",
@@ -397,7 +397,7 @@ jQuery(document).ready(function(){
 		];
 	jQuery( "#keyword" ).autocomplete({
 		source: availableTags
-	});
+	});*/
 	
 	
 	/******** MENU *******/

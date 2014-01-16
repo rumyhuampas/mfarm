@@ -41,7 +41,7 @@ class Helpers_Venta {
             array_push($res, array('key' => $data[$i]['Key'], 'sales' => (float)$data[$i]['Total'], 'pay' => (float)$data[$i]['Pagos']));
         }
         
-        $data2 = DB::select(array(DB::expr('CONCAT("Ultimos 12 meses: desde ", DATE_SUB(NOW(), INTERVAL 12 MONTH))'), 'Key'), 
+        $data2 = DB::select(array(DB::expr('CONCAT(CONCAT(CONCAT("Ultimos 12 meses: desde ", MONTH(DATE_SUB(NOW(), INTERVAL 12 MONTH))), "-"), YEAR(DATE_SUB(NOW(), INTERVAL 12 MONTH)))'), 'Key'), 
             array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
             DB::expr('(select sum(vp.monto) from ventapagos vp where concat(month(vp.fecha), year(vp.fecha)) = concat(month(v.fecha), year(v.fecha))) as Pagos'))
             ->from(array('ventas', 'v'))
