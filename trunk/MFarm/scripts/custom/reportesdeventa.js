@@ -35,6 +35,48 @@ jQuery(document).ready(function(){
 			});
 	    }
     );
+    
+    /************ VENTAS PERC CHART *************/
+	jQuery.post( 
+	    '/mfarm/ventas/getventatotchartdata/',
+	    function( data ){
+	    	data = JSON.parse(data);
+	    	jQuery("#ventatotchart").dxChart({
+			    dataSource: data,
+			    commonSeriesSettings: {
+			        argumentField: "key",
+			        type: "bar",
+			        hoverMode: "allArgumentPoints",
+			        selectionMode: "allArgumentPoints",
+			        label: {
+			            visible: true,
+			            format: "fixedPoint",
+			            precision: 0
+			        }
+			    },
+			    series: [
+			        { valueField: "sales", name: "Ventas" },
+			        { valueField: "pay", name: "Pagos" },
+			    ],
+			    argumentAxis:{
+			        grid:{
+			            visible: true
+			        }
+			    },
+			    tooltip:{
+			        enabled: true
+			    },
+			    title: "Totales de ventas y pagos",
+			    legend: {
+			        verticalAlignment: "bottom",
+			        horizontalAlignment: "center"
+			    },
+			    pointClick: function (point) {
+			        this.select();
+			    }
+			});
+	    }
+    );
 	    
 	    
    	/*var dataSource = [

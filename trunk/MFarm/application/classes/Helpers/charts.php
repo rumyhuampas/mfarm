@@ -255,4 +255,9 @@ class Helpers_Charts {
             
         return $jsonarray;
     }
+    
+    public static function getVentasTotData(){
+        $jsonarray = Helpers_Venta::getTotals();
+        return $jsonarray;
+    }
 }
