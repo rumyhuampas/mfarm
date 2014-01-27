@@ -17,6 +17,7 @@ class Controller_Ventas extends Controller {
 			$cliente = Helpers_Cliente::get($_POST['cuil']);
 			$venta->IdCliente = $cliente->Id;
 			$venta->Total = $_POST['total'];
+            $venta->Deleted = 'N';
 			$venta->create();
 			
 			$prodtable = $_POST['prodtable'];
@@ -29,6 +30,15 @@ class Controller_Ventas extends Controller {
 				$ventadetalle->Total = $prodtable[$i][3];
 				$ventadetalle->create();
 			}
+            
+            if($_POST['pagototal'] == 'true'){
+                $ventapago = ORM::factory('ventapago');
+                $ventapago->Fecha = date('Y-m-d', strtotime($_POST['date']));
+                $ventapago->IdVenta = $venta->Id;
+                $ventapago->Tipo = 'Efectivo';
+                $ventapago->Monto = $venta->Total;
+                $ventapago->create();   
+            }
 			
 			echo URL::base().Route::get('msgid')->uri(array('controller' => 'ventas', 'action' => 'new',
 				'id' => $venta->Id, 'msgtype' => 'msgsuccess', 'msgtext' => 'Venta agregada con exito.'));
@@ -73,6 +83,21 @@ class Controller_Ventas extends Controller {
 			}
 		}
 	}
+
+    public function action_delete(){
+        $venta = ORM::factory('venta', $_POST['ventaid']);
+        if($venta->loaded()){
+            $venta->Deleted = 'Y';
+            $venta->update();
+            
+            HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
+                'msgtype' => 'msgsuccess', 'msgtext' => 'Venta eliminada con exito.')));
+        }
+        else{
+            HTTP::redirect(Route::get('msg')->uri(array('controller' => 'ventas', 'action' => 'new',
+                'msgtype' => 'msgerror', 'msgtext' => 'Error al eliminar la venta.')));
+        }
+    }
 	
 	public function action_printfactura(){
 		$venta = ORM::factory('venta', $_POST['ventaid']);
