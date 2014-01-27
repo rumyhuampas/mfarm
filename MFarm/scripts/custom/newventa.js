@@ -18,6 +18,7 @@ jQuery(document).ready(function(){
 		    	date: jQuery('[name=date]').val(),
 		    	cuil: jQuery('[name=cuil]').val(),
 		    	total: jQuery('[name=total]').val(),
+		    	pagototal: jQuery('[name=pagototal]').is(':checked'),
 		    	prodtable: table
 	    	},
 		    function( data ){

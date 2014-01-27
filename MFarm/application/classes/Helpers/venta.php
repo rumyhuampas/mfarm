@@ -9,7 +9,8 @@ class Helpers_Venta {
 		}
 		else{
 			return ORM::factory('venta')
-				->order_by('Fecha', 'ASC')->find_all();
+                ->where('Deleted', '<>', 'Y')
+				->order_by('Fecha', 'DESC')->find_all();
 		}
 	}
 	
@@ -22,9 +23,11 @@ class Helpers_Venta {
 			->join('ventapagos', 'left')
 			->on('ventapagos.IdVenta', '=', 'ventas.Id')
 			->where(DB::expr('(SELECT COUNT(monto) FROM ventapagos WHERE ventapagos.IdVenta=ventas.Id)'), '=', '0')
+            ->and_where('ventas.Total', '<>', '0')
+            ->and_where('ventas.Deleted', '<>', 'Y')
 			->__toString();
 			
-		return DB::query(Database::SELECT, 'select * from ('.$qry1.' UNION ALL '.$qry2.') t order by t.Fecha')->as_object()->execute();
+		return DB::query(Database::SELECT, 'select * from ('.$qry1.' UNION ALL '.$qry2.') t order by t.Fecha DESC')->as_object()->execute();
 	}
     
     public static function getTotals(){

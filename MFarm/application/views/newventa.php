@@ -104,6 +104,13 @@
 									echo Form::input('total', '', array('type' => 'text', 'id' => 'total', 'class' => 'smallinput', 'style' => 'background-color: #DDDDDD', 'readonly'));
 								echo '</span>';
 	                        echo '</p>';
+                            echo '<p>';
+                                echo Form::label('pagototal', 'Pago');
+                                echo '<span class="formwrapper">';
+                                    echo Form::input('pagototal', '', array('type' => 'checkbox', 'id' => 'pagototal'));
+                                    echo " Venta con pago inmediato";
+                                echo '</span>';
+                            echo '</p>';
 	                        
 	                        echo '<p class="stdformbutton">';
 								echo '<span class="stdbtn btn_black" id="btnsave">Guardar</span>';

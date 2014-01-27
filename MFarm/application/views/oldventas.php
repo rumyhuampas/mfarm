@@ -12,6 +12,8 @@
      	<div class="mainwrapperinner">
          	
         	<?php include Kohana::find_file('views', '_menu'); ?>
+        	
+        	<?php include Kohana::find_file('views/dialogs', 'yesno'); ?>
         
         <div class="maincontent noright">
         	<div class="maincontentinner">
@@ -84,6 +86,10 @@
                                             echo Form::open('ventas/printestadoventa', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprintestadoventa'.$venta->Id));
                                                 echo Form::hidden('ventaid', $venta->Id);
                                                 echo '<a href="#" name="reprint">Imprimir estado de venta</a>';
+                                            echo Form::close();
+                                            echo Form::open('ventas/delete', array('method' => 'POST'));
+                                                echo Form::hidden('ventaid', $venta->Id);
+                                                echo '<a href="#" name="delete">Eliminar venta</a>';
                                             echo Form::close();
 											echo '<a href='.URL::base().Route::get('default')
 			                            		->uri(array('controller' => 'ventas', 'action' => 'addpago', 'id' => $venta->Id)).'>
