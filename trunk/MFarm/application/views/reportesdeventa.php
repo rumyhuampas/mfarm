@@ -41,9 +41,12 @@
                     </div>
                     
                     <div class="one_half last">
-                        <!--<div class="contenttitle">
+                        <div class="contenttitle">
                             <h2 class="form"><span>Totales</span></h2>
-                        </div><!--contenttitle-->
+                        </div>
+                        <div class="tableoptions">
+                            <button title="Imprimir" class="deletebutton radius3">Imprimir</button> &nbsp; 
+                        </div>
                         <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
                             <colgroup>
                                 <col class="con0" />
