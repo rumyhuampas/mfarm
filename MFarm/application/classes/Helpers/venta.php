@@ -33,9 +33,10 @@ class Helpers_Venta {
     public static function getTotals(){
         $data = DB::select(array(DB::expr('CONCAT("Corriente mes: ", CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha)))'), 'Key'), 
             array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
-            DB::expr('(select sum(vp.monto) from ventapagos vp where concat(month(vp.fecha), year(vp.fecha)) = concat(month(v.fecha), year(v.fecha))) as Pagos'))
+            DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
             ->from(array('ventas', 'v'))
             ->where(DB::expr('MONTH(v.Fecha)'), '=', DB::expr('MONTH(NOW())'))
+            ->and_where('v.Deleted', '<>', 'Y')
             ->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
             ->order_by('v.Fecha', 'ASC')->execute();
             
@@ -46,10 +47,10 @@ class Helpers_Venta {
         
         $data2 = DB::select(array(DB::expr('CONCAT(CONCAT(CONCAT("Ultimos 12 meses: desde ", MONTH(DATE_SUB(NOW(), INTERVAL 12 MONTH))), "-"), YEAR(DATE_SUB(NOW(), INTERVAL 12 MONTH)))'), 'Key'), 
             array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
-            DB::expr('(select sum(vp.monto) from ventapagos vp where concat(month(vp.fecha), year(vp.fecha)) = concat(month(v.fecha), year(v.fecha))) as Pagos'))
+            DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
             ->from(array('ventas', 'v'))
             ->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL 12 MONTH)'))
-            //->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
+            ->and_where('v.Deleted', '<>', 'Y')
             ->order_by('v.Fecha', 'ASC')->execute();
         
         for($i=0; $i<count($data2); $i++){
@@ -58,9 +59,10 @@ class Helpers_Venta {
         
         $data3 = DB::select(array(DB::expr('CONCAT("Corriente ano: ", YEAR(v.Fecha))'), 'Key'), 
             array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
-            DB::expr('(select sum(vp.monto) from ventapagos vp where year(vp.fecha) = year(v.fecha)) as Pagos'))
+            DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
             ->from(array('ventas', 'v'))
             ->where(DB::expr('YEAR(v.Fecha)'), '=', DB::expr('YEAR(NOW())'))
+            ->and_where('v.Deleted', '<>', 'Y')
             ->group_by(DB::expr('YEAR(v.Fecha)'))
             ->order_by('v.Fecha', 'ASC')->execute();
         

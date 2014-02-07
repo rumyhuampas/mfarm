@@ -243,9 +243,10 @@ class Helpers_Charts {
     public static function getVentasData(){
         $data = DB::select(array(DB::expr('CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha))'), 'Year'), 
             array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
-            DB::expr('(select sum(vp.monto) from ventapagos vp where concat(month(vp.fecha), year(vp.fecha)) = concat(month(v.fecha), year(v.fecha))) as Pagos'))
+            DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
             ->from(array('ventas', 'v'))
             ->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL 12 MONTH)'))
+            ->and_where('v.Deleted', '<>', 'Y')
             ->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
             ->order_by('v.Fecha', 'ASC')->execute();
         $jsonarray = array();
