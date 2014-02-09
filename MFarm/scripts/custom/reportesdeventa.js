@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
 	/************ VENTAS CHART *************/
-	jQuery.post( 
+	/*jQuery.post( 
 	    '/mfarm/ventas/getventachartdata/',
 	    function( data ){
 	    	data = JSON.parse(data);
@@ -34,10 +34,10 @@ jQuery(document).ready(function(){
 			    }
 			});
 	    }
-    );
+    );*/
     
     /************ VENTAS PERC CHART *************/
-	jQuery.post( 
+	/*jQuery.post( 
 	    '/mfarm/ventas/getventatotchartdata/',
 	    function( data ){
 	    	data = JSON.parse(data);
@@ -76,7 +76,7 @@ jQuery(document).ready(function(){
 			    }
 			});
 	    }
-    );
+    );*/
 	    
 	    
    	/*var dataSource = [
