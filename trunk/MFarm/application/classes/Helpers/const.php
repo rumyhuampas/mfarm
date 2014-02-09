@@ -74,6 +74,12 @@ class Helpers_Const {
 	const TPEFECTIVO = 'Efectivo';
 	const TPCHEQUE = 'Cheque';
 	const TPDEPOSITO = 'Deposito en cuenta';
+    
+    /************* TIPOS DE FILTRO DE VENTA ***************/
+    const FVCURRMONTH = 'CURRMONTH';
+    const FVLASTMONTHS = 'LASTMONTHS';
+    const FVCURRYEAR = 'CURRYEAR';
+    const FVYEAR = 'YEAR';
 	
 	/************* USER PROFILE ***************/
 	const UPADMIN = 'ADMIN';

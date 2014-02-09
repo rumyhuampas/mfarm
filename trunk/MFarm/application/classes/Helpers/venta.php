@@ -30,46 +30,67 @@ class Helpers_Venta {
 		return DB::query(Database::SELECT, 'select * from ('.$qry1.' UNION ALL '.$qry2.') t order by t.Fecha DESC')->as_object()->execute();
 	}
     
-    public static function getTotals(){
-        $data = DB::select(array(DB::expr('CONCAT("Corriente mes: ", CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha)))'), 'Key'), 
+    public static function getTotals($filter, $amount = NULL){
+        $key = '';
+        if($filter == Helpers_Const::FVCURRMONTH){
+            $key = 'CONCAT("Corriente mes: ", CONCAT(CONCAT(MONTH(NOW()), "-"), YEAR(NOW())))';
+        }
+        if($filter == Helpers_Const::FVLASTMONTHS){
+            $key = 'CONCAT(CONCAT(CONCAT("Ultimos '.$amount.' meses: desde ", MONTH(DATE_SUB(NOW(), INTERVAL '.$amount.' MONTH))), "-"), YEAR(DATE_SUB(NOW(), INTERVAL '.$amount.' MONTH)))';
+        }
+        if($filter == Helpers_Const::FVCURRYEAR){
+            $key = 'CONCAT("Corriente ano: ", YEAR(NOW()))';
+        }
+        if($filter == Helpers_Const::FVYEAR){
+            $key = 'CONCAT("Ano: ", '.$amount.')';
+        }
+        $data = DB::select(array(DB::expr($key), 'Key'), 
             array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
             DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
-            ->from(array('ventas', 'v'))
-            ->where(DB::expr('MONTH(v.Fecha)'), '=', DB::expr('MONTH(NOW())'))
-            ->and_where('v.Deleted', '<>', 'Y')
-            ->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
+            ->from(array('ventas', 'v'));
+        if($filter == Helpers_Const::FVCURRMONTH){
+            $data = $data->where(DB::expr('MONTH(v.Fecha)'), '=', DB::expr('MONTH(NOW())'));
+        }
+        if($filter == Helpers_Const::FVLASTMONTHS){
+            $data = $data->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL '.$amount.' MONTH)'));
+        }    
+        if($filter == Helpers_Const::FVCURRYEAR){
+            $data = $data->where(DB::expr('YEAR(v.Fecha)'), '=', DB::expr('YEAR(NOW())'));
+        }
+        if($filter == Helpers_Const::FVYEAR){
+            $data = $data->where(DB::expr('YEAR(v.Fecha)'), '=', $amount);
+        }
+        $data = $data->and_where('v.Deleted', '<>', 'Y')
+            //->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
             ->order_by('v.Fecha', 'ASC')->execute();
             
         $res = array();
         for($i=0; $i<count($data); $i++){
             array_push($res, array('key' => $data[$i]['Key'], 'sales' => (float)$data[$i]['Total'], 'pay' => (float)$data[$i]['Pagos']));
         }
-        
-        $data2 = DB::select(array(DB::expr('CONCAT(CONCAT(CONCAT("Ultimos 12 meses: desde ", MONTH(DATE_SUB(NOW(), INTERVAL 12 MONTH))), "-"), YEAR(DATE_SUB(NOW(), INTERVAL 12 MONTH)))'), 'Key'), 
+            
+        return $res;
+    }
+
+    /*public static function getVentasData(){
+        $data = DB::select(array(DB::expr('CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha))'), 'Year'), 
             array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
             DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
             ->from(array('ventas', 'v'))
             ->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL 12 MONTH)'))
             ->and_where('v.Deleted', '<>', 'Y')
+            ->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
             ->order_by('v.Fecha', 'ASC')->execute();
-        
-        for($i=0; $i<count($data2); $i++){
-            array_push($res, array('key' => $data2[$i]['Key'], 'sales' => (float)$data2[$i]['Total'], 'pay' => (float)$data2[$i]['Pagos']));
-        }
-        
-        $data3 = DB::select(array(DB::expr('CONCAT("Corriente ano: ", YEAR(v.Fecha))'), 'Key'), 
-            array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
-            DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
-            ->from(array('ventas', 'v'))
-            ->where(DB::expr('YEAR(v.Fecha)'), '=', DB::expr('YEAR(NOW())'))
-            ->and_where('v.Deleted', '<>', 'Y')
-            ->group_by(DB::expr('YEAR(v.Fecha)'))
-            ->order_by('v.Fecha', 'ASC')->execute();
-        
-        for($i=0; $i<count($data3); $i++){
-            array_push($res, array('key' => $data3[$i]['Key'], 'sales' => (float)$data3[$i]['Total'], 'pay' => (float)$data3[$i]['Pagos']));
+        $jsonarray = array();
+        for($i=0; $i<count($data); $i++){
+            array_push($jsonarray, array('year' => $data[$i]['Year'], 'sales' => (float)$data[$i]['Total'], 'pay' => (float)$data[$i]['Pagos']));
         }
             
-        return $res;
+        return $jsonarray;
     }
+    
+    public static function getVentasTotData(){
+        $jsonarray = Helpers_Venta::getTotals();
+        return $jsonarray;
+    }*/
 }

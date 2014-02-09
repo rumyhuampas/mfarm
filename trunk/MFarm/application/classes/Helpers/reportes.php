@@ -73,6 +73,24 @@ class Helpers_Reportes {
 		
 		return $pdf;
 	}
+    
+    public static function createVentaTotals($id){
+        $pdf = Helpers_Reportes::create('reports/ventatotals', 'A4-L');
+        $stylesheet = file_get_contents('assets/css/pdfstyle.css');
+        $pdf->get_mpdf()->WriteHTML($stylesheet, 1);
+            
+        $pdf->get_mpdf()->SetTitle(Helpers_Const::APPNAME.' - Totales de Venta');
+        $pdf->get_mpdf()->SetSubject('Totales de Venta');
+        $pdf->get_mpdf()->SetAuthor(Helpers_Const::APPNAME);
+        $pdf->get_mpdf()->SetCreator(Helpers_Const::APPNAME);
+        
+        $pdf->title = Helpers_Const::APPNAME.' - Totales de Venta';
+        $pdf->filename = Helpers_Const::APPNAME.' - totalesventa.pdf';
+        
+        $pdf->_id = $id;
+        
+        return $pdf;
+    }
 	
 	public static function getModifReport($reportTitle = '', $desde = 'Now()', $hasta = 'Now()', $IdCerda = NULL){
 		$report = new Helpers_ReportTable;

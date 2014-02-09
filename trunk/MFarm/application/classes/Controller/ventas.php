@@ -199,8 +199,12 @@ class Controller_Ventas extends Controller {
         $view = View::factory('reportesdeventa');
         $view->title = Helpers_Const::APPNAME." - Ventas";
         $view->menuid = Helpers_Const::MENUVENTASID;
-        //$view->ventas = Helpers_Venta::get();
-        $view->totales = Helpers_Venta::getTotals();
+        $res = array();
+        $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVCURRMONTH));
+        $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVLASTMONTHS, 12));
+        $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVCURRYEAR));
+        $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVYEAR, 2013));
+        $view->totales = $res;
         $this->response->body($view->render());
     }
     
@@ -216,5 +220,12 @@ class Controller_Ventas extends Controller {
             $jsonarray = Helpers_Charts::getVentasTotData();
             echo json_encode($jsonarray);
         }
+    }
+    
+    public function action_printtotals(){
+        
+        $pdf = Helpers_Reportes::createVentaTotals();
+        $this->response->headers(array('Content-Type' => 'application/pdf'));
+        Helpers_Reportes::show($pdf);
     }
 }

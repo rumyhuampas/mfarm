@@ -2,7 +2,7 @@
 
 class Helpers_Charts {
 	
-	/***********ABM CERDA**********/
+	/***********ABM CERDA**********
 	public static function getCerdaPesoData($id){
 		$data = DB::select('Peso')->from('cerdaaudit')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
 		$jsonarray = array();
@@ -155,8 +155,10 @@ class Helpers_Charts {
 		}
 		return $result;
 	}
+     * 
+     * */
 	
-	/**********HOME RIGHT PANEL************/
+	/**********HOME RIGHT PANEL************
 	public static function getLastBirthsPercentage($amount){
 		$data = DB::select('vivos','muertos','momificados')->from('partos')->order_by('Fecha', 'ASC')->limit($amount)->execute();
 		$jsonarray = array();
@@ -201,7 +203,10 @@ class Helpers_Charts {
 		return $jsonarray;
 	}
 	
-	/************** PARTOS *****************/
+     * 
+     * */
+     
+	/************** PARTOS *****************
 	public static function getPartoData($id){
 		$data = DB::select(DB::expr('Vivos-Muertos-Momificados as Total'))->from('partos')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
 		$jsonarray = array();
@@ -212,8 +217,10 @@ class Helpers_Charts {
 		}
 		return $jsonarray;
 	}
+     * 
+     * */
 	
-	/************** LACTANCIAS *****************/
+	/************** LACTANCIAS *****************
 	public static function getLactanciaData($id, $idparto){
 		$data = DB::select('Total')->from('lactanciaaudit')
 		->where('IdCerda', '=', $id)->and_where('IdParto', '=', $idparto)
@@ -226,8 +233,10 @@ class Helpers_Charts {
 		}
 		return $jsonarray;
 	}
+     * 
+     * */
 	
-	/************** DESTETES *****************/
+	/************** DESTETES *****************
 	public static function getDesteteData($id){
 		$data = DB::select('Lechones')->from('destetes')->where('IdCerda', '=', $id)->order_by('Fecha', 'DESC')->limit(20)->execute();
 		$jsonarray = array();
@@ -238,27 +247,6 @@ class Helpers_Charts {
 		}
 		return $jsonarray;
 	}
-    
-    /************** VENTAS *****************/
-    public static function getVentasData(){
-        $data = DB::select(array(DB::expr('CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha))'), 'Year'), 
-            array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
-            DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
-            ->from(array('ventas', 'v'))
-            ->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL 12 MONTH)'))
-            ->and_where('v.Deleted', '<>', 'Y')
-            ->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
-            ->order_by('v.Fecha', 'ASC')->execute();
-        $jsonarray = array();
-        for($i=0; $i<count($data); $i++){
-            array_push($jsonarray, array('year' => $data[$i]['Year'], 'sales' => (float)$data[$i]['Total'], 'pay' => (float)$data[$i]['Pagos']));
-        }
-            
-        return $jsonarray;
-    }
-    
-    public static function getVentasTotData(){
-        $jsonarray = Helpers_Venta::getTotals();
-        return $jsonarray;
-    }
+     * 
+     * */
 }
