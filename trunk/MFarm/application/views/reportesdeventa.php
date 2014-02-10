@@ -45,7 +45,9 @@
                             <h2 class="form"><span>Totales</span></h2>
                         </div>
                         <div class="tableoptions">
-                            <button title="Imprimir" class="deletebutton radius3">Imprimir</button> &nbsp; 
+                            <?php echo Form::open('ventas/printtotals', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprinttotals'));
+                                echo Form::button('btnprint', 'Imprimir', array('class' => 'deletebutton radius3'));
+                            echo Form::close(); ?> 
                         </div>
                         <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
                             <colgroup>

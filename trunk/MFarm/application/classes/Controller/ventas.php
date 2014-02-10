@@ -210,14 +210,19 @@ class Controller_Ventas extends Controller {
     
     public function action_getventachartdata(){
         if ($this->request->is_ajax()) {
-            $jsonarray = Helpers_Charts::getVentasData();
+            $jsonarray = Helpers_Venta::getTotals(Helpers_Const::FVLASTMONTHS, 12);
             echo json_encode($jsonarray);
         }
     }
     
     public function action_getventatotchartdata(){
         if ($this->request->is_ajax()) {
-            $jsonarray = Helpers_Charts::getVentasTotData();
+            $res = array();
+            $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVCURRMONTH));
+            $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVLASTMONTHS, 12));
+            $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVCURRYEAR));
+            $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVYEAR, 2013));
+            $jsonarray = $res;
             echo json_encode($jsonarray);
         }
     }
