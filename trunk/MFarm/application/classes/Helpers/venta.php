@@ -72,4 +72,31 @@ class Helpers_Venta {
             
         return $res;
     }
+
+    public static function getByPreviousMonths($amount){
+        $data = DB::select('v.Id','v.Fecha', 'v.IdCliente', 'v.Total',
+            array(DB::expr('CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha))'), 'Month'))
+            ->from(array('ventas', 'v'))
+            ->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL '.$amount.' MONTH)'))
+            ->and_where('v.Deleted', '<>', 'Y')
+            ->order_by('v.Fecha', 'ASC')->execute();
+            
+        $res = array();
+        for($i=0; $i<count($data); $i++){
+            $detaildata = DB::select('vd.Cant', 'vd.Detalle', 'vd.PUnit', array('vd.Total', 'TotalUnit'))
+                ->from(array('ventadetalle', 'vd'))
+                ->where('vd.IdVenta', '=', $data[$i]['Id'])->execute();
+                
+            $detailres = array();
+            for($j=0; $j<count($detaildata); $j++){
+                array_push($detailres, array('cant' => (int)$detaildata[$j]['Cant'],
+                    'detalle' => $detaildata[$j]['Detalle'], 'punit' => (float)$detaildata[$j]['PUnit'],
+                    'totalunit' => (float)$detaildata[$j]['TotalUnit']));
+            }
+            array_push($res, array('fecha' => $data[$i]['Fecha'], 'nombre' => $data[$i]['IdCliente'],
+                'total' => (float)$data[$i]['Total'], 'month' => $data[$i]['Month'], 'detail' => $detailres));
+        }
+            
+        return $res;
+    }
 }

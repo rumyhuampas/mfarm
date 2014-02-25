@@ -228,7 +228,6 @@ class Controller_Ventas extends Controller {
     }
     
     public function action_printtotals(){
-        
         $pdf = Helpers_Reportes::createVentaTotals();
         $this->response->headers(array('Content-Type' => 'application/pdf'));
         Helpers_Reportes::show($pdf);
