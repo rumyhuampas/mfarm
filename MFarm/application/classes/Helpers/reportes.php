@@ -92,7 +92,10 @@ class Helpers_Reportes {
         $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVLASTMONTHS, 12));
         $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVCURRYEAR));
         $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVYEAR, 2013));
-        $pdf->_res = $res;
+        $pdf->_totals = $res;
+        $res = array();
+        $res = array_merge($res, Helpers_Venta::getByPreviousMonths(2));
+        $pdf->_sales = $res;
         
         return $pdf;
     }
