@@ -45,9 +45,13 @@
                             <h2 class="form"><span>Totales</span></h2>
                         </div>
                         <div class="tableoptions">
-                            <?php echo Form::open('ventas/printtotals', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprinttotals'));
+                            <?php 
+                            echo Form::open('ventas/printtotals', array('method' => 'POST', 'target' => '_blank', 'id' => 'formprinttotals'));
+                                echo Form::label('monthlbl', 'Ultimos meses: ');
+                                echo Form::select('monthamount', Helpers_Const::getNumbersArray(12), 0, array('id' => 'monthamount', 'class' => 'radius3', 'style' => 'margin-right: 5px;margin-left: 5px;'));
                                 echo Form::button('btnprint', 'Imprimir', array('class' => 'deletebutton radius3'));
-                            echo Form::close(); ?> 
+                            echo Form::close();
+                            ?> 
                         </div>
                         <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
                             <colgroup>

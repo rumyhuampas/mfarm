@@ -48,7 +48,12 @@
                         <br clear="all" />
                         
                         <div class="contenttitle">
-                            <h2 class="form"><span>Detalle del ultimo mes</span></h2>
+                            <h2 class="form"><span>
+                            <?php
+                                if(_months == 1){ echo 'Detalle del ultimo mes'; }
+                                else{ echo 'Detalle de los ultimos '.$_months.' meses';}
+                            ?>
+                            </span></h2>
                         </div><!--contenttitle-->
                             
                         <br clear="all" />
@@ -79,9 +84,6 @@
                             <tbody>
                                 <?php
                                     if(isset($_sales)){
-                                        echo '<tr>';
-                                        echo '<td>'.count($_sales).'</td>';
-                                        echo '</tr>';
                                         foreach($_sales as $sale){
                                             echo '<tr>';
                                             echo '<td>'.$sale['fecha'].'</td>';

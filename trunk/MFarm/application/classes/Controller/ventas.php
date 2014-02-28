@@ -210,7 +210,7 @@ class Controller_Ventas extends Controller {
     
     public function action_getventachartdata(){
         if ($this->request->is_ajax()) {
-            $jsonarray = Helpers_Venta::getTotals(Helpers_Const::FVLASTMONTHS, 12);
+            $jsonarray = Helpers_Venta::getPrevMonthsTotals(12);
             echo json_encode($jsonarray);
         }
     }
@@ -228,7 +228,7 @@ class Controller_Ventas extends Controller {
     }
     
     public function action_printtotals(){
-        $pdf = Helpers_Reportes::createVentaTotals();
+        $pdf = Helpers_Reportes::createVentaTotals($_POST['monthamount'] + 1);
         $this->response->headers(array('Content-Type' => 'application/pdf'));
         Helpers_Reportes::show($pdf);
     }
