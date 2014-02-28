@@ -74,7 +74,7 @@ class Helpers_Reportes {
 		return $pdf;
 	}
     
-    public static function createVentaTotals(){
+    public static function createVentaTotals($monthamount){
         $pdf = Helpers_Reportes::create('reports/ventatotals', 'A4-L');
         $stylesheet = file_get_contents('assets/css/pdfstyle.css');
         $pdf->get_mpdf()->WriteHTML($stylesheet, 1);
@@ -94,8 +94,9 @@ class Helpers_Reportes {
         $res = array_merge($res, Helpers_Venta::getTotals(Helpers_Const::FVYEAR, 2013));
         $pdf->_totals = $res;
         $res = array();
-        $res = array_merge($res, Helpers_Venta::getByPreviousMonths(2));
+        $res = array_merge($res, Helpers_Venta::getByPreviousMonths($monthamount));
         $pdf->_sales = $res;
+        $pdf->_months = $monthamount;
         
         return $pdf;
     }

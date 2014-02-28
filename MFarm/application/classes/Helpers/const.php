@@ -86,4 +86,12 @@ class Helpers_Const {
 	const UPVENTA = 'VENTA';
 	const UPGRANJA = 'GRANJA';
 	const UPESTADISTICO = 'ESTADISTICO';
+    
+    public static function getNumbersArray($amount){
+        $numbers = array();
+        for($i=1;$i<=$amount;$i++){
+            array_push($numbers, $i);
+        }
+        return $numbers;
+    }
 }

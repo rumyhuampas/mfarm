@@ -62,7 +62,25 @@ class Helpers_Venta {
             $data = $data->where(DB::expr('YEAR(v.Fecha)'), '=', $amount);
         }
         $data = $data->and_where('v.Deleted', '<>', 'Y')
-            //->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
+            ->order_by('v.Fecha', 'ASC')->execute();
+            
+        $res = array();
+        for($i=0; $i<count($data); $i++){
+            array_push($res, array('key' => $data[$i]['Key'], 'year' => $data[$i]['Year'], 'sales' => (float)$data[$i]['Total'], 'pay' => (float)$data[$i]['Pagos']));
+        }
+            
+        return $res;
+    }
+
+    public static function getPrevMonthsTotals($amount){
+        $data = DB::select(array(DB::expr('CONCAT(CONCAT(CONCAT("Ultimos '.$amount.' meses: desde ", MONTH(DATE_SUB(NOW(), INTERVAL '.$amount.' MONTH))), "-"), YEAR(DATE_SUB(NOW(), INTERVAL '.$amount.' MONTH)))'), 'Key'), 
+            array(DB::expr('CONCAT(CONCAT(MONTH(v.Fecha), "-"), YEAR(v.Fecha))'), 'Year'),
+            array(DB::expr('ROUND(SUM(v.Total), 2)'), 'Total'),
+            DB::expr('(select ROUND(sum(vp.monto), 2) from ventapagos vp where vp.IdVenta = v.Id) as Pagos'))
+            ->from(array('ventas', 'v'))
+            ->where('v.Fecha', '>', DB::expr('DATE_SUB(NOW(), INTERVAL '.$amount.' MONTH)'))
+            ->and_where('v.Deleted', '<>', 'Y')
+            ->group_by(DB::expr('YEAR(v.Fecha)'))->group_by(DB::expr('MONTH(v.Fecha)'))
             ->order_by('v.Fecha', 'ASC')->execute();
             
         $res = array();
